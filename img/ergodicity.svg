@@ -1,0 +1,189 @@
+<ns0:svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns1="http://www.inkscape.org/namespaces/inkscape" xmlns:ns2="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:ns4="http://creativecommons.org/ns#" xmlns:ns6="http://www.iki.fi/pav/software/textext/" xmlns:ns7="http://www.w3.org/1999/xlink" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" height="430.47107" id="svg2" preserveAspectRatio="xMidYMid meet" version="1.1" viewBox="0 0 644.15833 430.47107" width="644.15833" ns2:docname="ergodicity.svg" ns1:version="0.48.5 r10040">
+  <ns2:namedview bordercolor="#666666" borderopacity="1.0" fit-margin-bottom="0" fit-margin-left="0" fit-margin-right="0" fit-margin-top="0" id="base" pagecolor="#ffffff" showgrid="true" ns1:current-layer="layer1" ns1:cx="788.33978" ns1:cy="59.54577" ns1:document-units="px" ns1:pageopacity="0.0" ns1:pageshadow="2" ns1:snap-bbox="true" ns1:snap-global="true" ns1:window-height="971" ns1:window-maximized="1" ns1:window-width="1680" ns1:window-x="-4" ns1:window-y="-4" ns1:zoom="0.7">
+    <ns1:grid empspacing="5" enabled="true" id="grid3759" originx="242.54441px" originy="-594px" snapvisiblegridlinesonly="true" type="xygrid" visible="true" />
+  </ns2:namedview>
+  <ns0:defs id="defs4" />
+  <ns0:metadata id="metadata7">
+    <rdf:RDF>
+      <ns4:Work rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </ns4:Work>
+    </rdf:RDF>
+  </ns0:metadata>
+  <ns0:g id="layer1" transform="translate(242.54441,-27.891096)" ns1:groupmode="layer" ns1:label="Layer 1">
+    <ns0:rect height="382.85715" id="rect2985" style="fill:#0000ff;fill-opacity:0.25098039;stroke:#000000;stroke-width:3.2277863;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" width="640" x="-240" y="29.50499" />
+    <ns0:path d="m -240,412.36217 c 0,0 57.35868,0 80,0 20,0 39.00233,-19.89469 57.14286,-38.57143 26.609315,-24.41398 43.936119,-248.73043 94.2857114,-257.14286 45.0487926,-4.18181 64.2857146,210 69.9999996,235.71429 5.714286,25.71428 23.1289,52.85714 38.571429,52.85714 20,0 38.69525,-0.93175 61.42857,-1.42857 17.37517,-0.37973 32.85714,-27.14286 37.14286,-60 13.00822,-29.43546 3.54189,-150.3814 41.42857,-151.42857 20,0 22.30124,125.3501 28.76844,152.27616 8.37442,34.86669 9.0887,69.15241 31.23156,67.72384 19.95851,-1.28765 40,0 40,0" id="path2987" style="fill:none;stroke:#000000;stroke-width:5.08882093;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" ns2:nodetypes="cscczssccssc" ns1:connector-curvature="0" />
+    <ns0:path d="m -60.812503,232.36217 c 0,138.57143 0,180 0,180" id="path3757" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:18, 3;stroke-dashoffset:0" ns2:nodetypes="cc" ns1:connector-curvature="0" />
+    <ns0:g id="g3770" transform="matrix(4,0,0,4,-967.35303,-81.13533)" ns6:preamble="" ns6:text="$\\alpha$">
+      <ns0:defs id="defs3772">
+        <ns0:g id="g3774">
+          <ns0:symbol id="textext-29044abb-0" overflow="visible" style="overflow:visible">
+            <ns0:path d="" id="path3777" style="stroke:none" ns1:connector-curvature="0" />
+          </ns0:symbol>
+          <ns0:symbol id="textext-29044abb-1" overflow="visible" style="overflow:visible">
+            <ns0:path d="m 4.75,-2.359375 c 0,-1.5625 -0.921875,-2.046875 -1.65625,-2.046875 -1.375,0 -2.6875,1.421875 -2.6875,2.828125 0,0.9375 0.59375,1.6875 1.625,1.6875 0.625,0 1.34375,-0.234375 2.09375,-0.84375 0.125,0.53125 0.453125,0.84375 0.90625,0.84375 0.53125,0 0.84375,-0.546875 0.84375,-0.703125 0,-0.078125 -0.0625,-0.109375 -0.125,-0.109375 -0.0625,0 -0.09375,0.03125 -0.125,0.109375 -0.1875,0.484375 -0.546875,0.484375 -0.5625,0.484375 -0.3125,0 -0.3125,-0.78125 -0.3125,-1.015625 0,-0.203125 0,-0.234375 0.109375,-0.34375 C 5.796875,-2.65625 6,-3.8125 6,-3.8125 6,-3.84375 5.984375,-3.921875 5.875,-3.921875 c -0.09375,0 -0.09375,0.03125 -0.140625,0.21875 -0.1875,0.625 -0.515625,1.375 -0.984375,1.96875 z m -0.65625,1.375 c -0.890625,0.765625 -1.65625,0.875 -2.046875,0.875 -0.59375,0 -0.90625,-0.453125 -0.90625,-1.09375 0,-0.484375 0.265625,-1.5625 0.578125,-2.0625 C 2.1875,-4 2.734375,-4.1875 3.078125,-4.1875 c 0.984375,0 0.984375,1.3125 0.984375,2.078125 0,0.375 0,0.953125 0.03125,1.125 z" id="path3780" style="stroke:none" ns1:connector-curvature="0" />
+          </ns0:symbol>
+        </ns0:g>
+      </ns0:defs>
+      <ns0:g id="textext-29044abb-2">
+        <ns0:g id="g3783" style="fill:#000000;fill-opacity:1">
+          <ns0:use height="1052.3622" id="use3785" width="744.09448" x="223.43201" y="134.765" ns7:href="#textext-29044abb-1" />
+        </ns0:g>
+      </ns0:g>
+    </ns0:g>
+    <ns0:g id="g3823" transform="matrix(4,0,0,4,-831.35303,-81.13533)" ns6:preamble="" ns6:text="$\\alpha\'$">
+      <ns0:defs id="defs3825">
+        <ns0:g id="g3827">
+          <ns0:symbol id="textext-b76bddb1-0" overflow="visible" style="overflow:visible">
+            <ns0:path d="" id="path3830" style="stroke:none" ns1:connector-curvature="0" />
+          </ns0:symbol>
+          <ns0:symbol id="textext-b76bddb1-1" overflow="visible" style="overflow:visible">
+            <ns0:path d="m 4.75,-2.359375 c 0,-1.5625 -0.921875,-2.046875 -1.65625,-2.046875 -1.375,0 -2.6875,1.421875 -2.6875,2.828125 0,0.9375 0.59375,1.6875 1.625,1.6875 0.625,0 1.34375,-0.234375 2.09375,-0.84375 0.125,0.53125 0.453125,0.84375 0.90625,0.84375 0.53125,0 0.84375,-0.546875 0.84375,-0.703125 0,-0.078125 -0.0625,-0.109375 -0.125,-0.109375 -0.0625,0 -0.09375,0.03125 -0.125,0.109375 -0.1875,0.484375 -0.546875,0.484375 -0.5625,0.484375 -0.3125,0 -0.3125,-0.78125 -0.3125,-1.015625 0,-0.203125 0,-0.234375 0.109375,-0.34375 C 5.796875,-2.65625 6,-3.8125 6,-3.8125 6,-3.84375 5.984375,-3.921875 5.875,-3.921875 c -0.09375,0 -0.09375,0.03125 -0.140625,0.21875 -0.1875,0.625 -0.515625,1.375 -0.984375,1.96875 z m -0.65625,1.375 c -0.890625,0.765625 -1.65625,0.875 -2.046875,0.875 -0.59375,0 -0.90625,-0.453125 -0.90625,-1.09375 0,-0.484375 0.265625,-1.5625 0.578125,-2.0625 C 2.1875,-4 2.734375,-4.1875 3.078125,-4.1875 c 0.984375,0 0.984375,1.3125 0.984375,2.078125 0,0.375 0,0.953125 0.03125,1.125 z" id="path3833" style="stroke:none" ns1:connector-curvature="0" />
+          </ns0:symbol>
+          <ns0:symbol id="textext-b76bddb1-2" overflow="visible" style="overflow:visible">
+            <ns0:path d="" id="path3836" style="stroke:none" ns1:connector-curvature="0" />
+          </ns0:symbol>
+          <ns0:symbol id="textext-b76bddb1-3" overflow="visible" style="overflow:visible">
+            <ns0:path d="m 2.015625,-3.296875 c 0.0625,-0.109375 0.0625,-0.171875 0.0625,-0.21875 0,-0.21875 -0.1875,-0.375 -0.40625,-0.375 -0.265625,0 -0.34375,0.21875 -0.375,0.328125 L 0.375,-0.546875 c -0.015625,0.015625 -0.046875,0.09375 -0.046875,0.109375 0,0.078125 0.21875,0.15625 0.28125,0.15625 0.046875,0 0.046875,-0.015625 0.09375,-0.125 z" id="path3839" style="stroke:none" ns1:connector-curvature="0" />
+          </ns0:symbol>
+        </ns0:g>
+      </ns0:defs>
+      <ns0:g id="textext-b76bddb1-4">
+        <ns0:g id="g3842" style="fill:#000000;fill-opacity:1">
+          <ns0:use height="1052.3622" id="use3844" width="744.09448" x="223.43201" y="134.765" ns7:href="#textext-b76bddb1-1" />
+        </ns0:g>
+        <ns0:g id="g3846" style="fill:#000000;fill-opacity:1">
+          <ns0:use height="1052.3622" id="use3848" width="744.09448" x="229.842" y="131.14999" ns7:href="#textext-b76bddb1-3" />
+        </ns0:g>
+      </ns0:g>
+    </ns0:g>
+    <ns0:path d="m 240.71493,412.36217 0.0863,-220" id="path3883" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:18, 3;stroke-dashoffset:0" ns2:nodetypes="cc" ns1:connector-curvature="0" />
+    <ns0:g id="g3921" transform="matrix(4,0,0,4,-1034.5405,-299.44783)" ns6:preamble="" ns6:text="${\\mathcal P}_\\alpha$">
+      <ns0:defs id="defs3923">
+        <ns0:g id="g3925">
+          <ns0:symbol id="textext-ec55c35c-0" overflow="visible" style="overflow:visible">
+            <ns0:path d="" id="path3928" style="stroke:none" ns1:connector-curvature="0" />
+          </ns0:symbol>
+          <ns0:symbol id="textext-ec55c35c-1" overflow="visible" style="overflow:visible">
+            <ns0:path d="m 3.46875,-6.8125 c -1.40625,0 -2.46875,0.6875 -2.875,1.15625 -0.359375,0.390625 -0.390625,0.6875 -0.390625,0.703125 0,0.0625 0.046875,0.078125 0.109375,0.078125 0.15625,0 0.390625,-0.140625 0.46875,-0.1875 0.203125,-0.140625 0.234375,-0.203125 0.296875,-0.390625 0.140625,-0.40625 0.421875,-0.75 1.671875,-0.8125 -0.171875,2.25 -0.78125,4.4375 -1.609375,6.515625 -0.0625,0.15625 -0.0625,0.171875 -0.0625,0.171875 0,0.03125 0.03125,0.078125 0.09375,0.078125 0.15625,0 0.640625,-0.21875 0.75,-0.484375 0.515625,-1.21875 1.34375,-3.5 1.640625,-6.28125 l 0.515625,0 c 1.21875,0 2.375,0.46875 2.375,1.46875 0,0.75 -0.71875,2.140625 -2.640625,2.203125 -0.21875,0.015625 -0.328125,0.015625 -0.609375,0.1875 -0.171875,0.125 -0.25,0.234375 -0.25,0.296875 0,0.0625 0.0625,0.0625 0.1875,0.0625 1.8125,0 4.171875,-1.53125 4.171875,-3.171875 0,-1.140625 -1.34375,-1.59375 -2.5,-1.59375 z" id="path3931" style="stroke:none" ns1:connector-curvature="0" />
+          </ns0:symbol>
+          <ns0:symbol id="textext-ec55c35c-2" overflow="visible" style="overflow:visible">
+            <ns0:path d="" id="path3934" style="stroke:none" ns1:connector-curvature="0" />
+          </ns0:symbol>
+          <ns0:symbol id="textext-ec55c35c-3" overflow="visible" style="overflow:visible">
+            <ns0:path d="m 3.8125,-0.984375 c 0.640625,-0.65625 0.890625,-1.59375 0.890625,-1.65625 0,-0.09375 -0.078125,-0.09375 -0.109375,-0.09375 C 4.5,-2.734375 4.5,-2.71875 4.453125,-2.5625 4.328125,-2.109375 4.09375,-1.671875 3.796875,-1.296875 3.796875,-1.40625 3.78125,-1.875 3.765625,-1.9375 3.65625,-2.625 3.140625,-3.078125 2.4375,-3.078125 c -1.015625,0 -2,0.953125 -2,1.9375 0,0.640625 0.46875,1.203125 1.265625,1.203125 0.640625,0 1.21875,-0.28125 1.609375,-0.578125 0.171875,0.5 0.515625,0.578125 0.734375,0.578125 0.40625,0 0.65625,-0.328125 0.65625,-0.484375 C 4.703125,-0.5 4.609375,-0.5 4.578125,-0.5 c -0.09375,0 -0.109375,0.03125 -0.125,0.0625 -0.09375,0.265625 -0.3125,0.3125 -0.390625,0.3125 -0.09375,0 -0.21875,0 -0.25,-0.859375 z M 3.265625,-0.75 C 2.578125,-0.1875 2,-0.125 1.734375,-0.125 c -0.46875,0 -0.71875,-0.3125 -0.71875,-0.78125 0,-0.1875 0.09375,-0.953125 0.453125,-1.4375 C 1.796875,-2.765625 2.1875,-2.875 2.4375,-2.875 c 0.546875,0 0.71875,0.53125 0.765625,0.96875 0.046875,0.296875 0.03125,0.796875 0.0625,1.15625 z" id="path3937" style="stroke:none" ns1:connector-curvature="0" />
+          </ns0:symbol>
+        </ns0:g>
+      </ns0:defs>
+      <ns0:g id="textext-ec55c35c-4">
+        <ns0:g id="g3940" style="fill:#000000;fill-opacity:1">
+          <ns0:use height="1052.3622" id="use3942" width="744.09448" x="223.43201" y="134.765" ns7:href="#textext-ec55c35c-1" />
+        </ns0:g>
+        <ns0:g id="g3944" style="fill:#000000;fill-opacity:1">
+          <ns0:use height="1052.3622" id="use3946" width="744.09448" x="230.362" y="136.259" ns7:href="#textext-ec55c35c-3" />
+        </ns0:g>
+      </ns0:g>
+    </ns0:g>
+    <ns0:g id="g4113" transform="matrix(4,0,0,4,-794.54053,-159.44783)" ns6:preamble="" ns6:text="${\\mathcal P}_{\\alpha\'}$">
+      <ns0:defs id="defs4115">
+        <ns0:g id="g4117">
+          <ns0:symbol id="textext-6717797f-0" overflow="visible" style="overflow:visible">
+            <ns0:path d="" id="path4120" style="stroke:none" ns1:connector-curvature="0" />
+          </ns0:symbol>
+          <ns0:symbol id="textext-6717797f-1" overflow="visible" style="overflow:visible">
+            <ns0:path d="m 3.46875,-6.8125 c -1.40625,0 -2.46875,0.6875 -2.875,1.15625 -0.359375,0.390625 -0.390625,0.6875 -0.390625,0.703125 0,0.0625 0.046875,0.078125 0.109375,0.078125 0.15625,0 0.390625,-0.140625 0.46875,-0.1875 0.203125,-0.140625 0.234375,-0.203125 0.296875,-0.390625 0.140625,-0.40625 0.421875,-0.75 1.671875,-0.8125 -0.171875,2.25 -0.78125,4.4375 -1.609375,6.515625 -0.0625,0.15625 -0.0625,0.171875 -0.0625,0.171875 0,0.03125 0.03125,0.078125 0.09375,0.078125 0.15625,0 0.640625,-0.21875 0.75,-0.484375 0.515625,-1.21875 1.34375,-3.5 1.640625,-6.28125 l 0.515625,0 c 1.21875,0 2.375,0.46875 2.375,1.46875 0,0.75 -0.71875,2.140625 -2.640625,2.203125 -0.21875,0.015625 -0.328125,0.015625 -0.609375,0.1875 -0.171875,0.125 -0.25,0.234375 -0.25,0.296875 0,0.0625 0.0625,0.0625 0.1875,0.0625 1.8125,0 4.171875,-1.53125 4.171875,-3.171875 0,-1.140625 -1.34375,-1.59375 -2.5,-1.59375 z" id="path4123" style="stroke:none" ns1:connector-curvature="0" />
+          </ns0:symbol>
+          <ns0:symbol id="textext-6717797f-2" overflow="visible" style="overflow:visible">
+            <ns0:path d="" id="path4126" style="stroke:none" ns1:connector-curvature="0" />
+          </ns0:symbol>
+          <ns0:symbol id="textext-6717797f-3" overflow="visible" style="overflow:visible">
+            <ns0:path d="m 3.8125,-0.984375 c 0.640625,-0.65625 0.890625,-1.59375 0.890625,-1.65625 0,-0.09375 -0.078125,-0.09375 -0.109375,-0.09375 C 4.5,-2.734375 4.5,-2.71875 4.453125,-2.5625 4.328125,-2.109375 4.09375,-1.671875 3.796875,-1.296875 3.796875,-1.40625 3.78125,-1.875 3.765625,-1.9375 3.65625,-2.625 3.140625,-3.078125 2.4375,-3.078125 c -1.015625,0 -2,0.953125 -2,1.9375 0,0.640625 0.46875,1.203125 1.265625,1.203125 0.640625,0 1.21875,-0.28125 1.609375,-0.578125 0.171875,0.5 0.515625,0.578125 0.734375,0.578125 0.40625,0 0.65625,-0.328125 0.65625,-0.484375 C 4.703125,-0.5 4.609375,-0.5 4.578125,-0.5 c -0.09375,0 -0.109375,0.03125 -0.125,0.0625 -0.09375,0.265625 -0.3125,0.3125 -0.390625,0.3125 -0.09375,0 -0.21875,0 -0.25,-0.859375 z M 3.265625,-0.75 C 2.578125,-0.1875 2,-0.125 1.734375,-0.125 c -0.46875,0 -0.71875,-0.3125 -0.71875,-0.78125 0,-0.1875 0.09375,-0.953125 0.453125,-1.4375 C 1.796875,-2.765625 2.1875,-2.875 2.4375,-2.875 c 0.546875,0 0.71875,0.53125 0.765625,0.96875 0.046875,0.296875 0.03125,0.796875 0.0625,1.15625 z" id="path4129" style="stroke:none" ns1:connector-curvature="0" />
+          </ns0:symbol>
+          <ns0:symbol id="textext-6717797f-4" overflow="visible" style="overflow:visible">
+            <ns0:path d="" id="path4132" style="stroke:none" ns1:connector-curvature="0" />
+          </ns0:symbol>
+          <ns0:symbol id="textext-6717797f-5" overflow="visible" style="overflow:visible">
+            <ns0:path d="m 1.796875,-2.3125 c 0,-0.015625 0.046875,-0.109375 0.046875,-0.1875 0,-0.171875 -0.15625,-0.28125 -0.3125,-0.28125 -0.203125,0 -0.25,0.15625 -0.28125,0.21875 L 0.484375,-0.40625 C 0.46875,-0.34375 0.46875,-0.328125 0.46875,-0.3125 c 0,0.078125 0.203125,0.125 0.203125,0.125 0.046875,0 0.0625,-0.03125 0.09375,-0.09375 z" id="path4135" style="stroke:none" ns1:connector-curvature="0" />
+          </ns0:symbol>
+        </ns0:g>
+      </ns0:defs>
+      <ns0:g id="textext-6717797f-6">
+        <ns0:g id="g4138" style="fill:#000000;fill-opacity:1">
+          <ns0:use height="1052.3622" id="use4140" width="744.09448" x="223.43201" y="134.765" ns7:href="#textext-6717797f-1" />
+        </ns0:g>
+        <ns0:g id="g4142" style="fill:#000000;fill-opacity:1">
+          <ns0:use height="1052.3622" id="use4144" width="744.09448" x="230.362" y="136.259" ns7:href="#textext-6717797f-3" />
+        </ns0:g>
+        <ns0:g id="g4146" style="fill:#000000;fill-opacity:1">
+          <ns0:use height="1052.3622" id="use4148" width="744.09448" x="235.541" y="134.267" ns7:href="#textext-6717797f-5" />
+        </ns0:g>
+      </ns0:g>
+    </ns0:g>
+    <ns0:path d="m 80.163724,412.36217 0,-22.86682" id="path3883-6" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:18, 3;stroke-dashoffset:0" ns2:nodetypes="cc" ns1:connector-curvature="0" />
+    <ns0:g id="g3280" transform="matrix(4,0,0,4,-675.35303,-81.13533)" ns6:preamble="" ns6:text="$\\alpha\'\'$">
+      <ns0:defs id="defs3282">
+        <ns0:g id="g3284">
+          <ns0:symbol id="textext-681ca217-0" overflow="visible" style="overflow:visible">
+            <ns0:path d="" id="path3287" style="stroke:none" ns1:connector-curvature="0" />
+          </ns0:symbol>
+          <ns0:symbol id="textext-681ca217-1" overflow="visible" style="overflow:visible">
+            <ns0:path d="m 4.75,-2.359375 c 0,-1.5625 -0.921875,-2.046875 -1.65625,-2.046875 -1.375,0 -2.6875,1.421875 -2.6875,2.828125 0,0.9375 0.59375,1.6875 1.625,1.6875 0.625,0 1.34375,-0.234375 2.09375,-0.84375 0.125,0.53125 0.453125,0.84375 0.90625,0.84375 0.53125,0 0.84375,-0.546875 0.84375,-0.703125 0,-0.078125 -0.0625,-0.109375 -0.125,-0.109375 -0.0625,0 -0.09375,0.03125 -0.125,0.109375 -0.1875,0.484375 -0.546875,0.484375 -0.5625,0.484375 -0.3125,0 -0.3125,-0.78125 -0.3125,-1.015625 0,-0.203125 0,-0.234375 0.109375,-0.34375 C 5.796875,-2.65625 6,-3.8125 6,-3.8125 6,-3.84375 5.984375,-3.921875 5.875,-3.921875 c -0.09375,0 -0.09375,0.03125 -0.140625,0.21875 -0.1875,0.625 -0.515625,1.375 -0.984375,1.96875 z m -0.65625,1.375 c -0.890625,0.765625 -1.65625,0.875 -2.046875,0.875 -0.59375,0 -0.90625,-0.453125 -0.90625,-1.09375 0,-0.484375 0.265625,-1.5625 0.578125,-2.0625 C 2.1875,-4 2.734375,-4.1875 3.078125,-4.1875 c 0.984375,0 0.984375,1.3125 0.984375,2.078125 0,0.375 0,0.953125 0.03125,1.125 z" id="path3290" style="stroke:none" ns1:connector-curvature="0" />
+          </ns0:symbol>
+          <ns0:symbol id="textext-681ca217-2" overflow="visible" style="overflow:visible">
+            <ns0:path d="" id="path3293" style="stroke:none" ns1:connector-curvature="0" />
+          </ns0:symbol>
+          <ns0:symbol id="textext-681ca217-3" overflow="visible" style="overflow:visible">
+            <ns0:path d="m 2.015625,-3.296875 c 0.0625,-0.109375 0.0625,-0.171875 0.0625,-0.21875 0,-0.21875 -0.1875,-0.375 -0.40625,-0.375 -0.265625,0 -0.34375,0.21875 -0.375,0.328125 L 0.375,-0.546875 c -0.015625,0.015625 -0.046875,0.09375 -0.046875,0.109375 0,0.078125 0.21875,0.15625 0.28125,0.15625 0.046875,0 0.046875,-0.015625 0.09375,-0.125 z" id="path3296" style="stroke:none" ns1:connector-curvature="0" />
+          </ns0:symbol>
+        </ns0:g>
+      </ns0:defs>
+      <ns0:g id="textext-681ca217-4">
+        <ns0:g id="g3299" style="fill:#000000;fill-opacity:1">
+          <ns0:use height="433.50964" id="use3301" width="563.01929" x="223.43201" y="134.765" ns7:href="#textext-681ca217-1" />
+        </ns0:g>
+        <ns0:g id="g3303" style="fill:#000000;fill-opacity:1">
+          <ns0:use height="433.50964" id="use3305" width="563.01929" x="229.842" y="131.14999" ns7:href="#textext-681ca217-3" />
+          <ns0:use height="433.50964" id="use3307" width="563.01929" x="232.13918" y="131.14999" ns7:href="#textext-681ca217-3" />
+        </ns0:g>
+      </ns0:g>
+    </ns0:g>
+    <ns0:g id="g3513" transform="matrix(4,0,0,4,-634.54053,-339.44783)" ns6:preamble="" ns6:text="${\\mathcal P}_{\\alpha\'\'}$">
+      <ns0:defs id="defs3515">
+        <ns0:g id="g3517">
+          <ns0:symbol id="textext-28e27b36-0" overflow="visible" style="overflow:visible">
+            <ns0:path d="" id="path3520" style="stroke:none" ns1:connector-curvature="0" />
+          </ns0:symbol>
+          <ns0:symbol id="textext-28e27b36-1" overflow="visible" style="overflow:visible">
+            <ns0:path d="m 3.46875,-6.8125 c -1.40625,0 -2.46875,0.6875 -2.875,1.15625 -0.359375,0.390625 -0.390625,0.6875 -0.390625,0.703125 0,0.0625 0.046875,0.078125 0.109375,0.078125 0.15625,0 0.390625,-0.140625 0.46875,-0.1875 0.203125,-0.140625 0.234375,-0.203125 0.296875,-0.390625 0.140625,-0.40625 0.421875,-0.75 1.671875,-0.8125 -0.171875,2.25 -0.78125,4.4375 -1.609375,6.515625 -0.0625,0.15625 -0.0625,0.171875 -0.0625,0.171875 0,0.03125 0.03125,0.078125 0.09375,0.078125 0.15625,0 0.640625,-0.21875 0.75,-0.484375 0.515625,-1.21875 1.34375,-3.5 1.640625,-6.28125 l 0.515625,0 c 1.21875,0 2.375,0.46875 2.375,1.46875 0,0.75 -0.71875,2.140625 -2.640625,2.203125 -0.21875,0.015625 -0.328125,0.015625 -0.609375,0.1875 -0.171875,0.125 -0.25,0.234375 -0.25,0.296875 0,0.0625 0.0625,0.0625 0.1875,0.0625 1.8125,0 4.171875,-1.53125 4.171875,-3.171875 0,-1.140625 -1.34375,-1.59375 -2.5,-1.59375 z" id="path3523" style="stroke:none" ns1:connector-curvature="0" />
+          </ns0:symbol>
+          <ns0:symbol id="textext-28e27b36-2" overflow="visible" style="overflow:visible">
+            <ns0:path d="" id="path3526" style="stroke:none" ns1:connector-curvature="0" />
+          </ns0:symbol>
+          <ns0:symbol id="textext-28e27b36-3" overflow="visible" style="overflow:visible">
+            <ns0:path d="m 3.8125,-0.984375 c 0.640625,-0.65625 0.890625,-1.59375 0.890625,-1.65625 0,-0.09375 -0.078125,-0.09375 -0.109375,-0.09375 C 4.5,-2.734375 4.5,-2.71875 4.453125,-2.5625 4.328125,-2.109375 4.09375,-1.671875 3.796875,-1.296875 3.796875,-1.40625 3.78125,-1.875 3.765625,-1.9375 3.65625,-2.625 3.140625,-3.078125 2.4375,-3.078125 c -1.015625,0 -2,0.953125 -2,1.9375 0,0.640625 0.46875,1.203125 1.265625,1.203125 0.640625,0 1.21875,-0.28125 1.609375,-0.578125 0.171875,0.5 0.515625,0.578125 0.734375,0.578125 0.40625,0 0.65625,-0.328125 0.65625,-0.484375 C 4.703125,-0.5 4.609375,-0.5 4.578125,-0.5 c -0.09375,0 -0.109375,0.03125 -0.125,0.0625 -0.09375,0.265625 -0.3125,0.3125 -0.390625,0.3125 -0.09375,0 -0.21875,0 -0.25,-0.859375 z M 3.265625,-0.75 C 2.578125,-0.1875 2,-0.125 1.734375,-0.125 c -0.46875,0 -0.71875,-0.3125 -0.71875,-0.78125 0,-0.1875 0.09375,-0.953125 0.453125,-1.4375 C 1.796875,-2.765625 2.1875,-2.875 2.4375,-2.875 c 0.546875,0 0.71875,0.53125 0.765625,0.96875 0.046875,0.296875 0.03125,0.796875 0.0625,1.15625 z" id="path3529" style="stroke:none" ns1:connector-curvature="0" />
+          </ns0:symbol>
+          <ns0:symbol id="textext-28e27b36-4" overflow="visible" style="overflow:visible">
+            <ns0:path d="" id="path3532" style="stroke:none" ns1:connector-curvature="0" />
+          </ns0:symbol>
+          <ns0:symbol id="textext-28e27b36-5" overflow="visible" style="overflow:visible">
+            <ns0:path d="m 1.796875,-2.3125 c 0,-0.015625 0.046875,-0.109375 0.046875,-0.1875 0,-0.171875 -0.15625,-0.28125 -0.3125,-0.28125 -0.203125,0 -0.25,0.15625 -0.28125,0.21875 L 0.484375,-0.40625 C 0.46875,-0.34375 0.46875,-0.328125 0.46875,-0.3125 c 0,0.078125 0.203125,0.125 0.203125,0.125 0.046875,0 0.0625,-0.03125 0.09375,-0.09375 z" id="path3535" style="stroke:none" ns1:connector-curvature="0" />
+          </ns0:symbol>
+        </ns0:g>
+      </ns0:defs>
+      <ns0:g id="textext-28e27b36-6">
+        <ns0:g id="g3538" style="fill:#000000;fill-opacity:1">
+          <ns0:use height="433.50964" id="use3540" width="563.01929" x="223.43201" y="134.765" ns7:href="#textext-28e27b36-1" />
+        </ns0:g>
+        <ns0:g id="g3542" style="fill:#000000;fill-opacity:1">
+          <ns0:use height="433.50964" id="use3544" width="563.01929" x="230.362" y="136.259" ns7:href="#textext-28e27b36-3" />
+        </ns0:g>
+        <ns0:g id="g3546" style="fill:#000000;fill-opacity:1">
+          <ns0:use height="433.50964" id="use3548" width="563.01929" x="235.541" y="134.267" ns7:href="#textext-28e27b36-5" />
+          <ns0:use height="433.50964" id="use3550" width="563.01929" x="237.73775" y="134.267" ns7:href="#textext-28e27b36-5" />
+        </ns0:g>
+      </ns0:g>
+    </ns0:g>
+  </ns0:g>
+</ns0:svg>

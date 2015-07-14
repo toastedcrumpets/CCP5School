@@ -1,0 +1,111 @@
+<ns0:svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns1="http://www.inkscape.org/namespaces/inkscape" xmlns:ns2="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:ns3="http://www.w3.org/1999/xlink" xmlns:ns5="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" height="500" id="svg2" preserveAspectRatio="xMidYMid meet" version="1.1" viewBox="0 0 1060 500" width="1060" ns2:docname="gibbs_ensemble.svg" ns1:version="0.48.5 r10040">
+  <ns2:namedview bordercolor="#666666" borderopacity="1.0" fit-margin-bottom="0" fit-margin-left="0" fit-margin-right="0" fit-margin-top="0" id="base" pagecolor="#ffffff" showgrid="true" ns1:current-layer="layer1" ns1:cx="595" ns1:cy="115.82449" ns1:document-units="px" ns1:pageopacity="0.0" ns1:pageshadow="2" ns1:snap-bbox="true" ns1:snap-global="true" ns1:window-height="971" ns1:window-maximized="1" ns1:window-width="1680" ns1:window-x="-4" ns1:window-y="-4" ns1:zoom="0.7">
+    <ns1:grid empspacing="5" enabled="true" id="grid3759" originx="220px" originy="-660px" snapvisiblegridlinesonly="true" type="xygrid" visible="true" />
+  </ns2:namedview>
+  <ns0:defs id="defs4">
+    <ns0:linearGradient id="linearGradient4056">
+      <ns0:stop id="stop4058" offset="0" style="stop-color:#ffffff;stop-opacity:1;" />
+      <ns0:stop id="stop4060" offset="1" style="stop-color:#0000ff;stop-opacity:1;" />
+    </ns0:linearGradient>
+    <ns0:radialGradient cx="-118.49034" cy="221.50964" fx="-118.49034" fy="221.50964" gradientUnits="userSpaceOnUse" id="radialGradient4064" r="30" ns1:collect="always" ns3:href="#linearGradient4056" />
+    <ns0:radialGradient cx="-118.49034" cy="221.50964" fx="-118.49034" fy="221.50964" gradientUnits="userSpaceOnUse" id="radialGradient4070" r="30" ns1:collect="always" ns3:href="#linearGradient4056" />
+    <ns0:radialGradient cx="-118.49034" cy="221.50964" fx="-118.49034" fy="221.50964" gradientUnits="userSpaceOnUse" id="radialGradient4074" r="30" ns1:collect="always" ns3:href="#linearGradient4056" />
+    <ns0:radialGradient cx="-118.49034" cy="221.50964" fx="-118.49034" fy="221.50964" gradientUnits="userSpaceOnUse" id="radialGradient4078" r="30" ns1:collect="always" ns3:href="#linearGradient4056" />
+    <ns0:radialGradient cx="-118.49034" cy="221.50964" fx="-118.49034" fy="221.50964" gradientUnits="userSpaceOnUse" id="radialGradient4078-6" r="30" ns1:collect="always" ns3:href="#linearGradient4056-7" />
+    <ns0:linearGradient id="linearGradient4056-7">
+      <ns0:stop id="stop4058-1" offset="0" style="stop-color:#ffffff;stop-opacity:1;" />
+      <ns0:stop id="stop4060-4" offset="1" style="stop-color:#0000ff;stop-opacity:1;" />
+    </ns0:linearGradient>
+    <ns0:radialGradient cx="-118.49034" cy="221.50964" fx="-118.49034" fy="221.50964" gradientUnits="userSpaceOnUse" id="radialGradient4074-9" r="30" ns1:collect="always" ns3:href="#linearGradient4056-7" />
+    <ns0:linearGradient id="linearGradient4113">
+      <ns0:stop id="stop4115" offset="0" style="stop-color:#ffffff;stop-opacity:1;" />
+      <ns0:stop id="stop4117" offset="1" style="stop-color:#0000ff;stop-opacity:1;" />
+    </ns0:linearGradient>
+    <ns0:radialGradient cx="-118.49034" cy="221.50964" fx="-118.49034" fy="221.50964" gradientUnits="userSpaceOnUse" id="radialGradient4070-9" r="30" ns1:collect="always" ns3:href="#linearGradient4056-7" />
+    <ns0:linearGradient id="linearGradient4120">
+      <ns0:stop id="stop4122" offset="0" style="stop-color:#ffffff;stop-opacity:1;" />
+      <ns0:stop id="stop4124" offset="1" style="stop-color:#0000ff;stop-opacity:1;" />
+    </ns0:linearGradient>
+    <ns0:radialGradient cx="-118.49034" cy="221.50964" fx="-118.49034" fy="221.50964" gradientUnits="userSpaceOnUse" id="radialGradient4129" r="30" ns1:collect="always" ns3:href="#linearGradient4056-7" />
+    <ns0:radialGradient cx="-118.49034" cy="221.50964" fx="-118.49034" fy="221.50964" gradientUnits="userSpaceOnUse" id="radialGradient4078-3" r="30" ns1:collect="always" ns3:href="#linearGradient4056-0" />
+    <ns0:linearGradient id="linearGradient4056-0">
+      <ns0:stop id="stop4058-5" offset="0" style="stop-color:#ffffff;stop-opacity:1;" />
+      <ns0:stop id="stop4060-1" offset="1" style="stop-color:#0000ff;stop-opacity:1;" />
+    </ns0:linearGradient>
+    <ns0:radialGradient cx="-118.49034" cy="221.50964" fx="-118.49034" fy="221.50964" gradientUnits="userSpaceOnUse" id="radialGradient4074-8" r="30" ns1:collect="always" ns3:href="#linearGradient4056-0" />
+    <ns0:linearGradient id="linearGradient4113-5">
+      <ns0:stop id="stop4115-3" offset="0" style="stop-color:#ffffff;stop-opacity:1;" />
+      <ns0:stop id="stop4117-6" offset="1" style="stop-color:#0000ff;stop-opacity:1;" />
+    </ns0:linearGradient>
+    <ns0:radialGradient cx="-118.49034" cy="221.50964" fx="-118.49034" fy="221.50964" gradientUnits="userSpaceOnUse" id="radialGradient4070-3" r="30" ns1:collect="always" ns3:href="#linearGradient4056-0" />
+    <ns0:linearGradient id="linearGradient4120-8">
+      <ns0:stop id="stop4122-7" offset="0" style="stop-color:#ffffff;stop-opacity:1;" />
+      <ns0:stop id="stop4124-6" offset="1" style="stop-color:#0000ff;stop-opacity:1;" />
+    </ns0:linearGradient>
+    <ns0:radialGradient cx="-118.49034" cy="221.50964" fx="-118.49034" fy="221.50964" gradientUnits="userSpaceOnUse" id="radialGradient4129-7" r="30" ns1:collect="always" ns3:href="#linearGradient4056-0" />
+    <ns0:radialGradient cx="-118.49034" cy="221.50964" fx="-118.49034" fy="221.50964" gradientUnits="userSpaceOnUse" id="radialGradient4207" r="30" ns1:collect="always" ns3:href="#linearGradient4056" />
+    <ns0:radialGradient cx="-118.49034" cy="221.50964" fx="-118.49034" fy="221.50964" gradientUnits="userSpaceOnUse" id="radialGradient4211" r="30" ns1:collect="always" ns3:href="#linearGradient4056" />
+    <ns0:radialGradient cx="-118.49034" cy="221.50964" fx="-118.49034" fy="221.50964" gradientUnits="userSpaceOnUse" id="radialGradient4225" r="30" ns1:collect="always" ns3:href="#linearGradient4056-7" />
+    <ns0:radialGradient cx="-118.49034" cy="221.50964" fx="-118.49034" fy="221.50964" gradientUnits="userSpaceOnUse" id="radialGradient4227" r="30" ns1:collect="always" ns3:href="#linearGradient4056-7" />
+    <ns0:radialGradient cx="-118.49034" cy="221.50964" fx="-118.49034" fy="221.50964" gradientUnits="userSpaceOnUse" id="radialGradient4229" r="30" ns1:collect="always" ns3:href="#linearGradient4056-7" />
+    <ns0:radialGradient cx="-118.49034" cy="221.50964" fx="-118.49034" fy="221.50964" gradientUnits="userSpaceOnUse" id="radialGradient4231" r="30" ns1:collect="always" ns3:href="#linearGradient4056-0" />
+    <ns0:radialGradient cx="-118.49034" cy="221.50964" fx="-118.49034" fy="221.50964" gradientUnits="userSpaceOnUse" id="radialGradient4233" r="30" ns1:collect="always" ns3:href="#linearGradient4056-0" />
+    <ns0:radialGradient cx="-118.49034" cy="221.50964" fx="-118.49034" fy="221.50964" gradientUnits="userSpaceOnUse" id="radialGradient4235" r="30" ns1:collect="always" ns3:href="#linearGradient4056-0" />
+    <ns0:radialGradient cx="-118.49034" cy="221.50964" fx="-118.49034" fy="221.50964" gradientUnits="userSpaceOnUse" id="radialGradient4239" r="30" ns1:collect="always" ns3:href="#linearGradient4056-7" />
+    <ns0:radialGradient cx="-118.49034" cy="221.50964" fx="-118.49034" fy="221.50964" gradientUnits="userSpaceOnUse" id="radialGradient4266" r="30" ns1:collect="always" ns3:href="#linearGradient4056" />
+    <ns0:radialGradient cx="-118.49034" cy="221.50964" fx="-118.49034" fy="221.50964" gradientUnits="userSpaceOnUse" id="radialGradient4268" r="30" ns1:collect="always" ns3:href="#linearGradient4056" />
+    <ns0:radialGradient cx="-118.49034" cy="221.50964" fx="-118.49034" fy="221.50964" gradientUnits="userSpaceOnUse" id="radialGradient4270" r="30" ns1:collect="always" ns3:href="#linearGradient4056" />
+    <ns0:radialGradient cx="-118.49034" cy="221.50964" fx="-118.49034" fy="221.50964" gradientUnits="userSpaceOnUse" id="radialGradient4272" r="30" ns1:collect="always" ns3:href="#linearGradient4056" />
+    <ns0:radialGradient cx="-118.49034" cy="221.50964" fx="-118.49034" fy="221.50964" gradientUnits="userSpaceOnUse" id="radialGradient4274" r="30" ns1:collect="always" ns3:href="#linearGradient4056" />
+    <ns0:radialGradient cx="-118.49034" cy="221.50964" fx="-118.49034" fy="221.50964" gradientUnits="userSpaceOnUse" id="radialGradient4276" r="30" ns1:collect="always" ns3:href="#linearGradient4056" />
+    <ns0:radialGradient cx="-118.49034" cy="221.50964" fx="-118.49034" fy="221.50964" gradientUnits="userSpaceOnUse" id="radialGradient4278" r="30" ns1:collect="always" ns3:href="#linearGradient4056-7" />
+    <ns0:radialGradient cx="-118.49034" cy="221.50964" fx="-118.49034" fy="221.50964" gradientUnits="userSpaceOnUse" id="radialGradient4280" r="30" ns1:collect="always" ns3:href="#linearGradient4056-7" />
+    <ns0:radialGradient cx="-118.49034" cy="221.50964" fx="-118.49034" fy="221.50964" gradientUnits="userSpaceOnUse" id="radialGradient4282" r="30" ns1:collect="always" ns3:href="#linearGradient4056-7" />
+    <ns0:radialGradient cx="-118.49034" cy="221.50964" fx="-118.49034" fy="221.50964" gradientUnits="userSpaceOnUse" id="radialGradient4284" r="30" ns1:collect="always" ns3:href="#linearGradient4056-0" />
+    <ns0:radialGradient cx="-118.49034" cy="221.50964" fx="-118.49034" fy="221.50964" gradientUnits="userSpaceOnUse" id="radialGradient4286" r="30" ns1:collect="always" ns3:href="#linearGradient4056-0" />
+    <ns0:radialGradient cx="-118.49034" cy="221.50964" fx="-118.49034" fy="221.50964" gradientUnits="userSpaceOnUse" id="radialGradient4288" r="30" ns1:collect="always" ns3:href="#linearGradient4056-0" />
+    <ns0:radialGradient cx="-118.49034" cy="221.50964" fx="-118.49034" fy="221.50964" gradientUnits="userSpaceOnUse" id="radialGradient4290" r="30" ns1:collect="always" ns3:href="#linearGradient4056-7" />
+    <ns0:radialGradient cx="-118.49034" cy="221.50964" fx="-118.49034" fy="221.50964" gradientUnits="userSpaceOnUse" id="radialGradient4292" r="30" ns1:collect="always" ns3:href="#linearGradient4056-7" />
+    <ns0:radialGradient cx="-118.49034" cy="221.50964" fx="-118.49034" fy="221.50964" gradientUnits="userSpaceOnUse" id="radialGradient4294" r="30" ns1:collect="always" ns3:href="#linearGradient4056-7" />
+    <ns0:radialGradient cx="-118.49034" cy="221.50964" fx="-118.49034" fy="221.50964" gradientUnits="userSpaceOnUse" id="radialGradient4296" r="30" ns1:collect="always" ns3:href="#linearGradient4056-0" />
+    <ns0:radialGradient cx="-118.49034" cy="221.50964" fx="-118.49034" fy="221.50964" gradientUnits="userSpaceOnUse" id="radialGradient4298" r="30" ns1:collect="always" ns3:href="#linearGradient4056-0" />
+    <ns0:radialGradient cx="-118.49034" cy="221.50964" fx="-118.49034" fy="221.50964" gradientUnits="userSpaceOnUse" id="radialGradient4300" r="30" ns1:collect="always" ns3:href="#linearGradient4056-0" />
+    <ns0:radialGradient cx="-118.49034" cy="221.50964" fx="-118.49034" fy="221.50964" gradientUnits="userSpaceOnUse" id="radialGradient4302" r="30" ns1:collect="always" ns3:href="#linearGradient4056-7" />
+  </ns0:defs>
+  <ns0:metadata id="metadata7">
+    <rdf:RDF>
+      <ns5:Work rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </ns5:Work>
+    </rdf:RDF>
+  </ns0:metadata>
+  <ns0:g id="layer1" transform="translate(220,107.63783)" ns1:groupmode="layer" ns1:label="Layer 1">
+    <ns0:g id="g4257">
+      <ns0:rect height="500" id="rect4066" style="fill:#0000ff;fill-opacity:0.24705882;stroke:none" width="500" x="-220" y="-107.63783" />
+      <ns0:path d="m -98.490341,231.50964 c 0,16.56855 -13.431459,30 -29.999999,30 -16.56854,0 -30,-13.43145 -30,-30 0,-16.56854 13.43146,-30 30,-30 16.56854,0 29.999999,13.43146 29.999999,30 z" id="path3286" style="fill:url(#radialGradient4266);fill-opacity:1;stroke:none" transform="translate(28.490341,90.852524)" ns2:cx="-128.49034" ns2:cy="231.50964" ns2:rx="30" ns2:ry="30" ns2:type="arc" />
+      <ns0:path d="m -98.490341,231.50964 c 0,16.56855 -13.431459,30 -29.999999,30 -16.56854,0 -30,-13.43145 -30,-30 0,-16.56854 13.43146,-30 30,-30 16.56854,0 29.999999,13.43146 29.999999,30 z" id="path4068" style="fill:url(#radialGradient4268);fill-opacity:1;stroke:none" transform="translate(188.49034,-89.147476)" ns2:cx="-128.49034" ns2:cy="231.50964" ns2:rx="30" ns2:ry="30" ns2:type="arc" />
+      <ns0:path d="m -98.490341,231.50964 c 0,16.56855 -13.431459,30 -29.999999,30 -16.56854,0 -30,-13.43145 -30,-30 0,-16.56854 13.43146,-30 30,-30 16.56854,0 29.999999,13.43146 29.999999,30 z" id="path4072" style="fill:url(#radialGradient4270);fill-opacity:1;stroke:none" transform="translate(348.49034,50.852524)" ns2:cx="-128.49034" ns2:cy="231.50964" ns2:rx="30" ns2:ry="30" ns2:type="arc" />
+      <ns0:path d="m -98.490341,231.50964 c 0,16.56855 -13.431459,30 -29.999999,30 -16.56854,0 -30,-13.43145 -30,-30 0,-16.56854 13.43146,-30 30,-30 16.56854,0 29.999999,13.43146 29.999999,30 z" id="path4076" style="fill:url(#radialGradient4272);fill-opacity:1;stroke:none" transform="translate(368.49034,-149.14748)" ns2:cx="-128.49034" ns2:cy="231.50964" ns2:rx="30" ns2:ry="30" ns2:type="arc" />
+      <ns0:path d="m -98.490341,231.50964 c 0,16.56855 -13.431459,30 -29.999999,30 -16.56854,0 -30,-13.43145 -30,-30 0,-16.56854 13.43146,-30 30,-30 16.56854,0 29.999999,13.43146 29.999999,30 z" id="path4205" style="fill:url(#radialGradient4274);fill-opacity:1;stroke:none" transform="translate(-21.509659,-199.14748)" ns2:cx="-128.49034" ns2:cy="231.50964" ns2:rx="30" ns2:ry="30" ns2:type="arc" />
+      <ns0:path d="m -98.490341,231.50964 c 0,16.56855 -13.431459,30 -29.999999,30 -16.56854,0 -30,-13.43145 -30,-30 0,-16.56854 13.43146,-30 30,-30 16.56854,0 29.999999,13.43146 29.999999,30 z" id="path4209" style="fill:url(#radialGradient4276);fill-opacity:1;stroke:none" transform="translate(138.49034,-279.14748)" ns2:cx="-128.49034" ns2:cy="231.50964" ns2:rx="30" ns2:ry="30" ns2:type="arc" />
+    </ns0:g>
+    <ns0:g id="g4241">
+      <ns0:rect height="340" id="rect4066-0" style="fill:#0000ff;fill-opacity:0.24705882;stroke:none" width="340" x="500" y="-27.637833" />
+      <ns0:path d="m -98.490341,231.50964 c 0,16.56855 -13.431459,30 -29.999999,30 -16.56854,0 -30,-13.43145 -30,-30 0,-16.56854 13.43146,-30 30,-30 16.56854,0 29.999999,13.43146 29.999999,30 z" id="path4068-6" style="fill:url(#radialGradient4278);fill-opacity:1;stroke:none" transform="translate(698.49034,-179.14748)" ns2:cx="-128.49034" ns2:cy="231.50964" ns2:rx="30" ns2:ry="30" ns2:type="arc" />
+      <ns0:path d="m -98.490341,231.50964 c 0,16.56855 -13.431459,30 -29.999999,30 -16.56854,0 -30,-13.43145 -30,-30 0,-16.56854 13.43146,-30 30,-30 16.56854,0 29.999999,13.43146 29.999999,30 z" id="path4072-3" style="fill:url(#radialGradient4280);fill-opacity:1;stroke:none" transform="translate(868.49034,-29.147476)" ns2:cx="-128.49034" ns2:cy="231.50964" ns2:rx="30" ns2:ry="30" ns2:type="arc" />
+      <ns0:path d="m -98.490341,231.50964 c 0,16.56855 -13.431459,30 -29.999999,30 -16.56854,0 -30,-13.43145 -30,-30 0,-16.56854 13.43146,-30 30,-30 16.56854,0 29.999999,13.43146 29.999999,30 z" id="path4076-3" style="fill:url(#radialGradient4282);fill-opacity:1;stroke:none" transform="translate(868.49034,-129.14748)" ns2:cx="-128.49034" ns2:cy="231.50964" ns2:rx="30" ns2:ry="30" ns2:type="arc" />
+      <ns0:path d="m -98.490341,231.50964 c 0,16.56855 -13.431459,30 -29.999999,30 -16.56854,0 -30,-13.43145 -30,-30 0,-16.56854 13.43146,-30 30,-30 16.56854,0 29.999999,13.43146 29.999999,30 z" id="path4068-7" style="fill:url(#radialGradient4284);fill-opacity:1;stroke:none" transform="translate(678.49034,40.852524)" ns2:cx="-128.49034" ns2:cy="231.50964" ns2:rx="30" ns2:ry="30" ns2:type="arc" />
+      <ns0:path d="m -98.490341,231.50964 c 0,16.56855 -13.431459,30 -29.999999,30 -16.56854,0 -30,-13.43145 -30,-30 0,-16.56854 13.43146,-30 30,-30 16.56854,0 29.999999,13.43146 29.999999,30 z" id="path4072-2" style="fill:url(#radialGradient4286);fill-opacity:1;stroke:none" transform="translate(778.49034,20.852524)" ns2:cx="-128.49034" ns2:cy="231.50964" ns2:rx="30" ns2:ry="30" ns2:type="arc" />
+      <ns0:path d="m -98.490341,231.50964 c 0,16.56855 -13.431459,30 -29.999999,30 -16.56854,0 -30,-13.43145 -30,-30 0,-16.56854 13.43146,-30 30,-30 16.56854,0 29.999999,13.43146 29.999999,30 z" id="path4076-0" style="fill:url(#radialGradient4288);fill-opacity:1;stroke:none" transform="translate(768.49034,-129.14748)" ns2:cx="-128.49034" ns2:cy="231.50964" ns2:rx="30" ns2:ry="30" ns2:type="arc" />
+      <ns0:path d="m -98.490341,231.50964 c 0,16.56855 -13.431459,30 -29.999999,30 -16.56854,0 -30,-13.43145 -30,-30 0,-16.56854 13.43146,-30 30,-30 16.56854,0 29.999999,13.43146 29.999999,30 z" id="path4213" style="fill:url(#radialGradient4290);fill-opacity:1;stroke:none" transform="translate(778.49034,-219.14748)" ns2:cx="-128.49034" ns2:cy="231.50964" ns2:rx="30" ns2:ry="30" ns2:type="arc" />
+      <ns0:path d="m -98.490341,231.50964 c 0,16.56855 -13.431459,30 -29.999999,30 -16.56854,0 -30,-13.43145 -30,-30 0,-16.56854 13.43146,-30 30,-30 16.56854,0 29.999999,13.43146 29.999999,30 z" id="path4215" style="fill:url(#radialGradient4292);fill-opacity:1;stroke:none" transform="translate(918.49034,-79.147476)" ns2:cx="-128.49034" ns2:cy="231.50964" ns2:rx="30" ns2:ry="30" ns2:type="arc" />
+      <ns0:path d="m -98.490341,231.50964 c 0,16.56855 -13.431459,30 -29.999999,30 -16.56854,0 -30,-13.43145 -30,-30 0,-16.56854 13.43146,-30 30,-30 16.56854,0 29.999999,13.43146 29.999999,30 z" id="path4217" style="fill:url(#radialGradient4294);fill-opacity:1;stroke:none" transform="translate(908.49034,-209.14748)" ns2:cx="-128.49034" ns2:cy="231.50964" ns2:rx="30" ns2:ry="30" ns2:type="arc" />
+      <ns0:path d="m -98.490341,231.50964 c 0,16.56855 -13.431459,30 -29.999999,30 -16.56854,0 -30,-13.43145 -30,-30 0,-16.56854 13.43146,-30 30,-30 16.56854,0 29.999999,13.43146 29.999999,30 z" id="path4219" style="fill:url(#radialGradient4296);fill-opacity:1;stroke:none" transform="translate(668.49034,-89.147476)" ns2:cx="-128.49034" ns2:cy="231.50964" ns2:rx="30" ns2:ry="30" ns2:type="arc" />
+      <ns0:path d="m -98.490341,231.50964 c 0,16.56855 -13.431459,30 -29.999999,30 -16.56854,0 -30,-13.43145 -30,-30 0,-16.56854 13.43146,-30 30,-30 16.56854,0 29.999999,13.43146 29.999999,30 z" id="path4221" style="fill:url(#radialGradient4298);fill-opacity:1;stroke:none" transform="translate(898.49034,40.852524)" ns2:cx="-128.49034" ns2:cy="231.50964" ns2:rx="30" ns2:ry="30" ns2:type="arc" />
+      <ns0:path d="m -98.490341,231.50964 c 0,16.56855 -13.431459,30 -29.999999,30 -16.56854,0 -30,-13.43145 -30,-30 0,-16.56854 13.43146,-30 30,-30 16.56854,0 29.999999,13.43146 29.999999,30 z" id="path4223" style="fill:url(#radialGradient4300);fill-opacity:1;stroke:none" transform="translate(778.49034,-59.147476)" ns2:cx="-128.49034" ns2:cy="231.50964" ns2:rx="30" ns2:ry="30" ns2:type="arc" />
+      <ns0:path d="m -98.490341,231.50964 c 0,16.56855 -13.431459,30 -29.999999,30 -16.56854,0 -30,-13.43145 -30,-30 0,-16.56854 13.43146,-30 30,-30 16.56854,0 29.999999,13.43146 29.999999,30 z" id="path4237" style="fill:url(#radialGradient4302);fill-opacity:1;stroke:none" transform="translate(838.49034,-199.14748)" ns2:cx="-128.49034" ns2:cy="231.50964" ns2:rx="30" ns2:ry="30" ns2:type="arc" />
+    </ns0:g>
+  </ns0:g>
+</ns0:svg>
