@@ -13,7 +13,7 @@ section.has-light-background, section.has-light-background h1, section.has-light
  * GLOBAL STYLES
  *********************************************/
 body {
-  background: rgb(134, 0, 56); /* University Approved background red */
+    background: rgb(134, 0, 56); /* University Approved background red */
   /* background: rgb(120, 0, 79); /* University text red */
 }
 
@@ -140,7 +140,6 @@ body {
   margin: 20px auto;
   text-align: left;
   font-family: monospace;
-  line-height: 1.2em;
   word-wrap: break-word;
   box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3); }
 
@@ -149,13 +148,16 @@ body {
 }
 
 .reveal pre code {
-  display: block;
-  padding: 5px;
-  overflow: auto;
-  max-height: 400px;
-  word-wrap: normal;
-  background: #3F3F3F;
-  color: #DCDCDC; }
+    font-size:50%;
+    line-height: initial;
+    display: block;
+    padding: 5px;
+    overflow: auto;
+    max-height: 400px;
+    word-wrap: normal;
+    background: #3F3F3F;
+    color: #DCDCDC;
+}
 
 .reveal table {
   margin: auto;

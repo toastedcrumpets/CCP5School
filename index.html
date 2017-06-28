@@ -17,6 +17,47 @@
     <!--[if lt IE 9]>
 	<script src="reveal.js/lib/js/html5shiv.js"></script>
 	<![endif]-->
+    <script>
+      //If the query string print-pdf is there, then load the print css style sheet
+      if (window.location.search.match( /print-pdf/gi )) {
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = 'reveal.js/css/print/pdf.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = 'UoApdf.css';
+      document.head.appendChild( link );
+      }
+
+      //Function to allow inserting of parameters to the current URL
+      function insertParam(key, value)
+      {
+      key = encodeURI(key); value = encodeURI(value);
+
+      var kvp = document.location.search.substr(1).split('&');
+
+      var i=kvp.length; var x; while(i--) 
+      {
+      x = kvp[i].split('=');
+
+      if (x[0]==key)
+      {
+      x[1] = value;
+      kvp[i] = x.join('=');
+      break;
+      }
+      }
+
+      if(i<0) {kvp[kvp.length] = [key,value].join('=');}
+
+	      //this will reload the page, it's likely better to store this until finished
+	      return kvp.join('&'); 
+	      }
+  </script>
   </head>
   <body>
     <div class="reveal">
@@ -34,6 +75,8 @@
 	      </object>
 	      Access the slides here:
 	      <a href="http://www.marcusbannerman.co.uk/CCP5School">www.marcusbannerman.co.uk/CCP5School</a>
+	      <br/>
+	      <a onclick="document.location.search = insertParam('print-pdf');" style="pointer:hand;" id="PrintButton">Click for a printable a copy of the notes.</a>
 	    </p>
 	  </section>
 	  <section>
@@ -125,12 +168,12 @@
 	  <section>
 	    <h2>Gaussian/Normally distributed random number generator</h2>
 	    <pre><code class="python" data-trim data-prevent-swipe>
-		#!/usr/bin/python
+#!/usr/bin/python
 
-		import numpy.random
+import numpy.random
 
-		for i in range(100):
-		print numpy.random.normal(0.0, 1.0)
+for i in range(100):
+    print numpy.random.normal(0.0, 1.0)
 	    </code></pre>
 	    <p>
 	      The examples in the practical sessions (<tt>gauss.f90</tt> or <tt>gauss.py</tt>)
@@ -140,14 +183,14 @@
 	  <section>
 	    <h2>Writing data to a file</h2>
 	    <pre><code class="python" data-trim data-prevent-swipe>
-		#!/usr/bin/python
+#!/usr/bin/python
 
-		import numpy.random
+import numpy.random
 
-		output_file = open("junk.dat", "w")
-		for i in range(100):
-		y = numpy.random.normal(0.0, 1.0)
-		output_file.write(str(i)+' '+str(y))
+output_file = open("junk.dat", "w")
+for i in range(100):
+    y = numpy.random.normal(0.0, 1.0)
+    output_file.write(str(i)+' '+str(y))
 	    </code></pre>
 	    <p>
 	      Reading is just as easy, you can google
@@ -157,20 +200,20 @@
 	  <section>
 	    <h2>Plotting</h2>
 	    <pre><code class="python" data-trim data-prevent-swipe>
-		#!/usr/bin/python
+#!/usr/bin/python
 
-		import numpy.random
+import numpy.random
 
-		y_data = []
-		for i in range(100):
-		y_data.append(numpy.random.normal(0.0, 1.0))
+y_data = []
+for i in range(100):
+    y_data.append(numpy.random.normal(0.0, 1.0))
 
-		print y_data
+print y_data
 
-		import pylab
+import pylab
 
-		pylab.plot(y_data)
-		pylab.show()
+pylab.plot(y_data)
+pylab.show()
 	    </code></pre>
 	    <p>
 	      The plotting features of Python alone make it worthwhile learning.
@@ -179,22 +222,22 @@
 	  <section>
 	    <h2>Data manipulation and plotting</h2>
 	    <pre><code class="python" data-trim data-prevent-swipe>
-		#!/usr/bin/python
+#!/usr/bin/python
 
-		import numpy
-		import pylab
+import numpy
+import pylab
 
-		y_data = []
-		for i in range(1000):
-		y_data.append(numpy.random.normal(0.0, 1.0))
+y_data = []
+for i in range(1000):
+    y_data.append(numpy.random.normal(0.0, 1.0))
 
-		n, bins, patches = pylab.hist(y_data, 50, normed=1, histtype='step')
+n, bins, patches = pylab.hist(y_data, 50, normed=1, histtype='step')
 
-		x_data = numpy.arange(-5.0, 5.0, 0.01)
-		y_data = [numpy.exp(-0.5*x**2/(1.0*1.0))/numpy.sqrt(2.0*numpy.pi*1.0**2) for x in x_data]
+x_data = numpy.arange(-5.0, 5.0, 0.01)
+y_data = [numpy.exp(-0.5*x**2/(1.0*1.0))/numpy.sqrt(2.0*numpy.pi*1.0**2) for x in x_data]
 
-		pylab.plot(x_data, y_data)
-		pylab.show()
+pylab.plot(x_data, y_data)
+pylab.show()
 	    </code></pre>
 	    <p>
 	      The example (<tt>gauss.py</tt>) uses its own histogramming code, rather than <tt>pylab.hist()</tt> to
@@ -204,30 +247,30 @@
 	  <section>
 	    <h2>Command-line arguments</h2>
 	    <pre><code class="python" data-trim data-prevent-swipe>
-		#!/usr/bin/python
-		import sys
-		from optparse import OptionParser
+#!/usr/bin/python
+import sys
+from optparse import OptionParser
 
-		# parse command line arguments
-		usage = "usage: %prog [options] arg"
-		parser = OptionParser(usage)
-		parser.add_option("--n", type="int", dest="nn", default=1)
-		(options, args) = parser.parse_args()
+# parse command line arguments
+usage = "usage: %prog [options] arg"
+parser = OptionParser(usage)
+parser.add_option("--n", type="int", dest="nn", default=1)
+(options, args) = parser.parse_args()
 
-		import numpy
-		import pylab
+import numpy
+import pylab
 
-		y_data = []
-		for i in range(options.nn):
-		y_data.append(numpy.random.normal(0.0, 1.0))
+y_data = []
+for i in range(options.nn):
+    y_data.append(numpy.random.normal(0.0, 1.0))
 
-		n, bins, patches = pylab.hist(y_data, 50, normed=1, histtype='step')
+n, bins, patches = pylab.hist(y_data, 50, normed=1, histtype='step')
 
-		x_data = numpy.arange(-5.0, 5.0, 0.01)
-		y_data = [numpy.exp(-0.5*x**2/(1.0*1.0))/numpy.sqrt(2.0*numpy.pi*1.0**2) for x in x_data]
+x_data = numpy.arange(-5.0, 5.0, 0.01)
+y_data = [numpy.exp(-0.5*x**2/(1.0*1.0))/numpy.sqrt(2.0*numpy.pi*1.0**2) for x in x_data]
 
-		pylab.plot(x_data, y_data)
-		pylab.show()
+pylab.plot(x_data, y_data)
+pylab.show()
 	    </code></pre>
 	    <p>
 	      Command line arguments turn scripts into
@@ -238,11 +281,11 @@
 	  <section>
 	    <h2>Running other programs</h2>
 	    <pre><code class="python" data-trim data-prevent-swipe>
-		#!/usr/bin/python
-		import os
+#!/usr/bin/python
+import os
 
-		#Run the ls program
-		os.system("ls")
+#Run the ls program
+os.system("ls")
 	    </code></pre>
 	    <p>
 	      Scripts are particularly powerful when
@@ -253,2323 +296,2324 @@
 	  <section>
 	    <h2>Molecular dynamics</h2>
 	    <pre><code class="python" data-trim data-prevent-swipe>
-		#!/usr/bin/python
-		import numpy, pylab, math
-		box_length = 10
-		N = 20
-		dt = 0.1
-		k_particle = 5
-		diameter = 2.0
-		k_domain = 0.1
-		pos = (numpy.random.rand(N, 2) - 0.5) * box_length
-		vel = numpy.zeros((N,2))
+#!/usr/bin/python
+import numpy, pylab, math
+box_length = 10
+N = 20
+dt = 0.1
+k_particle = 5
+diameter = 2.0
+k_domain = 0.1
+pos = (numpy.random.rand(N, 2) - 0.5) * box_length
+vel = numpy.zeros((N,2))
 
-		def force(i, j):
-		rij = pos[i] - pos[j]
-		distance = numpy.linalg.norm(rij)
-		if distance > diameter or i == j:
+def force(i, j):
+    rij = pos[i] - pos[j]
+    distance = numpy.linalg.norm(rij)
+    if distance &gt; diameter or i == j:
         return numpy.array([0,0])
-	rij_norm = rij / distance
-	return k_particle * (diameter - distance) * rij_norm
-	
-	while True:
-	pylab.scatter(pos[:,0], pos[:,1], s=250)
-	pylab.xlim(-box_length, +box_length)
-	pylab.ylim(-box_length, +box_length)
-	pylab.draw()
-	pylab.pause(0.001)
-	pylab.clf()
-	
-	for i in range(N):
+    rij_norm = rij / distance
+    return k_particle * (diameter - distance) * rij_norm
+
+while True:
+    pylab.scatter(pos[:,0], pos[:,1], s=250)
+    pylab.xlim(-box_length, +box_length)
+    pylab.ylim(-box_length, +box_length)
+    pylab.draw()
+    pylab.pause(0.001)
+    pylab.clf()
+    
+    for i in range(N):
         pos[i] += 0.5 * dt * vel[i]
 
-	forces = numpy.zeros((N,2))
-	for i in range(N):
+    forces = numpy.zeros((N,2))
+    for i in range(N):
         forces[i] += - k_domain * pos[i]
         for j in range(N):
-        forces[i] += force(i,j)
+            forces[i] += force(i,j)
 
-	for i in range(N):
+    for i in range(N):
         vel[i] += dt * forces[i]
-        
-	for i in range(N):
+    
+    for i in range(N):
         pos[i] += 0.5 * dt * vel[i]    
-</code></pre>
-<p>
-  This is a toy "spring" particles trapped
-  in a spring well, using a symplectic
-  integrator. Great example of python's
-  power (and its lack of speed). Balance
-  YOUR programming time against the COMPUTER
-  run time when choosing scripting or compiled languages.</p>
-</section>
-<section>
-  <p>
-    Python versions of the fortran codes are
-    available for the first day's workshop if
-    you want to take a look. Check the <tt>programming-exercises</tt> folder.
-  </p>
-  <p>
-    Good luck! Have fun! Ask if you need help!
-  </p>
-</section>
-</section>
-<section id="statmech">
-  <section>
-    <h2 class="backbox">Statistical Mechanics 2</h2>
-    <p><em>
-	Ludwig Boltzman, who spent much of his life studying statistical mechanics, died in 1906, by his own hand. Paul Ehrenfest, carrying on the work, died similarly in 1933. Now it is our turn to study statistical mechanics. Perhaps it will be wise to approach the subject cautiously.
-      </em>
-    <p style="float:right">(Opening lines of "States of Matter", by D.L. Goodstein).</p>
-    </p>
-  </section>
-  <section>
-    <p>
-      Statistical mechanics is our bridge from
-      the microscopic scale to the
-      &ldquo;macroscopic&rdquo; thermodynamics.</p>
-    <p class="fragment">
-      We can connect microscopic details
-      (positions, velocities) to more
-      interesting macroscopic properties (i.e.,
-      internal energy, heat capacity).
-    </p>
-    <p class="fragment">
-      To be able to perform Monte Carlo, we must
-      understand the relative probabilities (and
-      therefore feasibility) of different states
-      or configurations of a microscopic system.
-    </p>
-    <p class="fragment">
-      Thermodynamics observationally tells us
-      what is possible (${\rm d}S\ge0$), but
-      statistical mechanics can quantify the
-      probabilities in terms of the microscopic state.</p>
-    <p class="fragment">
-      It also proves that (${\rm d}S<0$) is
-					 possible, but that this is so
-					 astronomically rare it may be ignored.</p>
-					 </section>
-  <section>
-    <h2>Microscopics notation recap</h2>
-    <ul>
-      <li> $N$ spherical atoms of mass $m$
-      </li>
-      <li> position of atom $\alpha$ is ${\bf r}_\alpha$
-      </li>
-      <li> momentum of atom $\alpha$ is ${\bf p}_\alpha$
-      </li>
-      <li> point in phase space: 
-	${\boldsymbol\Gamma}=({\bf r}_1,\dots{\bf r}_N,{\bf p}_1,\dots,{\bf p}_N)$
-      </li>
-      <li> pairwise additive potential $u(|{\bf r}_\alpha-{\bf r}_{\alpha'}|)$
-      </li>
-      <li> Hamiltonian: 
-	$H({\boldsymbol\Gamma})=U({\bf r}_1,\dots{\bf r}_N)+K({\bf p}_1,\dots,{\bf p}_N)$
-	\begin{align*}
-	U({\bf r}_1,\dots{\bf r}_N)
-	&= \frac{1}{2} \sum_{\alpha\ne\alpha'} u(|{\bf r}_\alpha-{\bf r}_{\alpha'}|)
-	\\
-	K({\bf p}_1,\dots,{\bf p}_N)
-	&= \sum_\alpha \frac{p_\alpha^2}{2m}
-	\end{align*}
-      </li>
-    </ul>
-  </section>
-  <section>
-    <h2>Phase space</h2>
+            </code></pre>
+	    <p>
+	      This is a toy "spring" particles trapped
+	      in a spring well, using a symplectic
+	      integrator. Great example of python's
+	      power (and its lack of speed). Balance
+	      YOUR programming time against the COMPUTER
+	      run time when choosing scripting or compiled languages.</p>
+	  </section>
+	  <section>
+	    <p>
+	      Python versions of the fortran codes are
+	      available for the first day's workshop if
+	      you want to take a look. Check the <tt>programming-exercises</tt> folder.
+	    </p>
+	    <p>
+	      Good luck! Have fun! Ask if you need help!
+	    </p>
+	  </section>
+	</section>
+	<section id="statmech">
+	  <section>
+	    <h2 class="backbox">Statistical Mechanics 2</h2>
+	    <p><em>
+		Ludwig Boltzman, who spent much of his life studying statistical mechanics, died in 1906, by his own hand. Paul Ehrenfest, carrying on the work, died similarly in 1933. Now it is our turn to study statistical mechanics. Perhaps it will be wise to approach the subject cautiously.
+	      </em>
+	    <p style="float:right">(Opening lines of "States of Matter", by D.L. Goodstein).</p>
+	    </p>
+	  </section>
+	  <section>
+	    <p>
+	      Statistical mechanics is our bridge from
+	      the microscopic scale to the
+	      &ldquo;macroscopic&rdquo; thermodynamics.</p>
+	    <p class="fragment">
+	      We can connect microscopic details
+	      (positions, velocities) to more
+	      interesting macroscopic properties (i.e.,
+	      internal energy, heat capacity).
+	    </p>
+	    <p class="fragment">
+	      To be able to perform Monte Carlo, we must
+	      understand the relative probabilities (and
+	      therefore feasibility) of different states
+	      or configurations of a microscopic system.
+	    </p>
+	    <p class="fragment">
+	      Thermodynamics observationally tells us
+	      what is possible (${\rm d}S\ge0$), but
+	      statistical mechanics can quantify the
+	      probabilities in terms of the microscopic state.</p>
+	    <p class="fragment">
+	      It also proves that (${\rm d}S&lt;0$) is
+	      possible, but that this is so
+	      astronomically rare it may be ignored.</p>
+	  </section>
+	  <section>
+	    <h2>Microscopics notation recap</h2>
+	    <ul>
+	      <li> $N$ spherical atoms of mass $m$
+	      </li>
+	      <li> position of atom $\alpha$ is ${\bf r}_\alpha$
+	      </li>
+	      <li> momentum of atom $\alpha$ is ${\bf p}_\alpha$
+	      </li>
+	      <li> point in phase space: 
+		${\boldsymbol\Gamma}=({\bf r}_1,\dots{\bf r}_N,{\bf p}_1,\dots,{\bf p}_N)$
+	      </li>
+	      <li> pairwise additive potential $u(|{\bf r}_\alpha-{\bf r}_{\alpha'}|)$
+	      </li>
+	      <li> Hamiltonian: 
+		$H({\boldsymbol\Gamma})=U({\bf r}_1,\dots{\bf r}_N)+K({\bf p}_1,\dots,{\bf p}_N)$
+		\begin{align*}
+		U({\bf r}_1,\dots{\bf r}_N)
+		&= \frac{1}{2} \sum_{\alpha\ne\alpha'} u(|{\bf r}_\alpha-{\bf r}_{\alpha'}|)
+		\\
+		K({\bf p}_1,\dots,{\bf p}_N)
+		&= \sum_\alpha \frac{p_\alpha^2}{2m}
+		\end{align*}
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Phase space</h2>
 
-    <object type="image/svg+xml" data="img/phasespace.svg" width="100%" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
-      Your browser does not support SVG
-    </object>
-  </section>
-  <section>
-    <h2>Thermodynamics Recap</h2>
-    1st law: Energy is conserved
-    \begin{align*}
-    dU &= \delta Q - \delta W
-    \end{align*}
-    2nd law: Entropy change is non-negative: $dS\ge\frac{\delta Q}{T}$<br/>
-    Combining and including pressure-volume & particle work:
-    \begin{align*}
-    {\rm d}U &\le T\,{\rm d}S - p{\rm d}V + \mu\,{\rm d}N
-    \\
-    {\rm d}S &\ge \frac{1}{T}dU + \frac{p}{T}dV - \frac{\mu}{T}{\rm d}N
-    \end{align*}
-    Reversible transformations: 
-    \begin{align*}
-    {\rm d}U &= T\,{\rm d}S - p\,{\rm d}V + \mu\,{\rm d}N
-    \end{align*}
-    State functions are exact differentials:
-    \begin{align*}
-    {\rm d}f &= \frac{\partial f}{\partial x}{\rm d}x  
-    + \frac{\partial f}{\partial y}{\rm d}y + \frac{\partial f}{\partial z}{\rm d}z
-    \end{align*}
-    thus: $U(S,V,N)$, $S(U,V,N)$
-  </section>
-  <section>
-    <h2>Basic concepts</h2>
-    <p>
-      <b>Ergodic hypothesis: </b> A system with fixed $N$, $V$, and $E$ ($U$) is equally likely to be found in any of its $\Omega(N,V,E)$ microscopic states.<br/>
-    </p>
-    <p class="fragment">
-      Consider two subsets of states, $\Omega_A$ and $\Omega_B$. A system is more likely to be found in set A if $\Omega_A>\Omega_B$.
-    </p>
-    <p class="fragment">
-      Therefore $S(\Omega_A)>S(\Omega_B)$ as A is more likely, thus $S$ must be a monotonically increasing function in $\Omega$.<br/>
-    </p>
-    <p class="fragment">
-      As states increase multiplicatively, yet entropy is additive, the relationship must be logarithmic. 
-      \begin{equation*}
-      S(N,V,E) = k_B \ln \Omega(N,V,E)
-      \end{equation*}
-      where $k_B=1.3806503\times10^{-23}$ J K$^{-1}$ is the Boltzmann
-      constant, present for historic reasons.			    
-    </p>
-  </section>
-  <section>
-    Consider one microscopic state, $\boldsymbol{\Gamma}$ out of the $\Omega(N,V,E)$ microscopic states. Its probability is:
-    \begin{equation*}
-    {\mathcal P}({\boldsymbol\Gamma}) \propto \frac{1}{\Omega(N,V,E)}
-    \end{equation*}
-    
-    In the $N,V,E$ ensemble, we can now determine average properties if the <b>density of states</b>, $\Omega(N,V,E)$ is known.
-
-    \begin{align*}
-    \langle{\mathcal A}\rangle &= \int {\rm d}{\boldsymbol\Gamma}\,{\mathcal P}({\boldsymbol\Gamma})\,
-    {\mathcal A}({\boldsymbol\Gamma}) = \lim_{t_{obs.}\to\infty} \frac{1}{t_{obs.}}\int_0^{t_{obs.}}\mathcal A(t)\,{\rm d}t
-    \end{align*}
-  </section>
-  <section>
-    <h2>Density of states</h2>
-    <ul>
-      <li> The density of states $\Omega(N,V,E)$ is the number of ways the
-	system can have an energy $E$.  In other words, it is the "volume"
-	of phase space with an energy $E$.
-      </li>
-      <li> Volume element in phase space:
-	\begin{equation*}
-	d{\boldsymbol\Gamma} = \frac{1}{N!}
-	\frac{d{\bf r}_1d{\bf p}_1}{h^3}\cdots \frac{d{\bf r}_N d{\bf p}_N}{h^3}
-	\end{equation*}
-	where $h$ is Planck's constant.
-      </li>
-      <li> Mathematically, the density of states is given by
-	\begin{equation*}
-	\Omega(N,V,E) = \int_{E \lt  H({\boldsymbol\Gamma})\lt E+\delta E} d{\boldsymbol\Gamma} 
-	\end{equation*}
-	where $\delta E\ll E$.
-      </li>
-    </ul>
-  </section>
-  <section>
-    <h2>Microcanonical ensemble ($N V E$)</h2>
-    <b>Fundamental equation of thermodynamics:</b>
-    \begin{align*}
-    {\rm d}S(N,V,E) &= \frac{{\rm d}E}{T} + \frac{p}{T}{\rm d}V - \frac{\mu}{T}{\rm d}N
-    \end{align*}
-    From $S(N,V,E) = k_B \ln \Omega(N,V,E)$:
-    \begin{align*}
-    {\rm d}\ln\Omega(N,V,E) &= \beta\,{\rm d}E + \beta\,p\,{\rm d} V - \beta\,\mu\,{\rm d}N
-    \end{align*}
-    where $\beta=1/(k_B\,T)$.
-
-    <br/>
-    <b>
-      Once the density of states $\Omega(N,V,E)$ is known, all the thermodynamic
-      properties of the system can be determined.
-    </b>
-  </section>
-  <section>
-    <h2>Free energies (other ensembles)</h2>
-    Helmholtz free energy: $A=U-TS$
-    \begin{align*}
-    {\rm d}A &\le -S\,{\rm d}T - p\,{\rm d}V + \mu\,{\rm d}N
-    \end{align*}
-    Reversible transformations:
-    \begin{align*}
-    {\rm d}A &= -S\,{\rm d}T - p\,{\rm d}V + \mu\,{\rm d}N
-    \end{align*}
-    State functions are exact differentials, thus:
-    \begin{equation*}
-    A(T,V,N)
-    \end{equation*}
-    Lets consider the $N V T$ ensemble...
-  </section>
-  <section>
-    <h2>Canonical ensemble  ($N V T$)</h2>
-    <object type="image/svg+xml" data="img/canonical_ensemble.svg" width="50%" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
-      Your browser does not support SVG
-    </object>
-    <p>
-      \begin{equation*}
-      {\mathcal P}(E) \propto \Omega(E;E_{\rm tot})
-      \qquad \qquad
-      \Omega(E;E_{\rm tot}) = \Omega(E)  \Omega_{\rm surr.} (E_{\rm tot}-E)
-      \end{equation*}
-
-      (Note: the $N$ and $V$ variables for the system and the surroundings are implicit)
-    </p>
-    
-  </section>
-  <section>
-    <h2>Canonical ensemble</h2>
-    <p>
-      \begin{align*} {\mathcal P}(E,E_{\rm tot})
-      &\propto \Omega(E) \Omega_{\rm
-      surr.}(E_{\rm tot}-E) \\ &\propto
-      \Omega(E) e^{\ln \Omega_{surr.}(E_{\rm
-      tot}-E)} \end{align*}
-    </p>
-    <p class="fragment">
-      Performing a taylor expansion of
-      $\ln\Omega_{\rm surr.}$ around $E_{\rm tot}$.
-      
-      \begin{align*}
-      {\mathcal P}(E,E_{\rm tot}) &\propto \Omega(E) e^{\ln
-      \Omega_B(E_{\rm tot}) - E
-      \frac{\partial}{\partial E_{\rm tot}}\ln
-      \Omega_B(E_{\rm tot}) + \cdots}
-      \end{align*}
-    </p>
-    <p class="fragment">
-      First-order is fine as $E\ll E_{tot}$. Note that $\partial \ln \Omega(E) / \partial E=\beta$. <br/>At equilibrium the surroundings and system have the same temperature thus:
-      
-      \begin{align*}
-      {\mathcal P}(E,E_{\rm tot}) &\propto \Omega(E) e^{\ln \Omega_B(E_{\rm
-      tot}) - \beta E} \end{align*}
-      \begin{align*} {\mathcal P}(E) &\propto
-      \Omega(E) e^{- \beta E} \end{align*}
-      
-      (If the surroundings are large, $E_{\rm tot}$ is unimportant and the constant term $\ln \Omega_B(E_{\rm tot})$ cancels on normalisation)
-    </p>
-  </section>
-  <section>
-    <h2>Canonical ensemble</h2>
-    Boltzmann distribution
-    \begin{equation*}
-    {\mathcal P}(E) = \frac{\Omega(N, V, E)}{Q(N,V,\beta)} e^{ - \beta E}
-    \end{equation*}
-    Canonical partition function is the normalisation:
-    \begin{equation*}
-    Q(N,V,\beta) = \int dE \Omega(N,V,E) e^{-\beta E}
-    \end{equation*}
-    Its also related to the Helmholtz free energy
-    \begin{align*}
-    A &= -k_BT \ln Q(N,V,\beta) 
-    \\
-    dA &= -S dT -pdV + \mu dN
-    \\
-    d\ln Q(N,V,\beta) &= - E d\beta + \beta p dV - \beta \mu dN
-    \end{align*}
-    Again, all thermodynamic properties can be derived from $Q(N,V,\beta)$.
-  </section>
-  <section>
-    <h2>Canonical ensemble: Partition function</h2>
-    The canonical partition function can be written in terms of an
-    integral over phase space coordinates:
-    \begin{align*}
-    Q(N,V,\beta) &= \int dE \Omega(N,V,E) e^{-\beta E}
-    \\
-    &= \int dE e^{-\beta E}
-    \int_{E \lt  H({\boldsymbol\Gamma})\lt E+\delta E} d{\boldsymbol\Gamma} 
-    \\
-    &= \int d{\boldsymbol\Gamma}\, e^{-\beta H({\Gamma})}
-    \\
-    &= \frac{1}{N!}\int \frac{d{\bf r}_1d{\bf p}_1}{h^3}
-    \cdots \frac{d{\bf r}_N d{\bf p}_N}{h^3}
-    e^{-\beta H({\Gamma})}
-    \end{align*}
-  </section>
-  <section id="factorization">
-    <h2>Factorization of the partition function</h2>
-    <ul style="font-size:80%">
-      <li> The partition function can be factorized
-	\begin{align*}
-	Q(N,V,T) = \frac{1}{N!}
-	\int d{\bf r}_1\cdots d{\bf r}_N 
-	e^{-\beta U({\bf r}_1,\dots{\bf r}_N)}
-	\int \frac{d{\bf p}_1}{h^3}\cdots\frac{d{\bf p}_N}{h^3}
-	e^{-\beta K({\bf p}_1,\dots,{\bf p}_N)}
-	\end{align*}
-      </li>
-      <li> The integrals over the momenta can be performed exactly
-	\begin{align*}
-	\int\frac{d{\bf p}_1}{h^3}\cdots\frac{d{\bf p}_N}{h^3}
-	e^{-\beta K({\bf p}_1,\dots,{\bf p}_N)}
-	&= \left[\int\frac{d{\bf p}}{h^3} e^{-\frac{\beta p^2}{2m}} \right]^{N}
-	\\
-	&= \left(\frac{2\pi m}{\beta h^2}\right)^{3N/2}
-	= \Lambda^{-3N}
-	\end{align*}
-      </li>
-      <li> The partition function is given in terms of a configurational
-	integral and the de Broglie wavelength $\Lambda$
-	\begin{equation*}
-	Q(N,V,T) = \frac{1}{N!\Lambda^{3N}}
-	\int d{\bf r}_1\cdots d{\bf r}_N 
-	e^{-\beta U({\bf r}_1,\dots{\bf r}_N)}
-	= \frac{Z(N,V,T)}{N!\Lambda^{3N}} 
-	\end{equation*}
-      </li>
-    </ul>
-  </section>
-  <section>
-    <h2>Average properties</h2>
-    <ul>
-      <li> The probability of being at the phase point ${\boldsymbol\Gamma}$ is
-	\begin{equation*}
-	{\mathcal P}({\boldsymbol\Gamma})
-	= \frac{e^{-\beta H({\boldsymbol\Gamma})}}{Q(N,V,\beta)}
-	\end{equation*}
-      </li>
-      <li> The average value of a property ${\mathcal A}({\boldsymbol\Gamma})$ is
-	\begin{align*}
-	\langle{\mathcal A}\rangle &= \int d{\boldsymbol\Gamma} {\mathcal P}({\boldsymbol\Gamma})
-	{\mathcal A}({\boldsymbol\Gamma})
-	\\
-	&= \frac{1}{Q(N,V,\beta)}\int d{\boldsymbol\Gamma} e^{-\beta H({\boldsymbol\Gamma})}
-	{\mathcal A}({\boldsymbol\Gamma})
-	\end{align*}
-      </li>
-      <li> If the property depends only on the position of the particles
-	\begin{align*}
-	\langle{\mathcal A}\rangle &= \frac{1}{Q(N,V,\beta)}
-	\int d{\bf r}_1\cdots d{\bf r}_N e^{-\beta U({\bf r}_1,\dots,{\bf r}_N)}
-	{\mathcal A}({\bf r}_1,\dots,{\bf r}_N)
-	\end{align*}
-      </li>
-    </ul>
-  </section>
-  <section>
-    <h2>Grand canonical ensemble  ($\mu V T$)</h2>
-    <object type="image/svg+xml" data="img/grandcanonical_ensemble.svg" width="50%" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
-      Your browser does not support SVG
-    </object>
-    \begin{align*}
-    {\mathcal P}(N,E) &\propto \Omega(N,E;N_{\rm tot},E_{\rm tot})
-    \\
-    \Omega(N,E;N_{\rm tot},E_{\rm tot}) 
-    &= \Omega(N,E) \Omega_B(N_{\rm tot}-N,E_{\rm tot}-E)
-    \end{align*}
-  </section>
-  <section>
-    <h2>Grand canonical ensemble</h2>
-    Boltzmann distribution
-    \begin{equation*}
-    {\mathcal P}(E,N) = \frac{\Omega(N, V, E)}{Z_G(\mu,V,\beta)} 
-    e^{\beta \mu N - \beta E}
-    \end{equation*}
-    Grand canonical partition function
-    \begin{equation*}
-    Z_G(\mu, V, \beta)
-    = \sum_{N} \int {\rm d}E\,\Omega(N,V,E) e^{\beta\,\mu\,N - \beta\,E}
-    \end{equation*}
-    Grand potential
-    \begin{align*}
-    \Omega &= - pV = -k_BT \ln Z_G(\mu,V,\beta) 
-    \\
-    d\Omega &= - d(pV) = -S dT - pdV - N d\mu
-    \\
-    d\ln Z_G(\mu, V, \beta) &= - E d\beta + \beta pdV + N d\beta\mu
-    \end{align*}
-  </section>
-  <section>
-    <h2>Isothermal-isobaric ensemble  ($NpT$)</h2>
-    Boltzmann distribution
-    \begin{equation*}
-    {\mathcal P}(V,E) = \frac{\Omega(N, V, E)}{\Delta(N,p,\beta)} 
-    e^{\beta pV - \beta E}
-    \end{equation*}
-    Isothermal-isobaric partition function
-    \begin{equation*}
-    \Delta(N, p, \beta)
-    = \int dV \int dE\, \Omega(N,V,E) e^{\beta pV - \beta E}
-    \end{equation*}
-    Gibbs free energy
-    \begin{align*}
-    G &= -k_BT \ln\Delta(N,p,\beta) 
-    \\
-    dG &= -S dT + Vdp + \mu dN
-    \\
-    d\ln\Delta(N, p, \beta) &= - E d\beta + V d \beta p + \beta\mu dN
-    \end{align*}
-  </section>
-  <section>
-    <h2>$n$-particle density</h2>
-    <ul style="font-size:80%">
-      <li> The $n$-particle density $\rho^{(n)}({\bf r}_1,\dots,{\bf r}_n)$
-	is defined as $N!/(N-n)!$ times the probability of finding $n$
-	particles in the element $d{\bf r}_1\cdots d{\bf r}_n$ of coordinate
-	space.
-	\begin{align*}
-	&\rho^{(n)}({\bf r}_1,\dots,{\bf r}_n)
-	= \frac{N!}{(N-n)!} \frac{1}{Z(N,V,T)}
-	\int d{\bf r}_{n+1}\cdots d{\bf r}_N\, e^{-\beta U({\bf r}_1,\dots,{\bf r}_N)}
-	\\
-	&\int d{\bf r}_1\cdots d{\bf r}_n\,\rho^{(n)}({\bf r}_1,\dots,{\bf r}_n)
-	= \frac{N!}{(N-n)!}
-	\end{align*}
-      </li>
-      <li> This normalisation means that, for a homogeneous system,
-	$\rho^{(1)}({\bf r})=\rho=N/V$
-	\begin{align*}
-	&\int d{\bf r}\, \rho^{(1)}({\bf r}) = N 
-	\qquad \longrightarrow \qquad 
-	\rho V = N
-	\\
-	&\int d{\bf r}_1d{\bf r}_2\, \rho^{(2)}({\bf r}_1,{\bf r}_2) = N(N-1) 
-	\end{align*}
-      </li>
-    </ul>
-  </section>
-  <section>
-    <h2>$n$-particle distribution function</h2>
-    <ul style="font-size:80%">
-      <li> The $n$-particle distribution function $g^{(n)}({\bf
-	r}_1,\dots,{\bf r}_n)$ is defined as
-	\begin{align*}
-	g^{(n)}({\bf r}_1,\dots,{\bf r}_n) 
-	&=\frac{\rho^{(n)}({\bf r}_1,\dots,{\bf r}_n)}
-	{\prod_{k=1}^n \rho^{(1)}({\bf r}_i)}
-	\\
-	g^{(n)}({\bf r}_1,\dots,{\bf r}_n) 
-	&= \rho^{-n} \rho^{(n)}({\bf r}_1,\dots,{\bf r}_n)
-	\qquad \mbox{for a homogeneous system}
-	\end{align*}
-      </li>
-      <li> For an ideal gas (i.e., $U=0$):
-	\begin{align*}
-	&\rho^{(n)}({\bf r}_1,\dots,{\bf r}_n)
-	= \frac{N!}{(N-n)!} 
-	\frac{\int d{\bf r}_{n+1}\cdots d{\bf r}_N}{\int d{\bf r}_{1}\cdots d{\bf r}_N}
-	= \frac{N!}{(N-n)!} \frac{V^{N-n}}{V^N}
-	\approx \rho^n
-	\\
-	&g^{(n)}({\bf r}_1,\dots,{\bf r}_n) \approx 1
-	\\
-	&g^{(2)}({\bf r}_1,{\bf r}_2) = 1 - \frac{1}{N}
-	\end{align*}
-      </li>
-    </ul>
-  </section>
-  <section>
-    <h2>Radial distribution function</h2>
-    <ul>
-      <li> $n=2$: pair density and pair distribution function in a
-	homogeneous fluid
-	\begin{align*}
-	g^{(2)}({\bf r}_1,{\bf r}_2) &= \rho^{-2} \rho^{(2)}({\bf r}_1,{\bf r}_2) 
-	\\
-	g^{(2)}({\bf 0},{\bf r}_2-{\bf r}_1) 
-	&= \rho^{-2} \rho^{(2)}({\bf 0},{\bf r}_2-{\bf r}_1) 
-	\end{align*}
-      </li>
-      <li> Average density of particles at r given that a tagged
-	particle is at the origin is
-	\begin{equation*}
-	\rho^{-1} \rho^{(2)}({\bf 0},{\bf r}) 
-	= \rho g^{(2)}({\bf 0},{\bf r})
-	\end{equation*}
-      </li>
-      <li> The pair distribution function in a homogeneous and isotropic
-	fluid is the radial distribution function $g(r)$, 
-	\begin{equation*}
-	g(r) = g^{(2)}({\bf r}_1,{\bf r}_2)
-	\end{equation*}
-	where $r = |{\bf r}_1-{\bf r}_2|$
-      </li>
-    </ul>
-  </section>
-  <section>
-    <h2>Radial distribution function</h2>
-    <img src="img/gofr1.png" width="40%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
-    <img src="img/spheres.png" width="40%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
-  </section>
-  <section>
-    <h2>Radial distribution function</h2>
-    <ul>
-      <li> Energy, virial, and compressibility equations:
-	\begin{align*}
-	U &= N \rho \int d{\bf r} u(r) g(r)
-	\\
-	\frac{\beta p}{\rho} 
-	&= 1 - \frac{\beta\rho}{6} \int d{\bf r} w(r) g(r)
-	\\
-	\rho k_BT \kappa_T &= 1 + \rho \int d{\bf r} [g(r)-1]
-	\end{align*}
-      </li>
-      <li> "Pair" virial 
-	\begin{equation*}
-	w(r) = {\bf r}\cdot \frac{\partial u}{\partial{\bf r}}
-	\end{equation*}
-      </li>
-    </ul>
-  </section>
-  <section>
-    <h2>Structure factor</h2>
-    <ul>
-      <li> Fourier component $\hat{\rho}({\bf k})$ of the instantaneous
-	single-particle density
-	\begin{align*}
-	\rho({\bf r}) &= \sum_\alpha \delta^d({\bf r}-{\bf r}_\alpha)
-	= \int \frac{d{\bf k}}{(2\pi)^d} \hat{\rho}({\bf k}) e^{-i{\bf k}\cdot{\bf r}} 
-	\\
-	\hat{\rho}({\bf k}) &= \int d{\bf r} \rho({\bf r}) e^{i{\bf k}\cdot{\bf r}} 
-	\end{align*}
-      </li>
-      <li> Autocorrelation function is called the structure factor $S(k)$
-	\begin{align*}
-	\frac{1}{N}\langle\hat{\rho}({\bf k})\hat{\rho}(-{\bf k})\rangle
-	&= 1 + \frac{1}{N}\left\lt 
-	\sum_{\alpha\ne\alpha'} e^{-i{\bf k}\cdot({\bf r}_\alpha-{\bf r}_{\alpha'})}
-	\right\gt 
-	\\
-	S({\bf k}) &= 1 + \rho\int d{\bf r}[g({\bf r})-1] e^{-i{\bf k}\cdot{\bf r}}
-	\end{align*}
-      </li>
-      <li> $S({\bf k})$ reflects density fluctuations and dictates
-	scattering
-      </li>
-    </ul>
-  </section>
-  <section>
-    <h2>Fourier decomposition</h2>
-    Consider the function
-    \begin{align*}
-    f(x) &= x^2 + \frac{1}{2}\sin 6\pi x  + 0.1 \cos 28\pi x
-    \end{align*}
-    Fourier representation:
-    \begin{align*}
-    f(x) &= \sum_{n=0} A_n e^{-i k_n x}
-    \end{align*}
-    where $k_n = 2\pi n$.
-  </section>
-  <section>
-    <h2>Fourier decomposition</h2>
-
-    <img src="img/decomposition.png" width="auto" height="80%" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
-
-  </section>
-  <section>
-    <h2>Structure factor</h2>
-    <ul>
-      <li> A peak at wavevector $k$ signals density inhomogeneity on the
-	lengthscale $2\pi/k$
-	<br/>
-	<div style="text-align:center;">
-	  <div style="width:16%;display:inline-block;">
-	    <img src="img/homogeneous.png" width="100%" height="auto" style="margin:0;"><br/>
-	    <img src="img/inhomogeneous.png" width="100%" height="auto" style="margin:0;">
-	  </div>
-	  <div style="width:28%;;display:inline-block;">
-	    <img src="img/sofk.png" width="100%" height="auto" style="margin:0;">
-	  </div>
-	</div>
-      </li>
-      <li> $k=0$ limit is related to the isothermal compressibility
-	$\kappa_T$
-	\begin{equation*}
-	S(0) = 1 + \rho \int d{\bf r} [g({\bf r})-1] = \rho k_BT \kappa_T
-	\end{equation*}
-      </li>
-    </ul>
-  </section>
-  <section>
-    <h2>Further reading</h2>
-    <ul>
-      <li> D Chandler, <i>Introduction to Modern Statistical Mechanics</i>
-	(1987).
-      </li>
-      <li> DA McQuarrie, <i>Statistical Mechanics</i> (2000).
-      </li>
-      <li> LE Reichl, <i>A Modern Course in Statistical Physics</i>
-	(2009).
-      </li>
-      <li> JP Hansen and IR McDonald, <i>Theory of Simple Liquids</i>, 3ed
-	(2006).
-      </li>
-    </ul>
-  </section>
-</section>
-<section id="MC1" style="height:100%;">
-  <section>
-    <h2 class="backbox">Monte Carlo: Part 1</h2>
-    <p>
-      <em>God does not play dice. <span style="float:right;">A. Einstein</span></em><br/><br/>
-      <em style="clear:right;">God does play dice with the universe. All the evidence points to him being an inveterate gambler, who throws the dice on every possible occasion. <span style="float:right;">S. Hawking</span></em>
-    <p style="clear:both;" class="fragment">
-      <br/>
-      You are the supreme power of your simulation, so you get to choose:
-      \begin{align*}
-      \langle{\mathcal A}\rangle &= \int d{\boldsymbol\Gamma}\,{\mathcal P}({\boldsymbol\Gamma})\,
-      {\mathcal A}({\boldsymbol\Gamma}) & \text{(MC)}\\
-      &\text{or} &\text{(or)}\\
-      \langle{\mathcal A}\rangle&=\lim_{t_{obs.}\to\infty} \frac{1}{t_{obs.}}\int_0^{t_{obs.}}\mathcal A(t)\,{\rm d}t & \text{(MD)}
-      \end{align*}
-    </p>
-    </p>
-  </section>
-  <section data-background="img/Casino_de_Monte-Carlo.png" style="height:100%;">
-    <p class="backbox" style="position:absolute; bottom:2em; right:2em;">
-      Monte Carlo Casino
-    </p>
-  </section>
-  <section>
-    <h2>Introduction</h2>
-    <ul>
-      <li> Monte Carlo (MC) is a stochastic molecular-simulation technique.
-	Sampling can be biased towards regions of specific interest.
-      </li>
-      <li> Not constrained by natural timescales (as in molecular dynamics).
-      </li>
-      <li> Can <em>easily</em> handle fluctuating numbers of particles (as in
-	the grand canonical ensemble).
-      </li>
-      <li> No (physical) dynamic foundation.
-      </li>
-    </ul>
-  </section>
-  <section>
-    <h2>Overview</h2>
-    <ul>
-      <li> Introduction</li>
-      <li> Practicalities</li>
-      <li> Free energy barriers</li>
-      <li> Advanced algorithms</li>
-      <li> Further reading:
-	<ul>
-	  <li> MP Allen and DJ Tildesley, Computer Simulation of Liquids (1987).
-	  </li>
-	  <li> D Frenkel and B Smit, Understanding Molecular Simulation (2001).
-	  </li>
-	  <li> DP Landau and K Binder, A Guide to Monte Carlo Simulations in
-	    Statistical Physics (2000).
-	  </li>
-	</ul>
-      </li>
-    </ul>
-  </section>
-  <section>
-    <h2>Monte Carlo evaluation of integrals</h2>
-    \begin{equation*}
-    I = \int_a^b dx\, f(x)
-    \end{equation*}
-    <ul style="font-size:80%">
-      <li> Uniform, probability distribution ${\mathcal P}(x)$ along the
-	interval $[a,b]$:
-	\begin{equation*}
-	{\mathcal P}(x) = \frac{1}{b-a} \left\{
-	\begin{array}{ll}
-	0 & \mbox{for $-\infty\lt x\lt a$} \\
-	1 & \mbox{for $a \le x \le b$} \\
-	0 & \mbox{for $b\lt x\lt \infty$} \\
-	\end{array}
-	\right.
-	\end{equation*}
-      </li>
-      <li> Randomly sample points $x_1$, $x_2$, $\cdots$ from ${\mathcal P}(x)$.
-      </li>
-      <li> The integral is related to the average of the function $f$:
-	\begin{equation*}
-	I = (b-a) \int_a^b dx\,{\mathcal P}(x) f(x) = (b-a) \langle f(x) \rangle
-	\end{equation*}
-      </li>
-      <li> The average can be approximated by:
-	\begin{equation*}
-	I \approx \frac{(b-a)}{N} \sum_{k=1}^N f(x_k)
-	\end{equation*}
-      </li>
-    </ul>
-  </section>
-  <section>
-    <h2>Example</h2>
-
-    <img src="img/MC1_integrate.png"  width="65%" height="auto" style="margin:0;">
-  </section>
-  <section>
-    <h2>Convergence</h2>
-    How quickly does the method converge to the correct answer?  
-    <br/>
-    Central limit theorem:
-    \begin{equation*}
-    \sigma_{\bar{f}} = \frac{\sigma_f}{\sqrt{N}}
-    \end{equation*}
-    where
-    \begin{equation*}
-    \sigma_{f} = \langle f^2(x)\rangle - \langle f(x)\rangle^2
-    \end{equation*}
-    The dependence of the convergence with sample size is independent on
-    the dimensionality of the integral.
-  </section>
-  <section>
-    <h2>Example: Convergence</h2>
-
-    <img src="img/MC1_integrate_convergence.png" width="65%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
-
-  </section>
-  <section>
-    <h2>Central limit theorem</h2>
-    Consider a set of $N$ independent variables $x_1$, $x_2$,...,$x_N$
-    which all follow the same probability distribution function $p(x)$,
-    with mean, $\mu$, and variance, $\sigma$.
-    <br/>
-    How is the mean $\bar{x}=\frac{1}{N}\sum_{k=1}^N x_k$ 
-    of these variables distributed? 
-    <br/>
-    This is given by the <b>central limit theorem</b>, which
-    becomes increasingly accurate as $N\to\infty$
-    \begin{align*}
-    p_{\bar{x}}(\bar{x}) &\approx
-    (2\pi\sigma_{\bar{x}}^2)^{-1/2} 
-    \exp\left(-\frac{(\bar{x}-\mu)^2}{2\sigma_{\bar{x}}^2}\right)
-    \\
-    \sigma_{\bar{x}} &\approx \frac{\sigma}{\sqrt{N}}
-    \end{align*}
-  </section>
-  <section>
-    <h2>Example:  Uniform distribution</h2>
-
-    <img src="img/MC1_centrallimit1.png" width="65%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
-  </section>
-  <section>
-    <h2>Example:  Exponential distribution</h2>
-    <img src="img/MC1_centrallimit2.png" width="65%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
-  </section>
-  <section style="height:100%;">
-    <h2>Example:  Galton Board</h2>
-    <div style="height:90%;width:100%; position:relative;">
-      <iframe src="http://www.youtube.com/embed/03tx4v0i7MA" frameborder="0" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
-    </div>
-  </section>
-  <section>
-    <h2>Multidimensional integrals</h2>
-    <p>
-      \begin{equation*}
-      I = \int_{V} d{\bf x} f({\bf x})
-      \end{equation*}
-      <ul style="font-size:80%;">
-	<li> Uniform, probability distribution ${\mathcal P}({\bf x})$ within the
-	  region $V$:
-	</li>
-	<li> Randomly sample points ${\bf x}_1$, ${\bf x}_2$, $\cdots$ from
-	  ${\mathcal P}({\bf x})$.
-	</li>
-	<li> The integral is related to the average of the function $f$:
-	  \begin{equation*}
-	  I = V \int_{V} d{\bf x}\, {\mathcal P}({\bf x}) f({\bf x}) 
-	  = V \langle f({\bf x}) \rangle
-	  \end{equation*}
-	</li>
-	<li> The average can be approximated by:
-	  \begin{equation*}
-	  I \approx \frac{V}{N} \sum_{k=1}^N f({\bf x}_k)
-	  \end{equation*}
-	</li>
-      </ul>
-    </p>
-  </section>
-  <section>
-    <h2>Importance sampling</h2>
-    \begin{equation*}
-    I = \int_{V} d{\bf x}\,f({\bf x})
-    \end{equation*}			
-    <img src="img/importance.png" width="30%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1); float:right;">
-    Importance sampling:
-    <div style="width:60%; float:left">
-      <ul>
-	<li> Choose distribution ${\mathcal P}$ to make $f({\bf x})/{\mathcal
-	  P}({\bf x})$ as constant as possible:
-	  \begin{equation*}
-	  I = \int_{V} d{\bf x}\,{\mathcal P}({\bf x}) \,
-	  \frac{f({\bf x})}{{\mathcal P}({\bf x})}
-	  \end{equation*}
-	</li>
-	<li> Sample from distribution ${\mathcal P}$
-	  \begin{equation*}
-	  I \approx \frac{V}{N} \sum_k   
-	  \frac{f({\bf x})}{{\mathcal P}({\bf x})}
-	  \end{equation*}
-	</li>
-	<li>
-	  The variance is significantly reduced.
-	</li>
-      </ul>
-    </div>
-
-    <span style="font-size:80%;">
-      \begin{align*}
-      f(x) &= x^{-1/3} + \frac{x}{10}
-      \\
-      p(x) &= \frac{2}{3} x^{-1/3}
-      \end{align*}
-    </span>
-  </section>
-  <section>
-    <h2>Influence of importance sampling</h2>
-
-    <img src="img/MC1_importance.png" width="60%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
-
-  </section>
-  <section>
-    <h2>Sampling from an arbitrary distribution</h2>
-    <ul>
-      <li> Importance sampling requires the generation of numbers from an
-	arbitrary probability distribution.
-      </li>
-      <li> One dimensional distributions can be sampled by sampling
-	uniformly from the cumulative distribution function.
-      </li>
-      <li> In higher dimensions, sampling algorithms are only available for
-	certain distributions (e.g., Gaussian distributions).
-      </li>
-      <li> The Metropolis method allows the sampling of arbitrary,
-	multidimensional distributions.  This relies on constructing a Markov process.
-      </li>
-    </ul>
-  </section>
-  <section>
-    <h2>Markov process</h2>
-    A Markov process is a stochastic process where the future state of the
-    system depends only on the present state of the system and not on its
-    previous history.
-    <ul>
-      <li> ${\mathcal P}_\alpha^{(n)}$ probability that the state $\alpha$ is
-	occupied at step $n$.
-      </li>
-      <li> Transition probability $W_{\alpha'\leftarrow\alpha}$ <br/>
-	Probability that a system in state $\alpha'$ will transition to
-	state $\alpha$.
-      </li>
-      <li> Markov chain:
-	\begin{equation*}
-	{\mathcal P}_\alpha^{(n+1)} 
-	= \sum_{\alpha'} W_{\alpha\leftarrow\alpha'} {\mathcal P}_{\alpha'}^{(n)}
-	\end{equation*}
-      </li>
-      <li> What guarantees a stationary, limiting distribution ${\mathcal
-	P}_\alpha$?
-      </li>
-    </ul>
-  </section>
-  <section>
-    <h2>Transition probabilities</h2>
-    <ul>
-      <li> $W_{\alpha'\leftarrow \alpha}$ is the probability that the
-	system will transition to state $\alpha'$, given that it is in state
-	$\alpha$.
-      </li>
-      <li> The transition matrix must satisfy:
-	\begin{equation*}
-	\sum_{\alpha'} W_{\alpha'\leftarrow \alpha} = 1
-	\end{equation*}
-      </li>
-      <li> The choice of the transition matrix determines the properties of
-	the Markov process.
-      </li>
-    </ul>
-  </section>
-  <section>
-    <h2>Stationary distribution</h2>
-    <p>
-      We need to choose the transition matrix to ensure that the stationary
-      distribution
-    </p>
-    <ul>
-      <li> exists and is unique
-	\begin{equation*}
-	{\mathcal P}_\alpha =  
-	\sum_{\alpha'} W_{\alpha\leftarrow\alpha'} {\mathcal P}_{\alpha'}
-	\end{equation*}
-      </li>
-      <li> is rapidly approached
-	\begin{align*}
-	\lim_{n\to\infty} {\mathcal P}_\alpha^{(n)} &= {\mathcal P}_\alpha
-	\\
-	{\mathcal P}_\alpha^{(n)}
-	&= \sum_{\alpha_1,\alpha_2,\dots,\alpha_n}
-	W_{\alpha\leftarrow\alpha_1}W_{\alpha_1\leftarrow\alpha_2}\cdots 
-	W_{\alpha_{n-1}\leftarrow\alpha_n}{\mathcal P}_{\alpha_n}^{(0)}
-	\\
-	&= \sum_{\alpha'}
-	W_{\alpha\leftarrow\alpha'}^n{\mathcal P}_{\alpha'}^{(0)}
-	\end{align*}
-      </li>
-    </ul>
-  </section>
-  <section>
-    <h2>Detailed balance</h2>
-    <ul>
-      <li> Physically, the condition of detailed balance requires that the
-	probability of observing the system transition from state a $\alpha$
-	to another state $\alpha'$ is the same as observing it transition
-	from $\alpha'$ to $\alpha$.
-      </li>
-      <li> Mathematically, this is
-	\begin{equation*}
-	W_{\alpha\leftarrow \alpha'} {\mathcal P}_{\alpha'} 
-	=  W_{\alpha'\leftarrow \alpha} {\mathcal P}_\alpha
-	\end{equation*}
-      </li>
-      <li> If the transition probability satisfies the detailed balance
-	condition, the Markov process has a unique, stationary limiting
-	distribution.
-      </li>
-      <li> Detailed balance is not required for the Markov process to
-	possess a unique, stationary limiting distribution.
-      </li>
-    </ul>
-  </section>
-  <section>
-    <h2>Metropolis method</h2>
-    <ul>
-      <li> The Metropolis method provides a manner to sample from any
-	probability distribution ${\mathcal P}_\alpha$, using a Markov
-	process.
-      </li>
-      <li> The transition probabilities are divided into two contributions:
-	\begin{equation*}
-	W_{\alpha'\leftarrow \alpha} 
-	= A_{\alpha'\leftarrow \alpha} g_{\alpha'\leftarrow \alpha}
-	\end{equation*}
-	where $g_{\alpha'\leftarrow \alpha}$ is the probability of selecting a
-	move to state $\alpha'$, given the system is at state $\alpha$, and
-	$A_{\alpha'\leftarrow \alpha}$ is the probability of accepting the
-	proposed move.
-      </li>
-      <li> The acceptance probability is given by
-	\begin{equation*}
-	A_{\alpha'\leftarrow\alpha} = \left\{
-	\begin{array}{ll}
-	1 & \mbox{if ${\mathcal P}_{\alpha'}\gt {\mathcal P}_\alpha$} \\
-	\frac{{\mathcal P}_{\alpha'}}{{\mathcal P}_\alpha} 
-	& \mbox{if ${\mathcal P}_{\alpha'}\lt {\mathcal P}_\alpha$}
-	\end{array}
-	\right.
-	\end{equation*}
-      </li>
-      <li> If $g_{\alpha'\leftarrow \alpha}=g_{\alpha\leftarrow \alpha'}$,
-	then the process satisfies detailed balance.
-      </li>
-    </ul>
-  </section>
-  <section>
-    <h2>Metropolis method</h2>
-    <object type="image/svg+xml" data="img/metropolis.svg" width="60%" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
-      Your browser does not support SVG
-    </object>
-  </section>
-  <section>
-    <h2>Markov process: Continuous state space</h2>
-    <ul>
-      <li> ${\mathcal P}^{(n)}(x)$ probability that the state $x$ is
-	occupied at step $n$.
-      </li>
-      <li> Transition probability $W(x'\leftarrow x)$ <br/>
-	Probability that a system in state $x$ will transition to state $x'$.
-      </li>
-      <li> Markov chain
-	\begin{equation*}
-	{\mathcal P}^{(n+1)}(x) = \int dx' W(x\leftarrow x') {\mathcal P}^{(n)}(x')
-	\end{equation*}
-      </li>
-    </ul>
-  </section>
-  <section>
-    <h2>Random number generators</h2>
-    <em>Any one who considers arithmetical methods of producing random digits is, of course, in a state of sin.<span style="float:right;">J. von Neumann</span></em>
-    <p class="fragment">
-      von Neumann is simply trying to caution
-      you against believing that random number
-      generators (RNG) are actually random.
-    </p>
-    <p class="fragment">
-      But GPU graphics programmers really do use a state of $\sin$!
-      \begin{align*}
-      x_i  = {\rm fract}(43758.5453\sin(12.9898\,i))
-      \end{align*}
-    </p>
-  </section>
-  <section>
-    <h2>Pseudo-random number generators</h2>
-    <ul>
-      <li> Typically, random deviates are
-	available with a uniform distribution
-	on $[0,1)$.</li>
-      <li> Be suspicious of intrinsic "<tt>ran</tt>" functions
-      </li>
-      <li> Linear congruential generators use the recursion
-	\begin{equation*}
-	X_{j+1} = a X_j + b \qquad \mod m
-	\end{equation*}
-      </li>
-      <li> Written ${\rm LCG}(m,a,b,X_0)$
-      </li>
-      <li> Generates integers in range $0 \le X \le m$
-      </li>
-      <li> Sequence repeats with period $m$ AT BEST
-      </li>
-      <li> 32-bit: $m \sim 2^{31} \sim 10^9$, whereas 64-bit: $m \sim 10^{18}$
-      </li>
-    </ul>
-  </section>
-  <section>
-    <h2>Tests for random number generators</h2>
-    <ul>
-      <li> RNGs assessed by plotting $d$-dimensional vectors
-	$(X_{n+1},\dots,X_{n+d})$ and looking for &ldquo;planes&rdquo; (which are bad)
-      </li>
-      <li> 3d plots: good (left); bad $LCG(2^{31},65539,0,1)$ (right)
-
-	<img src="img/RNGgood.png" width="30%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
-	<img src="img/RNGbad.png" width="30%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
-
-      </li>
-      <li> In addition, simulate a finite-size system for which the
-	properties are known exactly (e.g., 2D Ising model on square
-	lattice)
-      </li>
-      <li>
-	The gold-standard battery of tests are the <a href="https://en.wikipedia.org/wiki/Diehard_tests">Diehard tests</a>.
-      </li>
-    </ul>
-  </section>
-  <section>
-    <h2>Mersenne Twister</h2>
-    <ul>
-      <li> Based on Mersenne prime $2^{19937}-1$.
-      </li>
-      <li> Passes many tests for statistical randomness.
-      </li>
-      <li> Default random number generator for Python, MATLAB, Ruby, etc.
-	Available in standard C++.  Code is also freely available in many
-	other languages (e.g., C, FORTRAN 77, FORTRAN 90, etc.).
-      </li>
-    </ul>
-  </section>
-</section>
-<section id="MC2">
-  <section>
-    <h2 class="backbox">Monte Carlo 2</h2>
-    <p>
-      <em>
-	Being secret, the work </em>[radiation shielding for nuclear weapons]<em>
-	of von Neumann and Ulam required a
-	code name. A colleague of von Neumann
-	and Ulam, Nicholas Metropolis,
-	suggested using the name Monte Carlo,
-	which refers to the Monte Carlo Casino
-	in Monaco where Ulam's uncle would
-	borrow money from relatives to gamble.</em>
-    </p>
-    <p class="fragment"><em>
-	Using lists of "truly random" random
-	numbers was extremely slow, but von
-	Neumann developed a way to calculate
-	pseudorandom numbers, using the
-	middle-square method. Though this method
-	has been criticized as crude, von Neumann
-	was aware of this: he justified it as
-	being faster than any other method at his
-	disposal, and also noted that when it went
-	awry it did so obviously, unlike methods
-	that could be subtly incorrect.<span style="float:right;">Taken from the <a href="https://en.wikipedia.org/wiki/Monte_Carlo_method">MC wikipedia page</a></span></em>
-    </p>
-  </section>
-  <section>
-    <h2>Overview</h2>
-    <ul>
-      <li> Monte Carlo in the NVT ensemble
-      </li>
-      <li> Practicalities
-      </li>
-      <li> Ergodicity and free-energy barriers
-      </li>
-      <li> Measuring ensemble averages
-      </li>
-      <li> Monte Carlo in the isobaric-isothermal ensemble
-      </li>
-      <li> Monte Carlo in the grand canonical ensemble
-      </li>
-      <li> Example: Truncated, shifted Lennard-Jones fluid
-      </li>
-      <li> Finite-size effects
-      </li>
-    </ul>
-  </section>
-  <section>
-    <h2>Canonical ensemble</h2>
-    <ul>
-      <li> Constant particle number, volume, and temperature; fluctuating
-	energy.
-      </li>
-      <li> Distribution of energies:
-	\begin{equation*}
-	{\mathcal P}(E;N,V,\beta) 
-	\propto \Omega(N,V,E)\,e^{ - \beta E}
-	\end{equation*}
-      </li>
-      <li> Distribution of states:
-	\begin{equation*}
-	{\mathcal P}({\boldsymbol\Gamma};N,V,\beta) 
-	\propto e^{ - \beta H({\boldsymbol\Gamma})}
-	\end{equation*}
-      </li>
-      <li> Partition function:
-	\begin{align*}
-	Q(N,V,\beta) = \int {\rm d}E\,\Omega(N,V,E)\,e^{- \beta E} = \int {\rm d}{\boldsymbol\Gamma}\,e^{- \beta H({\boldsymbol\Gamma})}
-	\end{align*}
-      </li>
-      <li> Helmholtz free energy
-	\begin{equation*}
-	F(N,V,T) = -k_B\,T\ln Q(N,V,\beta)
-	\end{equation*}
-      </li>
-    </ul>
-  </section>
-  <section>
-    <h2>Metropolis Monte Carlo in the NVT ensemble</h2>
-    <p>
-      Boltzmann distribution:
-      $
-      {\mathcal P}({\boldsymbol\Gamma}) \propto e^{-\beta\,H({\boldsymbol\Gamma})}
-      $
-      Monte Carlo integration
-      \begin{align*}
-      \langle {\mathcal A} \rangle 
-      &= \int d{\boldsymbol\Gamma}\, {\mathcal P}({\boldsymbol\Gamma}) {\mathcal A}({\boldsymbol\Gamma}) 
-      \approx \frac{1}{{\mathcal N}}
-      \sum_{k=1}^{\mathcal N}  {\mathcal A}({\boldsymbol\Gamma}_k)
-      \end{align*}
-      (provided ${\boldsymbol\Gamma}_k$ is generated from ${\mathcal P}({\boldsymbol\Gamma})$)<br/>
-    </p>
-    <p class="fragment">
-      Transition probability:
-      \begin{equation*}
-      W({\boldsymbol\Gamma}_n\leftarrow{\boldsymbol\Gamma}_o) 
-      = g({\boldsymbol\Gamma}_n\leftarrow{\boldsymbol\Gamma}_o) 
-      A({\boldsymbol\Gamma}_n\leftarrow{\boldsymbol\Gamma}_o) 
-      \end{equation*}
-      where
-      \begin{align*}
-      g({\boldsymbol\Gamma}_n\leftarrow{\boldsymbol\Gamma}_o) &= \mbox{random particle move}
-      \\
-      A ({\boldsymbol\Gamma}_n\leftarrow{\boldsymbol\Gamma}_o) 
-      &= \left\{
-      \begin{array}{ll}
-      1 & \mbox{if $H({\boldsymbol\Gamma}_n) \lt  H({\boldsymbol\Gamma}_o)$} \\
-      e^{-\beta(H({\boldsymbol\Gamma}')-H({\boldsymbol\Gamma}))} 
-      & \mbox{if $H({\boldsymbol\Gamma}_n) \gt  H({\boldsymbol\Gamma}_o)$}
-      \end{array}
-      \right.
-      \end{align*}
-    </p>
-  </section>
-  <section>
-    <h2>Particle move</h2>
-    <ul>
-      <li>
-	Pick particle <i>at random</i> (to obey detailed balance)
-      </li>
-      <li>
-	Alter $x$, $y$, and $z$ coordinates by displacements randomly
-	from the interval $-\Delta{\bf r}_{\rm max}\lt \Delta{\bf r}\lt \Delta{\bf
-	r}_{\rm max}$
-	<br/>
-	<img src="img/mover.png" width="35%" height="auto" style="float:right;background:white;color:black; width:40%; margin-left:auto; margin-right:auto; box-shadow: 0px 0px 5px 5px rgba(255,255,255,1);">
-      </li>
-      <li> Calculate resulting change in potential energy $\Delta U$
-      </li>
-      <li> Accept move with probability ${\rm min}(1,e^{-\beta\Delta U})$
-	<ul>
-	  <li> If $\Delta U\lt 0$, accept.
-	  </li>
-	  <li> If $\Delta U\gt 0$, generate random number $R \in[0,1)$
-	  </li>
-	  <li> If $R\le e^{-\beta\Delta U}$, accept.
-	  </li>
-	  <li> If $R\gt  e^{-\beta\Delta U}$, reject and retain old configuration.
-	  </li>
-	</ul>
-      </li>
-    </ul>
-  </section>
-  <section>
-    <h2>Tuning the acceptance rate</h2>
-    <ul>
-      <li> Acceptance rate controlled by maximum displacement(s).
-      </li>
-      <li> Displacements result in energy change $\Delta U$.
-      </li>
-      <li> Large displacements are unlikely to be accepted.
-      </li>
-      <li> Small displacements are more likely to be accepted, but progress
-	through configuration space is slow.
-      </li>
-      <li> This is not always a sensible choice!
-      </li>
-      <li> Adjust trial displacements to give maximum actual displacement
-	per unit CPU time.
-      </li>
-    </ul>
-  </section>
-  <section>
-    <h2>Energy autocorrelation function</h2>
-
-    <img src="img/acf.png" width="60%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
-
-  </section>
-  <section>
-    <h2>Equilibration</h2>
-    <ul>
-      <li> MC simulations converge towards equilibrium (or
-	&ldquo;thermalize&rdquo;) until $p(A,\tau+1) = p(A,\tau)$
-      </li>
-      <li> Starting from a non-equilibrium configuration, the deviation
-	from equilibrium decreases like $\exp(-\tau/\tau_0)$, where $\tau_0$
-	is the correlation &ldquo;time&rdquo;
-      </li>
-      <li> Must only retain measurements (for ensemble averages etc.) when
-	$\tau\gg\tau_0$
-      </li>
-      <li>
-	See the exercises and the Molecular Dynamics simulation lectures for more information.
-      </li>
-    </ul>
-  </section>
-  <section>
-    <h2>Diagnostics</h2>
-    <ul>
-      <li> Useful diagnostics include binning, autocorrelations, hot and
-	cold starts, and configurational temperature
-      </li>
-      <li> Binning: accumulate separate averages over blocks of (say)
-	$1000$ MC cycles, and watch for convergence of block averages
-      </li>
-      <li> Autocorrelations: calculate correlation function $\langle
-	A(\tau)A(0)\rangle \sim \exp(-\tau/\tau_0)$ for some observable $A$,
-	estimate $\tau_0$, discard configurations for $t\lt 10\,\tau_0$
-      </li>
-      <li> &ldquo;Hot/cold starts&rdquo;: check that simulations starting from
-	different configurations (e.g., disordered and crystalline) converge
-	to the same equilibrium state
-      </li>
-    </ul>
-  </section>
-  <section>
-    <h2>Configurational temperature</h2>
-    <ul>
-      <li> In MD, one can use the equipartition theorem to check the
-	(kinetic) temperature (although this can be misleading!) 
-      </li>
-      <li> DPD potentials: MP Allen, <em>J. Phys. Chem. B</em> 110, 3823
-	(2006).
-      </li>
-      <li> In MC, configurational temperature provides a sensitive test of
-	whether you are sampling the correct Boltzmann distribution for the
-	prescribed value of $T$
-	\begin{align*}
-	k_BT_{\rm conf} 
-	&= -\frac{\langle\sum_{\alpha}{\bf F}_{\alpha}\cdot{\bf F}_{\alpha}\rangle}
-	{\langle\sum_{\alpha}\nabla_{{\bf r}_{\alpha}}\cdot{\bf F}_{\alpha}\rangle}
-	+ O(N^{-1})
-	\\
-	{\bf F}_\alpha &= \sum_{\alpha'\ne\alpha} {\bf F}_{\alpha\alpha'}
-	= -\sum_{\alpha'\ne\alpha} 
-	\nabla_{{\bf r}_{\alpha}} u({\bf r}_{\alpha}-{\bf r}_{\alpha'})
-	\end{align*}
-	<ul>
-      </li>
-      <li> H. H. Rugh, Phys. Rev. Lett. 78, 772 (1997)
-      </li>
-      <li> O. G. Jepps et al., Phys. Rev. E 62, 4757 (2000)
-      </li>
-      </ul>
-    </ul>
-  </section>
-  <section>
-    <h2>Configurational temperature: Example</h2>
-    <ul>
-      <li> $T_{\rm conf}$ is sensitive to programming errors
-
-	<img src="img/confT.png" width="45%" height="auto" style="background:white;color:black; margin:20px; margin-left:25%; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
-      </li>
-      <li> BD Butler et al., <em>J. Chem. Phys.</em> 109, 6519 (1998).
-      </li>
-      <li> Orientations: AA Chialvo et al., <em>J. Chem. Phys.</em> 114,
-	6514 (2004).
-      </li>
-    </ul>
-  </section>
-  <section>
-    <h2>Ergodicity</h2>
-    <ul>
-      <li> &ldquo;All areas of configuration space are accessible from any
-	starting point.&rdquo;
-      </li>
-      <li> Difficult to prove a priori that an MC algorithm is ergodic.
-      </li>
-      <li> Many interesting systems possess configuration spaces with
-	&ldquo;traps&rdquo;.
-      </li>
-      <li> This can render many elementary MC algorithms practically
-	non-ergodic (i.e. it is very difficult to access certain
-	(potentially important) regions of configuration space).
-      </li>
-      <li> Common examples of apparent non-ergodicity arise from
-	free-energy barriers (e.g., in first-order phase transitions).
-      </li>
-    </ul>
-  </section>
-  <section>
-    <h2>Ergodicity</h2>
-
-    <object type="image/svg+xml" data="img/ergodicity.svg" width="70%" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
-      Your browser does not support SVG
-    </object>
-
-  </section>
-  <section>
-    <h2>Isobaric-isothermal ensemble</h2>
-    <ul>
-      <li> Constant number of particles, pressure, and temperature;
-	fluctuating volume and energy.
-      </li>
-      <li> Joint distribution of volume and energy:
-	\begin{equation*}
-	{\mathcal P}(V,E;p,\beta) 
-	\propto \Omega(N,V,E) e^{\beta p V - \beta E}
-	\end{equation*}
-      </li>
-      <li> Partition function:
-	\begin{align*}
-	\Delta(N,p,\beta) = \int dV \int dE \Omega(N,V,E) e^{\beta pV - \beta E}
-	\end{align*}
-      </li>
-      <li> Gibb's free energy
-	\begin{equation*}
-	G(N,p,\beta) = - k_BT \ln \Delta(N,p,\beta)
-	\end{equation*}
-      </li>
-    </ul>
-  </section>
-  <section>
-    <h2>MC simulations in the isobaric-isothermal ensemble</h2>
-    <ul>
-      <li> Single-particle move (results in $U\to U+\Delta U$)
-	\begin{align*}
-	A(o\to n) = \min(1,e^{-\beta\Delta U})
-	\end{align*}
-      </li>
-      <li> Volume move $V\to V+\Delta V$ ($-\Delta V_{\rm max}\le\Delta V
-	\le\Delta V_{\rm max}$ results in $U\to U+\Delta U$)
-	\begin{align*}
-	A(o\to n) &= \min(1,e^{-\beta\Delta U})
-	\\
-	\frac{p(V+\Delta V)}{p(V)}
-	&= \frac{(V+\Delta V)^N}{V^N} e^{-\beta(\Delta U + p\Delta V)}
-	\end{align*}
-      </li>
-      <li> One MC sweep consists of $N_{\rm sp}$ attempted single-particle
-	moves, and $N_{\rm vol}$ attempted volume moves.
-      </li>
-      <li> Single-particle moves and volume moves must be attempted at
-	random with a fixed probability (and not cycled) so that $A(o\to n)
-	= A(n\to o)$
-      </li>
-    </ul>
-  </section>
-  <section>
-    <h2>Isobaric-isothermal ensemble</h2>
-
-    <object type="image/svg+xml" data="img/npt.svg" width="80%" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
-      Your browser does not support SVG
-    </object><br/>
-    Particle positions are scaled during volume
-    move, thus one configuration state maps to
-    more($\Delta V>0$) OR less($\Delta V<0$) states. Detailed balance then requires
-					     the $(V+\Delta V)^N/V^N$ term to offset this.</section>
-					     <section>
-					       <h2>Grand canonical ensemble</h2>
-					       <ul>
-						 <li> Constant chemical potential, volume, and temperature;
-						   fluctuating particle number and energy.
-						 </li>
-						 <li> Joint distribution of particle number and energy:
-						   \begin{equation*}
-						   {\mathcal P}(N,E;\mu,\beta) 
-						   \propto \Omega(N,V,E) e^{\beta \mu N - \beta E}
-						   \end{equation*}
-						 </li>
-						 <li> Partition function:
-						   \begin{align*}
-						   Z_{G}(\mu,V,\beta) = \sum_N \int dE \Omega(N,V,E) e^{\beta \mu N - \beta E}
-						   \end{align*}
-						 </li>
-						 <li> Free energy: pressure
-						   \begin{equation*}
-						   pV = k_BT \ln Z_G(\mu,V,\beta) + \mbox{constant}
-						   \end{equation*}
-						 </li>
-					       </ul>
-					     </section>
-					     <section>
-					       <h2>MC simulations in the grand canonical ensemble</h2>
-					       <ul style="font-size:80%;">
-						 <li> Single particle move (results in $U\to U+\Delta U$) as before.</li>
-						 <li> Particle insertion:  $N\to N+1$ 
-						   (results in $U\to U+\Delta U$)
-						   \begin{align*}
-						   A(n\leftarrow o) 
-						   &= \min\left(1,\frac{{\mathcal P}(N+1)}{{\mathcal P}(N)}\right)
-						   \\
-						   \frac{{\mathcal P}(N+1)}{{\mathcal P}(N)}
-						   &= \frac{(zV)^{N+1}e^{-\beta(U+\Delta U)}}{(N+1)!} 
-						   \frac{N!}{(zV)^{N}e^{-\beta U}} 
-						   = \frac{zV e^{-\beta \Delta U}}{N+1} 
-						   \end{align*}
-						   where $z=e^{\beta\,\mu-\ln\Lambda^3}$ (<a href="#factorization">$\Lambda^3$
-						     arises from the new particle's velocity
-						     integral in its unadded state (see Frenkel and Smit)</a>, $N+1$ is to maintain detailed
-						   balance on selecting the added particle for deletion).</li>
-						 <li class="fragment"> Particle deletion: $N\to N-1$
-						   (results in $U\to U+\Delta U$)
-						   \begin{align*}
-						   A(n\leftarrow o) 
-						   &= \min\left(1,\frac{{\mathcal P}(N-1)}{{\mathcal P}(N)}\right)
-						   \\
-						   \frac{{\mathcal P}(N-1)}{{\mathcal P}(N)}
-						   &= \frac{(zV)^{N-1}e^{-\beta(U+\Delta U)}}{(N-1)!} 
-						   \frac{N!}{(zV)^{N}e^{-\beta U}} 
-						   = \frac{N e^{-\beta \Delta U}}{zV} 
-						   \end{align*}
-						 </li>
-					       </ul>
-					     </section>
-					     <section>
-					       <h2>Ensemble averages</h2>
-					       <ul>
-						 <li> Finally(!) assuming that you are sampling the equilibrium
-						   distribution, ensemble averages are calculated as simple unweighted
-						   averages over configurations
-						   \begin{equation*}
-						   \langle {\mathcal A} \rangle 
-						   = \frac{1}{\mathcal N} \sum_{k} {\mathcal A}({\boldsymbol\Gamma}_k)
-						   \end{equation*}
-						 </li>
-						 <li> Statistical errors can be estimated assuming that block averages
-						   are statistically uncorrelated
-						 </li>
-					       </ul>
-					     </section>
-					     <section>
-					       <h2>Properties</h2>
-					       <ul>
-						 <li> pressure 
-						   $\displaystyle
-						   p=\left\lt \rho k_BT - \frac{1}{3V}\sum_{j\lt k}{\bf r}_{jk}\cdot 
-						   \frac{\partial u_{jk}}{\partial {\bf r}_{jk}}\right\gt $
-						 </li>
-						 <li> density
-						   $\displaystyle
-						   \rho=\left\lt \frac{N}{V}\right\gt 
-						   $
-						 </li>
-						 <li> chemical potential
-						   $\displaystyle
-						   \beta\mu-\ln\Lambda^3
-						   =-\ln\left\lt \frac{V\exp(-\beta\Delta U_+)}{N+1}\right\gt 
-						   $
-						 </li>
-						 <li> heat capacity
-						   $\displaystyle
-						   C_V/k_B = \frac{3}{2} N + \beta^2(\langle U^2\rangle-\langle U\rangle^2) $
-						   <br/>
-						   $\displaystyle
-						   C_p/k_B = \frac{3}{2} N + \beta^2(\langle H^2\rangle-\langle H\rangle^2) $
-						 </li>
-						 <li> isothermal compressibility
-						   $\displaystyle
-						   \kappa_T = -\frac{1}{V}\left(\frac{\partial V}{\partial p}\right)_T
-						   = \frac{\langle V^2\rangle-\langle V\rangle^2}
-						   {k_BT\langle V\rangle}
-						   = \frac{V(\langle N^2\rangle-\langle N\rangle^2}
-						   {k_BT\langle N\rangle^2}
-						   $
-						 </li>
-					       </ul>
-					     </section>
-					     <section>
-					       <h2>Truncated-shifted Lennard-Jones atoms</h2>
-
-					       <img src="img/LJ.png" width="45%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
-					       <p style="font-size:80%;">
-						 \begin{align*}
-						 u_{\rm LJ}(r) &= 4\varepsilon\left[\left(\frac{\sigma}{r}\right)^{12}
-						 - \left(\frac{\sigma}{r}\right)^{6}\right]
-						 \\
-						 u(r) &= \left\{
-						 \begin{array}{ll}
-						 u_{\rm LJ}(r) - u_{\rm LJ}(r_c) & \mbox{for $r\lt r_c$} \\
-						 0 & \mbox{for $r\gt r_c$} \\
-						 \end{array}
-						 \right.
-						 \end{align*}
-					       </p>
-					     </section>
-					     <section>
-					       <h2>Results: Lennard-Jones fluid</h2>
-					       <img src="img/LJsnapshot.png" width=40%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
-																									   <img src="img/LJgofr.png" width="50%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
-</section>
-<section>
-  <h2>Results: Lennard-Jones fluid</h2>
-  <img src="img/LJMCdata.png" width="45%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
-  <img src="img/LJSofk.png" width="45%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
-</section>
-<section>
-  <h2>Results: Lennard-Jones fluid</h2>
-
-  <img src="img/LJtable.png" width="75%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
-  <p>
-    Regardless of the ensemble (how we specify
-    the thermodynamic state), at the same
-    state the <b>average</b> properties are nearly
-    identical.</p>
-</section>
-<section>
-  <h2>Ensembles</h2>
-  <ul style="font-size:80%;">
-    <li> canonical ensemble (NVT)
-      <ul>
-	<li> single-phase properties (at fixed densities)
-	</li>
-	<li> phase transition with change in volume (e.g., freezing)
-	</li>
-	<li> phase transition with change in structure (e.g., solid-solid)
-	</li>
-      </ul>
-    </li>
-    <li> isobaric-isothermal ensemble (NpT)
-      <ul>
-	<li> Corresponds to normal experimental conditions
-	</li>
-	<li> Easy to measure equation of state
-	</li>
-	<li> Density histograms ${\mathcal P}(V)$ at phase coexistence
-	</li>
-	<li> Structural phase transitions
-	</li>
-	<li> Expensive volume moves (recalculation of total energy)
-	</li>
-      </ul>
-    </li>
-    <li> grand canonical ensemble ($\mu$VT)
-      <ul>
-	<li> Open systems (mixtures, confined fluids, interfaces)
-	</li>
-	<li> Vapor-liquid coexistence and critical phenomena
-	</li>
-	<li> Dense systems (low insertion/deletion rate)
-	</li>
-      </ul>
-    </li>
-  </ul>
-</section>
-<section>
-  <h2>Finite size effects</h2>
-  <ul>
-    <li> The finite size of the system (box dimension $L$, number of
-      particles $N$) is a limitation for all computer simulations,
-      irrespective of periodic boundary conditions.
-    </li>
-    <li> Finite-size effects become apparent when the interaction
-      range or the correlation length $\xi$ becomes comparable to $L$
-      \begin{equation*}
-      h(r) = g(r)-1 \sim \frac{e^{-r/\xi(T)}}{r}
-      \end{equation*}
-    </li>
-    <li> Systems with long-range interactions (e.g., Coulomb)
-    </li>
-    <li> Vapour-liquid critical point: $\xi(T)$ diverges like
-      $|T-Tc|^{-0.63}$.
-    </li>
-  </ul>
-</section>
-</section>
-<section id="MC3">
-  <section>
-    <h2 class="backbox">Monte Carlo 3: Biased sampling</h2>
-    <em class="fragment">
-      Some samples use a biased statistical
-      design... The
-      U.S. National Center for Health
-      Statistics...  deliberately
-      oversamples from minority populations in
-      many of its nationwide surveys in order to
-      gain sufficient precision for estimates
-      within these groups. These surveys
-      require the use of sample weights to produce proper estimates
-      across all ethnic groups. Provided that
-      certain conditions are met... these samples permit accurate
-      estimation of population parameters.
-      <br/>
-      <span style="float:right;">Taken from the <a href="https://en.wikipedia.org/wiki/Sampling_bias">sampling bias wikipedia page</a></span></em>
-</em>
-<br/>
-<em class="fragment">
-  God may like playing with dice but, given
-  the success of hard-spheres and
-  Lennard-Jones models, He also has a penchant
-  for playing snooker using classical
-  mechanics rules.
-  <br/>
-  <span style="float:right;">Prof. N. Allan, yesterday</span>
-</em>
-</section>
-<section>
-  <h2>Introduction</h2>
-  <ul>
-    <li> Histogram methods
-    </li>
-    <li> Quasi non-ergodicity
-    </li>
-    <li> Vapor-liquid transition
-    </li>
-    <li> Gibbs ensemble MC simulations
-    </li>
-    <li> Free-energy barrier in the grand-canonical ensemble
-    </li>
-    <li> Multicanonical simulations
-    </li>
-    <li> Replica exchange
-    </li>
-  </ul>
-</section>
-<section>
-  <h2>Histogram extrapolation</h2>
-  <ul>
-    <li> Consider an NVT simulation at $\beta_0$, where we collect an energy histogram, ${\mathcal H}(E;\beta_0)$:
-      \begin{align*}
-      {\mathcal P}(E;\beta_0) &= \frac{\Omega(N,V,E)}{Q(N,V,\beta_0)} e^{-\beta_0 E}
-      \\
-      {\mathcal H}(E;\beta_0) &\propto \Omega(N,V,E) e^{-\beta_0 E}
-      \end{align*}
-    </li>
-    <li> Estimate for the density of states:
-      \begin{align*}
-      \Omega(N,V,E) \propto {\mathcal H}(E;\beta_0) e^{\beta_0 E}
-      \end{align*}
-    </li>
-    <li> Using the estimate for $\Omega(N,V,E)$, we can estimate the
-      histogram at any other $\beta$
-      \begin{align*}
-      {\mathcal P}(E;\beta) &= \frac{\Omega(N,V,E)}{Q(N,V,\beta)} e^{-\beta E}
-      \\
-      {\mathcal H}(E;\beta) &\propto \Omega(N,V,E) e^{-\beta E}
-      \\
-      &\propto {\mathcal H}(E;\beta_0) e^{-(\beta-\beta_0) E}
-      \end{align*}
-    </li>
-  </ul>
-</section>
-<section>
-  <h2>Example: LJ fluid  $\rho\sigma^3=0.5$</h2>
-
-  <img src="img/energy_ext_hist.png" width="50%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
-  <p>
-    Solid lines are simulations, dashed lines
-    are extrapolated histograms from
-    $k_B\,T=2\varepsilon$.
-  </p>
-</section>
-<section>
-  <h2>Example: LJ fluid  $\rho\sigma^3=0.5$</h2>
-  <img src="img/energy_ext.png" width="50%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
-  <p>The extrapolated histograms allow evaluation of properties at any/all temperatures (within sampled states).</p>
-</section>
-<section>
-  <h2>Histogram extrapolation: Other properties</h2>
-  <ul>
-    <li> Other properties (i.e., $X$) can be extrapolated by collecting the joint
-      probability distribution at $\beta_0$
-      \begin{align*}
-      {\mathcal P}(X,E;\beta_0) 
-      &= \frac{\Omega(N,V,E,X)}{Q(N,V,\beta_0)} e^{-\beta_0 E}
-      \\
-      {\mathcal H}(X,E;\beta_0) 
-      &\propto \Omega(N,V,E,X) e^{-\beta_0 E}
-      \end{align*}
-    </li>
-    <li> Estimate for the modified density of states:
-      \begin{align*}
-      \Omega(N,V,E,X) \propto {\mathcal H}(X,E;\beta_0) e^{\beta_0 E}
-      \end{align*}
-    </li>
-    <li> Using the estimate for $\Omega(N,V,E)$, we can estimate the histogram of property $X$ at any other $\beta$
-      \begin{align*}
-      {\mathcal H}(X,E;\beta) &\propto \Omega(N,V,E,X) e^{-\beta E}
-      \\
-      &\propto {\mathcal H}(X,E;\beta_0) e^{-(\beta-\beta_0) E}
-      \end{align*}
-    </li>
-  </ul>
-</section>
-<section>
-  <h2>Example: LJ fluid</h2>
-
-  <img src="img/virial_ext.png" width="50%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
-  <p>
-    Extrapolation of the virial (i.e., excess)
-    contribution to the pressure.</p>
-</section>
-<section>
-  <h2>Histogram combining</h2>
-  <p>
-    <ul>
-      <li> Consider the case where we perform NVT simulations at several
-	temperatures $\beta_1$, $\beta_2$,..., $\beta_n$ where we collect
-	the histograms:
-	\begin{align*}
-	{\mathcal H}(X,E;\beta_k) &\propto \Omega(N,V,E,X) e^{-\beta_k E}
-	\end{align*}
-      </li>
-      <li> Estimate for the density of states as a weighted sum:
-	\begin{align*}
-	\Omega(N,V,E,X) \propto 
-	\sum_k \frac{w_k}{Z_k} {\mathcal H}(X,E;\beta_k) e^{\beta_k E}
-	\end{align*}
-	where $\sum_k w_k=1$ and $Z_k=\sum_{E,X} \Omega(N,V,E,X) e^{-\beta_k E}$.
-      </li>
-      <li> The uncertainty in ${\mathcal H}(X,E;\beta_k)$ is
-	roughly $[{\mathcal H}(X,E;\beta_k)]^{1/2}$ (Poisson).
-      </li>
-      <li> Determining the weights $w_k$ by
-	minimizing the uncertainty of the
-	estimate of the density of states leads to the following:
-	\begin{align*}
-	\Omega(N,V,E,X)&=\frac{\sum_j {\mathcal H}(E,X,\beta_j)}{\sum_k N_k\,Z_k^{-1}\,e^{-\beta_k\,E}}
-	\end{align*}
-	where $N_k$ is the number of samples, now solve for $Z^{-1}_k$!
-      </li>
-    </ul>
-  </p>
-</section>
-<section>
-  <h2>Quasi non-ergodicity</h2>
-  <ul>
-    <li> An MC algorithm may be theoretically ergodic, but in some
-      cases it can be very difficult (or impossible) to sample all of
-      the important regions of configuration space.
-    </li>
-    <li> 
-      <img src="img/configurationspace.png" width="40%" height="auto" style="background:white;color:black;box-shadow: 0px 0px 10px 10px rgba(255,255,255,1); float:right; margin:1em;">
-      Even in &ldquo;simple&rdquo; systems (e.g., mono-atomic fluids) significant
-      free-energy barriers can separate these important areas.
-    </li>
-    <li> A common example is the barrier between simulated
-      coexisting phases at a first-order phase transition.
-    </li>
-    <li> We concentrate on the vapour-liquid phase transition.
-    </li>
-  </ul>
-</section>
-<section>
-  <h2>Vapor-liquid transition</h2>
-  <ul>
-    <li> At coexistence $T_{\rm vap}=T_{\rm liq}$, 
-      $p_{\rm vap}=p_{\rm liq}$, and $\mu_{\rm vap}=\mu_{\rm liq}$
-    </li>
-    <li> The density  is the order parameter
-    </li>
-  </ul>
-  
-  <img src="img/phasediagram.png" width="40%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
-  <img src="img/vle.png" width="40%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
-</section>
-<section>
-  <h2>Vapor-liquid transition: Difficulties</h2>
-  <ul>
-    <li> In a finite-size system, the interfacial free energy (positive,
-      unfavourable) is significant
-    </li>
-    <li> Free energy: $F=F_{\rm int}+F_{\rm bulk}=\gamma L^2 - AL^3$
-
-      <img src="img/layer.png" width="80%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
-
-    </li>
-    <li> Direct simulation will not locate the coexistence densities
-      accurately
-    </li>
-  </ul>
-</section>
-<section>
-  <h2>Gibbs ensemble Monte Carlo</h2>
-  <ul>
-    <li> Two simulation boxes, $I$ and $II$
-    </li>
-    <li> Total number of particles $N$, volume $V$, temperature $T$
-    </li>
-    <li> Separate single-particle moves (thermal equilibrium)
-    </li>
-    <li> Exchange volume such that $V = V_I + V_{II}$ (equates $p$)
-    </li>
-    <li> Exchange particles such that $N = N_I + N_{II}$ (equates $\mu$)
-      <div style="float:right;width:40%">
-	<img src="img/vapor.png" width="30%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);vertical-align:middle;">
-	$\longleftrightarrow$
-	<img src="img/liquid.png" width="30%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);vertical-align:middle;">
-      </div>
-    </li>
-    <li> Phase coexistence in a single simulation!
-    </li>
-    <li> Not good for dense phases: low probability for simultaneous
-      particle insertion (in one box) and deletion (from the other)
-    </li>
-  </ul>
-  <ul style="font-size:80%;">
-    <li> AZ Panagiotopoulos, <i>Mol. Phys.</i> 61, 813 (1987).
-    </li>
-    <li> D Frenkel and B Smit, <em>Understanding Molecular Simulation</em> (2001).
-    </li>
-  </ul>
-</section>
-<section>
-  <h2>Gibbs ensemble Monte Carlo</h2>
-
-  <object type="image/svg+xml" data="img/gibbs_ensemble.svg" width="80%" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
-    Your browser does not support SVG
-  </object>
-</section>
-<section>
-  <h2>Phase diagram of square-well fluids</h2>
-  <span style="font-size:80%;">
-    <div style="display:inline-block; width:40%;">
-      $\lambda=1.375$<br/>
-      <img src="img/lambda1375.png" width="100%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);vertical-align:middle;">
-    </div>
-    <div style="display:inline-block; width:40%;">
-      $\lambda=1.5$<br/>
-      <img src="img/lambda150.png" width=100%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);vertical-align:middle;">
-</div>
-$
-\displaystyle
-u(r) = \left\{
-\begin{array}{rl}
-\infty & \mbox{for $0\lt  r \lt  \sigma$} \\
-- \epsilon & \mbox{for $\sigma\lt  r \lt  \lambda\sigma$} \\
-0 & \mbox{for $\lambda\sigma \lt  r$} \\
-\end{array}
-\right.
-$
-</span><br/>
-<span style="font-size:50%;">
-  L Vega et al., <i>J. Chem. Phys.</i> 96, 2296 (1992).
-</span>
-</section>
-<section>
-  <h2>Phase diagram of square-well fluids</h2>
-  <span style="font-size:80%;">
-    <div style="display:inline-block; width:40%;">
-      $\lambda=1.75$<br/>
-      <img src="img/lambda175.png" width="100%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);vertical-align:middle;">
-    </div>
-    <div style="display:inline-block; width:40%;">
-      $\lambda=2$<br/>
-      <img src="img/lambda200.png" width="100%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);vertical-align:middle;">
-    </div>
-    $
-    \displaystyle
-    u(r) = \left\{
-    \begin{array}{rl}
-    \infty & \mbox{for $0\lt  r \lt  \sigma$} \\
-    - \epsilon & \mbox{for $\sigma\lt  r \lt  \lambda\sigma$} \\
-    0 & \mbox{for $\lambda\sigma \lt  r$} \\
-    \end{array}
-    \right.
-    $
-  </span><br/>
-  <span style="font-size:50%;">
-    L Vega et al., <i>J. Chem. Phys.</i> 96, 2296 (1992).
-  </span>
-</section>
-<section>
-  <h2>MC simulations in the GC ensemble</h2>
-  <ul>
-    <li> Single particle move (results in $U\to U+\Delta U$)
-      \begin{align*}
-      A(n\leftarrow o) = \min(1,e^{-\beta\Delta U})
-      \end{align*}
-    </li>
-    <li> Particle insertion:  $N\to N+1$ 
-      (results in $U\to U+\Delta U$)
-      \begin{align*}
-      A(n\leftarrow o) 
-      &= \min\left(1,\frac{{\mathcal P}(N+1)}{{\mathcal P}(N)}\right)
-      \\
-      \frac{{\mathcal P}(N+1)}{{\mathcal P}(N)}
-      &= \frac{(zV)^{N+1}e^{-\beta(U+\Delta U)}}{(N+1)!} 
-      \frac{N!}{(zV)^{N}e^{-\beta U}} 
-      = \frac{zV e^{-\beta \Delta U}}{N+1} 
-      \end{align*}
-    </li>
-    <li> Particle deletion: $N\to N-1$
-      (results in $U\to U+\Delta U$)
-      \begin{align*}
-      A(n\leftarrow o) 
-      &= \min\left(1,\frac{{\mathcal P}(N-1)}{{\mathcal P}(N)}\right)
-      \\
-      \frac{{\mathcal P}(N-1)}{{\mathcal P}(N)}
-      &= \frac{(zV)^{N-1}e^{-\beta(U+\Delta U)}}{(N-1)!} 
-      \frac{N!}{(zV)^{N}e^{-\beta U}} 
-      = \frac{N e^{-\beta \Delta U}}{zV} 
-      \end{align*}
-    </li>
-  </ul>
-</section>
-<section>
-  <h2>Free energy barrier in GC ensemble</h2>
-  <ul>
-    <li> In the grand-canonical ensemble
-      \begin{equation*}
-      {\mathcal P}(N)
-      = \frac{Q(N,V,T)}{Z_G(\mu,V,T)}e^{\beta\mu N }
-      = \frac{Q(N,V,T)}{Z_G(\mu,V,T)} z^N
-      \end{equation*}
-    </li>
-    <li> In a system at coexistence well below $T_c$, the particle number
-      histogram $p(N)$ [or $p(\rho=N/V)$] at constant chemical potential,
-      temperature, and volume is bimodal, with almost no &ldquo;overlap&rdquo;
-      between the peaks
-    </li>
-  </ul>
-  <img src="img/densityhistogram.png" width="34%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);vertical-align:middle;">
-  <img src="img/densityactivity.png" width="32%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);vertical-align:middle;">
-</section>
-<section>
-  <h2>Multicanonical simulations</h2>
-  <ul>
-    <li> Apply a biasing potential $\eta(N)$ in the Hamiltonian to cancel
-      out the barrier.
-      \begin{equation*}
-      {\mathcal P}_{\rm bias}(N) \propto {\mathcal P}(N) e^{-\eta(N)}
-      \end{equation*}
-    </li>
-    <li> Insertion/deletion acceptance probabilities are modifed
-      \begin{equation*}
-      \frac{{\mathcal P}_{\rm bias}(N_n)}{{\mathcal P}_{\rm bias}(N_o)}
-      = \frac{{\mathcal P}(N_n)}{{\mathcal P}(N_o)}
-      e^{-[\eta(N_n)-\eta(N_o)]} 
-      \end{equation*}
-    </li>
-    <li> Single-particle moves are unaffected
-    </li>
-  </ul>
-</section>
-<section>
-  <h2>Multicanonical  weights</h2>
-  \begin{equation*}
-  {\mathcal P}_{\rm bias}(N) \propto {\mathcal P}(N) e^{-\eta(N)}
-  \end{equation*}
-  <ul>
-    <li> The &ldquo;ideal&rdquo; choice for $\eta(N)$ would cancel out the barrier
-      completely such that the biased probability distribution is flat,
-      i.e., $\eta(N) = k_BT\ln{\mathcal P}(N)$ so that ${\mathcal P}_{\rm
-      bias}(N) = {\rm constant}$
-    </li>
-    <li> However, if we knew that in advance, there would be no need for a
-      simulation!
-    </li>
-    <li> Fortunately, $\eta(N)$ can be determined iteratively, to give
-      successively smooth biased distributions
-    </li>
-  </ul>
-</section>
-<section>
-  <h2>Determining the multicanonical  weights</h2>
-  \begin{equation*}
-  {\mathcal P}_{\rm bias}(N) \propto {\mathcal P}(N) e^{-\eta(N)}
-  \end{equation*}
-  <ul>
-    <li>[Step 1:] Choose $z$ to be near coexistence (selected from
-      hysteresis region)
-    </li>
-    <li>[Step 2:] Get good statistics in ${\mathcal P}(N)$ for $N_{\rm
-      min}\le N\le N_{\rm max}$
-    </li>
-    <li>[Step 3:] Generate biasing potential
-      \begin{align*}
-      \eta(N) &= k_BT\ln{\mathcal P}(N)
-      \\
-      \eta(N\lt N_{\rm min}) &= k_BT\ln{\mathcal P}(N_{\rm min})
-      \\
-      \eta(N\gt N_{\rm max}) &= k_BT\ln{\mathcal P}(N_{\rm max})
-      \end{align*}
-    </li>
-    <li>[Step 4:] Get good statistics in ${\mathcal P}_{\rm bias}(N)$
-      (now over a wider range of $N$)
-    </li>
-    <li>[Step 5:] Generate unbiased $p(N)$
-      \begin{align*}
-      {\mathcal P} \propto {\mathcal P}_{\rm bias}(N) e^{\eta(N)}
-      \end{align*}
-      return to <b>Step 3</b>
-    </li>
-  </ul>
-</section>
-<section>
-  <h2>Multicanonical simulations: LJ fluid</h2>
-
-  <img src="img/multihist.png" width="60%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);vertical-align:middle;">
-</section>
-<section>
-  <h2>GCMC: Histogram reweighting</h2>
-  <ul>
-    <li> At reciprocal temperature $\beta_0$ and activity $z_0$
-      \begin{align*}
-      {\mathcal P}(N,E;\mu_0,V,\beta_0) 
-      = \frac{\Omega(N,V,E)}{Z_G(\mu_0,V,\beta_0)} e^{\beta_0\mu_0 N - \beta_0 U}
-      \end{align*}
-    </li>
-    <li> Now consider a different activity and temperature
-      \begin{align*}
-      {\mathcal P}(N,E;\mu_1,V,\beta_1) 
-      &= \frac{\Omega(N,V,E)}{Z_G(\mu_1,V,\beta_1)} e^{\beta_1\mu_1 N-\beta_1 U}
-      \\
-      &= {\mathcal P}(N,E;\mu_0,V,\beta_0) 
-      \left(\frac{z_1}{z_0}\right)^N e^{-(\beta_1-\beta_0)U}
-      \\ & \qquad \times
-      \frac{Z_{G}(\mu_1,V,\beta_1)}{Z_{G}(\mu_0,V,\beta_0)}
-      \end{align*}
-    </li>
-    <li> The ratio $Z_{G}(\mu_1,V,\beta_1)/Z_{G}(\mu_0,V,\beta_0)$ is
-      just a normalizing factor, so that
-      <span style="font-size:80%">
-	\begin{align*}
-	\sum_{N} \int dE {\mathcal P}(N,E;\mu,V,\beta)
-	= \sum_{N} {\mathcal P}(N;\mu,V,\beta)
-	= \int dE {\mathcal P}(E;\mu,V,\beta)
-	= 1
-	\end{align*}
-      </span>
-    </li>
-  </ul>
-</section>
-<section>
-  <h2>Determining coexistence</h2>
-  <ul>
-    <li> To find coexistence, tune $\mu$ to satisfy the &ldquo;equal area&rdquo;
-      rule (not equal peak height)
-      <br/>
-      <img src="img/densityhistogram-coex.png" width="35%" height="auto" style="background:white;color:black; margin-left:27%; width:35%; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);vertical-align:middle;">
-
-    </li>
-    <li> These histograms were generated from a multicanonical simulation
-      with $z=0.029$.
-    </li>
-  </ul>
-</section>
-<section>
-  <h2>Density histogram for the LJ fluid</h2>
-
-  <img src="img/densityhistogram-LJ.png" width="55%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);vertical-align:middle;">
-
-</section>
-<section>
-  <h2>Lennard-Jones phase diagram</h2>
-  
-  <img src="img/LJcoex.png" width="50%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);vertical-align:middle;">
-
-  \begin{align*}
-  \rho_{l/g} &= \rho_c + A|T-T_c| \pm B|T-T_c|^\beta
-  \\
-  \beta &= 0.3265  \qquad \mbox{(universal)}
-  \end{align*}
-
-</section>
-<section>
-  <h2>Replica exchange</h2>
-  <ul>
-    <li> &ldquo;Rough&rdquo; energy landscapes are hard to sample at low
-      temperature (get stuck in local minima)
-    </li>
-    <li> High-temperature simulations can glide over barriers
-      
-      <img src="img/energylandscape.png" width="30%" height="auto" style="background:white;color:black; margin-left:35%; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);vertical-align:middle;">
-
-    </li>
-    <li> Exchange complete configurations (with energies $U_0$ and $U_1$)
-      between simulations run in parallel at different reciprocal
-      temperatures ($\beta_0$ and $\beta_1$, respectively)
-      \begin{equation*}
-      \frac{{\mathcal P}(n)}{{\mathcal P}(o)} =
-      \frac{e^{-\beta_0U_1} \times e^{-\beta_1U_0}}{e^{-\beta_0U_0} \times e^{-\beta_1U_1}}
-      = e^{-(\beta_0-\beta_1 )(U_1-U_0 )}
-      \end{equation*}
-    </li>
-  </ul>
-  <span style="font-size:50%;">
-    QL Yan and JJ de Pablo, <em>J. Chem. Phys.</em> 111, 9509 (1999),
-    A Kone and DA Kofke, <em>J. Chem. Phys.</em> 122, 206101 (2005)
-  </span>
-</section>
-<section>
-  <h2>Replica exchange: Simple example</h2>
-  <p>
-    <ul>
-      <li>
-	<div style="float:right; width:50%;">
-	  <img src="img/potential.png" width="100%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);vertical-align:middle;">
-	  <p>
+	    <object type="image/svg+xml" data="img/phasespace.svg" width="100%" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
+	      Your browser does not support SVG
+	    </object>
+	  </section>
+	  <section>
+	    <h2>Thermodynamics Recap</h2>
+	    1st law: Energy is conserved
 	    \begin{align*}
-	    U(x) &= \left[\sin\frac{\pi x}{2} \sin 5\pi x\right]^2
-	    \\
-	    p(x,\beta) &\propto e^{-\beta U}
+	    dU &= \delta Q - \delta W
 	    \end{align*}
+	    2nd law: Entropy change is non-negative: $dS\ge\frac{\delta Q}{T}$<br/>
+	    Combining and including pressure-volume & particle work:
+	    \begin{align*}
+	    {\rm d}U &\le T\,{\rm d}S - p{\rm d}V + \mu\,{\rm d}N
+	    \\
+	    {\rm d}S &\ge \frac{1}{T}dU + \frac{p}{T}dV - \frac{\mu}{T}{\rm d}N
+	    \end{align*}
+	    Reversible transformations: 
+	    \begin{align*}
+	    {\rm d}U &= T\,{\rm d}S - p\,{\rm d}V + \mu\,{\rm d}N
+	    \end{align*}
+	    State functions are exact differentials:
+	    \begin{align*}
+	    {\rm d}f &= \frac{\partial f}{\partial x}{\rm d}x  
+	    + \frac{\partial f}{\partial y}{\rm d}y + \frac{\partial f}{\partial z}{\rm d}z
+	    \end{align*}
+	    thus: $U(S,V,N)$, $S(U,V,N)$
+	  </section>
+	  <section>
+	    <h2>Basic concepts</h2>
+	    <p>
+	      <b>Ergodic hypothesis: </b> A system with fixed $N$, $V$, and $E$ ($U$) is equally likely to be found in any of its $\Omega(N,V,E)$ microscopic states.<br/>
+	    </p>
+	    <p class="fragment">
+	      Consider two subsets of states, $\Omega_A$ and $\Omega_B$. A system is more likely to be found in set A if $\Omega_A&gt;\Omega_B$.
+	    </p>
+	    <p class="fragment">
+	      Therefore $S(\Omega_A)&gt;S(\Omega_B)$ as A is more likely, thus $S$ must be a monotonically increasing function in $\Omega$.<br/>
+	    </p>
+	    <p class="fragment">
+	      As states increase multiplicatively, yet entropy is additive, the relationship must be logarithmic. 
+	      \begin{equation*}
+	      S(N,V,E) = k_B \ln \Omega(N,V,E)
+	      \end{equation*}
+	      where $k_B=1.3806503\times10^{-23}$ J K$^{-1}$ is the Boltzmann
+	      constant, present for historic reasons.			    
+	    </p>
+	  </section>
+	  <section>
+	    Consider one microscopic state, $\boldsymbol{\Gamma}$ out of the $\Omega(N,V,E)$ microscopic states. Its probability is:
+	    \begin{equation*}
+	    {\mathcal P}({\boldsymbol\Gamma}) \propto \frac{1}{\Omega(N,V,E)}
+	    \end{equation*}
+	    
+	    In the $N,V,E$ ensemble, we can now determine average properties if the <b>density of states</b>, $\Omega(N,V,E)$ is known.
+	    
+	    \begin{align*}
+	    \langle{\mathcal A}\rangle &= \int {\rm d}{\boldsymbol\Gamma}\,{\mathcal P}({\boldsymbol\Gamma})\,
+	    {\mathcal A}({\boldsymbol\Gamma}) = \lim_{t_{obs.}\to\infty} \frac{1}{t_{obs.}}\int_0^{t_{obs.}}\mathcal A(t)\,{\rm d}t
+	    \end{align*}
+	  </section>
+	  <section>
+	    <h2>Density of states</h2>
+	    <ul>
+	      <li> The density of states $\Omega(N,V,E)$ is the number of ways the
+		system can have an energy $E$.  In other words, it is the "volume"
+		of phase space with an energy $E$.
+	      </li>
+	      <li> Volume element in phase space:
+		\begin{equation*}
+		d{\boldsymbol\Gamma} = \frac{1}{N!}
+		\frac{d{\bf r}_1d{\bf p}_1}{h^3}\cdots \frac{d{\bf r}_N d{\bf p}_N}{h^3}
+		\end{equation*}
+		where $h$ is Planck's constant.
+	      </li>
+	      <li> Mathematically, the density of states is given by
+		\begin{equation*}
+		\Omega(N,V,E) = \int_{E \lt  H({\boldsymbol\Gamma})\lt E+\delta E} d{\boldsymbol\Gamma} 
+		\end{equation*}
+		where $\delta E\ll E$.
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Microcanonical ensemble ($N V E$)</h2>
+	    <b>Fundamental equation of thermodynamics:</b>
+	    \begin{align*}
+	    {\rm d}S(N,V,E) &= \frac{{\rm d}E}{T} + \frac{p}{T}{\rm d}V - \frac{\mu}{T}{\rm d}N
+	    \end{align*}
+	    From $S(N,V,E) = k_B \ln \Omega(N,V,E)$:
+	    \begin{align*}
+	    {\rm d}\ln\Omega(N,V,E) &= \beta\,{\rm d}E + \beta\,p\,{\rm d} V - \beta\,\mu\,{\rm d}N
+	    \end{align*}
+	    where $\beta=1/(k_B\,T)$.
+
+	    <br/>
+	    <b>
+	      Once the density of states $\Omega(N,V,E)$ is known, all the thermodynamic
+	      properties of the system can be determined.
+	    </b>
+	  </section>
+	  <section>
+	    <h2>Free energies (other ensembles)</h2>
+	    Helmholtz free energy: $A=U-TS$
+	    \begin{align*}
+	    {\rm d}A &\le -S\,{\rm d}T - p\,{\rm d}V + \mu\,{\rm d}N
+	    \end{align*}
+	    Reversible transformations:
+	    \begin{align*}
+	    {\rm d}A &= -S\,{\rm d}T - p\,{\rm d}V + \mu\,{\rm d}N
+	    \end{align*}
+	    State functions are exact differentials, thus:
+	    \begin{equation*}
+	    A(T,V,N)
+	    \end{equation*}
+	    Lets consider the $N V T$ ensemble...
+	  </section>
+	  <section>
+	    <h2>Canonical ensemble  ($N V T$)</h2>
+	    <object type="image/svg+xml" data="img/canonical_ensemble.svg" width="50%" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
+	      Your browser does not support SVG
+	    </object>
+	    <p>
+	      \begin{equation*}
+	      {\mathcal P}(E) \propto \Omega(E;E_{\rm tot})
+	      \qquad \qquad
+	      \Omega(E;E_{\rm tot}) = \Omega(E)  \Omega_{\rm surr.} (E_{\rm tot}-E)
+	      \end{equation*}
+
+	      (Note: the $N$ and $V$ variables for the system and the surroundings are implicit)
+	    </p>
+	    
+	  </section>
+	  <section>
+	    <h2>Canonical ensemble</h2>
+	    <p>
+	      \begin{align*} {\mathcal P}(E,E_{\rm tot})
+	      &\propto \Omega(E) \Omega_{\rm
+	      surr.}(E_{\rm tot}-E) \\ &\propto
+	      \Omega(E) e^{\ln \Omega_{surr.}(E_{\rm
+	      tot}-E)} \end{align*}
+	    </p>
+	    <p class="fragment">
+	      Performing a taylor expansion of
+	      $\ln\Omega_{\rm surr.}$ around $E_{\rm tot}$.
+	      
+	      \begin{align*}
+	      {\mathcal P}(E,E_{\rm tot}) &\propto \Omega(E) e^{\ln
+	      \Omega_B(E_{\rm tot}) - E
+	      \frac{\partial}{\partial E_{\rm tot}}\ln
+	      \Omega_B(E_{\rm tot}) + \cdots}
+	      \end{align*}
+	    </p>
+	    <p class="fragment">
+	      First-order is fine as $E\ll E_{tot}$. Note that $\partial \ln \Omega(E) / \partial E=\beta$. <br/>At equilibrium the surroundings and system have the same temperature thus:
+	      
+	      \begin{align*}
+	      {\mathcal P}(E,E_{\rm tot}) &\propto \Omega(E) e^{\ln \Omega_B(E_{\rm
+	      tot}) - \beta E} \end{align*}
+	      \begin{align*} {\mathcal P}(E) &\propto
+	      \Omega(E) e^{- \beta E} \end{align*}
+	      
+	      (If the surroundings are large, $E_{\rm tot}$ is unimportant and the constant term $\ln \Omega_B(E_{\rm tot})$ cancels on normalisation)
+	    </p>
+	  </section>
+	  <section>
+	    <h2>Canonical ensemble</h2>
+	    Boltzmann distribution
+	    \begin{equation*}
+	    {\mathcal P}(E) = \frac{\Omega(N, V, E)}{Q(N,V,\beta)} e^{ - \beta E}
+	    \end{equation*}
+	    Canonical partition function is the normalisation:
+	    \begin{equation*}
+	    Q(N,V,\beta) = \int dE \Omega(N,V,E) e^{-\beta E}
+	    \end{equation*}
+	    Its also related to the Helmholtz free energy
+	    \begin{align*}
+	    A &= -k_BT \ln Q(N,V,\beta) 
+	    \\
+	    dA &= -S dT -pdV + \mu dN
+	    \\
+	    d\ln Q(N,V,\beta) &= - E d\beta + \beta p dV - \beta \mu dN
+	    \end{align*}
+	    Again, all thermodynamic properties can be derived from $Q(N,V,\beta)$.
+	  </section>
+	  <section>
+	    <h2>Canonical ensemble: Partition function</h2>
+	    The canonical partition function can be written in terms of an
+	    integral over phase space coordinates:
+	    \begin{align*}
+	    Q(N,V,\beta) &= \int dE \Omega(N,V,E) e^{-\beta E}
+	    \\
+	    &= \int dE e^{-\beta E}
+	    \int_{E \lt  H({\boldsymbol\Gamma})\lt E+\delta E} d{\boldsymbol\Gamma} 
+	    \\
+	    &= \int d{\boldsymbol\Gamma}\, e^{-\beta H({\Gamma})}
+	    \\
+	    &= \frac{1}{N!}\int \frac{d{\bf r}_1d{\bf p}_1}{h^3}
+	    \cdots \frac{d{\bf r}_N d{\bf p}_N}{h^3}
+	    e^{-\beta H({\Gamma})}
+	    \end{align*}
+	  </section>
+	  <section id="factorization">
+	    <h2>Factorization of the partition function</h2>
+	    <ul style="font-size:80%">
+	      <li> The partition function can be factorized
+		\begin{align*}
+		Q(N,V,T) = \frac{1}{N!}
+		\int d{\bf r}_1\cdots d{\bf r}_N 
+		e^{-\beta U({\bf r}_1,\dots{\bf r}_N)}
+		\int \frac{d{\bf p}_1}{h^3}\cdots\frac{d{\bf p}_N}{h^3}
+		e^{-\beta K({\bf p}_1,\dots,{\bf p}_N)}
+		\end{align*}
+	      </li>
+	      <li> The integrals over the momenta can be performed exactly
+		\begin{align*}
+		\int\frac{d{\bf p}_1}{h^3}\cdots\frac{d{\bf p}_N}{h^3}
+		e^{-\beta K({\bf p}_1,\dots,{\bf p}_N)}
+		&= \left[\int\frac{d{\bf p}}{h^3} e^{-\frac{\beta p^2}{2m}} \right]^{N}
+		\\
+		&= \left(\frac{2\pi m}{\beta h^2}\right)^{3N/2}
+		= \Lambda^{-3N}
+		\end{align*}
+	      </li>
+	      <li> The partition function is given in terms of a configurational
+		integral and the de Broglie wavelength $\Lambda$
+		\begin{equation*}
+		Q(N,V,T) = \frac{1}{N!\Lambda^{3N}}
+		\int d{\bf r}_1\cdots d{\bf r}_N 
+		e^{-\beta U({\bf r}_1,\dots{\bf r}_N)}
+		= \frac{Z(N,V,T)}{N!\Lambda^{3N}} 
+		\end{equation*}
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Average properties</h2>
+	    <ul>
+	      <li> The probability of being at the phase point ${\boldsymbol\Gamma}$ is
+		\begin{equation*}
+		{\mathcal P}({\boldsymbol\Gamma})
+		= \frac{e^{-\beta H({\boldsymbol\Gamma})}}{Q(N,V,\beta)}
+		\end{equation*}
+	      </li>
+	      <li> The average value of a property ${\mathcal A}({\boldsymbol\Gamma})$ is
+		\begin{align*}
+		\langle{\mathcal A}\rangle &= \int d{\boldsymbol\Gamma} {\mathcal P}({\boldsymbol\Gamma})
+		{\mathcal A}({\boldsymbol\Gamma})
+		\\
+		&= \frac{1}{Q(N,V,\beta)}\int d{\boldsymbol\Gamma} e^{-\beta H({\boldsymbol\Gamma})}
+		{\mathcal A}({\boldsymbol\Gamma})
+		\end{align*}
+	      </li>
+	      <li> If the property depends only on the position of the particles
+		\begin{align*}
+		\langle{\mathcal A}\rangle &= \frac{1}{Q(N,V,\beta)}
+		\int d{\bf r}_1\cdots d{\bf r}_N e^{-\beta U({\bf r}_1,\dots,{\bf r}_N)}
+		{\mathcal A}({\bf r}_1,\dots,{\bf r}_N)
+		\end{align*}
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Grand canonical ensemble  ($\mu V T$)</h2>
+	    <object type="image/svg+xml" data="img/grandcanonical_ensemble.svg" width="50%" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
+	      Your browser does not support SVG
+	    </object>
+	    \begin{align*}
+	    {\mathcal P}(N,E) &\propto \Omega(N,E;N_{\rm tot},E_{\rm tot})
+	    \\
+	    \Omega(N,E;N_{\rm tot},E_{\rm tot}) 
+	    &= \Omega(N,E) \Omega_B(N_{\rm tot}-N,E_{\rm tot}-E)
+	    \end{align*}
+	  </section>
+	  <section>
+	    <h2>Grand canonical ensemble</h2>
+	    Boltzmann distribution
+	    \begin{equation*}
+	    {\mathcal P}(E,N) = \frac{\Omega(N, V, E)}{Z_G(\mu,V,\beta)} 
+	    e^{\beta \mu N - \beta E}
+	    \end{equation*}
+	    Grand canonical partition function
+	    \begin{equation*}
+	    Z_G(\mu, V, \beta)
+	    = \sum_{N} \int {\rm d}E\,\Omega(N,V,E) e^{\beta\,\mu\,N - \beta\,E}
+	    \end{equation*}
+	    Grand potential
+	    \begin{align*}
+	    \Omega &= - pV = -k_BT \ln Z_G(\mu,V,\beta) 
+	    \\
+	    d\Omega &= - d(pV) = -S dT - pdV - N d\mu
+	    \\
+	    d\ln Z_G(\mu, V, \beta) &= - E d\beta + \beta pdV + N d\beta\mu
+	    \end{align*}
+	  </section>
+	  <section>
+	    <h2>Isothermal-isobaric ensemble  ($NpT$)</h2>
+	    Boltzmann distribution
+	    \begin{equation*}
+	    {\mathcal P}(V,E) = \frac{\Omega(N, V, E)}{\Delta(N,p,\beta)} 
+	    e^{\beta pV - \beta E}
+	    \end{equation*}
+	    Isothermal-isobaric partition function
+	    \begin{equation*}
+	    \Delta(N, p, \beta)
+	    = \int dV \int dE\, \Omega(N,V,E) e^{\beta pV - \beta E}
+	    \end{equation*}
+	    Gibbs free energy
+	    \begin{align*}
+	    G &= -k_BT \ln\Delta(N,p,\beta) 
+	    \\
+	    dG &= -S dT + Vdp + \mu dN
+	    \\
+	    d\ln\Delta(N, p, \beta) &= - E d\beta + V d \beta p + \beta\mu dN
+	    \end{align*}
+	  </section>
+	  <section>
+	    <h2>$n$-particle density</h2>
+	    <ul style="font-size:80%">
+	      <li> The $n$-particle density $\rho^{(n)}({\bf r}_1,\dots,{\bf r}_n)$
+		is defined as $N!/(N-n)!$ times the probability of finding $n$
+		particles in the element $d{\bf r}_1\cdots d{\bf r}_n$ of coordinate
+		space.
+		\begin{align*}
+		&\rho^{(n)}({\bf r}_1,\dots,{\bf r}_n)
+		= \frac{N!}{(N-n)!} \frac{1}{Z(N,V,T)}
+		\int d{\bf r}_{n+1}\cdots d{\bf r}_N\, e^{-\beta U({\bf r}_1,\dots,{\bf r}_N)}
+		\\
+		&\int d{\bf r}_1\cdots d{\bf r}_n\,\rho^{(n)}({\bf r}_1,\dots,{\bf r}_n)
+		= \frac{N!}{(N-n)!}
+		\end{align*}
+	      </li>
+	      <li> This normalisation means that, for a homogeneous system,
+		$\rho^{(1)}({\bf r})=\rho=N/V$
+		\begin{align*}
+		&\int d{\bf r}\, \rho^{(1)}({\bf r}) = N 
+		\qquad \longrightarrow \qquad 
+		\rho V = N
+		\\
+		&\int d{\bf r}_1d{\bf r}_2\, \rho^{(2)}({\bf r}_1,{\bf r}_2) = N(N-1) 
+		\end{align*}
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>$n$-particle distribution function</h2>
+	    <ul style="font-size:80%">
+	      <li> The $n$-particle distribution function $g^{(n)}({\bf
+		r}_1,\dots,{\bf r}_n)$ is defined as
+		\begin{align*}
+		g^{(n)}({\bf r}_1,\dots,{\bf r}_n) 
+		&=\frac{\rho^{(n)}({\bf r}_1,\dots,{\bf r}_n)}
+		{\prod_{k=1}^n \rho^{(1)}({\bf r}_i)}
+		\\
+		g^{(n)}({\bf r}_1,\dots,{\bf r}_n) 
+		&= \rho^{-n} \rho^{(n)}({\bf r}_1,\dots,{\bf r}_n)
+		\qquad \mbox{for a homogeneous system}
+		\end{align*}
+	      </li>
+	      <li> For an ideal gas (i.e., $U=0$):
+		\begin{align*}
+		&\rho^{(n)}({\bf r}_1,\dots,{\bf r}_n)
+		= \frac{N!}{(N-n)!} 
+		\frac{\int d{\bf r}_{n+1}\cdots d{\bf r}_N}{\int d{\bf r}_{1}\cdots d{\bf r}_N}
+		= \frac{N!}{(N-n)!} \frac{V^{N-n}}{V^N}
+		\approx \rho^n
+		\\
+		&g^{(n)}({\bf r}_1,\dots,{\bf r}_n) \approx 1
+		\\
+		&g^{(2)}({\bf r}_1,{\bf r}_2) = 1 - \frac{1}{N}
+		\end{align*}
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Radial distribution function</h2>
+	    <ul>
+	      <li> $n=2$: pair density and pair distribution function in a
+		homogeneous fluid
+		\begin{align*}
+		g^{(2)}({\bf r}_1,{\bf r}_2) &= \rho^{-2} \rho^{(2)}({\bf r}_1,{\bf r}_2) 
+		\\
+		g^{(2)}({\bf 0},{\bf r}_2-{\bf r}_1) 
+		&= \rho^{-2} \rho^{(2)}({\bf 0},{\bf r}_2-{\bf r}_1) 
+		\end{align*}
+	      </li>
+	      <li> Average density of particles at r given that a tagged
+		particle is at the origin is
+		\begin{equation*}
+		\rho^{-1} \rho^{(2)}({\bf 0},{\bf r}) 
+		= \rho g^{(2)}({\bf 0},{\bf r})
+		\end{equation*}
+	      </li>
+	      <li> The pair distribution function in a homogeneous and isotropic
+		fluid is the radial distribution function $g(r)$, 
+		\begin{equation*}
+		g(r) = g^{(2)}({\bf r}_1,{\bf r}_2)
+		\end{equation*}
+		where $r = |{\bf r}_1-{\bf r}_2|$
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Radial distribution function</h2>
+	    <img src="img/gofr1.png" width="40%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
+	    <img src="img/spheres.png" width="40%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
+	  </section>
+	  <section>
+	    <h2>Radial distribution function</h2>
+	    <ul>
+	      <li> Energy, virial, and compressibility equations:
+		\begin{align*}
+		U &= N \rho \int d{\bf r} u(r) g(r)
+		\\
+		\frac{\beta p}{\rho} 
+		&= 1 - \frac{\beta\rho}{6} \int d{\bf r} w(r) g(r)
+		\\
+		\rho k_BT \kappa_T &= 1 + \rho \int d{\bf r} [g(r)-1]
+		\end{align*}
+	      </li>
+	      <li> "Pair" virial 
+		\begin{equation*}
+		w(r) = {\bf r}\cdot \frac{\partial u}{\partial{\bf r}}
+		\end{equation*}
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Structure factor</h2>
+	    <ul>
+	      <li> Fourier component $\hat{\rho}({\bf k})$ of the instantaneous
+		single-particle density
+		\begin{align*}
+		\rho({\bf r}) &= \sum_\alpha \delta^d({\bf r}-{\bf r}_\alpha)
+		= \int \frac{d{\bf k}}{(2\pi)^d} \hat{\rho}({\bf k}) e^{-i{\bf k}\cdot{\bf r}} 
+		\\
+		\hat{\rho}({\bf k}) &= \int d{\bf r} \rho({\bf r}) e^{i{\bf k}\cdot{\bf r}} 
+		\end{align*}
+	      </li>
+	      <li> Autocorrelation function is called the structure factor $S(k)$
+		\begin{align*}
+		\frac{1}{N}\langle\hat{\rho}({\bf k})\hat{\rho}(-{\bf k})\rangle
+		&= 1 + \frac{1}{N}\left\lt 
+		\sum_{\alpha\ne\alpha'} e^{-i{\bf k}\cdot({\bf r}_\alpha-{\bf r}_{\alpha'})}
+		\right\gt 
+		\\
+		S({\bf k}) &= 1 + \rho\int d{\bf r}[g({\bf r})-1] e^{-i{\bf k}\cdot{\bf r}}
+		\end{align*}
+	      </li>
+	      <li> $S({\bf k})$ reflects density fluctuations and dictates
+		scattering
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Fourier decomposition</h2>
+	    Consider the function
+	    \begin{align*}
+	    f(x) &= x^2 + \frac{1}{2}\sin 6\pi x  + 0.1 \cos 28\pi x
+	    \end{align*}
+	    Fourier representation:
+	    \begin{align*}
+	    f(x) &= \sum_{n=0} A_n e^{-i k_n x}
+	    \end{align*}
+	    where $k_n = 2\pi n$.
+	  </section>
+	  <section>
+	    <h2>Fourier decomposition</h2>
+
+	    <img src="img/decomposition.png" width="auto" height="80%" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
+
+	  </section>
+	  <section>
+	    <h2>Structure factor</h2>
+	    <ul>
+	      <li> A peak at wavevector $k$ signals density inhomogeneity on the
+		lengthscale $2\pi/k$
+		<br/>
+		<div style="text-align:center;">
+		  <div style="width:16%;display:inline-block;">
+		    <img src="img/homogeneous.png" width="100%" height="auto" style="margin:0;"><br/>
+		    <img src="img/inhomogeneous.png" width="100%" height="auto" style="margin:0;">
+		  </div>
+		  <div style="width:28%;;display:inline-block;">
+		    <img src="img/sofk.png" width="100%" height="auto" style="margin:0;">
+		  </div>
+		</div>
+	      </li>
+	      <li> $k=0$ limit is related to the isothermal compressibility
+		$\kappa_T$
+		\begin{equation*}
+		S(0) = 1 + \rho \int d{\bf r} [g({\bf r})-1] = \rho k_BT \kappa_T
+		\end{equation*}
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Further reading</h2>
+	    <ul>
+	      <li> D Chandler, <i>Introduction to Modern Statistical Mechanics</i>
+		(1987).
+	      </li>
+	      <li> DA McQuarrie, <i>Statistical Mechanics</i> (2000).
+	      </li>
+	      <li> LE Reichl, <i>A Modern Course in Statistical Physics</i>
+		(2009).
+	      </li>
+	      <li> JP Hansen and IR McDonald, <i>Theory of Simple Liquids</i>, 3ed
+		(2006).
+	      </li>
+	    </ul>
+	  </section>
+	</section>
+	<section id="MC1" style="height:100%;">
+	  <section>
+	    <h2 class="backbox">Monte Carlo: Part 1</h2>
+	    <p>
+	      <em>God does not play dice. <span style="float:right;">A. Einstein</span></em><br/><br/>
+	      <em style="clear:right;">God does play dice with the universe. All the evidence points to him being an inveterate gambler, who throws the dice on every possible occasion. <span style="float:right;">S. Hawking</span></em>
+	    <p style="clear:both;" class="fragment">
+	      <br/>
+	      You are the supreme power of your simulation, so you get to choose:
+	      \begin{align*}
+	      \langle{\mathcal A}\rangle &= \int d{\boldsymbol\Gamma}\,{\mathcal P}({\boldsymbol\Gamma})\,
+	      {\mathcal A}({\boldsymbol\Gamma}) & \text{(MC)}\\
+	      &\text{or} &\text{(or)}\\
+	      \langle{\mathcal A}\rangle&=\lim_{t_{obs.}\to\infty} \frac{1}{t_{obs.}}\int_0^{t_{obs.}}\mathcal A(t)\,{\rm d}t & \text{(MD)}
+	      \end{align*}
+	    </p>
+	    </p>
+	  </section>
+	  <section data-background="img/Casino_de_Monte-Carlo.png" style="height:100%;">
+	    <p class="backbox" style="position:absolute; bottom:2em; right:2em;">
+	      Monte Carlo Casino
+	    </p>
+	  </section>
+	  <section>
+	    <h2>Introduction</h2>
+	    <ul>
+	      <li> Monte Carlo (MC) is a stochastic molecular-simulation technique.
+		Sampling can be biased towards regions of specific interest.
+	      </li>
+	      <li> Not constrained by natural timescales (as in molecular dynamics).
+	      </li>
+	      <li> Can <em>easily</em> handle fluctuating numbers of particles (as in
+		the grand canonical ensemble).
+	      </li>
+	      <li> No (physical) dynamic foundation.
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Overview</h2>
+	    <ul>
+	      <li> Introduction</li>
+	      <li> Practicalities</li>
+	      <li> Free energy barriers</li>
+	      <li> Advanced algorithms</li>
+	      <li> Further reading:
+		<ul>
+		  <li> MP Allen and DJ Tildesley, Computer Simulation of Liquids (1987).
+		  </li>
+		  <li> D Frenkel and B Smit, Understanding Molecular Simulation (2001).
+		  </li>
+		  <li> DP Landau and K Binder, A Guide to Monte Carlo Simulations in
+		    Statistical Physics (2000).
+		  </li>
+		</ul>
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Monte Carlo evaluation of integrals</h2>
+	    \begin{equation*}
+	    I = \int_a^b dx\, f(x)
+	    \end{equation*}
+	    <ul style="font-size:80%">
+	      <li> Uniform, probability distribution ${\mathcal P}(x)$ along the
+		interval $[a,b]$:
+		\begin{equation*}
+		{\mathcal P}(x) = \frac{1}{b-a} \left\{
+		\begin{array}{ll}
+		0 & \mbox{for $-\infty\lt x\lt a$} \\
+		1 & \mbox{for $a \le x \le b$} \\
+		0 & \mbox{for $b\lt x\lt \infty$} \\
+		\end{array}
+		\right.
+		\end{equation*}
+	      </li>
+	      <li> Randomly sample points $x_1$, $x_2$, $\cdots$ from ${\mathcal P}(x)$.
+	      </li>
+	      <li> The integral is related to the average of the function $f$:
+		\begin{equation*}
+		I = (b-a) \int_a^b dx\,{\mathcal P}(x) f(x) = (b-a) \langle f(x) \rangle
+		\end{equation*}
+	      </li>
+	      <li> The average can be approximated by:
+		\begin{equation*}
+		I \approx \frac{(b-a)}{N} \sum_{k=1}^N f(x_k)
+		\end{equation*}
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Example</h2>
+
+	    <img src="img/MC1_integrate.png"  width="65%" height="auto" style="margin:0;">
+	  </section>
+	  <section>
+	    <h2>Convergence</h2>
+	    How quickly does the method converge to the correct answer?  
+	    <br/>
+	    Central limit theorem:
+	    \begin{equation*}
+	    \sigma_{\bar{f}} = \frac{\sigma_f}{\sqrt{N}}
+	    \end{equation*}
+	    where
+	    \begin{equation*}
+	    \sigma_{f} = \langle f^2(x)\rangle - \langle f(x)\rangle^2
+	    \end{equation*}
+	    The dependence of the convergence with sample size is independent on
+	    the dimensionality of the integral.
+	  </section>
+	  <section>
+	    <h2>Example: Convergence</h2>
+
+	    <img src="img/MC1_integrate_convergence.png" width="65%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
+
+	  </section>
+	  <section>
+	    <h2>Central limit theorem</h2>
+	    Consider a set of $N$ independent variables $x_1$, $x_2$,...,$x_N$
+	    which all follow the same probability distribution function $p(x)$,
+	    with mean, $\mu$, and variance, $\sigma$.
+	    <br/>
+	    How is the mean $\bar{x}=\frac{1}{N}\sum_{k=1}^N x_k$ 
+	    of these variables distributed? 
+	    <br/>
+	    This is given by the <b>central limit theorem</b>, which
+	    becomes increasingly accurate as $N\to\infty$
+	    \begin{align*}
+	    p_{\bar{x}}(\bar{x}) &\approx
+	    (2\pi\sigma_{\bar{x}}^2)^{-1/2} 
+	    \exp\left(-\frac{(\bar{x}-\mu)^2}{2\sigma_{\bar{x}}^2}\right)
+	    \\
+	    \sigma_{\bar{x}} &\approx \frac{\sigma}{\sqrt{N}}
+	    \end{align*}
+	  </section>
+	  <section>
+	    <h2>Example:  Uniform distribution</h2>
+
+	    <img src="img/MC1_centrallimit1.png" width="65%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
+	  </section>
+	  <section>
+	    <h2>Example:  Exponential distribution</h2>
+	    <img src="img/MC1_centrallimit2.png" width="65%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
+	  </section>
+	  <section style="height:100%;">
+	    <h2>Example:  Galton Board</h2>
+	    <div style="height:90%;width:100%; position:relative;">
+	      <iframe src="http://www.youtube.com/embed/03tx4v0i7MA" frameborder="0" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+	    </div>
+	  </section>
+	  <section>
+	    <h2>Multidimensional integrals</h2>
+	    <p>
+	      \begin{equation*}
+	      I = \int_{V} d{\bf x} f({\bf x})
+	      \end{equation*}
+	      <ul style="font-size:80%;">
+		<li> Uniform, probability distribution ${\mathcal P}({\bf x})$ within the
+		  region $V$:
+		</li>
+		<li> Randomly sample points ${\bf x}_1$, ${\bf x}_2$, $\cdots$ from
+		  ${\mathcal P}({\bf x})$.
+		</li>
+		<li> The integral is related to the average of the function $f$:
+		  \begin{equation*}
+		  I = V \int_{V} d{\bf x}\, {\mathcal P}({\bf x}) f({\bf x}) 
+		  = V \langle f({\bf x}) \rangle
+		  \end{equation*}
+		</li>
+		<li> The average can be approximated by:
+		  \begin{equation*}
+		  I \approx \frac{V}{N} \sum_{k=1}^N f({\bf x}_k)
+		  \end{equation*}
+		</li>
+	      </ul>
+	    </p>
+	  </section>
+	  <section>
+	    <h2>Importance sampling</h2>
+	    \begin{equation*}
+	    I = \int_{V} d{\bf x}\,f({\bf x})
+	    \end{equation*}			
+	    <img src="img/importance.png" width="30%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1); float:right;">
+	    Importance sampling:
+	    <div style="width:60%; float:left">
+	      <ul>
+		<li> Choose distribution ${\mathcal P}$ to make $f({\bf x})/{\mathcal
+		  P}({\bf x})$ as constant as possible:
+		  \begin{equation*}
+		  I = \int_{V} d{\bf x}\,{\mathcal P}({\bf x}) \,
+		  \frac{f({\bf x})}{{\mathcal P}({\bf x})}
+		  \end{equation*}
+		</li>
+		<li> Sample from distribution ${\mathcal P}$
+		  \begin{equation*}
+		  I \approx \frac{V}{N} \sum_k   
+		  \frac{f({\bf x})}{{\mathcal P}({\bf x})}
+		  \end{equation*}
+		</li>
+		<li>
+		  The variance is significantly reduced.
+		</li>
+	      </ul>
+	    </div>
+
+	    <span style="font-size:80%;">
+	      \begin{align*}
+	      f(x) &= x^{-1/3} + \frac{x}{10}
+	      \\
+	      p(x) &= \frac{2}{3} x^{-1/3}
+	      \end{align*}
+	    </span>
+	  </section>
+	  <section>
+	    <h2>Influence of importance sampling</h2>
+
+	    <img src="img/MC1_importance.png" width="60%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
+
+	  </section>
+	  <section>
+	    <h2>Sampling from an arbitrary distribution</h2>
+	    <ul>
+	      <li> Importance sampling requires the generation of numbers from an
+		arbitrary probability distribution.
+	      </li>
+	      <li> One dimensional distributions can be sampled by sampling
+		uniformly from the cumulative distribution function.
+	      </li>
+	      <li> In higher dimensions, sampling algorithms are only available for
+		certain distributions (e.g., Gaussian distributions).
+	      </li>
+	      <li> The Metropolis method allows the sampling of arbitrary,
+		multidimensional distributions.  This relies on constructing a Markov process.
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Markov process</h2>
+	    A Markov process is a stochastic process where the future state of the
+	    system depends only on the present state of the system and not on its
+	    previous history.
+	    <ul>
+	      <li> ${\mathcal P}_\alpha^{(n)}$ probability that the state $\alpha$ is
+		occupied at step $n$.
+	      </li>
+	      <li> Transition probability $W_{\alpha'\leftarrow\alpha}$ <br/>
+		Probability that a system in state $\alpha'$ will transition to
+		state $\alpha$.
+	      </li>
+	      <li> Markov chain:
+		\begin{equation*}
+		{\mathcal P}_\alpha^{(n+1)} 
+		= \sum_{\alpha'} W_{\alpha\leftarrow\alpha'} {\mathcal P}_{\alpha'}^{(n)}
+		\end{equation*}
+	      </li>
+	      <li> What guarantees a stationary, limiting distribution ${\mathcal
+		P}_\alpha$?
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Transition probabilities</h2>
+	    <ul>
+	      <li> $W_{\alpha'\leftarrow \alpha}$ is the probability that the
+		system will transition to state $\alpha'$, given that it is in state
+		$\alpha$.
+	      </li>
+	      <li> The transition matrix must satisfy:
+		\begin{equation*}
+		\sum_{\alpha'} W_{\alpha'\leftarrow \alpha} = 1
+		\end{equation*}
+	      </li>
+	      <li> The choice of the transition matrix determines the properties of
+		the Markov process.
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Stationary distribution</h2>
+	    <p>
+	      We need to choose the transition matrix to ensure that the stationary
+	      distribution
+	    </p>
+	    <ul>
+	      <li> exists and is unique
+		\begin{equation*}
+		{\mathcal P}_\alpha =  
+		\sum_{\alpha'} W_{\alpha\leftarrow\alpha'} {\mathcal P}_{\alpha'}
+		\end{equation*}
+	      </li>
+	      <li> is rapidly approached
+		\begin{align*}
+		\lim_{n\to\infty} {\mathcal P}_\alpha^{(n)} &= {\mathcal P}_\alpha
+		\\
+		{\mathcal P}_\alpha^{(n)}
+		&= \sum_{\alpha_1,\alpha_2,\dots,\alpha_n}
+		W_{\alpha\leftarrow\alpha_1}W_{\alpha_1\leftarrow\alpha_2}\cdots 
+		W_{\alpha_{n-1}\leftarrow\alpha_n}{\mathcal P}_{\alpha_n}^{(0)}
+		\\
+		&= \sum_{\alpha'}
+		W_{\alpha\leftarrow\alpha'}^n{\mathcal P}_{\alpha'}^{(0)}
+		\end{align*}
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Detailed balance</h2>
+	    <ul>
+	      <li> Physically, the condition of detailed balance requires that the
+		probability of observing the system transition from state a $\alpha$
+		to another state $\alpha'$ is the same as observing it transition
+		from $\alpha'$ to $\alpha$.
+	      </li>
+	      <li> Mathematically, this is
+		\begin{equation*}
+		W_{\alpha\leftarrow \alpha'} {\mathcal P}_{\alpha'} 
+		=  W_{\alpha'\leftarrow \alpha} {\mathcal P}_\alpha
+		\end{equation*}
+	      </li>
+	      <li> If the transition probability satisfies the detailed balance
+		condition, the Markov process has a unique, stationary limiting
+		distribution.
+	      </li>
+	      <li> Detailed balance is not required for the Markov process to
+		possess a unique, stationary limiting distribution.
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Metropolis method</h2>
+	    <ul>
+	      <li> The Metropolis method provides a manner to sample from any
+		probability distribution ${\mathcal P}_\alpha$, using a Markov
+		process.
+	      </li>
+	      <li> The transition probabilities are divided into two contributions:
+		\begin{equation*}
+		W_{\alpha'\leftarrow \alpha} 
+		= A_{\alpha'\leftarrow \alpha} g_{\alpha'\leftarrow \alpha}
+		\end{equation*}
+		where $g_{\alpha'\leftarrow \alpha}$ is the probability of selecting a
+		move to state $\alpha'$, given the system is at state $\alpha$, and
+		$A_{\alpha'\leftarrow \alpha}$ is the probability of accepting the
+		proposed move.
+	      </li>
+	      <li> The acceptance probability is given by
+		\begin{equation*}
+		A_{\alpha'\leftarrow\alpha} = \left\{
+		\begin{array}{ll}
+		1 & \mbox{if ${\mathcal P}_{\alpha'}\gt {\mathcal P}_\alpha$} \\
+		\frac{{\mathcal P}_{\alpha'}}{{\mathcal P}_\alpha} 
+		& \mbox{if ${\mathcal P}_{\alpha'}\lt {\mathcal P}_\alpha$}
+		\end{array}
+		\right.
+		\end{equation*}
+	      </li>
+	      <li> If $g_{\alpha'\leftarrow \alpha}=g_{\alpha\leftarrow \alpha'}$,
+		then the process satisfies detailed balance.
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Metropolis method</h2>
+	    <object type="image/svg+xml" data="img/metropolis.svg" width="60%" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
+	      Your browser does not support SVG
+	    </object>
+	  </section>
+	  <section>
+	    <h2>Markov process: Continuous state space</h2>
+	    <ul>
+	      <li> ${\mathcal P}^{(n)}(x)$ probability that the state $x$ is
+		occupied at step $n$.
+	      </li>
+	      <li> Transition probability $W(x'\leftarrow x)$ <br/>
+		Probability that a system in state $x$ will transition to state $x'$.
+	      </li>
+	      <li> Markov chain
+		\begin{equation*}
+		{\mathcal P}^{(n+1)}(x) = \int dx' W(x\leftarrow x') {\mathcal P}^{(n)}(x')
+		\end{equation*}
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Random number generators</h2>
+	    <em>Any one who considers arithmetical methods of producing random digits is, of course, in a state of sin.<span style="float:right;">J. von Neumann</span></em>
+	    <p class="fragment">
+	      von Neumann is simply trying to caution
+	      you against believing that random number
+	      generators (RNG) are actually random.
+	    </p>
+	    <p class="fragment">
+	      But GPU graphics programmers really do use a state of $\sin$!
+	      \begin{align*}
+	      x_i  = {\rm fract}(43758.5453\sin(12.9898\,i))
+	      \end{align*}
+	    </p>
+	  </section>
+	  <section>
+	    <h2>Pseudo-random number generators</h2>
+	    <ul>
+	      <li> Typically, random deviates are
+		available with a uniform distribution
+		on $[0,1)$.</li>
+	      <li> Be suspicious of intrinsic "<tt>ran</tt>" functions
+	      </li>
+	      <li> Linear congruential generators use the recursion
+		\begin{equation*}
+		X_{j+1} = a X_j + b \qquad \mod m
+		\end{equation*}
+	      </li>
+	      <li> Written ${\rm LCG}(m,a,b,X_0)$
+	      </li>
+	      <li> Generates integers in range $0 \le X \le m$
+	      </li>
+	      <li> Sequence repeats with period $m$ AT BEST
+	      </li>
+	      <li> 32-bit: $m \sim 2^{31} \sim 10^9$, whereas 64-bit: $m \sim 10^{18}$
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Tests for random number generators</h2>
+	    <ul>
+	      <li> RNGs assessed by plotting $d$-dimensional vectors
+		$(X_{n+1},\dots,X_{n+d})$ and looking for &ldquo;planes&rdquo; (which are bad)
+	      </li>
+	      <li> 3d plots: good (left); bad $LCG(2^{31},65539,0,1)$ (right)
+
+		<img src="img/RNGgood.png" width="30%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
+		<img src="img/RNGbad.png" width="30%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
+
+	      </li>
+	      <li> In addition, simulate a finite-size system for which the
+		properties are known exactly (e.g., 2D Ising model on square
+		lattice)
+	      </li>
+	      <li>
+		The gold-standard battery of tests are the <a href="https://en.wikipedia.org/wiki/Diehard_tests">Diehard tests</a>.
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Mersenne Twister</h2>
+	    <ul>
+	      <li> Based on Mersenne prime $2^{19937}-1$.
+	      </li>
+	      <li> Passes many tests for statistical randomness.
+	      </li>
+	      <li> Default random number generator for Python, MATLAB, Ruby, etc.
+		Available in standard C++.  Code is also freely available in many
+		other languages (e.g., C, FORTRAN 77, FORTRAN 90, etc.).
+	      </li>
+	    </ul>
+	  </section>
+	</section>
+	<section id="MC2">
+	  <section>
+	    <h2 class="backbox">Monte Carlo 2</h2>
+	    <p>
+	      <em>
+		Being secret, the work </em>[radiation shielding for nuclear weapons]<em>
+		of von Neumann and Ulam required a
+		code name. A colleague of von Neumann
+		and Ulam, Nicholas Metropolis,
+		suggested using the name Monte Carlo,
+		which refers to the Monte Carlo Casino
+		in Monaco where Ulam's uncle would
+		borrow money from relatives to gamble.</em>
+	    </p>
+	    <p class="fragment"><em>
+		Using lists of "truly random" random
+		numbers was extremely slow, but von
+		Neumann developed a way to calculate
+		pseudorandom numbers, using the
+		middle-square method. Though this method
+		has been criticized as crude, von Neumann
+		was aware of this: he justified it as
+		being faster than any other method at his
+		disposal, and also noted that when it went
+		awry it did so obviously, unlike methods
+		that could be subtly incorrect.<span style="float:right;">Taken from the <a href="https://en.wikipedia.org/wiki/Monte_Carlo_method">MC wikipedia page</a></span></em>
+	    </p>
+	  </section>
+	  <section>
+	    <h2>Overview</h2>
+	    <ul>
+	      <li> Monte Carlo in the NVT ensemble
+	      </li>
+	      <li> Practicalities
+	      </li>
+	      <li> Ergodicity and free-energy barriers
+	      </li>
+	      <li> Measuring ensemble averages
+	      </li>
+	      <li> Monte Carlo in the isobaric-isothermal ensemble
+	      </li>
+	      <li> Monte Carlo in the grand canonical ensemble
+	      </li>
+	      <li> Example: Truncated, shifted Lennard-Jones fluid
+	      </li>
+	      <li> Finite-size effects
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Canonical ensemble</h2>
+	    <ul>
+	      <li> Constant particle number, volume, and temperature; fluctuating
+		energy.
+	      </li>
+	      <li> Distribution of energies:
+		\begin{equation*}
+		{\mathcal P}(E;N,V,\beta) 
+		\propto \Omega(N,V,E)\,e^{ - \beta E}
+		\end{equation*}
+	      </li>
+	      <li> Distribution of states:
+		\begin{equation*}
+		{\mathcal P}({\boldsymbol\Gamma};N,V,\beta) 
+		\propto e^{ - \beta H({\boldsymbol\Gamma})}
+		\end{equation*}
+	      </li>
+	      <li> Partition function:
+		\begin{align*}
+		Q(N,V,\beta) = \int {\rm d}E\,\Omega(N,V,E)\,e^{- \beta E} = \int {\rm d}{\boldsymbol\Gamma}\,e^{- \beta H({\boldsymbol\Gamma})}
+		\end{align*}
+	      </li>
+	      <li> Helmholtz free energy
+		\begin{equation*}
+		F(N,V,T) = -k_B\,T\ln Q(N,V,\beta)
+		\end{equation*}
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Metropolis Monte Carlo in the NVT ensemble</h2>
+	    <p>
+	      Boltzmann distribution:
+	      $
+	      {\mathcal P}({\boldsymbol\Gamma}) \propto e^{-\beta\,H({\boldsymbol\Gamma})}
+	      $
+	      Monte Carlo integration
+	      \begin{align*}
+	      \langle {\mathcal A} \rangle 
+	      &= \int d{\boldsymbol\Gamma}\, {\mathcal P}({\boldsymbol\Gamma}) {\mathcal A}({\boldsymbol\Gamma}) 
+	      \approx \frac{1}{{\mathcal N}}
+	      \sum_{k=1}^{\mathcal N}  {\mathcal A}({\boldsymbol\Gamma}_k)
+	      \end{align*}
+	      (provided ${\boldsymbol\Gamma}_k$ is generated from ${\mathcal P}({\boldsymbol\Gamma})$)<br/>
+	    </p>
+	    <p class="fragment">
+	      Transition probability:
+	      \begin{equation*}
+	      W({\boldsymbol\Gamma}_n\leftarrow{\boldsymbol\Gamma}_o) 
+	      = g({\boldsymbol\Gamma}_n\leftarrow{\boldsymbol\Gamma}_o) 
+	      A({\boldsymbol\Gamma}_n\leftarrow{\boldsymbol\Gamma}_o) 
+	      \end{equation*}
+	      where
+	      \begin{align*}
+	      g({\boldsymbol\Gamma}_n\leftarrow{\boldsymbol\Gamma}_o) &= \mbox{random particle move}
+	      \\
+	      A ({\boldsymbol\Gamma}_n\leftarrow{\boldsymbol\Gamma}_o) 
+	      &= \left\{
+	      \begin{array}{ll}
+	      1 & \mbox{if $H({\boldsymbol\Gamma}_n) \lt  H({\boldsymbol\Gamma}_o)$} \\
+	      e^{-\beta(H({\boldsymbol\Gamma}')-H({\boldsymbol\Gamma}))} 
+	      & \mbox{if $H({\boldsymbol\Gamma}_n) \gt  H({\boldsymbol\Gamma}_o)$}
+	      \end{array}
+	      \right.
+	      \end{align*}
+	    </p>
+	  </section>
+	  <section>
+	    <h2>Particle move</h2>
+	    <ul>
+	      <li>
+		Pick particle <i>at random</i> (to obey detailed balance)
+	      </li>
+	      <li>
+		Alter $x$, $y$, and $z$ coordinates by displacements randomly
+		from the interval $-\Delta{\bf r}_{\rm max}\lt \Delta{\bf r}\lt \Delta{\bf
+		r}_{\rm max}$
+		<br/>
+		<img src="img/mover.png" width="35%" height="auto" style="float:right;background:white;color:black; width:40%; margin-left:auto; margin-right:auto; box-shadow: 0px 0px 5px 5px rgba(255,255,255,1);">
+	      </li>
+	      <li> Calculate resulting change in potential energy $\Delta U$
+	      </li>
+	      <li> Accept move with probability ${\rm min}(1,e^{-\beta\Delta U})$
+		<ul>
+		  <li> If $\Delta U\lt 0$, accept.
+		  </li>
+		  <li> If $\Delta U\gt 0$, generate random number $R \in[0,1)$
+		  </li>
+		  <li> If $R\le e^{-\beta\Delta U}$, accept.
+		  </li>
+		  <li> If $R\gt  e^{-\beta\Delta U}$, reject and retain old configuration.
+		  </li>
+		</ul>
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Tuning the acceptance rate</h2>
+	    <ul>
+	      <li> Acceptance rate controlled by maximum displacement(s).
+	      </li>
+	      <li> Displacements result in energy change $\Delta U$.
+	      </li>
+	      <li> Large displacements are unlikely to be accepted.
+	      </li>
+	      <li> Small displacements are more likely to be accepted, but progress
+		through configuration space is slow.
+	      </li>
+	      <li> This is not always a sensible choice!
+	      </li>
+	      <li> Adjust trial displacements to give maximum actual displacement
+		per unit CPU time.
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Energy autocorrelation function</h2>
+
+	    <img src="img/acf.png" width="60%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
+
+	  </section>
+	  <section>
+	    <h2>Equilibration</h2>
+	    <ul>
+	      <li> MC simulations converge towards equilibrium (or
+		&ldquo;thermalize&rdquo;) until $p(A,\tau+1) = p(A,\tau)$
+	      </li>
+	      <li> Starting from a non-equilibrium configuration, the deviation
+		from equilibrium decreases like $\exp(-\tau/\tau_0)$, where $\tau_0$
+		is the correlation &ldquo;time&rdquo;
+	      </li>
+	      <li> Must only retain measurements (for ensemble averages etc.) when
+		$\tau\gg\tau_0$
+	      </li>
+	      <li>
+		See the exercises and the Molecular Dynamics simulation lectures for more information.
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Diagnostics</h2>
+	    <ul>
+	      <li> Useful diagnostics include binning, autocorrelations, hot and
+		cold starts, and configurational temperature
+	      </li>
+	      <li> Binning: accumulate separate averages over blocks of (say)
+		$1000$ MC cycles, and watch for convergence of block averages
+	      </li>
+	      <li> Autocorrelations: calculate correlation function $\langle
+		A(\tau)A(0)\rangle \sim \exp(-\tau/\tau_0)$ for some observable $A$,
+		estimate $\tau_0$, discard configurations for $t\lt 10\,\tau_0$
+	      </li>
+	      <li> &ldquo;Hot/cold starts&rdquo;: check that simulations starting from
+		different configurations (e.g., disordered and crystalline) converge
+		to the same equilibrium state
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Configurational temperature</h2>
+	    <ul>
+	      <li> In MD, one can use the equipartition theorem to check the
+		(kinetic) temperature (although this can be misleading!) 
+	      </li>
+	      <li> DPD potentials: MP Allen, <em>J. Phys. Chem. B</em> 110, 3823
+		(2006).
+	      </li>
+	      <li> In MC, configurational temperature provides a sensitive test of
+		whether you are sampling the correct Boltzmann distribution for the
+		prescribed value of $T$
+		\begin{align*}
+		k_BT_{\rm conf} 
+		&= -\frac{\langle\sum_{\alpha}{\bf F}_{\alpha}\cdot{\bf F}_{\alpha}\rangle}
+		{\langle\sum_{\alpha}\nabla_{{\bf r}_{\alpha}}\cdot{\bf F}_{\alpha}\rangle}
+		+ O(N^{-1})
+		\\
+		{\bf F}_\alpha &= \sum_{\alpha'\ne\alpha} {\bf F}_{\alpha\alpha'}
+		= -\sum_{\alpha'\ne\alpha} 
+		\nabla_{{\bf r}_{\alpha}} u({\bf r}_{\alpha}-{\bf r}_{\alpha'})
+		\end{align*}
+		<ul>
+	      </li>
+	      <li> H. H. Rugh, Phys. Rev. Lett. 78, 772 (1997)
+	      </li>
+	      <li> O. G. Jepps et al., Phys. Rev. E 62, 4757 (2000)
+	      </li>
+	      </ul>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Configurational temperature: Example</h2>
+	    <ul>
+	      <li> $T_{\rm conf}$ is sensitive to programming errors
+
+		<img src="img/confT.png" width="45%" height="auto" style="background:white;color:black; margin:20px; margin-left:25%; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
+	      </li>
+	      <li> BD Butler et al., <em>J. Chem. Phys.</em> 109, 6519 (1998).
+	      </li>
+	      <li> Orientations: AA Chialvo et al., <em>J. Chem. Phys.</em> 114,
+		6514 (2004).
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Ergodicity</h2>
+	    <ul>
+	      <li> &ldquo;All areas of configuration space are accessible from any
+		starting point.&rdquo;
+	      </li>
+	      <li> Difficult to prove a priori that an MC algorithm is ergodic.
+	      </li>
+	      <li> Many interesting systems possess configuration spaces with
+		&ldquo;traps&rdquo;.
+	      </li>
+	      <li> This can render many elementary MC algorithms practically
+		non-ergodic (i.e. it is very difficult to access certain
+		(potentially important) regions of configuration space).
+	      </li>
+	      <li> Common examples of apparent non-ergodicity arise from
+		free-energy barriers (e.g., in first-order phase transitions).
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Ergodicity</h2>
+
+	    <object type="image/svg+xml" data="img/ergodicity.svg" width="70%" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
+	      Your browser does not support SVG
+	    </object>
+
+	  </section>
+	  <section>
+	    <h2>Isobaric-isothermal ensemble</h2>
+	    <ul>
+	      <li> Constant number of particles, pressure, and temperature;
+		fluctuating volume and energy.
+	      </li>
+	      <li> Joint distribution of volume and energy:
+		\begin{equation*}
+		{\mathcal P}(V,E;p,\beta) 
+		\propto \Omega(N,V,E) e^{\beta p V - \beta E}
+		\end{equation*}
+	      </li>
+	      <li> Partition function:
+		\begin{align*}
+		\Delta(N,p,\beta) = \int dV \int dE \Omega(N,V,E) e^{\beta pV - \beta E}
+		\end{align*}
+	      </li>
+	      <li> Gibb's free energy
+		\begin{equation*}
+		G(N,p,\beta) = - k_BT \ln \Delta(N,p,\beta)
+		\end{equation*}
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>MC simulations in the isobaric-isothermal ensemble</h2>
+	    <ul>
+	      <li> Single-particle move (results in $U\to U+\Delta U$)
+		\begin{align*}
+		A(o\to n) = \min(1,e^{-\beta\Delta U})
+		\end{align*}
+	      </li>
+	      <li> Volume move $V\to V+\Delta V$ ($-\Delta V_{\rm max}\le\Delta V
+		\le\Delta V_{\rm max}$ results in $U\to U+\Delta U$)
+		\begin{align*}
+		A(o\to n) &= \min(1,e^{-\beta\Delta U})
+		\\
+		\frac{p(V+\Delta V)}{p(V)}
+		&= \frac{(V+\Delta V)^N}{V^N} e^{-\beta(\Delta U + p\Delta V)}
+		\end{align*}
+	      </li>
+	      <li> One MC sweep consists of $N_{\rm sp}$ attempted single-particle
+		moves, and $N_{\rm vol}$ attempted volume moves.
+	      </li>
+	      <li> Single-particle moves and volume moves must be attempted at
+		random with a fixed probability (and not cycled) so that $A(o\to n)
+		= A(n\to o)$
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Isobaric-isothermal ensemble</h2>
+
+	    <object type="image/svg+xml" data="img/npt.svg" width="80%" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
+	      Your browser does not support SVG
+	    </object><br/>
+	    Particle positions are scaled during volume
+	    move, thus one configuration state maps to
+	    more($\Delta V&gt;0$) OR less($\Delta V&lt;0$) states. Detailed balance then requires
+	    the $(V+\Delta V)^N/V^N$ term to offset this.</section>
+	  <section>
+	    <h2>Grand canonical ensemble</h2>
+	    <ul>
+	      <li> Constant chemical potential, volume, and temperature;
+		fluctuating particle number and energy.
+	      </li>
+	      <li> Joint distribution of particle number and energy:
+		\begin{equation*}
+		{\mathcal P}(N,E;\mu,\beta) 
+		\propto \Omega(N,V,E) e^{\beta \mu N - \beta E}
+		\end{equation*}
+	      </li>
+	      <li> Partition function:
+		\begin{align*}
+		Z_{G}(\mu,V,\beta) = \sum_N \int dE \Omega(N,V,E) e^{\beta \mu N - \beta E}
+		\end{align*}
+	      </li>
+	      <li> Free energy: pressure
+		\begin{equation*}
+		pV = k_BT \ln Z_G(\mu,V,\beta) + \mbox{constant}
+		\end{equation*}
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>MC simulations in the grand canonical ensemble</h2>
+	    <ul style="font-size:80%;">
+	      <li> Single particle move (results in $U\to U+\Delta U$) as before.</li>
+	      <li> Particle insertion:  $N\to N+1$ 
+		(results in $U\to U+\Delta U$)
+		\begin{align*}
+		A(n\leftarrow o) 
+		&= \min\left(1,\frac{{\mathcal P}(N+1)}{{\mathcal P}(N)}\right)
+		\\
+		\frac{{\mathcal P}(N+1)}{{\mathcal P}(N)}
+		&= \frac{(zV)^{N+1}e^{-\beta(U+\Delta U)}}{(N+1)!} 
+		\frac{N!}{(zV)^{N}e^{-\beta U}} 
+		= \frac{zV e^{-\beta \Delta U}}{N+1} 
+		\end{align*}
+		where $z=e^{\beta\,\mu-\ln\Lambda^3}$ (<a href="#factorization">$\Lambda^3$
+		  arises from the new particle's velocity
+		  integral in its unadded state (see Frenkel and Smit)</a>, $N+1$ is to maintain detailed
+		balance on selecting the added particle for deletion).</li>
+	      <li class="fragment"> Particle deletion: $N\to N-1$
+		(results in $U\to U+\Delta U$)
+		\begin{align*}
+		A(n\leftarrow o) 
+		&= \min\left(1,\frac{{\mathcal P}(N-1)}{{\mathcal P}(N)}\right)
+		\\
+		\frac{{\mathcal P}(N-1)}{{\mathcal P}(N)}
+		&= \frac{(zV)^{N-1}e^{-\beta(U+\Delta U)}}{(N-1)!} 
+		\frac{N!}{(zV)^{N}e^{-\beta U}} 
+		= \frac{N e^{-\beta \Delta U}}{zV} 
+		\end{align*}
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Ensemble averages</h2>
+	    <ul>
+	      <li> Finally(!) assuming that you are sampling the equilibrium
+		distribution, ensemble averages are calculated as simple unweighted
+		averages over configurations
+		\begin{equation*}
+		\langle {\mathcal A} \rangle 
+		= \frac{1}{\mathcal N} \sum_{k} {\mathcal A}({\boldsymbol\Gamma}_k)
+		\end{equation*}
+	      </li>
+	      <li> Statistical errors can be estimated assuming that block averages
+		are statistically uncorrelated
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Properties</h2>
+	    <ul>
+	      <li> pressure 
+		$\displaystyle
+		p=\left\lt \rho k_BT - \frac{1}{3V}\sum_{j\lt k}{\bf r}_{jk}\cdot 
+		\frac{\partial u_{jk}}{\partial {\bf r}_{jk}}\right\gt $
+	      </li>
+	      <li> density
+		$\displaystyle
+		\rho=\left\lt \frac{N}{V}\right\gt 
+		$
+	      </li>
+	      <li> chemical potential
+		$\displaystyle
+		\beta\mu-\ln\Lambda^3
+		=-\ln\left\lt \frac{V\exp(-\beta\Delta U_+)}{N+1}\right\gt 
+		$
+	      </li>
+	      <li> heat capacity
+		$\displaystyle
+		C_V/k_B = \frac{3}{2} N + \beta^2(\langle U^2\rangle-\langle U\rangle^2) $
+		<br/>
+		$\displaystyle
+		C_p/k_B = \frac{3}{2} N + \beta^2(\langle H^2\rangle-\langle H\rangle^2) $
+	      </li>
+	      <li> isothermal compressibility
+		$\displaystyle
+		\kappa_T = -\frac{1}{V}\left(\frac{\partial V}{\partial p}\right)_T
+		= \frac{\langle V^2\rangle-\langle V\rangle^2}
+		{k_BT\langle V\rangle}
+		= \frac{V(\langle N^2\rangle-\langle N\rangle^2}
+		{k_BT\langle N\rangle^2}
+		$
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Truncated-shifted Lennard-Jones atoms</h2>
+
+	    <img src="img/LJ.png" width="45%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
+	    <p style="font-size:80%;">
+	      \begin{align*}
+	      u_{\rm LJ}(r) &= 4\varepsilon\left[\left(\frac{\sigma}{r}\right)^{12}
+	      - \left(\frac{\sigma}{r}\right)^{6}\right]
+	      \\
+	      u(r) &= \left\{
+	      \begin{array}{ll}
+	      u_{\rm LJ}(r) - u_{\rm LJ}(r_c) & \mbox{for $r\lt r_c$} \\
+	      0 & \mbox{for $r\gt r_c$} \\
+	      \end{array}
+	      \right.
+	      \end{align*}
+	    </p>
+	  </section>
+	  <section>
+	    <h2>Results: Lennard-Jones fluid</h2>
+	    <img src="img/LJsnapshot.png" width="40%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
+	    <img src="img/LJgofr.png" width="50%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
+	  </section>
+	  <section>
+	    <h2>Results: Lennard-Jones fluid</h2>
+	    <img src="img/LJMCdata.png" width="45%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
+	    <img src="img/LJSofk.png" width="45%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
+	  </section>
+	  <section>
+	    <h2>Results: Lennard-Jones fluid</h2>
+	    
+	    <img src="img/LJtable.png" width="75%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
+	    <p>
+	      Regardless of the ensemble (how we specify
+	      the thermodynamic state), at the same
+	      state the <b>average</b> properties are nearly
+	      identical.</p>
+	  </section>
+	  <section>
+	    <h2>Ensembles</h2>
+	    <ul style="font-size:80%;">
+	      <li> canonical ensemble (NVT)
+		<ul>
+		  <li> single-phase properties (at fixed densities)
+		  </li>
+		  <li> phase transition with change in volume (e.g., freezing)
+		  </li>
+		  <li> phase transition with change in structure (e.g., solid-solid)
+		  </li>
+		</ul>
+	      </li>
+	      <li> isobaric-isothermal ensemble (NpT)
+		<ul>
+		  <li> Corresponds to normal experimental conditions
+		  </li>
+		  <li> Easy to measure equation of state
+		  </li>
+		  <li> Density histograms ${\mathcal P}(V)$ at phase coexistence
+		  </li>
+		  <li> Structural phase transitions
+		  </li>
+		  <li> Expensive volume moves (recalculation of total energy)
+		  </li>
+		</ul>
+	      </li>
+	      <li> grand canonical ensemble ($\mu$VT)
+		<ul>
+		  <li> Open systems (mixtures, confined fluids, interfaces)
+		  </li>
+		  <li> Vapor-liquid coexistence and critical phenomena
+		  </li>
+		  <li> Dense systems (low insertion/deletion rate)
+		  </li>
+		</ul>
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Finite size effects</h2>
+	    <ul>
+	      <li> The finite size of the system (box dimension $L$, number of
+		particles $N$) is a limitation for all computer simulations,
+		irrespective of periodic boundary conditions.
+	      </li>
+	      <li> Finite-size effects become apparent when the interaction
+		range or the correlation length $\xi$ becomes comparable to $L$
+		\begin{equation*}
+		h(r) = g(r)-1 \sim \frac{e^{-r/\xi(T)}}{r}
+		\end{equation*}
+	      </li>
+	      <li> Systems with long-range interactions (e.g., Coulomb)
+	      </li>
+	      <li> Vapour-liquid critical point: $\xi(T)$ diverges like
+		$|T-Tc|^{-0.63}$.
+	      </li>
+	    </ul>
+	  </section>
+	</section>
+	<section id="MC3">
+	  <section>
+	    <h2 class="backbox">Monte Carlo 3: Biased sampling</h2>
+	    <em class="fragment">
+	      Some samples use a biased statistical
+	      design... The
+	      U.S. National Center for Health
+	      Statistics...  deliberately
+	      oversamples from minority populations in
+	      many of its nationwide surveys in order to
+	      gain sufficient precision for estimates
+	      within these groups. These surveys
+	      require the use of sample weights to produce proper estimates
+	      across all ethnic groups. Provided that
+	      certain conditions are met... these samples permit accurate
+	      estimation of population parameters.
+	      <br/>
+	      <span style="float:right;">Taken from the <a href="https://en.wikipedia.org/wiki/Sampling_bias">sampling bias wikipedia page</a></span>
+	    </em>
+	    <br/>
+	    <em class="fragment">
+	      God may like playing with dice but, given
+	      the success of hard-spheres and
+	      Lennard-Jones models, He also has a penchant
+	      for playing snooker using classical
+	      mechanics rules.
+	      <br/>
+	      <span style="float:right;">Prof. N. Allan, CCP5 summer school 2016</span>
+	    </em>
+	  </section>
+	  <section>
+	    <h2>Introduction</h2>
+	    <ul>
+	      <li> Histogram methods
+	      </li>
+	      <li> Quasi non-ergodicity
+	      </li>
+	      <li> Vapor-liquid transition
+	      </li>
+	      <li> Gibbs ensemble MC simulations
+	      </li>
+	      <li> Free-energy barrier in the grand-canonical ensemble
+	      </li>
+	      <li> Multicanonical simulations
+	      </li>
+	      <li> Replica exchange
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Histogram extrapolation</h2>
+	    <ul>
+	      <li> Consider an NVT simulation at $\beta_0$, where we collect an energy histogram, ${\mathcal H}(E;\beta_0)$:
+		\begin{align*}
+		{\mathcal P}(E;\beta_0) &= \frac{\Omega(N,V,E)}{Q(N,V,\beta_0)} e^{-\beta_0 E}
+		\\
+		{\mathcal H}(E;\beta_0) &\propto \Omega(N,V,E) e^{-\beta_0 E}
+		\end{align*}
+	      </li>
+	      <li> Estimate for the density of states:
+		\begin{align*}
+		\Omega(N,V,E) \propto {\mathcal H}(E;\beta_0) e^{\beta_0 E}
+		\end{align*}
+	      </li>
+	      <li> Using the estimate for $\Omega(N,V,E)$, we can estimate the
+		histogram at any other $\beta$
+		\begin{align*}
+		{\mathcal P}(E;\beta) &= \frac{\Omega(N,V,E)}{Q(N,V,\beta)} e^{-\beta E}
+		\\
+		{\mathcal H}(E;\beta) &\propto \Omega(N,V,E) e^{-\beta E}
+		\\
+		&\propto {\mathcal H}(E;\beta_0) e^{-(\beta-\beta_0) E}
+		\end{align*}
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Example: LJ fluid  $\rho\sigma^3=0.5$</h2>
+
+	    <img src="img/energy_ext_hist.png" width="50%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
+	    <p>
+	      Solid lines are simulations, dashed lines
+	      are extrapolated histograms from
+	      $k_B\,T=2\varepsilon$.
+	    </p>
+	  </section>
+	  <section>
+	    <h2>Example: LJ fluid  $\rho\sigma^3=0.5$</h2>
+	    <img src="img/energy_ext.png" width="50%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
+	    <p>The extrapolated histograms allow evaluation of properties at any/all temperatures (within sampled states).</p>
+	  </section>
+	  <section>
+	    <h2>Histogram extrapolation: Other properties</h2>
+	    <ul>
+	      <li> Other properties (i.e., $X$) can be extrapolated by collecting the joint
+		probability distribution at $\beta_0$
+		\begin{align*}
+		{\mathcal P}(X,E;\beta_0) 
+		&= \frac{\Omega(N,V,E,X)}{Q(N,V,\beta_0)} e^{-\beta_0 E}
+		\\
+		{\mathcal H}(X,E;\beta_0) 
+		&\propto \Omega(N,V,E,X) e^{-\beta_0 E}
+		\end{align*}
+	      </li>
+	      <li> Estimate for the modified density of states:
+		\begin{align*}
+		\Omega(N,V,E,X) \propto {\mathcal H}(X,E;\beta_0) e^{\beta_0 E}
+		\end{align*}
+	      </li>
+	      <li> Using the estimate for $\Omega(N,V,E)$, we can estimate the histogram of property $X$ at any other $\beta$
+		\begin{align*}
+		{\mathcal H}(X,E;\beta) &\propto \Omega(N,V,E,X) e^{-\beta E}
+		\\
+		&\propto {\mathcal H}(X,E;\beta_0) e^{-(\beta-\beta_0) E}
+		\end{align*}
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Example: LJ fluid</h2>
+
+	    <img src="img/virial_ext.png" width="50%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
+	    <p>
+	      Extrapolation of the virial (i.e., excess)
+	      contribution to the pressure.</p>
+	  </section>
+	  <section>
+	    <h2>Histogram combining</h2>
+	    <p>
+	      <ul>
+		<li> Consider the case where we perform NVT simulations at several
+		  temperatures $\beta_1$, $\beta_2$,..., $\beta_n$ where we collect
+		  the histograms:
+		  \begin{align*}
+		  {\mathcal H}(X,E;\beta_k) &\propto \Omega(N,V,E,X) e^{-\beta_k E}
+		  \end{align*}
+		</li>
+		<li> Estimate for the density of states as a weighted sum:
+		  \begin{align*}
+		  \Omega(N,V,E,X) \propto 
+		  \sum_k \frac{w_k}{Z_k} {\mathcal H}(X,E;\beta_k) e^{\beta_k E}
+		  \end{align*}
+		  where $\sum_k w_k=1$ and $Z_k=\sum_{E,X} \Omega(N,V,E,X) e^{-\beta_k E}$.
+		</li>
+		<li> The uncertainty in ${\mathcal H}(X,E;\beta_k)$ is
+		  roughly $[{\mathcal H}(X,E;\beta_k)]^{1/2}$ (Poisson).
+		</li>
+		<li> Determining the weights $w_k$ by
+		  minimizing the uncertainty of the
+		  estimate of the density of states leads to the following:
+		  \begin{align*}
+		  \Omega(N,V,E,X)&=\frac{\sum_j {\mathcal H}(E,X,\beta_j)}{\sum_k N_k\,Z_k^{-1}\,e^{-\beta_k\,E}}
+		  \end{align*}
+		  where $N_k$ is the number of samples, now solve for $Z^{-1}_k$!
+		</li>
+	      </ul>
+	    </p>
+	  </section>
+	  <section>
+	    <h2>Quasi non-ergodicity</h2>
+	    <ul>
+	      <li> An MC algorithm may be theoretically ergodic, but in some
+		cases it can be very difficult (or impossible) to sample all of
+		the important regions of configuration space.
+	      </li>
+	      <li> 
+		<img src="img/configurationspace.png" width="40%" height="auto" style="background:white;color:black;box-shadow: 0px 0px 10px 10px rgba(255,255,255,1); float:right; margin:1em;">
+		Even in &ldquo;simple&rdquo; systems (e.g., mono-atomic fluids) significant
+		free-energy barriers can separate these important areas.
+	      </li>
+	      <li> A common example is the barrier between simulated
+		coexisting phases at a first-order phase transition.
+	      </li>
+	      <li> We concentrate on the vapour-liquid phase transition.
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Vapor-liquid transition</h2>
+	    <ul>
+	      <li> At coexistence $T_{\rm vap}=T_{\rm liq}$, 
+		$p_{\rm vap}=p_{\rm liq}$, and $\mu_{\rm vap}=\mu_{\rm liq}$
+	      </li>
+	      <li> The density  is the order parameter
+	      </li>
+	    </ul>
+	    
+	    <img src="img/phasediagram.png" width="40%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
+	    <img src="img/vle.png" width="40%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
+	  </section>
+	  <section>
+	    <h2>Vapor-liquid transition: Difficulties</h2>
+	    <ul>
+	      <li> In a finite-size system, the interfacial free energy (positive,
+		unfavourable) is significant
+	      </li>
+	      <li> Free energy: $F=F_{\rm int}+F_{\rm bulk}=\gamma L^2 - AL^3$
+
+		<img src="img/layer.png" width="80%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
+
+	      </li>
+	      <li> Direct simulation will not locate the coexistence densities
+		accurately
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Gibbs ensemble Monte Carlo</h2>
+	    <ul>
+	      <li> Two simulation boxes, $I$ and $II$
+	      </li>
+	      <li> Total number of particles $N$, volume $V$, temperature $T$
+	      </li>
+	      <li> Separate single-particle moves (thermal equilibrium)
+	      </li>
+	      <li> Exchange volume such that $V = V_I + V_{II}$ (equates $p$)
+	      </li>
+	      <li> Exchange particles such that $N = N_I + N_{II}$ (equates $\mu$)
+		<div style="float:right;width:40%">
+		  <img src="img/vapor.png" width="30%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);vertical-align:middle;">
+		  $\longleftrightarrow$
+		  <img src="img/liquid.png" width="30%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);vertical-align:middle;">
+		</div>
+	      </li>
+	      <li> Phase coexistence in a single simulation!
+	      </li>
+	      <li> Not good for dense phases: low probability for simultaneous
+		particle insertion (in one box) and deletion (from the other)
+	      </li>
+	    </ul>
+	    <ul style="font-size:80%;">
+	      <li> AZ Panagiotopoulos, <i>Mol. Phys.</i> 61, 813 (1987).
+	      </li>
+	      <li> D Frenkel and B Smit, <em>Understanding Molecular Simulation</em> (2001).
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Gibbs ensemble Monte Carlo</h2>
+
+	    <object type="image/svg+xml" data="img/gibbs_ensemble.svg" width="80%" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
+	      Your browser does not support SVG
+	    </object>
+	  </section>
+	  <section>
+	    <h2>Phase diagram of square-well fluids</h2>
+	    <span style="font-size:80%;">
+	      <div style="display:inline-block; width:40%;">
+		$\lambda=1.375$<br/>
+		<img src="img/lambda1375.png" width="100%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);vertical-align:middle;">
+	      </div>
+	      <div style="display:inline-block; width:40%;">
+		$\lambda=1.5$<br/>
+		<img src="img/lambda150.png" width="100%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);vertical-align:middle;">
+	      </div>
+	      $
+	      \displaystyle
+	      u(r) = \left\{
+	      \begin{array}{rl}
+	      \infty & \mbox{for $0\lt  r \lt  \sigma$} \\
+	      - \epsilon & \mbox{for $\sigma\lt  r \lt  \lambda\sigma$} \\
+	      0 & \mbox{for $\lambda\sigma \lt  r$} \\
+	      \end{array}
+	      \right.
+	      $
+	    </span><br/>
+	    <span style="font-size:50%;">
+	      L Vega et al., <i>J. Chem. Phys.</i> 96, 2296 (1992).
+	    </span>
+	  </section>
+	  <section>
+	    <h2>Phase diagram of square-well fluids</h2>
+	    <span style="font-size:80%;">
+	      <div style="display:inline-block; width:40%;">
+		$\lambda=1.75$<br/>
+		<img src="img/lambda175.png" width="100%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);vertical-align:middle;">
+	      </div>
+	      <div style="display:inline-block; width:40%;">
+		$\lambda=2$<br/>
+		<img src="img/lambda200.png" width="100%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);vertical-align:middle;">
+	      </div>
+	      $
+	      \displaystyle
+	      u(r) = \left\{
+	      \begin{array}{rl}
+	      \infty & \mbox{for $0\lt  r \lt  \sigma$} \\
+	      - \epsilon & \mbox{for $\sigma\lt  r \lt  \lambda\sigma$} \\
+	      0 & \mbox{for $\lambda\sigma \lt  r$} \\
+	      \end{array}
+	      \right.
+	      $
+	    </span><br/>
+	    <span style="font-size:50%;">
+	      L Vega et al., <i>J. Chem. Phys.</i> 96, 2296 (1992).
+	    </span>
+	  </section>
+	  <section>
+	    <h2>MC simulations in the GC ensemble</h2>
+	    <ul>
+	      <li> Single particle move (results in $U\to U+\Delta U$)
+		\begin{align*}
+		A(n\leftarrow o) = \min(1,e^{-\beta\Delta U})
+		\end{align*}
+	      </li>
+	      <li> Particle insertion:  $N\to N+1$ 
+		(results in $U\to U+\Delta U$)
+		\begin{align*}
+		A(n\leftarrow o) 
+		&= \min\left(1,\frac{{\mathcal P}(N+1)}{{\mathcal P}(N)}\right)
+		\\
+		\frac{{\mathcal P}(N+1)}{{\mathcal P}(N)}
+		&= \frac{(zV)^{N+1}e^{-\beta(U+\Delta U)}}{(N+1)!} 
+		\frac{N!}{(zV)^{N}e^{-\beta U}} 
+		= \frac{zV e^{-\beta \Delta U}}{N+1} 
+		\end{align*}
+	      </li>
+	      <li> Particle deletion: $N\to N-1$
+		(results in $U\to U+\Delta U$)
+		\begin{align*}
+		A(n\leftarrow o) 
+		&= \min\left(1,\frac{{\mathcal P}(N-1)}{{\mathcal P}(N)}\right)
+		\\
+		\frac{{\mathcal P}(N-1)}{{\mathcal P}(N)}
+		&= \frac{(zV)^{N-1}e^{-\beta(U+\Delta U)}}{(N-1)!} 
+		\frac{N!}{(zV)^{N}e^{-\beta U}} 
+		= \frac{N e^{-\beta \Delta U}}{zV} 
+		\end{align*}
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Free energy barrier in GC ensemble</h2>
+	    <ul>
+	      <li> In the grand-canonical ensemble
+		\begin{equation*}
+		{\mathcal P}(N)
+		= \frac{Q(N,V,T)}{Z_G(\mu,V,T)}e^{\beta\mu N }
+		= \frac{Q(N,V,T)}{Z_G(\mu,V,T)} z^N
+		\end{equation*}
+	      </li>
+	      <li> In a system at coexistence well below $T_c$, the particle number
+		histogram $p(N)$ [or $p(\rho=N/V)$] at constant chemical potential,
+		temperature, and volume is bimodal, with almost no &ldquo;overlap&rdquo;
+		between the peaks
+	      </li>
+	    </ul>
+	    <img src="img/densityhistogram.png" width="34%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);vertical-align:middle;">
+	    <img src="img/densityactivity.png" width="32%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);vertical-align:middle;">
+	  </section>
+	  <section>
+	    <h2>Multicanonical simulations</h2>
+	    <ul>
+	      <li> Apply a biasing potential $\eta(N)$ in the Hamiltonian to cancel
+		out the barrier.
+		\begin{equation*}
+		{\mathcal P}_{\rm bias}(N) \propto {\mathcal P}(N) e^{-\eta(N)}
+		\end{equation*}
+	      </li>
+	      <li> Insertion/deletion acceptance probabilities are modifed
+		\begin{equation*}
+		\frac{{\mathcal P}_{\rm bias}(N_n)}{{\mathcal P}_{\rm bias}(N_o)}
+		= \frac{{\mathcal P}(N_n)}{{\mathcal P}(N_o)}
+		e^{-[\eta(N_n)-\eta(N_o)]} 
+		\end{equation*}
+	      </li>
+	      <li> Single-particle moves are unaffected
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Multicanonical  weights</h2>
+	    \begin{equation*}
+	    {\mathcal P}_{\rm bias}(N) \propto {\mathcal P}(N) e^{-\eta(N)}
+	    \end{equation*}
+	    <ul>
+	      <li> The &ldquo;ideal&rdquo; choice for $\eta(N)$ would cancel out the barrier
+		completely such that the biased probability distribution is flat,
+		i.e., $\eta(N) = k_BT\ln{\mathcal P}(N)$ so that ${\mathcal P}_{\rm
+		bias}(N) = {\rm constant}$
+	      </li>
+	      <li> However, if we knew that in advance, there would be no need for a
+		simulation!
+	      </li>
+	      <li> Fortunately, $\eta(N)$ can be determined iteratively, to give
+		successively smooth biased distributions
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Determining the multicanonical  weights</h2>
+	    \begin{equation*}
+	    {\mathcal P}_{\rm bias}(N) \propto {\mathcal P}(N) e^{-\eta(N)}
+	    \end{equation*}
+	    <ul>
+	      <li>[Step 1:] Choose $z$ to be near coexistence (selected from
+		hysteresis region)
+	      </li>
+	      <li>[Step 2:] Get good statistics in ${\mathcal P}(N)$ for $N_{\rm
+		min}\le N\le N_{\rm max}$
+	      </li>
+	      <li>[Step 3:] Generate biasing potential
+		\begin{align*}
+		\eta(N) &= k_BT\ln{\mathcal P}(N)
+		\\
+		\eta(N\lt N_{\rm min}) &= k_BT\ln{\mathcal P}(N_{\rm min})
+		\\
+		\eta(N\gt N_{\rm max}) &= k_BT\ln{\mathcal P}(N_{\rm max})
+		\end{align*}
+	      </li>
+	      <li>[Step 4:] Get good statistics in ${\mathcal P}_{\rm bias}(N)$
+		(now over a wider range of $N$)
+	      </li>
+	      <li>[Step 5:] Generate unbiased $p(N)$
+		\begin{align*}
+		{\mathcal P} \propto {\mathcal P}_{\rm bias}(N) e^{\eta(N)}
+		\end{align*}
+		return to <b>Step 3</b>
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Multicanonical simulations: LJ fluid</h2>
+
+	    <img src="img/multihist.png" width="60%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);vertical-align:middle;">
+	  </section>
+	  <section>
+	    <h2>GCMC: Histogram reweighting</h2>
+	    <ul>
+	      <li> At reciprocal temperature $\beta_0$ and activity $z_0$
+		\begin{align*}
+		{\mathcal P}(N,E;\mu_0,V,\beta_0) 
+		= \frac{\Omega(N,V,E)}{Z_G(\mu_0,V,\beta_0)} e^{\beta_0\mu_0 N - \beta_0 U}
+		\end{align*}
+	      </li>
+	      <li> Now consider a different activity and temperature
+		\begin{align*}
+		{\mathcal P}(N,E;\mu_1,V,\beta_1) 
+		&= \frac{\Omega(N,V,E)}{Z_G(\mu_1,V,\beta_1)} e^{\beta_1\mu_1 N-\beta_1 U}
+		\\
+		&= {\mathcal P}(N,E;\mu_0,V,\beta_0) 
+		\left(\frac{z_1}{z_0}\right)^N e^{-(\beta_1-\beta_0)U}
+		\\ & \qquad \times
+		\frac{Z_{G}(\mu_1,V,\beta_1)}{Z_{G}(\mu_0,V,\beta_0)}
+		\end{align*}
+	      </li>
+	      <li> The ratio $Z_{G}(\mu_1,V,\beta_1)/Z_{G}(\mu_0,V,\beta_0)$ is
+		just a normalizing factor, so that
+		<span style="font-size:80%">
+		  \begin{align*}
+		  \sum_{N} \int dE {\mathcal P}(N,E;\mu,V,\beta)
+		  = \sum_{N} {\mathcal P}(N;\mu,V,\beta)
+		  = \int dE {\mathcal P}(E;\mu,V,\beta)
+		  = 1
+		  \end{align*}
+		</span>
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Determining coexistence</h2>
+	    <ul>
+	      <li> To find coexistence, tune $\mu$ to satisfy the &ldquo;equal area&rdquo;
+		rule (not equal peak height)
+		<br/>
+		<img src="img/densityhistogram-coex.png" width="35%" height="auto" style="background:white;color:black; margin-left:27%; width:35%; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);vertical-align:middle;">
+
+	      </li>
+	      <li> These histograms were generated from a multicanonical simulation
+		with $z=0.029$.
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Density histogram for the LJ fluid</h2>
+
+	    <img src="img/densityhistogram-LJ.png" width="55%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);vertical-align:middle;">
+
+	  </section>
+	  <section>
+	    <h2>Lennard-Jones phase diagram</h2>
+	    
+	    <img src="img/LJcoex.png" width="50%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);vertical-align:middle;">
+
+	    \begin{align*}
+	    \rho_{l/g} &= \rho_c + A|T-T_c| \pm B|T-T_c|^\beta
+	    \\
+	    \beta &= 0.3265  \qquad \mbox{(universal)}
+	    \end{align*}
+
+	  </section>
+	  <section>
+	    <h2>Replica exchange</h2>
+	    <ul>
+	      <li> &ldquo;Rough&rdquo; energy landscapes are hard to sample at low
+		temperature (get stuck in local minima)
+	      </li>
+	      <li> High-temperature simulations can glide over barriers
+		
+		<img src="img/energylandscape.png" width="30%" height="auto" style="background:white;color:black; margin-left:35%; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);vertical-align:middle;">
+
+	      </li>
+	      <li> Exchange complete configurations (with energies $U_0$ and $U_1$)
+		between simulations run in parallel at different reciprocal
+		temperatures ($\beta_0$ and $\beta_1$, respectively)
+		\begin{equation*}
+		\frac{{\mathcal P}(n)}{{\mathcal P}(o)} =
+		\frac{e^{-\beta_0U_1} \times e^{-\beta_1U_0}}{e^{-\beta_0U_0} \times e^{-\beta_1U_1}}
+		= e^{-(\beta_0-\beta_1 )(U_1-U_0 )}
+		\end{equation*}
+	      </li>
+	    </ul>
+	    <span style="font-size:50%;">
+	      QL Yan and JJ de Pablo, <em>J. Chem. Phys.</em> 111, 9509 (1999),
+	      A Kone and DA Kofke, <em>J. Chem. Phys.</em> 122, 206101 (2005)
+	    </span>
+	  </section>
+	  <section>
+	    <h2>Replica exchange: Simple example</h2>
+	    <p>
+	      <ul>
+		<li>
+		  <div style="float:right; width:50%;">
+		    <img src="img/potential.png" width="100%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);vertical-align:middle;">
+		    <p>
+		      \begin{align*}
+		      U(x) &= \left[\sin\frac{\pi x}{2} \sin 5\pi x\right]^2
+		      \\
+		      p(x,\beta) &\propto e^{-\beta U}
+		      \end{align*}
+		    </p>
+		  </div>
+		  Model one-dimensional system <br/> (after Frenkel and Smit)
+		</li>
+		<li> Single particle in unit box (with periodic boundary
+		  conditions)
+		</li>
+		<li> External potential, $U(x)$.
+		</li>
+		<li> Start, $x = 0$.
+		</li>
+		<li> $\Delta x = \pm0.005$
+		</li>
+		<li> $10^6$ MC moves
+		</li>
+	      </ul>
+	    </p>
+	  </section>
+	  <section>
+	    <h2>Replica exchange: Simple example</h2>
+	    <ul>
+	      <li> Without parallel tempering
+	      </li>
+	      <li> Simulations (point); exact (lines)
+	      </li>
+	    </ul>
+
+	    <img src="img/noreplica.png" width="50%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);vertical-align:middle;">
+
+	  </section>
+	  <section>
+	    <h2>Replica exchange: Simple example</h2>
+	    <ul>
+	      <li> With parallel tempering
+	      </li>
+	      <li> Five reciprocal temperatures ($\beta^*=0$, $4$, $8$ , $12$, and
+		$16$)
+	      </li>
+	    </ul>
+	    
+	    <img src="img/replica.png" width="50%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);vertical-align:middle;">
+	  </section>
+	</section>
+	<section>
+	  <h2>Thanks</h2>
+	  <p>
+	    Thanks to Dr. Leo Lue (Strathclyde) for his excellent notes which
+	    this course is largely based on, also thanks to his predecessor,
+	    Dr Philip Camp (Edinburgh), where some slides originated from.
 	  </p>
-	</div>
-	Model one-dimensional system <br/> (after Frenkel and Smit)
-      </li>
-      <li> Single particle in unit box (with periodic boundary
-	conditions)
-      </li>
-      <li> External potential, $U(x)$.
-      </li>
-      <li> Start, $x = 0$.
-      </li>
-      <li> $\Delta x = \pm0.005$
-      </li>
-      <li> $10^6$ MC moves
-      </li>
-    </ul>
-  </p>
-</section>
-<section>
-  <h2>Replica exchange: Simple example</h2>
-  <ul>
-    <li> Without parallel tempering
-    </li>
-    <li> Simulations (point); exact (lines)
-    </li>
-  </ul>
+	  <p>
+	    Thank you also to Prof. Allan/Dr. Purton/CCP5 for the
+	    opportunity, and you for your attention.</p>
+	  <p>
+	    Have fun!
+	  </p>
+	</section>
+	<section id="extra">
+	  <h2>Extra files needed for the practicals</h2>
+	  <p>
+	    <ul>
+	      <li><a href="TABLE">TABLE file for DL_poly (Day 3)</li>
+	      <li><a href="csv_to_plt.py">Conversion script from CSV to PLT (Day 3)</li>
+	    </ul>
+	  </p>
+	</section>
+      </div>
+    </div>
+    <script src="reveal.js/lib/js/head.min.js"></script>
+    <script src="reveal.js/js/reveal.js"></script>
+    <script>
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+      width:1280,height:720,margin:0.1, minScale:0.2, maxScale:1.5,
+      slideNumber: 'c / t',
+      history: true,
+      transition: 'slide',
+      backgroundTransition: 'fade',
+      pdfMaxPagesPerSlide: 1,
+      math: {
+      mathjax: 'MathJax/MathJax.js',
+      config: 'TeX-AMS-MML_SVG-full'
+      },
+      dependencies: [
+      // Cross-browser shim that fully implements classList - https://github.com/eligrey/classList.js/
+      { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
 
-  <img src="img/noreplica.png" width="50%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);vertical-align:middle;">
+      // Interpret Markdown in <section> elements
+	{ src: 'reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+	{ src: 'reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
 
-</section>
-<section>
-  <h2>Replica exchange: Simple example</h2>
-  <ul>
-    <li> With parallel tempering
-    </li>
-    <li> Five reciprocal temperatures ($\beta^*=0$, $4$, $8$ , $12$, and
-      $16$)
-    </li>
-  </ul>
+	// Syntax highlight for <code> elements
+	  { src: 'reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
 
-  <img src="img/replica.png" width="50%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);vertical-align:middle;">
-</section>
-</section>
-<section>
-  <h2>Thanks</h2>
-  <p>
-    Thanks to Dr. Leo Lue (Strathclyde) for his excellent notes which
-    this course is largely based on, also thanks to his predecessor,
-    Dr Philip Camp (Edinburgh), where some slides originated from.
-  </p>
-  <p>
-    Thank you also to Prof. Allan/Dr. Purton/CCP5 for the
-    opportunity, and you for your attention.</p>
-  <p>
-    Have fun!
-  </p>
-</section>
-<section id="extra">
-  <h2>Extra files needed for the practicals</h2>
-  <p>
-    <ul>
-      <li><a href="TABLE">TABLE file for DL_poly (Day 3)</li>
-      <li><a href="csv_to_plt.py">Conversion script from CSV to PLT (Day 3)</li>
-    </ul>
-  </p>
-</section>
-</div>
-</div>
-<script src="reveal.js/lib/js/head.min.js"></script>
-<script src="reveal.js/js/reveal.js"></script>
-<script>
-  // Full list of configuration options available here:
-  // https://github.com/hakimel/reveal.js#configuration
-  Reveal.initialize({
-  width:1280,height:720,margin:0.1, minScale:0.2, maxScale:1.5,
-  slideNumber: 'c / t',
-  history: true,
-  transition: 'slide',
-  backgroundTransition: 'fade',
-  math: {
-  mathjax: 'MathJax/MathJax.js',
-  config: 'TeX-AMS-MML_SVG-full'
-  },      
-  dependencies: [
-  // Cross-browser shim that fully implements classList - https://github.com/eligrey/classList.js/
-  { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+	  // Zoom in and out with Alt+click
+	  { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true },
 
-  // Interpret Markdown in <section> elements
-    { src: 'reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-    { src: 'reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+	  // Speaker notes
+	  { src: 'reveal.js/plugin/notes/notes.js', async: true },
 
-    // Syntax highlight for <code> elements
-      { src: 'reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+	  // Remote control your reveal.js presentation using a touch device
+	  // { src: 'reveal.js/plugin/remotes/remotes.js', async: true },
 
-      // Zoom in and out with Alt+click
-      { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true },
-
-      // Speaker notes
-      { src: 'reveal.js/plugin/notes/notes.js', async: true },
-
-      // Remote control your reveal.js presentation using a touch device
-      // { src: 'reveal.js/plugin/remotes/remotes.js', async: true },
-
-      // MathJax
-      { src: 'reveal.js/plugin/math/math.js',
-      async: false
-      }
-      ]
-      });
-</script>
-<script>
-  //      $(function () {
-  //    // on page load  replace all src URLs
-  //
-  //    $('.animated-gif').each(function (i, e) {
-  //        disableGif(e)
-  //    });
-  //});
-  //Reveal.addEventListener('slidechanged', initAnimatedGifs);
-  //Reveal.addEventListener('ready', initAnimatedGifs);
-  //
-  //function initAnimatedGifs(event) {
-  //    $('.animated-gif', event.currentSlide).each(function (i, e) {
-  //        enableGif(e)
-  //    });
-  //
-  //    if (event.previousSlide)
-  //        $('.animated-gif', event.previousSlide).each(function (i, e) {
-  //            disableGif(e)
-  //
-  //        });
-  //}
-  //
-  //function enableGif(e) {
-  //    var src = $(e).attr("src")
-  //    $(e).attr('src', src.replace('-image.gif', '.gif'));
-  //
-  //
-  //}
-  //function disableGif(e) {
-  //    var src = $(e).attr("src")
-  //    $(e).attr('src', src.replace('.gif', '-image.gif'));
-  //
-  //}
-</script>
-</body>
+	  // MathJax
+	  { src: 'reveal.js/plugin/math/math.js',
+	  async: false
+	  }
+	  ]
+	  });
+    </script>
+    <script>
+      //      $(function () {
+      //    // on page load  replace all src URLs
+      //
+      //    $('.animated-gif').each(function (i, e) {
+      //        disableGif(e)
+      //    });
+      //});
+      //Reveal.addEventListener('slidechanged', initAnimatedGifs);
+      //Reveal.addEventListener('ready', initAnimatedGifs);
+      //
+      //function initAnimatedGifs(event) {
+      //    $('.animated-gif', event.currentSlide).each(function (i, e) {
+      //        enableGif(e)
+      //    });
+      //
+      //    if (event.previousSlide)
+      //        $('.animated-gif', event.previousSlide).each(function (i, e) {
+      //            disableGif(e)
+      //
+      //        });
+      //}
+      //
+      //function enableGif(e) {
+      //    var src = $(e).attr("src")
+      //    $(e).attr('src', src.replace('-image.gif', '.gif'));
+      //
+      //
+      //}
+      //function disableGif(e) {
+      //    var src = $(e).attr("src")
+      //    $(e).attr('src', src.replace('.gif', '-image.gif'));
+      //
+      //}
+    </script>
+  </body>
 </html>
