@@ -304,3 +304,21 @@ body {
     font-size:0.5em;
 }
 
+.reveal .codeDL {
+    font-family:FontAwesome; font-style: normal;
+    top:0;
+    right:0;
+    position:absolute;
+    border-left:4px solid white;
+    border-bottom:4px solid white;
+    padding:5px;
+    cursor:pointer;
+}
+
+.reveal .codeDL:hover {
+    border:2px solid white;
+}
+
+.codeDL::before {
+  content:"\f019";
+}
