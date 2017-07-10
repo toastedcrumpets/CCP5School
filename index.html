@@ -977,36 +977,45 @@ while True:
 	    <h2 class="backbox">Monte Carlo: Part 1</h2>
 	    <p>
 	      <em>God does not play dice. <span style="float:right;">A. Einstein</span></em><br/><br/>
-	      <em style="clear:right;">God does play dice with the universe. All the evidence points to him being an inveterate gambler, who throws the dice on every possible occasion. <span style="float:right;">S. Hawking</span></em>
+	      <em style="clear:right;" class="fragment">God does play dice with the universe. All the evidence points to him being an inveterate gambler, who throws the dice on every possible occasion. <span style="float:right;">S. Hawking</span></em>
 	    <p style="clear:both;" class="fragment">
 	      <br/>
-	      You are the supreme power of your simulation, so you get to choose:
+	      You are the omnipotent being of your simulation, so you get to choose:
 	      \begin{align*}
 	      \langle{\mathcal A}\rangle &= \int d{\boldsymbol\Gamma}\,{\mathcal P}({\boldsymbol\Gamma})\,
 	      {\mathcal A}({\boldsymbol\Gamma}) & \text{(MC)}\\
-	      &\text{or} &\text{(or)}\\
+	      &\text{or}\\
 	      \langle{\mathcal A}\rangle&=\lim_{t_{obs.}\to\infty} \frac{1}{t_{obs.}}\int_0^{t_{obs.}}\mathcal A(t)\,{\rm d}t & \text{(MD)}
 	      \end{align*}
 	    </p>
 	    </p>
 	  </section>
 	  <section data-background="img/Casino_de_Monte-Carlo.png" style="height:100%;">
+	    <h2 class="backbox">Monte Carlo</h2>
 	    <p class="backbox" style="position:absolute; bottom:2em; right:2em;">
-	      Monte Carlo Casino
+	      Ulam reinvented the method while working on the nulear
+	      weapons project in 1946. This required a code name,
+	      which was taken from the Monte Carlo Casino where Ulam's
+	      uncle gambled the family's money.
 	    </p>
 	  </section>
 	  <section>
 	    <h2>Introduction</h2>
 	    <ul>
-	      <li> Monte Carlo (MC) is a stochastic molecular-simulation technique.
+	      <li> Monte Carlo (MC) is a stochastic molecular-simulation technique.</li>
+	      <li class="fragment">
 		Sampling can be biased towards regions of specific interest.
 	      </li>
-	      <li> Not constrained by natural timescales (as in molecular dynamics).
+	      <li class="fragment">
+		Not constrained by natural timescales (as in molecular dynamics).
 	      </li>
-	      <li> Can <em>easily</em> handle fluctuating numbers of particles (as in
+	      <li class="fragment">
+		Can <em>easily</em> handle fluctuating numbers of particles (as in
 		the grand canonical ensemble).
 	      </li>
-	      <li> No (physical) dynamic foundation.
+	      <li class="fragment">
+		No (physical) dynamic foundation (for the systems
+		considered here).
 	      </li>
 	    </ul>
 	  </section>
@@ -1060,12 +1069,22 @@ while True:
 		I \approx \frac{(b-a)}{N} \sum_{k=1}^N f(x_k)
 		\end{equation*}
 	      </li>
+	      <li>
+		The original idea of Ulam was to calculate the chance
+		of winning Canfield solitaire, where the tediousness
+		of combinatorial calculations could be replaced by
+		simply playing a large number of games.
+	      </li>
 	    </ul>
 	  </section>
 	  <section>
 	    <h2>Example</h2>
-
 	    <img src="img/MC1_integrate.png"  width="65%" height="auto" style="margin:0;">
+	  </section>
+	  <section>
+	    <h2>Convergence</h2>
+	    <em>Monte Carlo is an extremely bad method; it should be used only when all alternative methods are worse.<span style="float:right;">A. D. Sokal, commenting on the convergence of Monte Carlo</span></em><br/><br/>
+	    <p style="clear:both;" class="fragment">
 	  </section>
 	  <section>
 	    <h2>Convergence</h2>
@@ -1073,7 +1092,7 @@ while True:
 	    <br/>
 	    Central limit theorem:
 	    \begin{equation*}
-	    \sigma_{\bar{f}} = \frac{\sigma_f}{\sqrt{N}}
+	    \sigma_{\left\langle f\right\rangle} = \frac{\sigma_f}{\sqrt{N}}
 	    \end{equation*}
 	    where
 	    \begin{equation*}
@@ -1106,6 +1125,7 @@ while True:
 	    \\
 	    \sigma_{\bar{x}} &\approx \frac{\sigma}{\sqrt{N}}
 	    \end{align*}
+	    This is unavoidable! But we can reduce $\sigma$ by a factor of $10^6$ or more using importance sampling.
 	  </section>
 	  <section>
 	    <h2>Example:  Uniform distribution</h2>
@@ -1165,7 +1185,7 @@ while True:
 		  \frac{f({\bf x})}{{\mathcal P}({\bf x})}
 		  \end{equation*}
 		</li>
-		<li> Sample from distribution ${\mathcal P}$
+		<li> Sample using $x$ from distribution ${\mathcal P}$
 		  \begin{equation*}
 		  I \approx \frac{V}{N} \sum_k   
 		  \frac{f({\bf x})}{{\mathcal P}({\bf x})}
@@ -1181,15 +1201,13 @@ while True:
 	      \begin{align*}
 	      f(x) &= x^{-1/3} + \frac{x}{10}
 	      \\
-	      p(x) &= \frac{2}{3} x^{-1/3}
+	      \mathcal{P}(x) &= \frac{2}{3} x^{-1/3}
 	      \end{align*}
 	    </span>
 	  </section>
 	  <section>
 	    <h2>Influence of importance sampling</h2>
-
 	    <img src="img/MC1_importance.png" width="60%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
-
 	  </section>
 	  <section>
 	    <h2>Sampling from an arbitrary distribution</h2>
@@ -1227,8 +1245,8 @@ while True:
 		= \sum_{\alpha'} W_{\alpha\leftarrow\alpha'} {\mathcal P}_{\alpha'}^{(n)}
 		\end{equation*}
 	      </li>
-	      <li> What guarantees a stationary, limiting distribution ${\mathcal
-		P}_\alpha$?
+	      <li> What guarantees a stationary, limiting distribution
+		${\mathcal P}_\alpha$ even exists?
 	      </li>
 	    </ul>
 	  </section>
