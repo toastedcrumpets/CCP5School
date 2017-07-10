@@ -76,8 +76,8 @@
 	      </object>
 	      Access the slides here:
 	      <a href="http://www.marcusbannerman.co.uk/CCP5School">www.marcusbannerman.co.uk/CCP5School</a>
-	      <br/>
-	      <a onclick="document.location.search = insertParam('print-pdf');" style="pointer:hand;" id="PrintButton">Click for a printable a copy of the notes.</a>
+	      <br/><br/>	      
+	      <a onclick="document.location.search = insertParam('print-pdf');" style="cursor:pointer;" id="PrintButton"><span style="font-family:FontAwesome; font-style: normal;" class="fa fa-print"></span>Printable notes</a>
 	    </p>
 	  </section>
 	  <section>
@@ -87,7 +87,10 @@
 	    <p>
 	      <ul>
 		<li>
-		  <a href="#scripting">Practical: Scripting</a>
+		  <a href="#practical">Practicals: General information</a>
+		</li>
+		<li>
+		  <a href="#scripting">Practicals: Scripting</a>
 		</li>
 		<li>
 		  <a href="#statmech">Statistical mechanics 2</a>
@@ -108,9 +111,38 @@
 	    </p>
 	  </section>
 	</section>
+	<section style="height:100%">
+	    <h2>Practicals: General information</h2>
+	  <section>
+	    <p>
+	      <img src="img/campus-map.svg"></img>
+	    </p>
+	  </section>
+	  <section>
+	    <ul>
+	      <li>
+		Instructions for tutorials (problem sheets etc.) are
+		all on the virtual machine.
+	      </li>
+	      <li class="fragment">
+		There are a lot of tutorials, it is expected that you
+		might need to take them home.
+	      </li>
+	      <li class="fragment">
+		You can attempt the tutorials on the cluster
+		computers, or on your own laptop (but try booting it
+		while you are here to check for problems).
+	      </li>
+	      <li class="fragment">
+		Many of the early problems require coding (i.e.,
+		fortran). If you need help, just ask!
+	      </li>
+	    </ul>
+	  </section>
+	</section>
 	<section id="scripting" style="height:100%;">
 	  <section>
-	    <h2>Scripting introduction</h2>
+	    <h2>Practicals: Scripting introduction</h2>
 	    <p>
 	      There are many compiled programming languages out
 	      there: <b><i>C++, C, Fortran, ...</i></b>.<br/>  These
@@ -217,7 +249,8 @@ pylab.plot(y_data)
 pylab.show()
 	    </code></pre>
 	    <p>
-	      The plotting features of Python alone make it worthwhile learning.
+	      The <a href="https://matplotlib.org/gallery.html">plotting
+	      features of Python</a> make it worthwhile learning.
 	    </p>
 	  </section>
 	  <section>
@@ -241,8 +274,10 @@ pylab.plot(x_data, y_data)
 pylab.show()
 	    </code></pre>
 	    <p>
-	      The example (<tt>gauss.py</tt>) uses its own histogramming code, rather than <tt>pylab.hist()</tt> to
-	      remain comparable to the fortran code.
+	      There is a fortran practical on histogramming, and the
+	      python example (<tt>gauss.py</tt>) doesn't
+	      use <tt>pylab.hist()</tt> as above, but tries to more
+	      closely follow the fortran code.
 	    </p>
 	  </section>
 	  <section>
@@ -344,8 +379,9 @@ while True:
 	      in a spring well, using a symplectic
 	      integrator. Great example of python's
 	      power (and its lack of speed). Balance
-	      YOUR programming time against the COMPUTER
-	      run time when choosing scripting or compiled languages.</p>
+	      <em>your</em> programming time against the <em>run
+	      time</em> when choosing scripting or compiled
+	      languages.</p>
 	  </section>
 	  <section>
 	    <p>
@@ -379,20 +415,20 @@ while True:
 	      internal energy, heat capacity).
 	    </p>
 	    <p class="fragment">
-	      To be able to perform Monte Carlo, we must
-	      understand the relative probabilities (and
-	      therefore feasibility) of different states
-	      or configurations of a microscopic system.
+	      This is a short introduction to the statistical
+	      mechanics behind Monte Carlo. We must understand the
+	      relative probabilities of different
+	      states/configurations of a microscopic system.
 	    </p>
 	    <p class="fragment">
-	      Thermodynamics observationally tells us
-	      what is possible (${\rm d}S\ge0$), but
-	      statistical mechanics can quantify the
-	      probabilities in terms of the microscopic state.</p>
+	      Thermodynamics observationally tells us what is possible
+	      (${\rm d}S\ge0$), but statistical mechanics quantifies
+	      these probabilities in terms of the microscopic
+	      state.</p>
 	    <p class="fragment">
-	      It also proves that (${\rm d}S&lt;0$) is
-	      possible, but that this is so
-	      astronomically rare it may be ignored.</p>
+	      It also proves that (${\rm d}S&lt;0$) is possible, but
+	      generally this is so astronomically rare it may be
+	      ignored.</p>
 	  </section>
 	  <section>
 	    <h2>Microscopics notation recap</h2>
@@ -2576,8 +2612,7 @@ while True:
 
 	  // MathJax
 	  { src: 'reveal.js/plugin/math/math.js',
-	  async: false
-	  }
+	  async: false	  }
 	  ]
 	  });
     </script>
