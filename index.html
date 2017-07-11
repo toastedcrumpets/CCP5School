@@ -153,10 +153,11 @@
 	    </p>
 	    <p class="fragment">
 	      The interpreted languages:<br/><b><i>python, ruby,
-		  fortran, erlang, perl, gawk, bash, Java(ish)/javascript,
-		  go, rust, <span style="color:red;">matlab</span> ...</i></b><br/> are lightweight, designed to
-	      be as simple as possible for you; however, many
-	      are application specific and <em>slow</em>.
+		  erlang, perl, gawk, bash, Java(ish)/javascript, go,
+		  rust, <span style="color:red;">matlab</span>
+		  ...</i></b><br/> are lightweight, designed to be as
+		  simple as possible for you; however, many are
+		  application specific and <em>slow</em>.
 	    </p>
 	    <p class="fragment">
 	      <b>Python</b> is general, powerful, and popular...
@@ -562,6 +563,12 @@ while True:
 	  </section>
 	  <section>
 	    <h2>Free energies (other ensembles)</h2>
+	    
+	    The microcanonical ensemble ($N$, $V$, $E$) is very useful
+	    for molecular dynamics; however, other ensembles such as
+	    ($N$, $V$, $T$) are more accessible in experiments.
+	    <br/>
+	    
 	    Helmholtz free energy: $A=U-TS$
 	    \begin{align*}
 	    {\rm d}A &\le -S\,{\rm d}T - p\,{\rm d}V + \mu\,{\rm d}N
@@ -574,7 +581,7 @@ while True:
 	    \begin{equation*}
 	    A(T,V,N)
 	    \end{equation*}
-	    Lets consider the $N V T$ ensemble...
+	    Lets consider the probabilities of the ($N$, $V$, $T$) ensemble...
 	  </section>
 	  <section>
 	    <h2>Canonical ensemble  ($N V T$)</h2>
@@ -628,21 +635,21 @@ while True:
 	    <h2>Canonical ensemble</h2>
 	    Boltzmann distribution
 	    \begin{equation*}
-	    {\mathcal P}(E) = \frac{\Omega(N, V, E)}{Q(N,V,\beta)} e^{ - \beta E}
+	    {\mathcal P}(E) = \frac{\Omega(N, V, E)}{Q(N,V,\beta)} e^{ - \beta\,E}
 	    \end{equation*}
 	    Canonical partition function is the normalisation:
 	    \begin{equation*}
-	    Q(N,V,\beta) = \int dE \Omega(N,V,E) e^{-\beta E}
+	    Q(N,V,\beta) = \int {\rm d}E\,\Omega(N,V,E) e^{-\beta\,E}
 	    \end{equation*}
 	    Its also related to the Helmholtz free energy
 	    \begin{align*}
-	    A &= -k_BT \ln Q(N,V,\beta) 
+	    A &= -k_B\,T \ln Q(N,V,\beta) 
 	    \\
-	    dA &= -S dT -pdV + \mu dN
+	    {\rm d}A &= -S\,{\rm d}T -p\,{\rm d}V + \mu\,{rm d}N
 	    \\
-	    d\ln Q(N,V,\beta) &= - E d\beta + \beta p dV - \beta \mu dN
+	    {\rm d}\ln Q(N,\,V,\,\beta) &= - E\,{\rm d}\beta + \beta\,p\,{\rm d}V - \beta\,\mu\,{\rm d}N
 	    \end{align*}
-	    Again, all thermodynamic properties can be derived from $Q(N,V,\beta)$.
+	    Again, all thermodynamic properties can be derived from $Q(N,\,V,\,\beta)$.
 	  </section>
 	  <section>
 	    <h2>Canonical ensemble: Partition function</h2>
