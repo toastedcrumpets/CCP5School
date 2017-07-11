@@ -682,21 +682,21 @@ while True:
 	      </li>
 	      <li> The integrals over the momenta can be performed exactly
 		\begin{align*}
-		\int\frac{d{\bf p}_1}{h^3}\cdots\frac{d{\bf p}_N}{h^3}
+		\int\frac{{\rm d}{\bf p}_1}{h^3}\cdots\frac{{\rm d}{\bf p}_N}{h^3}
 		e^{-\beta K({\bf p}_1,\dots,{\bf p}_N)}
-		&= \left[\int\frac{d{\bf p}}{h^3} e^{-\frac{\beta p^2}{2m}} \right]^{N}
+		&= \left[\int\frac{{\rm d}{\bf p}}{h^3} e^{-\frac{\beta\,p^2}{2\,m}} \right]^{N}
 		\\
-		&= \left(\frac{2\pi m}{\beta h^2}\right)^{3N/2}
-		= \Lambda^{-3N}
+		&= \left(\frac{2\,\pi\,m}{\beta h^2}\right)^{3\,N/2}
+		= \Lambda^{-3\,N}
 		\end{align*}
 	      </li>
 	      <li> The partition function is given in terms of a configurational
 		integral and the de Broglie wavelength $\Lambda$
 		\begin{equation*}
-		Q(N,V,T) = \frac{1}{N!\Lambda^{3N}}
-		\int d{\bf r}_1\cdots d{\bf r}_N 
-		e^{-\beta U({\bf r}_1,\dots{\bf r}_N)}
-		= \frac{Z(N,V,T)}{N!\Lambda^{3N}} 
+		Q(N,\,V,\,T) = \frac{1}{N!\Lambda^{3\,N}}
+		\int {\rm d}{\bf r}_1\cdots {\rm d}{\bf r}_N 
+		e^{-\beta\,U({\bf r}_1,\dots{\bf r}_N)}
+		= \frac{Z(N,\,V,\,T)}{N!\Lambda^{3\,N}}
 		\end{equation*}
 	      </li>
 	    </ul>
@@ -707,15 +707,15 @@ while True:
 	      <li> The probability of being at the phase point ${\boldsymbol\Gamma}$ is
 		\begin{equation*}
 		{\mathcal P}({\boldsymbol\Gamma})
-		= \frac{e^{-\beta H({\boldsymbol\Gamma})}}{Q(N,V,\beta)}
+		= \frac{e^{-\beta\,H({\boldsymbol\Gamma})}}{Q(N,\,V,\,\beta)}
 		\end{equation*}
 	      </li>
 	      <li> The average value of a property ${\mathcal A}({\boldsymbol\Gamma})$ is
 		\begin{align*}
-		\langle{\mathcal A}\rangle &= \int d{\boldsymbol\Gamma} {\mathcal P}({\boldsymbol\Gamma})
+		\langle{\mathcal A}\rangle &= \int {\rm d}{\boldsymbol\Gamma} {\mathcal P}({\boldsymbol\Gamma})
 		{\mathcal A}({\boldsymbol\Gamma})
 		\\
-		&= \frac{1}{Q(N,V,\beta)}\int d{\boldsymbol\Gamma} e^{-\beta H({\boldsymbol\Gamma})}
+		&= \frac{1}{Q(N,\,V,\,\beta)}\int {\rm d}{\boldsymbol\Gamma} e^{-\beta H({\boldsymbol\Gamma})}
 		{\mathcal A}({\boldsymbol\Gamma})
 		\end{align*}
 	      </li>
@@ -1049,7 +1049,7 @@ while True:
 	  <section>
 	    <h2>Monte Carlo evaluation of integrals</h2>
 	    \begin{equation*}
-	    I = \int_a^b dx\, f(x)
+	    I = \int_a^b f(x)\,{\rm d}x
 	    \end{equation*}
 	    <ul style="font-size:80%">
 	      <li> Uniform, probability distribution ${\mathcal P}(x)$ along the
@@ -1068,7 +1068,7 @@ while True:
 	      </li>
 	      <li> The integral is related to the average of the function $f$:
 		\begin{equation*}
-		I = (b-a) \int_a^b dx\,{\mathcal P}(x) f(x) = (b-a) \langle f(x) \rangle
+		I = (b-a) \int_a^b {\mathcal P}(x)\,f(x) {\rm d}x = (b-a) \langle f(x) \rangle
 		\end{equation*}
 	      </li>
 	      <li> The average can be approximated by:
@@ -1152,7 +1152,7 @@ while True:
 	    <h2>Multidimensional integrals</h2>
 	    <p>
 	      \begin{equation*}
-	      I = \int_{V} d{\bf x} f({\bf x})
+	      I = \int_{V} f({\bf x}) {\rm d}{\bf x}
 	      \end{equation*}
 	      <ul style="font-size:80%;">
 		<li> Uniform, probability distribution ${\mathcal P}({\bf x})$ within the
@@ -1163,7 +1163,7 @@ while True:
 		</li>
 		<li> The integral is related to the average of the function $f$:
 		  \begin{equation*}
-		  I = V \int_{V} d{\bf x}\, {\mathcal P}({\bf x}) f({\bf x}) 
+		  I = V \int_{V} {\mathcal P}({\bf x})\,f({\bf x})\,{\rm d}{\bf x}
 		  = V \langle f({\bf x}) \rangle
 		  \end{equation*}
 		</li>
@@ -1178,7 +1178,7 @@ while True:
 	  <section>
 	    <h2>Importance sampling</h2>
 	    \begin{equation*}
-	    I = \int_{V} d{\bf x}\,f({\bf x})
+	    I = \int_{V} f({\bf x})\,{\rm d}{\bf x}
 	    \end{equation*}			
 	    <img src="img/importance.png" width="30%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1); float:right;">
 	    Importance sampling:
@@ -1187,8 +1187,8 @@ while True:
 		<li> Choose distribution ${\mathcal P}$ to make $f({\bf x})/{\mathcal
 		  P}({\bf x})$ as constant as possible:
 		  \begin{equation*}
-		  I = \int_{V} d{\bf x}\,{\mathcal P}({\bf x}) \,
-		  \frac{f({\bf x})}{{\mathcal P}({\bf x})}
+		  I = \int_{V} {\mathcal P}({\bf x}) \,
+		  \frac{f({\bf x})}{{\mathcal P}({\bf x})}{\rm d}{\bf x}
 		  \end{equation*}
 		</li>
 		<li> Sample using $x$ from distribution ${\mathcal P}$
@@ -1374,7 +1374,7 @@ while True:
 	      </li>
 	      <li> Markov chain
 		\begin{equation*}
-		{\mathcal P}^{(n+1)}(x) = \int dx' W(x\leftarrow x') {\mathcal P}^{(n)}(x')
+		{\mathcal P}^{(n+1)}(x) = \int W(x\leftarrow x')\,{\mathcal P}^{(n)}(x')\,{\rm d}{\bf x}'
 		\end{equation*}
 	      </li>
 	    </ul>
@@ -1736,18 +1736,18 @@ while True:
 	      </li>
 	      <li> Joint distribution of volume and energy:
 		\begin{equation*}
-		{\mathcal P}(V,E;p,\beta) 
-		\propto \Omega(N,V,E) e^{\beta p V - \beta E}
+		{\mathcal P}(V,\,E;\,p,\,\beta) 
+		\propto \Omega(N,\,V,\,E) e^{\beta\,p\,V - \beta\,E}
 		\end{equation*}
 	      </li>
 	      <li> Partition function:
 		\begin{align*}
-		\Delta(N,p,\beta) = \int dV \int dE \Omega(N,V,E) e^{\beta pV - \beta E}
+		\Delta(N,\,p,\,\beta) = \int {\rm d}V \int {\rm d}E \Omega(N,\,V,\,E) e^{\beta\,p\,V - \beta\,E}
 		\end{align*}
 	      </li>
 	      <li> Gibb's free energy
 		\begin{equation*}
-		G(N,p,\beta) = - k_BT \ln \Delta(N,p,\beta)
+		G(N,\,p,\,\beta) = - k_B\,T \ln \Delta(N,\,p,\,\beta)
 		\end{equation*}
 	      </li>
 	    </ul>
@@ -2085,7 +2085,7 @@ while True:
 	  <section>
 	    <h2>Example: LJ fluid  $\rho\sigma^3=0.5$</h2>
 	    <img src="img/energy_ext.png" width="50%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
-	    <p>The extrapolated histograms allow evaluation of properties at any/all temperatures (within sampled states).</p>
+	    <p>The extrapolated histograms allow evaluation of properties at any/all temperatures (within sampled states, above is at $k_B\,T=2\varepsilon$).</p>
 	  </section>
 	  <section>
 	    <h2>Histogram extrapolation: Other properties</h2>
