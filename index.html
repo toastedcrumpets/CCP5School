@@ -1003,7 +1003,7 @@ while True:
 	      Ulam reinvented the method while working on the nulear
 	      weapons project in 1946. This required a code name,
 	      which was taken from the Monte Carlo Casino where Ulam's
-	      uncle gambled the family's money.
+	      uncle gambled.
 	    </p>
 	  </section>
 	  <section>
@@ -1091,7 +1091,6 @@ while True:
 	  <section>
 	    <h2>Convergence</h2>
 	    <em>Monte Carlo is an extremely bad method; it should be used only when all alternative methods are worse.<span style="float:right;">A. D. Sokal, commenting on the convergence of Monte Carlo</span></em><br/><br/>
-	    <p style="clear:both;" class="fragment">
 	  </section>
 	  <section>
 	    <h2>Convergence</h2>
@@ -1456,29 +1455,24 @@ while True:
 	<section id="MC2">
 	  <section>
 	    <h2 class="backbox">Monte Carlo 2</h2>
-	    <p>
-	      <em>
-		Being secret, the work </em>[radiation shielding for nuclear weapons]<em>
-		of von Neumann and Ulam required a
-		code name. A colleague of von Neumann
-		and Ulam, Nicholas Metropolis,
-		suggested using the name Monte Carlo,
-		which refers to the Monte Carlo Casino
-		in Monaco where Ulam's uncle would
-		borrow money from relatives to gamble.</em>
+	    <p><em> Using lists of "truly random" random numbers
+		[provided by experiment via punch cards] was extremely slow, but von
+		Neumann developed a way to calculate pseudorandom
+		numbers using the middle-square method. Though this
+		method has been criticized as crude, von Neumann was
+		aware of this: he justified it as being faster than
+		any other method at his disposal, and also noted that
+		when it went awry it did so obviously, unlike methods
+		that could be subtly
+		incorrect.<span style="float:right;">Taken from
+		the <a href="https://en.wikipedia.org/wiki/Monte_Carlo_method">MC
+		wikipedia page</a></span></em>
 	    </p>
-	    <p class="fragment"><em>
-		Using lists of "truly random" random
-		numbers was extremely slow, but von
-		Neumann developed a way to calculate
-		pseudorandom numbers, using the
-		middle-square method. Though this method
-		has been criticized as crude, von Neumann
-		was aware of this: he justified it as
-		being faster than any other method at his
-		disposal, and also noted that when it went
-		awry it did so obviously, unlike methods
-		that could be subtly incorrect.<span style="float:right;">Taken from the <a href="https://en.wikipedia.org/wiki/Monte_Carlo_method">MC wikipedia page</a></span></em>
+	    <p class="fragment">
+	      Subtle errors are easy to make. We must not violate
+	      detailed balance (or do so very very carefully), and
+	      must have good tests to ensure the correct ensemble is
+	      simulated.
 	    </p>
 	  </section>
 	  <section>
