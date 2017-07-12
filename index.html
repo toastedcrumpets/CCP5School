@@ -1931,45 +1931,45 @@ while True:
 	    
 	    <img src="img/LJtable.png" width="75%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
 	    <p>
-	      Regardless of the ensemble (how we specify
-	      the thermodynamic state), at the same
-	      state the <b>average</b> properties are nearly
-	      identical.</p>
+	      Regardless of the ensemble (how we specify the
+	      thermodynamic state), at the same state
+	      the <b>average</b> properties are nearly
+	      identical. There are many fluctuations, even in the
+	      specified variables, do we have information on nearby
+	      states? (tune in tomorrow for more)</p>
 	  </section>
 	  <section>
 	    <h2>Ensembles</h2>
 	    <ul style="font-size:80%;">
 	      <li> canonical ensemble (NVT)
-		<ul>
-		  <li> single-phase properties (at fixed densities)
+		<ul class="fa-ul">
+		  <li><i class="fa-li fa fa-check"></i> Single-phase properties (at fixed densities)
 		  </li>
-		  <li> phase transition with change in volume (e.g., freezing)
+		  <li><i class="fa-li fa fa-times"></i> Phase transition with change in volume (e.g., freezing)
 		  </li>
-		  <li> phase transition with change in structure (e.g., solid-solid)
+		  <li><i class="fa-li fa fa-times"></i> Phase transition with change in structure (e.g., solid-solid)
 		  </li>
 		</ul>
 	      </li>
 	      <li> isobaric-isothermal ensemble (NpT)
-		<ul>
-		  <li> Corresponds to normal experimental conditions
+		<ul class="fa-ul">
+		  <li><i class="fa-li fa fa-check"></i> Corresponds to normal experimental conditions
 		  </li>
-		  <li> Easy to measure equation of state
+		  <li><i class="fa-li fa fa-check"></i> Easy to measure equation of state
 		  </li>
-		  <li> Density histograms ${\mathcal P}(V)$ at phase coexistence
+		  <li><i class="fa-li fa fa-check"></i> Density histograms ${\mathcal P}(V)$ at phase coexistence
 		  </li>
-		  <li> Structural phase transitions
-		  </li>
-		  <li> Expensive volume moves (recalculation of total energy)
+		  <li><i class="fa-li fa fa-times"></i> Expensive volume moves (recalculation of total energy)
 		  </li>
 		</ul>
 	      </li>
 	      <li> grand canonical ensemble ($\mu$VT)
-		<ul>
-		  <li> Open systems (mixtures, confined fluids, interfaces)
+		<ul class="fa-ul">
+		  <li><i class="fa-li fa fa-check"></i> Open systems (mixtures, confined fluids, interfaces)
 		  </li>
-		  <li> Vapor-liquid coexistence and critical phenomena
+		  <li><i class="fa-li fa fa-check"></i> Vapor-liquid coexistence and critical phenomena
 		  </li>
-		  <li> Dense systems (low insertion/deletion rate)
+		  <li><i class="fa-li fa fa-times"></i> Dense systems (low insertion/deletion rate)
 		  </li>
 		</ul>
 	      </li>
@@ -1999,7 +1999,7 @@ while True:
 	<section id="MC3">
 	  <section>
 	    <h2 class="backbox">Monte Carlo 3: Biased sampling</h2>
-	    <em class="fragment">
+	    <em>
 	      Some samples use a biased statistical
 	      design... The
 	      U.S. National Center for Health
@@ -2141,7 +2141,7 @@ while True:
 		  where $\sum_k w_k=1$ and $Z_k=\sum_{E,X} \Omega(N,V,E,X) e^{-\beta_k E}$.
 		</li>
 		<li> The uncertainty in ${\mathcal H}(X,E;\beta_k)$ is
-		  roughly $[{\mathcal H}(X,E;\beta_k)]^{1/2}$ (Poisson).
+		  roughly $[{\mathcal H}(X,E;\beta_k)]^{1/2}$ (Poisson, like MC).
 		</li>
 		<li> Determining the weights $w_k$ by
 		  minimizing the uncertainty of the

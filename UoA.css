@@ -322,3 +322,11 @@ body {
 .codeDL::before {
   content:"\f019";
 }
+
+.reveal .fa-li {
+    font-family:FontAwesome; font-style: normal;
+}
+
+.reveal ul.fa-ul {
+    list-style-type:none;
+}
