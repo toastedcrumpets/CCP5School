@@ -87,7 +87,13 @@
 	    <p>
 	      <ul>
 		<li>
+		  <a href="https://mybinder.org/v2/gh/toastedcrumpets/CCP5_Python_examples/master">Python tutorials</a>
+		</li>
+		<li>
 		  <a href="#MC1">Monte Carlo 1</a>
+		</li>
+		<li>
+		  <a href="#statmech">Statistical Mechanics Primer</a>
 		</li>
 		<li>
 		  <a href="#MC2">Monte Carlo 2</a>
@@ -102,9 +108,501 @@
 	    </p>
 	  </section>
 	</section>
+	<section id="MC1" style="height:100%;">
+	  <section>
+	    <h2 class="backbox">Monte Carlo: Part 1</h2>
+	    <p>
+	      <em>God does not play dice. <span style="float:right;">A. Einstein</span></em><br/><br/>
+	      <em style="clear:right;" class="fragment">God does play dice with the universe. All the evidence points to him being an inveterate gambler, who throws the dice on every possible occasion. <span style="float:right;">S. Hawking</span></em>
+	    <p style="clear:both;" class="fragment">
+	      <br/>
+	      You are the omnipotent being of your simulation, so you get to choose:
+	      \begin{align*}
+	      \langle{\mathcal A}\rangle &= \int d{\boldsymbol\Gamma}\,{\mathcal P}({\boldsymbol\Gamma})\,
+	      {\mathcal A}({\boldsymbol\Gamma}) & \text{(MC)}\\
+	      &\text{or}\\
+	      \langle{\mathcal A}\rangle&=\lim_{t_{obs.}\to\infty} \frac{1}{t_{obs.}}\int_0^{t_{obs.}}\mathcal A(t)\,{\rm d}t & \text{(MD)}
+	      \end{align*}
+	    </p>
+	    </p>
+	  </section>	  
+	  <section data-background="img/Casino_de_Monte-Carlo.png" style="height:100%;">
+	    <h2 class="backbox">Monte Carlo</h2>
+	    <p class="backbox" style="position:absolute; bottom:2em; right:2em;">
+	      Ulam reinvented the method while working on the nulear
+	      weapons project in 1946. This required a code name,
+	      which was taken from the Monte Carlo Casino where Ulam's
+	      uncle gambled.
+	    </p>
+	  </section>
+	  <section>
+	    <h2>Introduction</h2>
+	    <ul>
+	      <li> Monte Carlo (MC) is a stochastic molecular-simulation technique.</li>
+	      <li class="fragment">
+		Sampling can be biased towards regions of specific interest.
+	      </li>
+	      <li class="fragment">
+		Not constrained by natural timescales (as in molecular dynamics).
+	      </li>
+	      <li class="fragment">
+		Can <em>easily</em> handle fluctuating numbers of particles (as in
+		the grand canonical ensemble).
+	      </li>
+	      <li class="fragment">
+		No (physical) dynamic foundation (for the systems
+		considered here).
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Overview</h2>
+	    <ul>
+	      <li> Introduction</li>
+	      <li> Practicalities</li>
+	      <li> Free energy barriers</li>
+	      <li> Advanced algorithms</li>
+	      <li> Further reading:
+		<ul>
+		  <li> MP Allen and DJ Tildesley, Computer Simulation of Liquids (1987).
+		  </li>
+		  <li> D Frenkel and B Smit, Understanding Molecular Simulation (2001).
+		  </li>
+		  <li> DP Landau and K Binder, A Guide to Monte Carlo Simulations in
+		    Statistical Physics (2000).
+		  </li>
+		</ul>
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Monte Carlo evaluation of integrals</h2>
+	    \begin{equation*}
+	    I = \int_a^b f(x)\,{\rm d}x
+	    \end{equation*}
+	    <ul style="font-size:80%">
+	      <li> Uniform, probability distribution ${\mathcal P}(x)$ along the
+		interval $[a,b]$:
+		\begin{equation*}
+		{\mathcal P}(x) = \frac{1}{b-a} \left\{
+		\begin{array}{ll}
+		0 & \mbox{for $-\infty\lt x\lt a$} \\
+		1 & \mbox{for $a \le x \le b$} \\
+		0 & \mbox{for $b\lt x\lt \infty$} \\
+		\end{array}
+		\right.
+		\end{equation*}
+	      </li>
+	      <li> Randomly sample points $x_1$, $x_2$, $\cdots$ from ${\mathcal P}(x)$.
+	      </li>
+	      <li> The integral is related to the average of the function $f$:
+		\begin{equation*}
+		I = (b-a) \int_a^b {\mathcal P}(x)\,f(x) {\rm d}x = (b-a) \langle f(x) \rangle
+		\end{equation*}
+	      </li>
+	      <li> The average can be approximated by:
+		\begin{equation*}
+		I \approx \frac{(b-a)}{N} \sum_{k=1}^N f(x_k)
+		\end{equation*}
+	      </li>
+	      <li>
+		The original idea of Ulam was to calculate the chance
+		of winning Canfield solitaire, where the tediousness
+		of combinatorial calculations could be replaced by
+		simply playing a large number of games.
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Example</h2>
+	    <img src="img/MC1_integrate.png"  width="65%" height="auto" style="margin:0;">
+	  </section>
+	  <section>
+	    <h2>Convergence</h2>
+	    <em>Monte Carlo is an extremely bad method; it should be used only when all alternative methods are worse.<span style="float:right;">A. D. Sokal, commenting on the convergence of Monte Carlo</span></em><br/><br/>
+	  </section>
+	  <section>
+	    <h2>Convergence</h2>
+	    How quickly does the method converge to the correct answer?  
+	    <br/>
+	    Central limit theorem:
+	    \begin{equation*}
+	    \sigma_{\left\langle f\right\rangle} = \frac{\sigma_f}{\sqrt{N}}
+	    \end{equation*}
+	    where
+	    \begin{equation*}
+	    \sigma_{f} = \langle f^2(x)\rangle - \langle f(x)\rangle^2
+	    \end{equation*}
+	    The dependence of the convergence with sample size is independent on
+	    the dimensionality of the integral.
+	  </section>
+	  <section>
+	    <h2>Example: Convergence</h2>
+	    <img src="img/MC1_integrate_convergence.png" width="50%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
+	    <p>
+	      The average of $N$ normally distributed random numbers,
+	      centered about $1$, with standard deviation of
+	      $\sigma_f$.
+	    </p>
+	  </section>
+	  <section>
+	    <h2>Central limit theorem</h2>
+	    <p>
+	    Consider a set of $N$ independent variables $x_1$, $x_2$,...,$x_N$
+	    which all follow the same probability distribution function $p(x)$,
+	    with mean, $\mu$, and variance, $\sigma$.
+	    </p>
+	    <p class="fragment">
+	    How is the mean $\bar{x}=\frac{1}{N}\sum_{k=1}^N x_k$ 
+	    of these variables distributed?
+	    </p>
+	    <p class="fragment">
+	    This is given by the <b>central limit theorem</b>, which
+	    becomes increasingly accurate as $N\to\infty$
+	    \begin{align*}
+	    p_{\bar{x}}(\bar{x}) &\approx
+	    (2\pi\sigma_{\bar{x}}^2)^{-1/2} 
+	    \exp\left(-\frac{(\bar{x}-\mu)^2}{2\sigma_{\bar{x}}^2}\right)
+	    \\
+	    \sigma_{\bar{x}} &\approx \frac{\sigma}{\sqrt{N}}
+	    \end{align*}
+	    This is unavoidable! But we can reduce $\sigma$ by a factor of $10^6$ or more using importance sampling.
+	    </p>
+	  </section>
+	  <section>
+	    <h2>Example:  Uniform distribution</h2>
+	    <img src="img/MC1_centrallimit1.png" width="50%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
+	    <p>
+	      The constant distribution (black), averaged over
+	      multiple ($N$) samples, which tends towards a peaked gaussian distribution.
+	    </p>
+	  </section>
+	  <section>
+	    <h2>Example:  Exponential distribution</h2>
+	    <img src="img/MC1_centrallimit2.png" width="50%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
+	    <p>
+	      This is also true for the exponential distribution
+	      (black), and many others.
+	    </p>
+	  </section>
+	  <section style="height:100%;">
+	    <h2>Example:  Galton Board</h2>
+	    <div style="height:90%;width:100%; position:relative;">
+	      <iframe src="http://www.youtube.com/embed/03tx4v0i7MA" frameborder="0" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+	    </div>
+	  </section>
+	  <section>
+	    <h2>Multidimensional integrals</h2>
+	    <p>
+	      \begin{equation*}
+	      I = \int_{V} f({\bf x}) {\rm d}{\bf x}
+	      \end{equation*}
+	      <ul style="font-size:80%;">
+		<li> Uniform, probability distribution ${\mathcal P}({\bf x})$ within the
+		  region $V$:
+		</li>
+		<li> Randomly sample points ${\bf x}_1$, ${\bf x}_2$, $\cdots$ from
+		  ${\mathcal P}({\bf x})$.
+		</li>
+		<li> The integral is related to the average of the function $f$:
+		  \begin{equation*}
+		  I = V \int_{V} {\mathcal P}({\bf x})\,f({\bf x})\,{\rm d}{\bf x}
+		  = V \langle f({\bf x}) \rangle
+		  \end{equation*}
+		</li>
+		<li> The average can be approximated by:
+		  \begin{equation*}
+		  I \approx \frac{V}{N} \sum_{k=1}^N f({\bf x}_k)
+		  \end{equation*}
+		</li>
+	      </ul>
+	    </p>
+	  </section>
+	  <section>
+	    <h2>Importance sampling</h2>
+	    \begin{equation*}
+	    I = \int_{V} f({\bf x})\,{\rm d}{\bf x}
+	    \end{equation*}			
+	    <img src="img/importance.png" width="30%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1); float:right;">
+	    Importance sampling:
+	    <div style="width:60%; float:left">
+	      <ul>
+		<li> Choose distribution ${\mathcal P}$ to make $f({\bf x})/{\mathcal
+		  P}({\bf x})$ as constant as possible:
+		  \begin{equation*}
+		  I = \int_{V} {\mathcal P}({\bf x}) \,
+		  \frac{f({\bf x})}{{\mathcal P}({\bf x})}{\rm d}{\bf x}
+		  \end{equation*}
+		</li>
+		<li> Sample using $x$ from distribution ${\mathcal P}$
+		  \begin{equation*}
+		  I \approx \frac{V}{N} \sum_k   
+		  \frac{f({\bf x})}{{\mathcal P}({\bf x})}
+		  \end{equation*}
+		</li>
+		<li>
+		  The variance is significantly reduced.
+		</li>
+	      </ul>
+	    </div>
+
+	    <span style="font-size:80%;">
+	      \begin{align*}
+	      f(x) &= x^{-1/3} + \frac{x}{10}
+	      \\
+	      \mathcal{P}(x) &= \frac{2}{3} x^{-1/3}
+	      \end{align*}
+	    </span>
+	  </section>
+	  <section>
+	    <h2>Influence of importance sampling</h2>
+	    <img src="img/MC1_importance.png" width="50%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
+	    <p>
+	      Curves represent the distribution of results for the
+	      previous integral when MC using constant (unfilled) and
+	      importance (filled) sampling.
+	    </p>
+	  </section>
+	  <section>
+	    <h2>Sampling from an arbitrary distribution</h2>
+	    <ul>
+	      <li> Importance sampling requires the generation of numbers from an
+		arbitrary probability distribution.
+	      </li>
+	      <li> One dimensional distributions can be sampled by sampling
+		uniformly from the cumulative distribution function.
+	      </li>
+	      <li> In higher dimensions, sampling algorithms are only available for
+		certain distributions (e.g., Gaussian distributions).
+	      </li>
+	      <li> The Metropolis method allows the sampling of arbitrary,
+		multidimensional distributions.  This relies on constructing a Markov process.
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Markov process</h2>
+	    A Markov process is a stochastic process where the future state of the
+	    system depends only on the present state of the system and not on its
+	    previous history.
+	    <ul>
+	      <li> ${\mathcal P}_\alpha^{(n)}$ probability that the state $\alpha$ is
+		occupied at step $n$.
+	      </li>
+	      <li> Transition probability $W_{\alpha'\leftarrow\alpha}$ <br/>
+		Probability that a system in state $\alpha'$ will transition to
+		state $\alpha$.
+	      </li>
+	      <li> Markov chain:
+		\begin{equation*}
+		{\mathcal P}_\alpha^{(n+1)} 
+		= \sum_{\alpha'} W_{\alpha\leftarrow\alpha'} {\mathcal P}_{\alpha'}^{(n)}
+		\end{equation*}
+	      </li>
+	      <li> What guarantees a stationary, limiting distribution
+		${\mathcal P}_\alpha$ even exists?
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Transition probabilities</h2>
+	    <ul>
+	      <li> $W_{\alpha'\leftarrow \alpha}$ is the probability that the
+		system will transition to state $\alpha'$, given that it is in state
+		$\alpha$.
+	      </li>
+	      <li> The transition matrix must satisfy:
+		\begin{equation*}
+		\sum_{\alpha'} W_{\alpha'\leftarrow \alpha} = 1
+		\end{equation*}
+	      </li>
+	      <li> The choice of the transition matrix determines the properties of
+		the Markov process.
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Stationary distribution</h2>
+	    <p>
+	      We need to choose the transition matrix to ensure that the stationary
+	      distribution
+	    </p>
+	    <ul>
+	      <li> exists and is unique
+		\begin{equation*}
+		{\mathcal P}_\alpha =  
+		\sum_{\alpha'} W_{\alpha\leftarrow\alpha'} {\mathcal P}_{\alpha'}
+		\end{equation*}
+	      </li>
+	      <li> is rapidly approached
+		\begin{align*}
+		\lim_{n\to\infty} {\mathcal P}_\alpha^{(n)} &= {\mathcal P}_\alpha
+		\\
+		{\mathcal P}_\alpha^{(n)}
+		&= \sum_{\alpha_1,\alpha_2,\dots,\alpha_n}
+		W_{\alpha\leftarrow\alpha_1}W_{\alpha_1\leftarrow\alpha_2}\cdots 
+		W_{\alpha_{n-1}\leftarrow\alpha_n}{\mathcal P}_{\alpha_n}^{(0)}
+		\\
+		&= \sum_{\alpha'}
+		W_{\alpha\leftarrow\alpha'}^n{\mathcal P}_{\alpha'}^{(0)}
+		\end{align*}
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Detailed balance</h2>
+	    <ul>
+	      <li> Physically, the condition of detailed balance requires that the
+		probability of observing the system transition from state a $\alpha$
+		to another state $\alpha'$ is the same as observing it transition
+		from $\alpha'$ to $\alpha$.
+	      </li>
+	      <li> Mathematically, this is
+		\begin{equation*}
+		W_{\alpha\leftarrow \alpha'} {\mathcal P}_{\alpha'} 
+		=  W_{\alpha'\leftarrow \alpha} {\mathcal P}_\alpha
+		\end{equation*}
+	      </li>
+	      <li> If the transition probability satisfies the detailed balance
+		condition, the Markov process has a unique, stationary limiting
+		distribution.
+	      </li>
+	      <li> Detailed balance is not required for the Markov process to
+		possess a unique, stationary limiting distribution.
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Metropolis method</h2>
+	    <ul>
+	      <li> The Metropolis method provides a manner to sample from any
+		probability distribution ${\mathcal P}_\alpha$, using a Markov
+		process.
+	      </li>
+	      <li> The transition probabilities are divided into two contributions:
+		\begin{equation*}
+		W_{\alpha'\leftarrow \alpha} 
+		= A_{\alpha'\leftarrow \alpha} g_{\alpha'\leftarrow \alpha}
+		\end{equation*}
+		where $g_{\alpha'\leftarrow \alpha}$ is the probability of selecting a
+		move to state $\alpha'$, given the system is at state $\alpha$, and
+		$A_{\alpha'\leftarrow \alpha}$ is the probability of accepting the
+		proposed move.
+	      </li>
+	      <li> The acceptance probability is given by
+		\begin{equation*}
+		A_{\alpha'\leftarrow\alpha} = \left\{
+		\begin{array}{ll}
+		1 & \mbox{if ${\mathcal P}_{\alpha'}\gt {\mathcal P}_\alpha$} \\
+		\frac{{\mathcal P}_{\alpha'}}{{\mathcal P}_\alpha} 
+		& \mbox{if ${\mathcal P}_{\alpha'}\lt {\mathcal P}_\alpha$}
+		\end{array}
+		\right.
+		\end{equation*}
+	      </li>
+	      <li> If $g_{\alpha'\leftarrow \alpha}=g_{\alpha\leftarrow \alpha'}$,
+		then the process satisfies detailed balance.
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Metropolis method</h2>
+	    <object type="image/svg+xml" data="img/metropolis.svg" width="60%" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
+	      Your browser does not support SVG
+	    </object>
+	  </section>
+	  <section>
+	    <h2>Markov process: Continuous state space</h2>
+	    <ul>
+	      <li> ${\mathcal P}^{(n)}(x)$ probability that the state $x$ is
+		occupied at step $n$.
+	      </li>
+	      <li> Transition probability $W(x'\leftarrow x)$ <br/>
+		Probability that a system in state $x$ will transition to state $x'$.
+	      </li>
+	      <li> Markov chain
+		\begin{equation*}
+		{\mathcal P}^{(n+1)}(x) = \int W(x\leftarrow x')\,{\mathcal P}^{(n)}(x')\,{\rm d}{\bf x}'
+		\end{equation*}
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Random number generators</h2>
+	    <em>Any one who considers arithmetical methods of producing random digits is, of course, in a state of sin.<span style="float:right;">J. von Neumann</span></em>
+	    <p class="fragment">
+	      von Neumann is simply trying to caution
+	      you against believing that random number
+	      generators (RNG) are actually random.
+	    </p>
+	    <p class="fragment">
+	      But GPU graphics programmers really do use a state of $\sin$!
+	      \begin{align*}
+	      x_i  = {\rm fract}(43758.5453\sin(12.9898\,i))
+	      \end{align*}
+	    </p>
+	  </section>
+	  <section>
+	    <h2>Pseudo-random number generators</h2>
+	    <ul>
+	      <li> Typically, random deviates are
+		available with a uniform distribution
+		on $[0,1)$ in most programming languages.</li>
+	      <li> Be suspicious of intrinsic "<tt>ran</tt>" functions
+	      </li>
+	      <li> Linear congruential generators use the recursion
+		\begin{equation*}
+		X_{j+1} = a X_j + b \qquad \mod m
+		\end{equation*}
+	      </li>
+	      <li> Written ${\rm LCG}(m,a,b,X_0)$
+	      </li>
+	      <li> Generates integers in range $0 \le X \le m$
+	      </li>
+	      <li> Sequence repeats with period $m$ AT BEST
+	      </li>
+	      <li> 32-bit: $m \sim 2^{31} \sim 10^9$, whereas 64-bit: $m \sim 10^{18}$
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Tests for random number generators</h2>
+	    <ul>
+	      <li> RNGs assessed by plotting $d$-dimensional vectors
+		$(X_{n+1},\dots,X_{n+d})$ and looking for &ldquo;planes&rdquo; (which are bad)
+	      </li>
+	      <li> 3d plots: good (left); bad $LCG(2^{31},65539,0,1)$ (right)
+
+		<img src="img/RNGgood.png" width="30%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
+		<img src="img/RNGbad.png" width="30%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
+
+	      </li>
+	      <li> In addition, simulate a finite-size system for which the
+		properties are known exactly (e.g., 2D Ising model on square
+		lattice)
+	      </li>
+	      <li>
+		The gold-standard battery of tests are the <a href="https://en.wikipedia.org/wiki/Diehard_tests">Diehard tests</a>.
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Mersenne Twister</h2>
+	    <ul>
+	      <li> Based on Mersenne prime $2^{19937}-1$.
+	      </li>
+	      <li> Passes many tests for statistical randomness.
+	      </li>
+	      <li> Default random number generator for Python, MATLAB, Ruby, etc.
+		Available in standard C++.  Code is also freely available in many
+		other languages (e.g., C, FORTRAN 77, FORTRAN 90, etc.).
+	      </li>
+	    </ul>
+	  </section>
+	</section>
 	<section id="statmech">
 	  <section>
-	    <h2 class="backbox">Statistical Mechanics 2</h2>
+	    <h2 class="backbox">Statistical Mechanics Recap</h2>
 	    <p><em>
 		Ludwig Boltzman, who spent much of his life studying statistical mechanics, died in 1906, by his own hand. Paul Ehrenfest, carrying on the work, died similarly in 1933. Now it is our turn to study statistical mechanics. Perhaps it will be wise to approach the subject cautiously.
 	      </em>
@@ -686,479 +1184,6 @@
 	    </ul>
 	  </section>
 	</section>
-	<section id="MC1" style="height:100%;">
-	  <section>
-	    <h2 class="backbox">Monte Carlo: Part 1</h2>
-	    <p>
-	      <em>God does not play dice. <span style="float:right;">A. Einstein</span></em><br/><br/>
-	      <em style="clear:right;" class="fragment">God does play dice with the universe. All the evidence points to him being an inveterate gambler, who throws the dice on every possible occasion. <span style="float:right;">S. Hawking</span></em>
-	    <p style="clear:both;" class="fragment">
-	      <br/>
-	      You are the omnipotent being of your simulation, so you get to choose:
-	      \begin{align*}
-	      \langle{\mathcal A}\rangle &= \int d{\boldsymbol\Gamma}\,{\mathcal P}({\boldsymbol\Gamma})\,
-	      {\mathcal A}({\boldsymbol\Gamma}) & \text{(MC)}\\
-	      &\text{or}\\
-	      \langle{\mathcal A}\rangle&=\lim_{t_{obs.}\to\infty} \frac{1}{t_{obs.}}\int_0^{t_{obs.}}\mathcal A(t)\,{\rm d}t & \text{(MD)}
-	      \end{align*}
-	    </p>
-	    </p>
-	  </section>
-	  <section data-background="img/Casino_de_Monte-Carlo.png" style="height:100%;">
-	    <h2 class="backbox">Monte Carlo</h2>
-	    <p class="backbox" style="position:absolute; bottom:2em; right:2em;">
-	      Ulam reinvented the method while working on the nulear
-	      weapons project in 1946. This required a code name,
-	      which was taken from the Monte Carlo Casino where Ulam's
-	      uncle gambled.
-	    </p>
-	  </section>
-	  <section>
-	    <h2>Introduction</h2>
-	    <ul>
-	      <li> Monte Carlo (MC) is a stochastic molecular-simulation technique.</li>
-	      <li class="fragment">
-		Sampling can be biased towards regions of specific interest.
-	      </li>
-	      <li class="fragment">
-		Not constrained by natural timescales (as in molecular dynamics).
-	      </li>
-	      <li class="fragment">
-		Can <em>easily</em> handle fluctuating numbers of particles (as in
-		the grand canonical ensemble).
-	      </li>
-	      <li class="fragment">
-		No (physical) dynamic foundation (for the systems
-		considered here).
-	      </li>
-	    </ul>
-	  </section>
-	  <section>
-	    <h2>Overview</h2>
-	    <ul>
-	      <li> Introduction</li>
-	      <li> Practicalities</li>
-	      <li> Free energy barriers</li>
-	      <li> Advanced algorithms</li>
-	      <li> Further reading:
-		<ul>
-		  <li> MP Allen and DJ Tildesley, Computer Simulation of Liquids (1987).
-		  </li>
-		  <li> D Frenkel and B Smit, Understanding Molecular Simulation (2001).
-		  </li>
-		  <li> DP Landau and K Binder, A Guide to Monte Carlo Simulations in
-		    Statistical Physics (2000).
-		  </li>
-		</ul>
-	      </li>
-	    </ul>
-	  </section>
-	  <section>
-	    <h2>Monte Carlo evaluation of integrals</h2>
-	    \begin{equation*}
-	    I = \int_a^b f(x)\,{\rm d}x
-	    \end{equation*}
-	    <ul style="font-size:80%">
-	      <li> Uniform, probability distribution ${\mathcal P}(x)$ along the
-		interval $[a,b]$:
-		\begin{equation*}
-		{\mathcal P}(x) = \frac{1}{b-a} \left\{
-		\begin{array}{ll}
-		0 & \mbox{for $-\infty\lt x\lt a$} \\
-		1 & \mbox{for $a \le x \le b$} \\
-		0 & \mbox{for $b\lt x\lt \infty$} \\
-		\end{array}
-		\right.
-		\end{equation*}
-	      </li>
-	      <li> Randomly sample points $x_1$, $x_2$, $\cdots$ from ${\mathcal P}(x)$.
-	      </li>
-	      <li> The integral is related to the average of the function $f$:
-		\begin{equation*}
-		I = (b-a) \int_a^b {\mathcal P}(x)\,f(x) {\rm d}x = (b-a) \langle f(x) \rangle
-		\end{equation*}
-	      </li>
-	      <li> The average can be approximated by:
-		\begin{equation*}
-		I \approx \frac{(b-a)}{N} \sum_{k=1}^N f(x_k)
-		\end{equation*}
-	      </li>
-	      <li>
-		The original idea of Ulam was to calculate the chance
-		of winning Canfield solitaire, where the tediousness
-		of combinatorial calculations could be replaced by
-		simply playing a large number of games.
-	      </li>
-	    </ul>
-	  </section>
-	  <section>
-	    <h2>Example</h2>
-	    <img src="img/MC1_integrate.png"  width="65%" height="auto" style="margin:0;">
-	  </section>
-	  <section>
-	    <h2>Convergence</h2>
-	    <em>Monte Carlo is an extremely bad method; it should be used only when all alternative methods are worse.<span style="float:right;">A. D. Sokal, commenting on the convergence of Monte Carlo</span></em><br/><br/>
-	  </section>
-	  <section>
-	    <h2>Convergence</h2>
-	    How quickly does the method converge to the correct answer?  
-	    <br/>
-	    Central limit theorem:
-	    \begin{equation*}
-	    \sigma_{\left\langle f\right\rangle} = \frac{\sigma_f}{\sqrt{N}}
-	    \end{equation*}
-	    where
-	    \begin{equation*}
-	    \sigma_{f} = \langle f^2(x)\rangle - \langle f(x)\rangle^2
-	    \end{equation*}
-	    The dependence of the convergence with sample size is independent on
-	    the dimensionality of the integral.
-	  </section>
-	  <section>
-	    <h2>Example: Convergence</h2>
-
-	    <img src="img/MC1_integrate_convergence.png" width="65%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
-
-	  </section>
-	  <section>
-	    <h2>Central limit theorem</h2>
-	    Consider a set of $N$ independent variables $x_1$, $x_2$,...,$x_N$
-	    which all follow the same probability distribution function $p(x)$,
-	    with mean, $\mu$, and variance, $\sigma$.
-	    <br/>
-	    How is the mean $\bar{x}=\frac{1}{N}\sum_{k=1}^N x_k$ 
-	    of these variables distributed? 
-	    <br/>
-	    This is given by the <b>central limit theorem</b>, which
-	    becomes increasingly accurate as $N\to\infty$
-	    \begin{align*}
-	    p_{\bar{x}}(\bar{x}) &\approx
-	    (2\pi\sigma_{\bar{x}}^2)^{-1/2} 
-	    \exp\left(-\frac{(\bar{x}-\mu)^2}{2\sigma_{\bar{x}}^2}\right)
-	    \\
-	    \sigma_{\bar{x}} &\approx \frac{\sigma}{\sqrt{N}}
-	    \end{align*}
-	    This is unavoidable! But we can reduce $\sigma$ by a factor of $10^6$ or more using importance sampling.
-	  </section>
-	  <section>
-	    <h2>Example:  Uniform distribution</h2>
-
-	    <img src="img/MC1_centrallimit1.png" width="65%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
-	  </section>
-	  <section>
-	    <h2>Example:  Exponential distribution</h2>
-	    <img src="img/MC1_centrallimit2.png" width="65%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
-	  </section>
-	  <section style="height:100%;">
-	    <h2>Example:  Galton Board</h2>
-	    <div style="height:90%;width:100%; position:relative;">
-	      <iframe src="http://www.youtube.com/embed/03tx4v0i7MA" frameborder="0" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
-	    </div>
-	  </section>
-	  <section>
-	    <h2>Multidimensional integrals</h2>
-	    <p>
-	      \begin{equation*}
-	      I = \int_{V} f({\bf x}) {\rm d}{\bf x}
-	      \end{equation*}
-	      <ul style="font-size:80%;">
-		<li> Uniform, probability distribution ${\mathcal P}({\bf x})$ within the
-		  region $V$:
-		</li>
-		<li> Randomly sample points ${\bf x}_1$, ${\bf x}_2$, $\cdots$ from
-		  ${\mathcal P}({\bf x})$.
-		</li>
-		<li> The integral is related to the average of the function $f$:
-		  \begin{equation*}
-		  I = V \int_{V} {\mathcal P}({\bf x})\,f({\bf x})\,{\rm d}{\bf x}
-		  = V \langle f({\bf x}) \rangle
-		  \end{equation*}
-		</li>
-		<li> The average can be approximated by:
-		  \begin{equation*}
-		  I \approx \frac{V}{N} \sum_{k=1}^N f({\bf x}_k)
-		  \end{equation*}
-		</li>
-	      </ul>
-	    </p>
-	  </section>
-	  <section>
-	    <h2>Importance sampling</h2>
-	    \begin{equation*}
-	    I = \int_{V} f({\bf x})\,{\rm d}{\bf x}
-	    \end{equation*}			
-	    <img src="img/importance.png" width="30%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1); float:right;">
-	    Importance sampling:
-	    <div style="width:60%; float:left">
-	      <ul>
-		<li> Choose distribution ${\mathcal P}$ to make $f({\bf x})/{\mathcal
-		  P}({\bf x})$ as constant as possible:
-		  \begin{equation*}
-		  I = \int_{V} {\mathcal P}({\bf x}) \,
-		  \frac{f({\bf x})}{{\mathcal P}({\bf x})}{\rm d}{\bf x}
-		  \end{equation*}
-		</li>
-		<li> Sample using $x$ from distribution ${\mathcal P}$
-		  \begin{equation*}
-		  I \approx \frac{V}{N} \sum_k   
-		  \frac{f({\bf x})}{{\mathcal P}({\bf x})}
-		  \end{equation*}
-		</li>
-		<li>
-		  The variance is significantly reduced.
-		</li>
-	      </ul>
-	    </div>
-
-	    <span style="font-size:80%;">
-	      \begin{align*}
-	      f(x) &= x^{-1/3} + \frac{x}{10}
-	      \\
-	      \mathcal{P}(x) &= \frac{2}{3} x^{-1/3}
-	      \end{align*}
-	    </span>
-	  </section>
-	  <section>
-	    <h2>Influence of importance sampling</h2>
-	    <img src="img/MC1_importance.png" width="60%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
-	  </section>
-	  <section>
-	    <h2>Sampling from an arbitrary distribution</h2>
-	    <ul>
-	      <li> Importance sampling requires the generation of numbers from an
-		arbitrary probability distribution.
-	      </li>
-	      <li> One dimensional distributions can be sampled by sampling
-		uniformly from the cumulative distribution function.
-	      </li>
-	      <li> In higher dimensions, sampling algorithms are only available for
-		certain distributions (e.g., Gaussian distributions).
-	      </li>
-	      <li> The Metropolis method allows the sampling of arbitrary,
-		multidimensional distributions.  This relies on constructing a Markov process.
-	      </li>
-	    </ul>
-	  </section>
-	  <section>
-	    <h2>Markov process</h2>
-	    A Markov process is a stochastic process where the future state of the
-	    system depends only on the present state of the system and not on its
-	    previous history.
-	    <ul>
-	      <li> ${\mathcal P}_\alpha^{(n)}$ probability that the state $\alpha$ is
-		occupied at step $n$.
-	      </li>
-	      <li> Transition probability $W_{\alpha'\leftarrow\alpha}$ <br/>
-		Probability that a system in state $\alpha'$ will transition to
-		state $\alpha$.
-	      </li>
-	      <li> Markov chain:
-		\begin{equation*}
-		{\mathcal P}_\alpha^{(n+1)} 
-		= \sum_{\alpha'} W_{\alpha\leftarrow\alpha'} {\mathcal P}_{\alpha'}^{(n)}
-		\end{equation*}
-	      </li>
-	      <li> What guarantees a stationary, limiting distribution
-		${\mathcal P}_\alpha$ even exists?
-	      </li>
-	    </ul>
-	  </section>
-	  <section>
-	    <h2>Transition probabilities</h2>
-	    <ul>
-	      <li> $W_{\alpha'\leftarrow \alpha}$ is the probability that the
-		system will transition to state $\alpha'$, given that it is in state
-		$\alpha$.
-	      </li>
-	      <li> The transition matrix must satisfy:
-		\begin{equation*}
-		\sum_{\alpha'} W_{\alpha'\leftarrow \alpha} = 1
-		\end{equation*}
-	      </li>
-	      <li> The choice of the transition matrix determines the properties of
-		the Markov process.
-	      </li>
-	    </ul>
-	  </section>
-	  <section>
-	    <h2>Stationary distribution</h2>
-	    <p>
-	      We need to choose the transition matrix to ensure that the stationary
-	      distribution
-	    </p>
-	    <ul>
-	      <li> exists and is unique
-		\begin{equation*}
-		{\mathcal P}_\alpha =  
-		\sum_{\alpha'} W_{\alpha\leftarrow\alpha'} {\mathcal P}_{\alpha'}
-		\end{equation*}
-	      </li>
-	      <li> is rapidly approached
-		\begin{align*}
-		\lim_{n\to\infty} {\mathcal P}_\alpha^{(n)} &= {\mathcal P}_\alpha
-		\\
-		{\mathcal P}_\alpha^{(n)}
-		&= \sum_{\alpha_1,\alpha_2,\dots,\alpha_n}
-		W_{\alpha\leftarrow\alpha_1}W_{\alpha_1\leftarrow\alpha_2}\cdots 
-		W_{\alpha_{n-1}\leftarrow\alpha_n}{\mathcal P}_{\alpha_n}^{(0)}
-		\\
-		&= \sum_{\alpha'}
-		W_{\alpha\leftarrow\alpha'}^n{\mathcal P}_{\alpha'}^{(0)}
-		\end{align*}
-	      </li>
-	    </ul>
-	  </section>
-	  <section>
-	    <h2>Detailed balance</h2>
-	    <ul>
-	      <li> Physically, the condition of detailed balance requires that the
-		probability of observing the system transition from state a $\alpha$
-		to another state $\alpha'$ is the same as observing it transition
-		from $\alpha'$ to $\alpha$.
-	      </li>
-	      <li> Mathematically, this is
-		\begin{equation*}
-		W_{\alpha\leftarrow \alpha'} {\mathcal P}_{\alpha'} 
-		=  W_{\alpha'\leftarrow \alpha} {\mathcal P}_\alpha
-		\end{equation*}
-	      </li>
-	      <li> If the transition probability satisfies the detailed balance
-		condition, the Markov process has a unique, stationary limiting
-		distribution.
-	      </li>
-	      <li> Detailed balance is not required for the Markov process to
-		possess a unique, stationary limiting distribution.
-	      </li>
-	    </ul>
-	  </section>
-	  <section>
-	    <h2>Metropolis method</h2>
-	    <ul>
-	      <li> The Metropolis method provides a manner to sample from any
-		probability distribution ${\mathcal P}_\alpha$, using a Markov
-		process.
-	      </li>
-	      <li> The transition probabilities are divided into two contributions:
-		\begin{equation*}
-		W_{\alpha'\leftarrow \alpha} 
-		= A_{\alpha'\leftarrow \alpha} g_{\alpha'\leftarrow \alpha}
-		\end{equation*}
-		where $g_{\alpha'\leftarrow \alpha}$ is the probability of selecting a
-		move to state $\alpha'$, given the system is at state $\alpha$, and
-		$A_{\alpha'\leftarrow \alpha}$ is the probability of accepting the
-		proposed move.
-	      </li>
-	      <li> The acceptance probability is given by
-		\begin{equation*}
-		A_{\alpha'\leftarrow\alpha} = \left\{
-		\begin{array}{ll}
-		1 & \mbox{if ${\mathcal P}_{\alpha'}\gt {\mathcal P}_\alpha$} \\
-		\frac{{\mathcal P}_{\alpha'}}{{\mathcal P}_\alpha} 
-		& \mbox{if ${\mathcal P}_{\alpha'}\lt {\mathcal P}_\alpha$}
-		\end{array}
-		\right.
-		\end{equation*}
-	      </li>
-	      <li> If $g_{\alpha'\leftarrow \alpha}=g_{\alpha\leftarrow \alpha'}$,
-		then the process satisfies detailed balance.
-	      </li>
-	    </ul>
-	  </section>
-	  <section>
-	    <h2>Metropolis method</h2>
-	    <object type="image/svg+xml" data="img/metropolis.svg" width="60%" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
-	      Your browser does not support SVG
-	    </object>
-	  </section>
-	  <section>
-	    <h2>Markov process: Continuous state space</h2>
-	    <ul>
-	      <li> ${\mathcal P}^{(n)}(x)$ probability that the state $x$ is
-		occupied at step $n$.
-	      </li>
-	      <li> Transition probability $W(x'\leftarrow x)$ <br/>
-		Probability that a system in state $x$ will transition to state $x'$.
-	      </li>
-	      <li> Markov chain
-		\begin{equation*}
-		{\mathcal P}^{(n+1)}(x) = \int W(x\leftarrow x')\,{\mathcal P}^{(n)}(x')\,{\rm d}{\bf x}'
-		\end{equation*}
-	      </li>
-	    </ul>
-	  </section>
-	  <section>
-	    <h2>Random number generators</h2>
-	    <em>Any one who considers arithmetical methods of producing random digits is, of course, in a state of sin.<span style="float:right;">J. von Neumann</span></em>
-	    <p class="fragment">
-	      von Neumann is simply trying to caution
-	      you against believing that random number
-	      generators (RNG) are actually random.
-	    </p>
-	    <p class="fragment">
-	      But GPU graphics programmers really do use a state of $\sin$!
-	      \begin{align*}
-	      x_i  = {\rm fract}(43758.5453\sin(12.9898\,i))
-	      \end{align*}
-	    </p>
-	  </section>
-	  <section>
-	    <h2>Pseudo-random number generators</h2>
-	    <ul>
-	      <li> Typically, random deviates are
-		available with a uniform distribution
-		on $[0,1)$.</li>
-	      <li> Be suspicious of intrinsic "<tt>ran</tt>" functions
-	      </li>
-	      <li> Linear congruential generators use the recursion
-		\begin{equation*}
-		X_{j+1} = a X_j + b \qquad \mod m
-		\end{equation*}
-	      </li>
-	      <li> Written ${\rm LCG}(m,a,b,X_0)$
-	      </li>
-	      <li> Generates integers in range $0 \le X \le m$
-	      </li>
-	      <li> Sequence repeats with period $m$ AT BEST
-	      </li>
-	      <li> 32-bit: $m \sim 2^{31} \sim 10^9$, whereas 64-bit: $m \sim 10^{18}$
-	      </li>
-	    </ul>
-	  </section>
-	  <section>
-	    <h2>Tests for random number generators</h2>
-	    <ul>
-	      <li> RNGs assessed by plotting $d$-dimensional vectors
-		$(X_{n+1},\dots,X_{n+d})$ and looking for &ldquo;planes&rdquo; (which are bad)
-	      </li>
-	      <li> 3d plots: good (left); bad $LCG(2^{31},65539,0,1)$ (right)
-
-		<img src="img/RNGgood.png" width="30%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
-		<img src="img/RNGbad.png" width="30%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
-
-	      </li>
-	      <li> In addition, simulate a finite-size system for which the
-		properties are known exactly (e.g., 2D Ising model on square
-		lattice)
-	      </li>
-	      <li>
-		The gold-standard battery of tests are the <a href="https://en.wikipedia.org/wiki/Diehard_tests">Diehard tests</a>.
-	      </li>
-	    </ul>
-	  </section>
-	  <section>
-	    <h2>Mersenne Twister</h2>
-	    <ul>
-	      <li> Based on Mersenne prime $2^{19937}-1$.
-	      </li>
-	      <li> Passes many tests for statistical randomness.
-	      </li>
-	      <li> Default random number generator for Python, MATLAB, Ruby, etc.
-		Available in standard C++.  Code is also freely available in many
-		other languages (e.g., C, FORTRAN 77, FORTRAN 90, etc.).
-	      </li>
-	    </ul>
-	  </section>
-	</section>
 	<section id="MC2">
 	  <section>
 	    <h2 class="backbox">Monte Carlo 2</h2>
@@ -1636,7 +1661,7 @@
 	  <section>
 	    <h2>Results: Lennard-Jones fluid</h2>
 	    
-	    <img src="img/LJtable.png" width="75%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
+	    <img src="img/LJtable.png" width="55%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
 	    <p>
 	      Regardless of the ensemble (how we specify the
 	      thermodynamic state), at the same state
@@ -1755,10 +1780,10 @@
 	  <section>
 	    <h2>Histogram extrapolation</h2>
 	    <ul>
-	      <li> Consider an NVT simulation at $\beta_0$, where we collect an energy histogram, ${\mathcal H}(E;\beta_0)$:
+	      <li> Consider an $NVT$ simulation at $\beta_0$, where we collect an energy histogram, ${\mathcal H}(E;\beta_0)$:
 		\begin{align*}
 		{\mathcal P}(E;\beta_0) &= \frac{\Omega(N,V,E)}{Q(N,V,\beta_0)} e^{-\beta_0 E}
-		\\
+		&
 		{\mathcal H}(E;\beta_0) &\propto \Omega(N,V,E) e^{-\beta_0 E}
 		\end{align*}
 	      </li>
@@ -1848,7 +1873,7 @@
 		  where $\sum_k w_k=1$ and $Z_k=\sum_{E,X} \Omega(N,V,E,X) e^{-\beta_k E}$.
 		</li>
 		<li> The uncertainty in ${\mathcal H}(X,E;\beta_k)$ is
-		  roughly $[{\mathcal H}(X,E;\beta_k)]^{1/2}$ (Poisson, like MC).
+		  roughly $[{\mathcal H}(X,E;\beta_k)]^{1/2}$ (MC/Poisson).
 		</li>
 		<li> Determining the weights $w_k$ by
 		  minimizing the uncertainty of the
@@ -2149,7 +2174,7 @@
 		\end{align*}
 	      </li>
 	      <li> The ratio $Z_{G}(\mu_1,V,\beta_1)/Z_{G}(\mu_0,V,\beta_0)$ is
-		just a normalizing factor, so that
+		just a normalizing factor,
 		<span style="font-size:80%">
 		  \begin{align*}
 		  \sum_{N} \int dE {\mathcal P}(N,E;\mu,V,\beta)
@@ -2283,11 +2308,7 @@
 	    Dr Philip Camp (Edinburgh), where some slides originated from.
 	  </p>
 	  <p>
-	    Thank you also to Prof. Allan/Dr. Purton/CCP5 for the
-	    opportunity, and you for your attention.</p>
-	  <p>
-	    Have fun!
-	  </p>
+	    Thank you to you for your attention.</p>
 	</section>
 	<section id="extra">
 	  <h2>Extra files needed for the practicals</h2>
