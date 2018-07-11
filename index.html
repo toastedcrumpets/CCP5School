@@ -62,7 +62,7 @@
   </head>
   <body>
     <div class="reveal">
-      <div class="slides">
+      <div class="slides" style="border:1px solid white">
 	<section style="height:100%;width:100%;">
 	  <section style="height:100%;width:100%;">
 	    <div class="backbox">
@@ -178,32 +178,32 @@
 	    I = \int_a^b f(x)\,{\rm d}x
 	    \end{equation*}
 	    <ul style="font-size:80%">
-	      <li> Uniform, probability distribution ${\mathcal P}(x)$ along the
-		interval $[a,b]$:
-		\begin{equation*}
-		{\mathcal P}(x) = \frac{1}{b-a} \left\{
-		\begin{array}{ll}
-		0 & \mbox{for $-\infty\lt x\lt a$} \\
-		1 & \mbox{for $a \le x \le b$} \\
-		0 & \mbox{for $b\lt x\lt \infty$} \\
-		\end{array}
+		<li> Implicit uniform probability/sampling distribution ${\mathcal P}(x)$ along the
+		    interval $[a,b]$:
+		    \begin{equation*}
+		    {\mathcal P}(x) = \frac{1}{b-a} \left\{
+		    \begin{array}{ll}
+		    1 & \mbox{for $a \le x \le b$} \\
+		    0 & \mbox{for $x\lt a$ or $x\gt a$} \\
+		    \end{array}
 		\right.
 		\end{equation*}
 	      </li>
-	      <li> Randomly sample points $x_1$, $x_2$, $\cdots$ from ${\mathcal P}(x)$.
-	      </li>
-	      <li> The integral is related to the average of the function $f$:
-		\begin{equation*}
-		I = (b-a) \int_a^b {\mathcal P}(x)\,f(x) {\rm d}x = (b-a) \langle f(x) \rangle
-		\end{equation*}
-	      </li>
-	      <li> The average can be approximated by:
+	      <li class="fragment">
+		  If we randomly sample points $x_1$, $x_2$, $\cdots$
+		  from ${\mathcal P}(x)$. The integral is related to
+		  the average of the function $f$:
+		  
+		\begin{equation*} I = (b-a) \int_a^b {\mathcal
+		P}(x)\,f(x) {\rm d}x = (b-a) \langle f(x) \rangle
+		\end{equation*}</li>
+	      <li class="fragment"> The average can be approximated by:
 		\begin{equation*}
 		I \approx \frac{(b-a)}{N} \sum_{k=1}^N f(x_k)
 		\end{equation*}
 	      </li>
-	      <li>
-		  The original idea of Ulam was to calculate the chance
+	      <li class="fragment">
+		  Ulam's initial application was to calculate the chance
 		  of winning Canfield solitaire, where the tediousness
 		  of combinatorial calculations could be replaced by
 		  simply playing a large number of games.
@@ -212,7 +212,9 @@
 	  </section>
 	  <section>
 	      <h2>Convergence</h2>
-	      <em>Monte Carlo is an extremely bad method; it should be used only when all alternative methods are worse.<br/><span style="float:right;">A. D. Sokal</span></em><br/><br/>
+	      <p>
+		  <em>Monte Carlo is an extremely bad method; it should be used only when all alternative methods are worse.<br/><span style="float:right;">A. D. Sokal</span></em>
+	      </p>
 	  </section>
 	  <section>
 	      <h2>Example: Convergence</h2>
@@ -272,6 +274,10 @@
 		  \sigma_{\bar{x}} &\approx \frac{\sigma}{\sqrt{N}}
 		  \end{align*}
 	      </p>
+	      <p class="fragment">
+		  All our results follow this so far, and it applies
+		  to most processes, physics has never been so easy&hellip;
+	      </p>
 	  </section>
 	  <section>
 	      <img src="img/MC1_centrallimit1.png" width="55%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
@@ -296,8 +302,8 @@
 	  <section>
 	      <h2>Convergence</h2>
 	      <p>
-		  How quickly does the average converge to the correct
-		  answer?<br/>
+		  How quickly does the average of central-limit
+		  processes converge to the correct answer?<br/>
 		  Central limit theorem:
 		  \begin{equation*}
 		  \sigma_{\left\langle f\right\rangle} = \frac{\sigma_f}{\sqrt{N}}
@@ -314,7 +320,7 @@
 	      <p class="fragment">
 		  One massive positive, the dependence of the
 		  convergence with sample size is independent on the
-		  dimensionality of the integral.
+		  dimensionality of the integral (thank you CL theory!).
 	      </p>
 	  </section>
 	  <section>
@@ -323,7 +329,7 @@
 	      \begin{equation*}
 	      I = \int_{V} f({\bf x}) {\rm d}{\bf x}
 	      \end{equation*}
-	      <ul style="font-size:80%;">
+	      <ul>
 		<li> Uniform, probability distribution ${\mathcal P}({\bf x})$ within the
 		  region $V$:
 		</li>
@@ -345,28 +351,27 @@
 	    </p>
 	  </section>
 	  <section>
-	    <h2>Importance sampling</h2>
+	      <b>Importance sampling</b>
 	    \begin{equation*}
 	    I = \int_{V} f({\bf x})\,{\rm d}{\bf x}
 	    \end{equation*}			
 	    <img src="img/importance.png" width="30%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1); float:right;">
-	    Importance sampling:
 	    <div style="width:60%; float:left">
 	      <ul>
-		<li> Choose distribution ${\mathcal P}$ to make $f({\bf x})/{\mathcal
-		  P}({\bf x})$ as constant as possible:
-		  \begin{equation*}
-		  I = \int_{V} {\mathcal P}({\bf x}) \,
-		  \frac{f({\bf x})}{{\mathcal P}({\bf x})}{\rm d}{\bf x}
-		  \end{equation*}
-		</li>
-		<li> Sample using $x$ from now non-uniform distribution ${\mathcal P}(x)$
-		  \begin{equation*}
-		  I \approx \frac{V}{N} \sum_k   
-		  \frac{f({\bf x})}{{\mathcal P}({\bf x})}
-		  \end{equation*}
-		</li>
-		<li>
+		  <li> Choose distribution ${\mathcal P}$ to make $f({\bf x})/{\mathcal
+		      P}({\bf x})$ as constant as possible:
+		      \begin{equation*}
+		      I = \int_{V} {\mathcal P}({\bf x}) \,
+		      \frac{f({\bf x})}{{\mathcal P}({\bf x})}{\rm d}{\bf x}
+		      \end{equation*}
+		  </li>
+		  <li class="fragment"> Sample using $x$ from now non-uniform distribution ${\mathcal P}(x)$
+		      \begin{equation*}
+		      I \approx \frac{V}{N} \sum_k   
+		      \frac{f({\bf x})}{{\mathcal P}({\bf x})}
+		      \end{equation*}
+		  </li>
+		  <li class="fragment">
 		    The variance can be significantly reduced if the
 		    sharp peaks can be flattened.
 		</li>	
@@ -397,13 +402,13 @@
 	      <li> Importance sampling requires the generation of numbers from an
 		arbitrary probability distribution.
 	      </li>
-	      <li> One dimensional distributions can be sampled by sampling
+	      <li class="fragment"> One dimensional distributions can be sampled by sampling
 		uniformly from the cumulative distribution function.
 	      </li>
-	      <li> In higher dimensions, sampling algorithms are only available for
+	      <li class="fragment"> In higher dimensions, sampling algorithms are only available for
 		certain distributions (e.g., Gaussian distributions).
 	      </li>
-	      <li> The Metropolis method allows the sampling of arbitrary,
+	      <li class="fragment"> The Metropolis method allows the sampling of arbitrary,
 		multidimensional distributions.  This relies on constructing a Markov process.
 	      </li>
 	    </ul>
@@ -414,20 +419,20 @@
 	    system depends only on the present state of the system and not on its
 	    previous history.
 	    <ul>
-	      <li> ${\mathcal P}_\alpha^{(n)}$ probability that the state $\alpha$ is
+	      <li class="fragment"> ${\mathcal P}_\alpha^{(n)}$ probability that the state $\alpha$ is
 		occupied at step $n$.
 	      </li>
-	      <li> Transition probability $W_{\alpha'\leftarrow\alpha}$ <br/>
+	      <li class="fragment"> Transition probability $W_{\alpha'\leftarrow\alpha}$ <br/>
 		Probability that a system in state $\alpha'$ will transition to
 		state $\alpha$.
 	      </li>
-	      <li> Markov chain:
+	      <li class="fragment"> Markov chain:
 		\begin{equation*}
 		{\mathcal P}_\alpha^{(n+1)} 
 		= \sum_{\alpha'} W_{\alpha\leftarrow\alpha'} {\mathcal P}_{\alpha'}^{(n)}
 		\end{equation*}
 	      </li>
-	      <li> What guarantees a stationary, limiting distribution
+	      <li class="fragment"> What guarantees a stationary, limiting distribution
 		${\mathcal P}_\alpha$ even exists?
 	      </li>
 	    </ul>
@@ -484,18 +489,18 @@
 		    condition, the Markov process has a unique, stationary limiting
 		    distribution.
 		</li>
-		<li> Physically, the condition of detailed balance requires that the
+		<li class="fragment"> Physically, the condition of detailed balance requires that the
 		    probability of observing the system transition from state a $\alpha$
 		    to another state $\alpha'$ is the same as observing it transition
 		    from $\alpha'$ to $\alpha$.
 		</li>
-		<li> Mathematically, this is
+		<li class="fragment"> Mathematically, this is
 		    \begin{equation*}
 		    W_{\alpha\leftarrow \alpha'} {\mathcal P}_{\alpha'} 
 		=  W_{\alpha'\leftarrow \alpha} {\mathcal P}_\alpha
 		\end{equation*}
 	      </li>
-	      <li> Detailed balance is not required for the Markov
+	      <li class="fragment"> Detailed balance is not required for the Markov
 		process to possess a unique, stationary limiting
 		distribution, but its a nice way to make sure.</li>
 	    </ul>
@@ -687,7 +692,7 @@
 			\propto \Omega(N,V,E)\,e^{ - \beta E}
 			\end{equation*}
 		    </li>
-		    <li> Distribution of states:
+		    <li> Distribution of individual states:
 			\begin{equation*}
 			{\mathcal P}({\boldsymbol\Gamma};N,V,\beta) 
 			\propto e^{ - \beta H({\boldsymbol\Gamma})}
@@ -773,6 +778,18 @@
 		</ul>
 	    </section>
 	    <section>
+		<h2>Particle move regions</h2>
+		<object type="image/svg+xml" data="img/SingleParticleMoves.svg" width="60%" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
+		    Your browser does not support SVG
+		</object>
+		<p>
+		    We must be careful to ensure detailed balance,
+		    when moving a particle it must be able to return to
+		    its initial starting point, so spheres and cubes are
+		    fine, but not triangular test regions!
+		</p>
+	    </section>
+	    <section>
 		<h2>Tuning the acceptance rate</h2>
 		<ul>
 		    <li> Acceptance rate controlled by maximum displacement(s).
@@ -784,18 +801,23 @@
 		    <li> Small displacements are more likely to be accepted, but progress
 			through configuration space is slow.
 		    </li>
-		    <li> This is not always a sensible choice!
+		    <li>
+			Although moves are accepted, this is not be a
+			sensible limit to work in.
 		    </li>
-		    <li> Adjust trial displacements to give maximum actual displacement
-			per unit CPU time.
+		    <li>
+			Trial displacements should be adjusted to give
+			maximum actual displacement per unit CPU time.
 		    </li>
 		</ul>
 	    </section>
 	    <section>
-		<h2>Energy autocorrelation function</h2>
-
-		<img src="img/acf.png" width="60%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
-
+		<b>Energy autocorrelation function</b>
+		<img src="img/acf.png" width="50%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
+		<p>
+		    In this simulation, the intermediate maximum trial
+		    move distance results in the fastest decay (i.e., the
+		    fastest sampling of phase space) per move.</p>
 	    </section>
 	    <section>
 		<h2>Equilibration</h2>
@@ -807,8 +829,10 @@
 			from equilibrium decreases like $\exp(-\tau/\tau_0)$, where $\tau_0$
 			is the correlation &ldquo;time&rdquo;
 		    </li>
-		    <li> Must only retain measurements (for ensemble averages etc.) when
-			$\tau\gg\tau_0$
+		    <li> Must only retain measurements (for ensemble
+			averages etc.) when $\tau\gg\tau_0$, so that
+			the initial (typically unphysical) condition
+			is lost.
 		    </li>
 		    <li>
 			See the exercises and the Molecular Dynamics simulation lectures for more information.
@@ -942,7 +966,7 @@
 		    <li> Volume move $V\to V+\Delta V$ ($-\Delta V_{\rm max}\le\Delta V
 			\le\Delta V_{\rm max}$ results in $U\to U+\Delta U$)
 			\begin{align*}
-			A(o\to n) &= \min(1,e^{-\beta\Delta U})
+			A(o\to n) &= \min\left(1,\,p(V+\Delta V)/p(V)\right)
 			\\
 			\frac{p(V+\Delta V)}{p(V)}
 			&= \frac{(V+\Delta V)^N}{V^N} e^{-\beta(\Delta U + p\Delta V)}
@@ -992,7 +1016,7 @@
 		</ul>
 	    </section>
 	    <section>
-		<h2>MC simulations in the grand canonical ensemble</h2>
+		<b>MC simulations in the grand canonical ensemble</b>
 		<ul style="font-size:80%;">
 		    <li> Single particle move (results in $U\to U+\Delta U$) as before.</li>
 		    <li> Particle insertion:  $N\to N+1$ 
@@ -1085,7 +1109,7 @@
 		    \begin{align*}
 		    u_{\rm LJ}(r) &= 4\varepsilon\left[\left(\frac{\sigma}{r}\right)^{12}
 		    - \left(\frac{\sigma}{r}\right)^{6}\right]
-		    \\
+		    &
 		    u(r) &= \left\{
 		    \begin{array}{ll}
 		    u_{\rm LJ}(r) - u_{\rm LJ}(r_c) & \mbox{for $r\lt r_c$} \\
@@ -1104,10 +1128,14 @@
 		<h2>Results: Lennard-Jones fluid</h2>
 		<img src="img/LJMCdata.png" width="45%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
 		<img src="img/LJSofk.png" width="45%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
+		<p>
+		    Observing properties over the duration of the
+		    simulation can give confidence we have reached
+		    equilibrium (or become stuck...).
+		</p>
 	    </section>
 	    <section>
-		<h2>Results: Lennard-Jones fluid</h2>
-		
+		<h2>Results: Lennard-Jones fluid</h2>		
 		<img src="img/LJtable.png" width="55%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
 		<p>
 		    Regardless of the ensemble (how we specify the
