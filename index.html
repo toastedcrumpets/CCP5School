@@ -63,7 +63,7 @@
   </head>
   <body>
     <div class="reveal">
-      <div class="slides" style="border:1px solid white">
+      <div class="slides">
 	<section style="height:100%;width:100%;">
 	  <section style="height:100%;width:100%;">
 	    <div class="backbox">
@@ -82,10 +82,9 @@
 	    </p>
 	  </section>
 	  <section>
-	    <a href="https://mybinder.org/v2/gh/toastedcrumpets/CCP5_Python_examples/master">Python pre-school course notes [External link]</a>
-	    <div class="backbox">
-	      <h2>Slide deck contents</h2>
-	    </div>
+	    <h3 style="margin-top:1em;">Python pre-school course notes</h3>
+	    <a href="https://mybinder.org/v2/gh/toastedcrumpets/CCP5_Python_examples/master"><span style="font-size:75%">https://mybinder.org/v2/gh/toastedcrumpets/CCP5_Python_examples/master</span></a>
+	    <h3 style="margin-top:1em;">2019 Lectures</h3>
 	    <p>
 	      <ul>
 		<li>
@@ -94,10 +93,14 @@
 		<li>
 		    <a href="#MC2">Monte Carlo 2</a>
 		</li>
-		<li>
+		<h3 style="margin-top:1em;font-size:75%;">Old notes (online only)</h3>
+		<li style="list-style: none;font-size:75%;margin-top:2em;">
+		  
+		</li>
+		<li style="font-size:75%;">
 		    <a href="#MC3">Monte Carlo 3</a>
 		</li>
-		<li>
+		<li style="font-size:75%;">
 		    <a href="#statmech">Statistical Mechanics Primer (old)</a>
 		</li>
 	      </ul>
@@ -119,35 +122,78 @@
 	      &\text{or}\\
 	      \langle{\mathcal A}\rangle&=\lim_{t_{obs.}\to\infty} \frac{1}{t_{obs.}}\int_0^{t_{obs.}}\mathcal A(t)\,{\rm d}t & \text{(MD)}
 	      \end{align*}
+	    </p>	    
+	  </section>
+	  <section>
+	    <p>
+	      Imagine simulating roulette to evaluate betting
+	      strategies on your balance $\mathcal{A}$. You could evaluate
+	      them over time $t$ by simulating the motion of the ball as
+	      it visits the different numbers/states of the wheel,
+	      
+	      \begin{align*}
+	      \langle{\mathcal A}\rangle&=\lim_{t_{obs.}\to\infty} \frac{1}{t_{obs.}}\int_0^{t_{obs.}}\mathcal A(t)\,{\rm d}t & \text{(MD)}.
+	      \end{align*}
 	    </p>
+	    <p class="fragment">
+	      Or you can directly sample the numbers/states ${\boldsymbol\Gamma}$ as you know their probability distribution beforehand,
+	      \begin{align*}
+	      \langle{\mathcal A}\rangle &= \int d{\boldsymbol\Gamma}\,{\mathcal P}({\boldsymbol\Gamma})\,
+	      {\mathcal A}({\boldsymbol\Gamma}) & \text{(MC)}.
+	      \end{align*}
 	    </p>
-	  </section>	  
+	    <p class="fragment">
+	      The system must be ergodic and you must know the
+	      (relative) probability of the states for these averages
+	      to be equal. Suprisingly, this is often the case for
+	      molecular systems (see stat. mech. lectures).
+	    </p>
+	  </section>
 	  <section data-background="img/Casino_de_Monte-Carlo.png" style="height:100%;">
 	    <h2 class="backbox">Monte Carlo</h2>
-	    <p class="backbox" style="position:absolute; bottom:2em; right:2em;">
-	      Ulam reinvented the method while working on the nuclear
-	      weapons project in 1946. This required a code name,
-	      which was taken from the Monte Carlo Casino where Ulam's
-	      uncle gambled.
-	    </p>
+	    <div  style="position:absolute; bottom:2em; right:2em;">
+	      <p class="backbox">
+		Molecular dynamics has a very large number of
+		states, we cannot visit them all.
+	      </p>
+	      <p class="backbox">
+		Stanisław Marcin Ulam (re)invented the Monte Carlo
+		method while working on the nuclear weapons project in
+		1946. The code name came from the Monte Carlo Casino
+		where Ulam's uncle gambled, and the idea came from
+		considering the large number of states in Canfield
+		solitaire.
+	      </p>
+	      <p class="backbox">
+		The ergodic idea is that we can visit "enough" to get
+		a good approximation of the observables
+		$\mathcal{A}$. My lectures will cover the basics of
+		Monte Carlo integration, and its application to
+		molecular systems.
+	      </p>
+	    </div>
 	  </section>
 	  <section>
 	    <h2>Introduction</h2>
 	    <ul>
 	      <li> Monte Carlo (MC) is a stochastic molecular-simulation technique.</li>
 	      <li class="fragment">
-		Sampling can be biased towards regions of specific interest.
+		Sampling can be biased towards regions of specific interest (see MC 3).
 	      </li>
 	      <li class="fragment">
-		Not constrained by natural timescales (as in molecular dynamics).
+		Not constrained by natural timescales (as in molecular
+		dynamics) but time does not generally exist in MC
+		simulation.
 	      </li>
 	      <li class="fragment">
-		Can <em>easily</em> handle fluctuating numbers of particles (as in
-		the grand canonical ensemble).
+		No (physical) dynamic foundation for the systems
+		considered here.
 	      </li>
 	      <li class="fragment">
-		No (physical) dynamic foundation (for the systems
-		considered here).
+		Can <em>easily</em> handle fluctuating numbers of
+		particles (as in the grand canonical ensemble)
+		impossible(?) for molecular dynamics, but actually the
+		closest ensemble to real experiments.
 	      </li>
 	    </ul>
 	  </section>
@@ -240,7 +286,7 @@
 	      <p>
 		  The average of $N$ normally distributed random
 		  numbers, centered about $1$, with standard deviation
-		  of $\sigma_f$ also gives the same sort of convergence(!).</p>
+		  of $\sigma_f$ also gives the same sort of convergence!.</p>
 	  </section> 
 	  <section>
 	      <img src="img/MC1_integrate.png"  width="50%" height="auto" style="margin:0;">
@@ -325,6 +371,8 @@
 	  <section>
 	    <h2>Multidimensional integrals</h2>
 	    <p>
+	      The position and velocity of every atom/molecule form a $3N$-dimensional phase space, so we need multidimensional MC.
+	      
 	      \begin{equation*}
 	      I = \int_{V} f({\bf x}) {\rm d}{\bf x}
 	      \end{equation*}
@@ -398,7 +446,11 @@
 	  <section>
 	    <h2>Sampling from an arbitrary distribution</h2>
 	    <ul>
-	      <li> Importance sampling requires the generation of numbers from an
+	      <li >
+		We need to sample molecular coordinates according to
+		probability distributions from statistical mechanics.
+	      </li>
+	      <li class="fragment"> Importance sampling also requires the generation of numbers from an
 		arbitrary probability distribution.
 	      </li>
 	      <li class="fragment"> One dimensional distributions can be sampled by sampling
@@ -576,6 +628,10 @@
 	      x_i  = {\rm fract}(43758.5453\sin(12.9898\,i))
 	      \end{align*}
 	    </p>
+	    <p class="fragment">
+	      When performing Monte Carlo, you must make sure your
+	      randomness is sufficiently random.
+	    </p>
 	  </section>
 	  <section>
 	    <h2>Pseudo-random number generators</h2>
@@ -585,7 +641,7 @@
 		on $[0,1)$ in most programming languages.</li>
 	      <li> Be suspicious of intrinsic "<tt>ran</tt>" functions
 	      </li>
-	      <li> Linear congruential generators use the recursion
+	      <li> Linear congruential generators are often used for these and use the recursion
 		\begin{equation*}
 		X_{j+1} = a X_j + b \qquad \mod m
 		\end{equation*}
@@ -594,7 +650,7 @@
 	      </li>
 	      <li> Generates integers in range $0 \le X \le m$
 	      </li>
-	      <li> Sequence repeats with period $m$ AT BEST
+	      <li> Extremely fast but sequence repeats with period $m$ AT BEST
 	      </li>
 	      <li> 32-bit: $m \sim 2^{31} \sim 10^9$, whereas 64-bit: $m \sim 10^{18}$
 	      </li>
@@ -1116,6 +1172,7 @@
 		    \end{array}
 		    \right.
 		    \end{align*}
+		    where $r_c=2.5$ for all that follows.
 		</p>
 	    </section>
 	    <section>
@@ -1129,7 +1186,7 @@
 		<img src="img/LJSofk.png" width="45%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
 		<p>
 		    Observing properties over the duration of the
-		    simulation can give confidence we have reached
+		    simulation can give confidenc  e we have reached
 		    equilibrium (or become stuck...).
 		</p>
 	    </section>
@@ -1142,7 +1199,7 @@
 		    the <b>average</b> properties are nearly
 		    identical. There are many fluctuations, even in the
 		    specified variables, do we have information on nearby
-		    states? (tune in tomorrow for more)</p>
+		    states? (tune in to MC3 for more)</p>
 	    </section>
 	    <section>
 		<h2>Ensembles</h2>
@@ -1201,6 +1258,16 @@
 		    </li>
 		</ul>
 	    </section>
+	</section>
+	<section>
+	    <h2>Thanks</h2>
+	    <p>
+		Thanks to Dr. Leo Lue (Strathclyde) for his excellent notes which
+		this course is largely based on, also thanks to his predecessor,
+		Dr Philip Camp (Edinburgh), where some slides originated from.
+	    </p>
+	    <p>
+		Thank you to you for your attention.</p>
 	</section>
 	<section id="MC3">
 	    <section>
@@ -1771,16 +1838,6 @@
 		
 		<img src="img/replica.png" width="50%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);vertical-align:middle;">
 	    </section>
-	</section>
-	<section>
-	    <h2>Thanks</h2>
-	    <p>
-		Thanks to Dr. Leo Lue (Strathclyde) for his excellent notes which
-		this course is largely based on, also thanks to his predecessor,
-		Dr Philip Camp (Edinburgh), where some slides originated from.
-	    </p>
-	    <p>
-		Thank you to you for your attention.</p>
 	</section>
 	<section id="statmech">
 	    <section>

@@ -18,7 +18,7 @@ body {
 }
 
 .reveal .backbox {
-    background:none;
+    background:white;
     border:1px solid black;
 }
 
