@@ -83,7 +83,7 @@
 	  </section>
 	  <section>
 	    <h3 style="margin-top:1em;">Python pre-school course notes</h3>
-	    <a href="https://mybinder.org/v2/gh/toastedcrumpets/CCP5_Python_examples/master"><span style="font-size:75%">https://mybinder.org/v2/gh/toastedcrumpets/CCP5_Python_examples/master</span></a>
+	    <a href="https://colab.research.google.com/github/toastedcrumpets/CCP5_Python_examples/blob/master/Table_of_contents_for_collab_research_google_com.ipynb">Interactive notes hosted on Google collab<span style="font-size:75%"></span></a>
 	    <h3 style="margin-top:1em;">2019 Lectures</h3>
 	    <p>
 	      <ul>
@@ -286,7 +286,7 @@
 	      <p>
 		  The average of $N$ normally distributed random
 		  numbers, centered about $1$, with standard deviation
-		  of $\sigma_f$ also gives the same sort of convergence!.</p>
+		  of $\sigma_f$ also gives the same sort of convergence!</p>
 	  </section> 
 	  <section>
 	      <img src="img/MC1_integrate.png"  width="50%" height="auto" style="margin:0;">
@@ -348,24 +348,24 @@
 	      <h2>Convergence</h2>
 	      <p>
 		  How quickly does the average of central-limit
-		  processes converge to the correct answer?<br/>
+		  processes (like Monte Carlo) converge to the correct answer?<br/>
 		  Central limit theorem:
-		  \begin{equation*}
-		  \sigma_{\left\langle f\right\rangle} = \frac{\sigma_f}{\sqrt{N}}
-		  \end{equation*}
-		  where
-		  \begin{equation*}
-		  \sigma_{f} = \left\langle \left(f(x)\right)^2\right\rangle - \left\langle f(x)\right\rangle^2
-		  \end{equation*}
+		  \begin{align*}
+		  \sigma_{\left\langle f\right\rangle} &= \frac{\sigma_f}{\sqrt{N}}
+		  &
+		  \sigma_{f} &= \left\langle \left(f(x)\right)^2\right\rangle - \left\langle f(x)\right\rangle^2
+		  \end{align*}
 	      </p>
 	      <p class="fragment">
 		  This "slow" $N^{-1/2}$ convergence is unavoidable! But we
 		  can reduce $\sigma_f$ by a factor of $10^6$ or more
 		  using importance sampling (more in a moment).</p>
 	      <p class="fragment">
-		  One massive positive, the dependence of the
-		  convergence with sample size is independent on the
-		  dimensionality of the integral (thank you CL theory!).
+		  However, the dependence of the convergence with
+		  sample size is independent on the dimensionality of
+		  the integral, so convergence is independent of
+		  dimensionality (molecular systems typically have at
+		  least $d\,N$ dimensions!).
 	      </p>
 	  </section>
 	  <section>
@@ -1186,7 +1186,7 @@
 		<img src="img/LJSofk.png" width="45%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);">
 		<p>
 		    Observing properties over the duration of the
-		    simulation can give confidenc  e we have reached
+		    simulation can give confidence we have reached
 		    equilibrium (or become stuck...).
 		</p>
 	    </section>
