@@ -192,7 +192,7 @@
 	      <li class="fragment">
 		Can <em>easily</em> handle fluctuating numbers of
 		particles (as in the grand canonical ensemble)
-		impossible(?) for molecular dynamics, but actually the
+		hard for molecular dynamics, but actually the
 		closest ensemble to real experiments.
 	      </li>
 	    </ul>
@@ -226,9 +226,9 @@
 		<li> Implicit uniform probability/sampling distribution ${\mathcal P}(x)$ along the
 		    interval $[a,b]$:
 		    \begin{equation*}
-		    {\mathcal P}(x) = \frac{1}{b-a} \left\{
+		    {\mathcal P}(x) =  \left\{
 		    \begin{array}{ll}
-		    1 & \mbox{for $a \le x \le b$} \\
+		  \left(b-a\right)^{-1} & \mbox{for $a \le x \le b$} \\
 		    0 & \mbox{for $x\lt a$ or $x\gt a$} \\
 		    \end{array}
 		\right.
@@ -268,7 +268,7 @@
 	      </video>
 	      <!-- <img src="img/MC1_integrate_convergence.png" width="50%" height="auto" style="background:white;color:black; margin:20px; box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);"> -->
 	      <p>
-		  Calculating $\pi$ by randomly dropping points in a
+		  Calculating $\pi=\int^1_{-1}\int^1_{-1} \theta(1-x^2-y^2){\rm d}x\,{\rm d}y$ by randomly dropping points in a
 		  square and testing if they fall in the circle (fraction inside should be $\pi/4$).
 	      </p>
 	  </section>
@@ -362,7 +362,7 @@
 		  using importance sampling (more in a moment).</p>
 	      <p class="fragment">
 		  However, the dependence of the convergence with
-		  sample size is independent on the dimensionality of
+		  sample size is independent of the dimensionality of
 		  the integral, so convergence is independent of
 		  dimensionality (molecular systems typically have at
 		  least $d\,N$ dimensions!).
