@@ -8,66 +8,89 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="viewport" content="initial-scale=1">
-    <link rel="stylesheet" href="reveal.js/css/reveal.css"></link>
+    <link rel="stylesheet" href="reveal.js/dist/reveal.css"></link>
     <link rel="stylesheet" href="Font-Awesome/css/font-awesome.min.css"></link>
     <!-- Default themes -->
     <!-- <link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme"></link>-->
-    <link rel="stylesheet" href="UoA.css" id="theme"></link>
     <!-- For syntax highlighting -->
-    <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css"></link>
-    <!-- For LaTeX formating highlighting -->
-    <!--[if lt IE 9]>
-	<script src="reveal.js/lib/js/html5shiv.js"></script>
-	<![endif]-->
+    <link rel="stylesheet" href="reveal.js/dist/theme/night.css"></link>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="UoA.css" id="theme"></link>    
     <script>
-      //If the query string print-pdf is there, then load the print css style sheet
-      if (window.location.search.match( /print-pdf/gi )) {
-      var link = document.createElement( 'link' );
-      link.rel = 'stylesheet';
-      link.type = 'text/css';
-      link.href = 'reveal.js/css/print/pdf.css';
-      document.getElementsByTagName( 'head' )[0].appendChild( link );
+     /**
+      * Simple object check.
+      * @param item
+      * @returns {boolean}
+      */
+     function isObject(item) {
+       return (item && typeof item === 'object' && !Array.isArray(item));
+     }
 
-      var link = document.createElement( 'link' );
-      link.rel = 'stylesheet';
-      link.type = 'text/css';
-      link.href = 'UoApdf.css';
-      document.head.appendChild( link );
-      }
+     /**
+      * Deep merge two objects.
+      * @param target
+      * @param ...sources
+      */
+     function mergeDeep(target, ...sources) {
+       if (!sources.length) return target;
+       const source = sources.shift();
 
-      //Function to allow inserting of parameters to the current URL
-      function insertParam(key, value)
-      {
-      key = encodeURI(key); value = encodeURI(value);
+       if (isObject(target) && isObject(source)) {
+	 for (const key in source) {
+	   if (isObject(source[key])) {
+             if (!target[key]) Object.assign(target, { [key]: {} });
+             mergeDeep(target[key], source[key]);
+	   } else {
+             Object.assign(target, { [key]: source[key] });
+	   }
+	 }
+       }
 
-      var kvp = document.location.search.substr(1).split('&');
+       return mergeDeep(target, ...sources);
+     }
+     
+     var default_plot_Layout = {
+       autosize:true,
+       font: {
+	 color: 'white',
+	 size: 15,
+       },
+       showlegend:true,
+       legend: {
+	 x:1, y:1, xanchor: 'right',
+       },
+       xaxis: {
+	 automargin:true,
+	 gridcolor:'white',
+       },
+       yaxis: {
+	 automargin:true,
+	 gridcolor:'white',
+       },
+       plot_bgcolor: '#000',
+       paper_bgcolor: '#000B',
+     };
 
-      var i=kvp.length; var x; while(i--) 
-      {
-      x = kvp[i].split('=');
-
-      if (x[0]==key)
-      {
-      x[1] = value;
-      kvp[i] = x.join('=');
-      break;
-      }
-      }
-
-      if(i<0) {kvp[kvp.length] = [key,value].join('=');}
-
-	      //this will reload the page, it's likely better to store this until finished
-	      return kvp.join('&'); 
-	      }
-  </script>
+     var default_plot_Config = {
+       responsive: true,
+       displaylogo: false,
+     };
+    </script>
   </head>
   <body>
     <div class="reveal">
-      <div class="slides">
-	<section style="height:100%;width:100%;">
-	  <section style="height:100%;width:100%;">
+      <div class="slides" style="border: 1px solid white;">
+	<section>
+	  <section>
 	    <div class="backbox">
-	      <h1>CCP5 Summer School</h1>
+	      <h3>Notes on Molecular Simulation</h3>
+	      <h3>CCP5 Summer School</h3>
 	    </div>
 	    <p>
 	      Marcus N. Bannerman<br/>
@@ -77,50 +100,329 @@
 	      </object>
 	      Access the slides here:
 	      <a href="http://www.marcusbannerman.co.uk/CCP5School">www.marcusbannerman.co.uk/CCP5School</a>
-	      <br/><br/>	      
-	      <a onclick="document.location.search = insertParam('print-pdf');" style="cursor:pointer;" id="PrintButton"><span style="font-family:FontAwesome; font-style: normal;" class="fa fa-print"></span>Printable notes</a>
 	    </p>
 	  </section>
 	  <section>
-	    <h3 style="margin-top:1em;">Python pre-school course notes</h3>
-	    <a href="https://colab.research.google.com/github/toastedcrumpets/CCP5_Python_examples/blob/master/Table_of_contents_for_collab_research_google_com.ipynb">Interactive notes hosted on Google collab<span style="font-size:75%"></span></a>
-	    <h3 style="margin-top:1em;">2019 Lectures</h3>
+	    <h3 style="margin-top:1em;">2021 Lectures</h3>
 	    <p>
 	      <ul>
 		<li>
-		    <a href="#MC1">Monte Carlo 1</a>
+		  <a href="https://colab.research.google.com/github/toastedcrumpets/CCP5_Python_examples/blob/master/Table_of_contents_for_collab_research_google_com.ipynb">Python pre-school notes (hosted on Google collab)</a>
 		</li>
 		<li>
-		    <a href="#MC2">Monte Carlo 2</a>
+		  <a href="#SM1">Statistical mechanics 1</a>
 		</li>
-		<h3 style="margin-top:1em;font-size:75%;">Old notes (online only)</h3>
-		<li style="list-style: none;font-size:75%;margin-top:2em;">
-		  
+		<li>
+		  <a href="#SM2">Statistical mechanics 2</a>
+		</li>
+		<h3 style="margin-top:1em;font-size:75%;">Old out of date notes I haven't thrown away yet from previous summer schools</h3>
+		<li style="font-size:75%;">
+		  <a href="#MC1">Monte carlo 1</a>
 		</li>
 		<li style="font-size:75%;">
-		    <a href="#MC3">Monte Carlo 3</a>
+		  <a href="#MC2">Monte carlo 2</a>
 		</li>
 		<li style="font-size:75%;">
-		    <a href="#statmech">Statistical Mechanics Primer (old)</a>
+		  <a href="#MC3">Monte carlo 3</a>
 		</li>
 	      </ul>
 	    </p>
 	  </section>
 	</section>
-	<section id="MC1" style="height:100%;">
+	<section id="SM1">
+	  <section>
+	    <h2 class="backbox">Statistical mechanics: Part 1</h2>
+	    <p><em>
+	      Ludwig Boltzman, who spent much of his life studying statistical mechanics, died in 1906, by his own hand. Paul Ehrenfest, carrying on the work, died similarly in 1933. Now it is our turn to study statistical mechanics. Perhaps it will be wise to approach the subject cautiously.
+	    </em>
+	    </p>
+	    <p style="float:right">(Opening lines of "States of Matter", by D.L. Goodstein).</p>
+	  </section>
+	  <section>
+	    <p>
+	      Statistical mechanics is our bridge from the microscopic
+	      scale (simulating individual atoms/molecules) to the
+	      &ldquo;macroscopic&rdquo; measurements we make in
+	      experiments (i.e., internal energy, heat capacity, pressure,
+	      free-energy).</p>
+	    <p class="fragment">
+	      We use it to connect to <b>thermodynamics</b>, and that
+	      is the focus here (statistical
+	      thermodynamics/equilibrium statistical mechanics), but
+	      it also is used to explore dynamics.</p>
+	    <p class="fragment">
+	      Two hours/lectures is nothing, I will hopelessly fail to
+	      teach you it all, so I'll give you the key touch points,
+	      and try my best to be different/interesting/intuitive.</p>
+	  </section>
+	  <section>
+	    <h2>Recap: The first law</h2>
+	    <p>
+	      Thermodynamics is observational. Consider the first law:
+	    </p>
+	    <h4 class="fragment">ENERGY IS CONSERVED</h4>
+	    <p class="fragment">
+	      But what is energy? Every time we observe violations of
+	      this law, we redefine energy to include the other forms.
+	    </p>
+	    <p class="fragment" >
+	      Let's rephrase the law to be something more universal (!):</p>
+	    <div class="fragment">
+	      <h4>THERE IS SOMETHING<sup>1</sup> WHICH IS CONSERVED AND WE CALL
+		IT ENERGY</h4>
+	      <p class="footnote">1: We need to be careful as it
+		must also be a <em>state</em> variable thus observed
+		to change with the state of the system, not just some
+		arbitrary constant. What exactly is a state variable, and
+		why, in real systems, keeps me up at night...</p>
+	    </div>
+	  </section>
+	  <section>
+	    <h2>Recap: The second law</h2>
+	    <p>
+	      Prepare yourself for another brutal simplification
+	      followed by wild statements.
+	    </p>
+	    <h4 class="fragment" data-fragment-index="1">ENTROPY MUST INCREASE<sup>1</sup></h4>
+	    <p class="fragment" data-fragment-index="2">
+	      Entropy is like time in its inexorable increase, except
+	      it is not monotonic. <span class="fragment" data-fragment-index="3">It's more &ldquo;real&rdquo; than time(!), as
+	      a constant entropy pocket universe would have no way to
+	      record the passage of time.<sup>2</sup></span></p>
+	    <p class="footnote fragment"  data-fragment-index="1">
+	      1: Entropy does not stay the same in any real
+	      macroscopic process; however, $S=0$ is
+	      mathematically possible.</p>
+	    <p class="footnote fragment"  data-fragment-index="3">
+	      2: The lack of an "arrow of time" was a major critiscm
+	      of Boltzmann's early work on statistical mechanics. The
+	      conclusions of a statistical mechanical universe and
+	      time are fascinating. E.g. See<a href="https://www.bbc.co.uk/sounds/play/m000lvbx">
+		The Infinite Monkey Cage: Does Time Exist?"
+	      </a>.
+	    </p>
+	  </section>
+	  <section>
+	    <p>
+	      Lets try to be real (and stay sane). The simplest
+	      example I can think that fits statistical mechanics AND
+	      thermodynamics is the game of craps (the sum of two
+	      dice).</p>
+	  </section>
+	</section>
+	<section data-background="https://upload.wikimedia.org/wikipedia/commons/3/32/Craps.jpg">
+	  <section>
+	    <h2 class="backbox">A craps example</h2>
+	  </section>
+	  <section>
+	    <p class="backbox">
+	      The numbers on the dice at any point in the game/<b>simulation</b>
+	      are the <b>micro-state</b> variables.
+	    </p>
+	    <p class="backbox fragment" data-fragment-index="1">
+	      <b>State</b> variables must change IFF<sup>1</sup> the system
+	      changes.
+	    </p>
+	    <p class="backbox fragment">	      
+	      The micro-state of molecular systems are the atomic
+	      coordinates and velocities.
+	    </p>
+	    <p class="backbox footnote fragment"  data-fragment-index="1">
+	      1: IFF = IF and only if.</p>
+	  </section>
+	  <section>
+	    <p class="backbox">
+	      Players/<b>observers</b> of craps do not care about the <b>micro-state</b>. To them the <b>state</b> only
+	      changes if the sum of the dice changes.</p>
+	    <p class="backbox fragment">
+	      The sum of the dice is the <b>macro-state</b>, consisting of an <b>ensemble</b> of
+	      many micro-states. </p>
+	    <p class="backbox fragment">
+	      For example, the <b>state</b> of a sum of 7 on the two dice is made of the $\left\{\left[1,\,6\right],\,\left[2,\,5\right],\,\left[3,\,4\right],\ldots\right\}$ <b>micro-states</b>.
+	    </p>
+	    <p class="backbox fragment">
+	      This is like a molecular system, where an observer sees a particular <b>state</b> (i.e. total
+	      energy at a fixed pressure) will have many possible <b>micro-states</b> (molecular configurations).
+	    </p>
+	    <p class="backbox fragment">
+	      An ensemble is a collection of <b>micro-states</b> that
+	      correspond to a particular <b>macro-state</b>.
+	    </p>
+	    <p class="backbox fragment">
+	      Note: When we say <b>state</b> we typically mean the <b>macro</b> state
+	      as its the one we can see, thus its the one we care about.
+	    </p>
+	  </section>
+	  <section>
+	    <p class="backbox">
+	      Fundamental postulate: Each <b>micro-state</b> is equally probable.
+	    </p>	    
+	    <p class="backbox fragment">
+	      This is intuitive for perfect dice, not so intuitive for
+	      classical molecular systems; however, it works, and that
+	      is all we have time for.</p>
+	    <p class="backbox fragment">
+	      Even though the <b>micro-states</b> are equally probable, the <b>macro-states</b> are very different due to the possible <em>combinations</em> of <b>micro-states</b>.
+	    </p>	      
+	    <p class="backbox fragment">
+	      For two dice, rolling a seven <br/> 
+	      $\left\{\left[1,\,6\right],\,\left[2,\,5\right],\,\left[3,\,4\right],\,\left[4,\,3\right],\,\left[5,\,2\right],\,\left[6,\,1\right]\right\}$.
+	      <br/>
+	      is six times more likely than a snake eyes (two)
+	      <br/>
+	      $\left\{\left[1,\,1\right]\right\}$</p>	      
+	  </section>
+	  <section style="height:100%">
+	    <h2 class="backbox">Example: Hyper-craps</h2>
+	    <form class="backbox">
+	      <div class="row">
+		<div class="col">
+		  <div class="form-group">
+		    <label id="dicecount1label" for="dicecount1">Dice count: 1</label>
+		    <input type="range" class="form-control-range" id="dicecount1" min="1" max="28" value="1" step="1">
+		  </div>
+		</div>
+		<div class="col">
+		  <input class="form-check-input" type="checkbox" value="" id="dicenormalisation1">
+		  <label class="form-check-label" for="dicenormalisation1">
+		    Per-dice normalisation
+		  </label>
+		</div>
+	      </div>
+	    </form>
+	    <div id="dicePlot" class="plot"/>
+	    <script>
+
+	     function binomial(n, k) {
+	       if ((typeof n !== 'number') || (typeof k !== 'number')) 
+		 return false; 
+	       var coeff = 1;
+	       for (var x = n-k+1; x <= n; x++) coeff *= x;
+	       for (x = 1; x <= k; x++) coeff /= x;
+	       return coeff;
+	     }
+
+	     //https://mathworld.wolfram.com/Dice.html
+	     function most_probable_rolls(dice_rolled, dice_sides) {
+	       var n = dice_rolled;
+	       var s = dice_sides;
+	       if (dice_rolled == 1)
+		 //A complex way of generating [1,2,3,4,..., dice_sides]
+		 return [...Array(dice_sides).keys()].map((e) => {return e+1;});
+
+	       var val = Math.floor(0.5 * n * (s + 1));
+	       if (dice_rolled % 2)
+		 return [val, val+1];
+	       else
+		 return [val];
+	     }
+	     
+	     function dice_prob(dice_points, dice_rolled, dice_sides) {
+	       var p = dice_points;
+	       var n = dice_rolled;
+	       var s = dice_sides;
+	       
+	       var N = Math.floor((p - n) / s);
+	       var sum = 0;
+	       for (var k=0; k <= N; ++k)
+		 sum += ((-1)**k) * binomial(n, k) * binomial(p - s*k - 1, n-1);
+	       return (dice_sides**(-dice_rolled)) * sum;
+	     }
+
+	     function dice_dist_plot(n, s) {
+	       var x = [];
+	       var y = [];
+	       for (var k = n; k <= n * s; ++k) {
+		 x.push(k);
+		 y.push(dice_prob(k, n, s));
+	       }
+	       return {x, y};
+	     }
+	     
+	     var max_dice = parseInt($('#dicecount1').max);
+	     var dice_sides = 6;
+	     
+	     function refresh_dice_plot(dice_rolled) {
+	       var mpr = most_probable_rolls(dice_rolled, dice_sides);
+	       var normalise_x = 1;
+	       if ($('#dicenormalisation1')[0].checked)
+		 normalise_x = dice_rolled;
+
+	       console.log($('#dicenormalisation1')[0].checked);
+	       
+	       var data1 = dice_dist_plot(dice_rolled, dice_sides);
+	       data1.x = data1.x.map((e) => { return e / normalise_x; });
+
+	       console.log(data1);
+
+	       var traces = [
+		 mergeDeep(
+		   {
+		     name:'Probability',
+		     type:'bar',
+		   },
+		   data1
+		 ),
+		 {
+		   name:'Maximum Probability',
+		   x: mpr.map((e) => { return e / normalise_x; } ),
+		   y: mpr.map((element) => { return dice_prob(element, dice_rolled, dice_sides); }),
+		   mode: 'markers',
+		   type: 'scatter',
+		 },
+	       ];
+
+	       var layout = {
+		 xaxis: {
+		   title: '$\\sum x_i$',
+		   autorange: true,
+		 },
+		 yaxis: {
+		   title: {
+		     text: '$p\\left(\\sum x_i\\right)$',
+		   },
+		   range:[0, 1.0 / dice_sides + 0.1],
+		 }
+	       };
+
+	       return {
+		 data: traces,
+		 layout: mergeDeep(default_plot_Layout, layout),
+		 config: default_plot_Config,
+	       };
+	     }
+	     
+	     Plotly.plot('dicePlot', refresh_dice_plot(1, 6));
+
+	     function diceupdate1() {
+	       var target = $('#dicecount1')[0];
+	       $('#dicecount1label').text("Dice count: "+target.value);
+	       Plotly.react('dicePlot', refresh_dice_plot(target.valueAsNumber, dice_sides));
+	     }
+
+	     $('#dicecount1').on('input', (event) => { diceupdate1() });
+	     $('#dicenormalisation1').on('input', (event) => { diceupdate1() });
+	     
+	    </script>
+	  </section>
+	</section>
+	<section id="SM2">
+	</section>
+	<section id="MC1">
 	  <section>
 	    <h2 class="backbox">Monte Carlo: Part 1</h2>
 	    <p>
 	      <em>God does not play dice. <span style="float:right;">A. Einstein</span></em><br/><br/>
 	      <em style="clear:right;" class="fragment">God does play dice with the universe. All the evidence points to him being an inveterate gambler, who throws the dice on every possible occasion. <span style="float:right;">S. Hawking</span></em>
-	    <p style="clear:both;" class="fragment">
-	      <br/>
+	  </section>
+	  <section>
+	    <p>
 	      You are the omnipotent being of your simulation, so you get to choose:
 	      \begin{align*}
 	      \langle{\mathcal A}\rangle &= \int d{\boldsymbol\Gamma}\,{\mathcal P}({\boldsymbol\Gamma})\,
-	      {\mathcal A}({\boldsymbol\Gamma}) & \text{(MC)}\\
+	      {\mathcal A}({\boldsymbol\Gamma}) & \text{(Monte Carlo)}\\
 	      &\text{or}\\
-	      \langle{\mathcal A}\rangle&=\lim_{t_{obs.}\to\infty} \frac{1}{t_{obs.}}\int_0^{t_{obs.}}\mathcal A(t)\,{\rm d}t & \text{(MD)}
+	      \langle{\mathcal A}\rangle&=\lim_{t_{obs.}\to\infty} \frac{1}{t_{obs.}}\int_0^{t_{obs.}}\mathcal A(t)\,{\rm d}t & \text{(Molecular Dynamics)}
 	      \end{align*}
 	    </p>	    
 	  </section>
@@ -149,9 +451,9 @@
 	      molecular systems (see stat. mech. lectures).
 	    </p>
 	  </section>
-	  <section data-background="img/Casino_de_Monte-Carlo.png" style="height:100%;">
+	  <section data-background="img/Casino_de_Monte-Carlo.png">
 	    <h2 class="backbox">Monte Carlo</h2>
-	    <div  style="position:absolute; bottom:2em; right:2em;">
+	    <div>
 	      <p class="backbox">
 		Molecular dynamics has a very large number of
 		states, we cannot visit them all.
@@ -166,7 +468,7 @@
 	      </p>
 	      <p class="backbox">
 		The ergodic idea is that we can visit "enough" to get
-		a good approximation of the observables
+		a good approximation of the observables 
 		$\mathcal{A}$. My lectures will cover the basics of
 		Monte Carlo integration, and its application to
 		molecular systems.
@@ -338,10 +640,10 @@
 		  (black), and many others.
 	      </p>
 	  </section>
-	  <section style="height:100%;">
+	  <section style="height:100%; width:100%;">
 	      <b>Example:  Galton Board</b>
 	      <div style="height:90%;width:100%; position:relative;">
-		  <iframe src="http://www.youtube.com/embed/03tx4v0i7MA" frameborder="0" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+		<iframe src="http://www.youtube.com/embed/03tx4v0i7MA" frameborder="0" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
 	      </div>
 	  </section>
 	  <section>
@@ -1842,38 +2144,7 @@
 	<section id="statmech">
 	    <section>
 		<h2 class="backbox">Statistical Mechanics Recap</h2>
-		<p><em>
-		    Ludwig Boltzman, who spent much of his life studying statistical mechanics, died in 1906, by his own hand. Paul Ehrenfest, carrying on the work, died similarly in 1933. Now it is our turn to study statistical mechanics. Perhaps it will be wise to approach the subject cautiously.
-		</em>
-		<p style="float:right">(Opening lines of "States of Matter", by D.L. Goodstein).</p>
 		</p>
-	    </section>
-	    <section>
-		<p>
-		    Statistical mechanics is our bridge from
-		    the microscopic scale to the
-		    &ldquo;macroscopic&rdquo; thermodynamics.</p>
-		<p class="fragment">
-		    We can connect microscopic details
-		    (positions, velocities) to more
-		    interesting macroscopic properties (i.e.,
-		    internal energy, heat capacity).
-		</p>
-		<p class="fragment">
-		    This is a short introduction to the statistical
-		    mechanics behind Monte Carlo. We must understand the
-		    relative probabilities of different
-		    states/configurations of a microscopic system.
-		</p>
-		<p class="fragment">
-		    Thermodynamics observationally tells us what is possible
-		    (${\rm d}S\ge0$), but statistical mechanics quantifies
-		    these probabilities in terms of the microscopic
-		    state.</p>
-		<p class="fragment">
-		    It also proves that (${\rm d}S&lt;0$) is possible, but
-		    generally this is so astronomically rare it may be
-		    ignored.</p>
 	    </section>
 	    <section>
 		<h2>Microscopics notation recap</h2>
@@ -2425,81 +2696,18 @@
 	</section>
       </div>
     </div>
-    <script src="reveal.js/lib/js/head.min.js"></script>
-    <script src="reveal.js/js/reveal.js"></script>
+    <script src="reveal.js/dist/reveal.js"></script>
+    <script src="reveal.js/plugin/math/math.js"></script>
+    <script src="reveal.js/plugin/markdown/markdown.js"></script>
+    <script src="reveal.js/plugin/highlight/highlight.js"></script>
+    <script src="reveal.js/plugin/notes/notes.js"></script>
     <script>
-      // Full list of configuration options available here:
-      // https://github.com/hakimel/reveal.js#configuration
-      Reveal.initialize({
-      width:1280,height:720,margin:0.1, minScale:0.2, maxScale:1.5,
-      slideNumber: 'c / t',
-      history: true,
-      transition: 'none',
-      backgroundTransition: 'fade',
-      pdfMaxPagesPerSlide: 1,
-      math: {
-      mathjax: 'MathJax/MathJax.js'
-      },
-      dependencies: [
-      // Cross-browser shim that fully implements classList - https://github.com/eligrey/classList.js/
-      { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
-
-      // Interpret Markdown in <section> elements
-	{ src: 'reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-	{ src: 'reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-
-	// Syntax highlight for <code> elements
-	  { src: 'reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-
-	  // Zoom in and out with Alt+click
-	  { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true },
-
-	  // Speaker notes
-	  { src: 'reveal.js/plugin/notes/notes.js', async: true },
-
-	  // Remote control your reveal.js presentation using a touch device
-	  // { src: 'reveal.js/plugin/remotes/remotes.js', async: true },
-
-	  // MathJax
-	  { src: 'reveal.js/plugin/math/math.js',
-	  async: false	  }
-	  ]
-	  });
-    </script>
-    <script>
-      //      $(function () {
-      //    // on page load  replace all src URLs
-      //
-      //    $('.animated-gif').each(function (i, e) {
-      //        disableGif(e)
-      //    });
-      //});
-      //Reveal.addEventListener('slidechanged', initAnimatedGifs);
-      //Reveal.addEventListener('ready', initAnimatedGifs);
-      //
-      //function initAnimatedGifs(event) {
-      //    $('.animated-gif', event.currentSlide).each(function (i, e) {
-      //        enableGif(e)
-      //    });
-      //
-      //    if (event.previousSlide)
-      //        $('.animated-gif', event.previousSlide).each(function (i, e) {
-      //            disableGif(e)
-      //
-      //        });
-      //}
-      //
-      //function enableGif(e) {
-      //    var src = $(e).attr("src")
-      //    $(e).attr('src', src.replace('-image.gif', '.gif'));
-      //
-      //
-      //}
-      //function disableGif(e) {
-      //    var src = $(e).attr("src")
-      //    $(e).attr('src', src.replace('.gif', '-image.gif'));
-      //
-      //}
+     Reveal.initialize({
+       plugins : [RevealMarkdown, RevealHighlight, RevealMath, RevealNotes],
+       width:960,height:700,margin:0.1, minScale:0.2, maxScale:1.5,
+       backgroundTransition: 'fade',
+       hash: true,
+     });
     </script>
     <script src="codeButtons.js"></script>
   </body>
