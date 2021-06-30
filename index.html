@@ -289,6 +289,20 @@
 		  </label>
 		</div>
 	      </div>
+	      <div class="row">
+		<div class="col">
+		  <input class="form-check-input" type="radio" name="dicey" id="dicey1" value="1" checked>
+		  <label class="form-check-label" for="dicey1" id="dicey1label">Combinations</label>
+		</div>
+		<div class="col">
+		  <input class="form-check-input" type="radio" name="dicey" id="dicey2" value="2">
+		  <label class="form-check-label" for="dicey2" id="dicey2label">Probability, $p$</label>
+		</div>
+		<div class="col">
+		  <input class="form-check-input" type="radio" name="dicey" id="dicey3" value="3">
+		  <label class="form-check-label" for="dicey3" id="dicey3label">$p/max(p)$</label>
+		</div>
+	      </div>
 	    </form>
 	    <div id="dicePlot" class="plot"/>
 	    <script>
@@ -344,17 +358,35 @@
 	     
 	     function refresh_dice_plot(dice_rolled) {
 	       var mpr = most_probable_rolls(dice_rolled, dice_sides);
+	       
 	       var normalise_x = 1;
 	       if ($('#dicenormalisation1')[0].checked)
 		 normalise_x = dice_rolled;
-
-	       console.log($('#dicenormalisation1')[0].checked);
+	       var ystate = parseInt($('input[name=dicey]:checked').val());
 	       
 	       var data1 = dice_dist_plot(dice_rolled, dice_sides);
 	       data1.x = data1.x.map((e) => { return e / normalise_x; });
 
-	       console.log(data1);
+	       var data2 = {
+		 x: mpr.map((e) => { return e / normalise_x; } ),
+		 y: mpr.map((element) => { return dice_prob(element, dice_rolled, dice_sides); }),
+	       };
 
+	       if (ystate == 1) {
+		 var factor = data1.y[0];
+		 data1.y = data1.y.map((e) => { return e / factor; });
+		 data2.y = data2.y.map((e) => { return e / factor; });
+	       } else if (ystate == 2) {
+		 
+	       } else if (ystate == 3) {
+		 data1.y = data1.y.map((e) => { return e / data2.y[0]; });
+		 data2.y = data2.y.map((e) => { return 1.0; });		 
+	       }
+
+	       var xlabel = '\\sum_i x_i';
+	       if ($('#dicenormalisation1')[0].checked) 
+		 xlabel = '\\left\\langle x_i\\right\\rangle';
+	       
 	       var traces = [
 		 mergeDeep(
 		   {
@@ -365,25 +397,38 @@
 		 ),
 		 {
 		   name:'Maximum Probability',
-		   x: mpr.map((e) => { return e / normalise_x; } ),
-		   y: mpr.map((element) => { return dice_prob(element, dice_rolled, dice_sides); }),
 		   mode: 'markers',
 		   type: 'scatter',
+		   data2
 		 },
 	       ];
 
 	       var layout = {
 		 xaxis: {
-		   title: '$\\sum x_i$',
+		   title: '$'+xlabel+'$',
 		   autorange: true,
 		 },
 		 yaxis: {
 		   title: {
-		     text: '$p\\left(\\sum x_i\\right)$',
-		   },
+		     text: '$p\\left(' + xlabel + '\\right)$',
+		   },		   
 		   range:[0, 1.0 / dice_sides + 0.1],
 		 }
 	       };
+	       
+	       
+	       if (ystate == 1) {
+		 layout.yaxis.autorange = true;
+		 layout.yaxis.title = 'Combinations';
+	       } else if (ystate == 2) {
+		 layout.yaxis.autorange = false;
+		 layout.yaxis.range = [0, 1.0 / dice_sides + 0.1];
+		 layout.yaxis.title = '$p\\left(' + xlabel + '\\right)$';
+	       } else if (ystate == 3) {
+		 layout.yaxis.autorange = false;
+		 layout.yaxis.range = [0, 1.0];
+		 layout.yaxis.title = '$p\\left(' + xlabel + '\\right) / \\max p\\left(' + xlabel + '\\right)$';
+	       }
 
 	       return {
 		 data: traces,
@@ -402,7 +447,7 @@
 
 	     $('#dicecount1').on('input', (event) => { diceupdate1() });
 	     $('#dicenormalisation1').on('input', (event) => { diceupdate1() });
-	     
+	     $('input[name=dicey]').on('input', (event) => { diceupdate1() });
 	    </script>
 	  </section>
 	</section>
