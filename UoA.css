@@ -29,9 +29,8 @@
 }
 
 .plot {
-    width:90%;
+    width:100%;
     height:70%;
-    margin: 0 auto;
 }
 
 .reveal form {
@@ -41,4 +40,12 @@
 
 :root {
     --r-main-font-size: 30px;
+}
+
+.reveal .attribution {
+    font-size:0.5em;
+    position:absolute;
+    bottom:0;
+    right:0;
+    display:inline-block;
 }

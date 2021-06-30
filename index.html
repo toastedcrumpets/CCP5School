@@ -74,7 +74,7 @@
 	 gridcolor:'white',
        },
        plot_bgcolor: '#000',
-       paper_bgcolor: '#000B',
+       paper_bgcolor: '#000E',
      };
 
      var default_plot_Config = {
@@ -156,53 +156,6 @@
 	      and try my best to be different/interesting/intuitive.</p>
 	  </section>
 	  <section>
-	    <h2>Recap: The first law</h2>
-	    <p>
-	      Thermodynamics is observational. Consider the first law:
-	    </p>
-	    <h4 class="fragment">ENERGY IS CONSERVED</h4>
-	    <p class="fragment">
-	      But what is energy? Every time we observe violations of
-	      this law, we redefine energy to include the other forms.
-	    </p>
-	    <p class="fragment" >
-	      Let's rephrase the law to be something more universal (!):</p>
-	    <div class="fragment">
-	      <h4>THERE IS SOMETHING<sup>1</sup> WHICH IS CONSERVED AND WE CALL
-		IT ENERGY</h4>
-	      <p class="footnote">1: We need to be careful as it
-		must also be a <em>state</em> variable thus observed
-		to change with the state of the system, not just some
-		arbitrary constant. What exactly is a state variable, and
-		why, in real systems, keeps me up at night...</p>
-	    </div>
-	  </section>
-	  <section>
-	    <h2>Recap: The second law</h2>
-	    <p>
-	      Prepare yourself for another brutal simplification
-	      followed by wild statements.
-	    </p>
-	    <h4 class="fragment" data-fragment-index="1">ENTROPY MUST INCREASE<sup>1</sup></h4>
-	    <p class="fragment" data-fragment-index="2">
-	      Entropy is like time in its inexorable increase, except
-	      it is not monotonic. <span class="fragment" data-fragment-index="3">It's more &ldquo;real&rdquo; than time(!), as
-	      a constant entropy pocket universe would have no way to
-	      record the passage of time.<sup>2</sup></span></p>
-	    <p class="footnote fragment"  data-fragment-index="1">
-	      1: Entropy does not stay the same in any real
-	      macroscopic process; however, $S=0$ is
-	      mathematically possible.</p>
-	    <p class="footnote fragment"  data-fragment-index="3">
-	      2: The lack of an "arrow of time" was a major critiscm
-	      of Boltzmann's early work on statistical mechanics. The
-	      conclusions of a statistical mechanical universe and
-	      time are fascinating. E.g. See<a href="https://www.bbc.co.uk/sounds/play/m000lvbx">
-		The Infinite Monkey Cage: Does Time Exist?"
-	      </a>.
-	    </p>
-	  </section>
-	  <section>
 	    <p>
 	      Lets try to be real (and stay sane). The simplest
 	      example I can think that fits statistical mechanics AND
@@ -210,59 +163,60 @@
 	      dice).</p>
 	  </section>
 	</section>
-	<section data-background="https://upload.wikimedia.org/wikipedia/commons/3/32/Craps.jpg">
-	  <section>
+	<section >
+	  <section data-background="https://upload.wikimedia.org/wikipedia/commons/3/3f/Craps_game_at_military_camp_in_1918.jpg">
 	    <h2 class="backbox">A craps example</h2>
+	    <p class="backbox fragment">
+	      In craps, players roll two dice and place bets on the
+	      outcome.
+	    </p>
 	  </section>
-	  <section>
+	  <section data-background="https://upload.wikimedia.org/wikipedia/commons/3/3f/Craps_game_at_military_camp_in_1918.jpg">
 	    <p class="backbox">
 	      The numbers on the dice at any point in the game/<b>simulation</b>
-	      are the <b>micro-state</b> variables.
+	      are the <b>microstate</b> variables.
 	    </p>
-	    <p class="backbox fragment" data-fragment-index="1">
-	      <b>State</b> variables must change IFF<sup>1</sup> the system
+	    <p class="backbox fragment" data-fragment-index="1" style="padding-top:0.5em">
+	      <b>State</b> variables are observables which must change IFF<sup>1</sup> the system
 	      changes.
-	    </p>
-	    <p class="backbox fragment">	      
-	      The micro-state of molecular systems are the atomic
-	      coordinates and velocities.
 	    </p>
 	    <p class="backbox footnote fragment"  data-fragment-index="1">
 	      1: IFF = IF and only if.</p>
-	  </section>
-	  <section>
-	    <p class="backbox">
-	      Players/<b>observers</b> of craps do not care about the <b>micro-state</b>. To them the <b>state</b> only
-	      changes if the sum of the dice changes.</p>
-	    <p class="backbox fragment">
-	      The sum of the dice is the <b>macro-state</b>, consisting of an <b>ensemble</b> of
-	      many micro-states. </p>
-	    <p class="backbox fragment">
-	      For example, the <b>state</b> of a sum of 7 on the two dice is made of the $\left\{\left[1,\,6\right],\,\left[2,\,5\right],\,\left[3,\,4\right],\ldots\right\}$ <b>micro-states</b>.
-	    </p>
-	    <p class="backbox fragment">
-	      This is like a molecular system, where an observer sees a particular <b>state</b> (i.e. total
-	      energy at a fixed pressure) will have many possible <b>micro-states</b> (molecular configurations).
-	    </p>
-	    <p class="backbox fragment">
-	      An ensemble is a collection of <b>micro-states</b> that
-	      correspond to a particular <b>macro-state</b>.
-	    </p>
-	    <p class="backbox fragment">
-	      Note: When we say <b>state</b> we typically mean the <b>macro</b> state
-	      as its the one we can see, thus its the one we care about.
+	    <p class="backbox fragment">	      
+	      The <b>microstate</b> of <em>molecular</em> systems are the atomic
+	      coordinates and velocities.
 	    </p>
 	  </section>
-	  <section>
+	  <section data-background="https://upload.wikimedia.org/wikipedia/commons/3/3f/Craps_game_at_military_camp_in_1918.jpg">
 	    <p class="backbox">
-	      Fundamental postulate: Each <b>micro-state</b> is equally probable.
+	      Players/<b>observers</b> of craps do not care about the <b>microstate</b>. The only <b>state</b> that matters in craps
+	      is the sum of the dice.</p>
+	    <p class="backbox fragment">
+	      The sum of the dice is the <b>macrostate</b>. A particular <b>macrostate</b> can consist of an <b>ensemble</b> of
+	      many microstates. </p>
+	    <p class="backbox fragment">
+	      For example, the <b>state</b> of a sum of 7 on the two dice is made of the $\left\{\left[1,\,6\right],\,\left[2,\,5\right],\,\left[3,\,4\right],\ldots\right\}$ <b>microstates</b>.
+	    </p>
+	    <p class="backbox fragment">
+	      This is like a molecular system, where an observer sees a particular <b>state</b> (i.e. pressure,
+	      temperature, and mass) will have many possible <b>microstates</b> (molecular configurations).
+	    </p>
+	    <p class="backbox fragment">
+	      Note: When we say <b>state</b> we typically mean the <b>macrostate</b>
+	      as its the one we can see experimentally/IRL, thus its the one we care about.
+	    </p>
+	  </section>
+	  <section data-background="https://upload.wikimedia.org/wikipedia/commons/3/32/Craps.jpg">
+	    <p class="backbox">
+	      Fundamental postulate: Each <b>microstate</b> is equally probable.
 	    </p>	    
 	    <p class="backbox fragment">
 	      This is intuitive for perfect dice, not so intuitive for
 	      classical molecular systems; however, it works, and that
 	      is all we have time for.</p>
 	    <p class="backbox fragment">
-	      Even though the <b>micro-states</b> are equally probable, the <b>macro-states</b> are very different due to the possible <em>combinations</em> of <b>micro-states</b>.
+	      Even though the <b>microstates</b> are equally probable, the <b>macrostates</b> have
+	      different probabilities due to the <em>combinations</em> of <b>microstates</b> that make up their <b>ensemble</b>.
 	    </p>	      
 	    <p class="backbox fragment">
 	      For two dice, rolling a seven <br/> 
@@ -270,9 +224,16 @@
 	      <br/>
 	      is six times more likely than a snake eyes (two)
 	      <br/>
-	      $\left\{\left[1,\,1\right]\right\}$</p>	      
+	      $\left\{\left[1,\,1\right]\right\}$
+	    </p>
+	    <p class="backbox fragment">
+	      What happens as we add more dice? Can we treat the
+	      system statistically? Molecular systems have very large
+	      numbers of microstate variables, so we need an intuition
+	      of the limit of many many dice....
+	    </p>
 	  </section>
-	  <section style="height:100%">
+	  <section style="height:100%" data-background="img/dice_heap.jpg">
 	    <h2 class="backbox">Example: Hyper-craps</h2>
 	    <form class="backbox">
 	      <div class="row">
@@ -305,6 +266,9 @@
 	      </div>
 	    </form>
 	    <div id="dicePlot" class="plot"/>
+	    <div class="attribution backbox">
+	      <i><a href="/wiki/User:XRay" title="User:XRay">Dietmar Rabich</a>&nbsp;/ <a href="/wiki/Main_Page" title="Main Page">Wikimedia Commons</a>&nbsp;/ <span class="plainlinks noprint"><a class="external text" href="https://commons.wikimedia.org/wiki/File:W%C3%BCrfel,_gemischt_--_2021_--_5649.jpg">“Würfel, gemischt -- 2021 -- 5649”</a></span>&nbsp;/ <span class="plainlinks noprint"><a rel="nofollow" class="external text" href="https://creativecommons.org/licenses/by-sa/4.0/">CC&nbsp;BY-SA&nbsp;4.0</a></span></i>
+	    </div>
 	    <script>
 
 	     function binomial(n, k) {
@@ -390,20 +354,21 @@
 	       var traces = [
 		 mergeDeep(
 		   {
-		     name:'Probability',
+		     name:'Value',
 		     type:'bar',
 		   },
 		   data1
 		 ),
 		 {
-		   name:'Maximum Probability',
+		   name:'Peak',
 		   mode: 'markers',
 		   type: 'scatter',
-		   data2
+		   ...data2,
 		 },
 	       ];
 
 	       var layout = {
+		 showlegend:false,
 		 xaxis: {
 		   title: '$'+xlabel+'$',
 		   autorange: true,
@@ -449,6 +414,79 @@
 	     $('#dicenormalisation1').on('input', (event) => { diceupdate1() });
 	     $('input[name=dicey]').on('input', (event) => { diceupdate1() });
 	    </script>
+	  </section>
+	  <section class="backbox">
+	    <h3 class="backbox">
+	      Key points from hyper-craps
+	    </h3>
+	    <ul >
+	      <li class="fragment">
+		Combinations increase incredibly quickly, even for small systems.
+	      </li>
+	      <li class="fragment">
+		The distribution sharpens as the number of variables
+		increases. Thus statistical systems will effectively
+		have unique states, despite everything being possible.</li>
+	      <li class="fragment">
+		Normalisation is important to:
+		<ul>
+		  <li>Make properties <b>intensive</b> (average dice value) instead of <b>extensive</b> (dice sum).</li>
+		  <li>Move from combinations to probability, which is more useful for calculations.</li>
+		</ul>
+	      </li>
+	      <li class="fragment">
+		The number of combinations, effectively an unnormalised probability, is called the <b>density of states</b>. It
+		is a measure of how many microstates a particular
+		macrostate might have. 
+	      </li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Recap: The first law</h2>
+	    <p>
+	      Thermodynamics is observational. Consider the first law:
+	    </p>
+	    <h4 class="fragment">ENERGY IS CONSERVED</h4>
+	    <p class="fragment">
+	      But what is energy? Every time we observe violations of
+	      this law, we redefine energy to include the other forms.
+	    </p>
+	    <p class="fragment" >
+	      Let's rephrase the law to be something more universal (!):</p>
+	    <div class="fragment">
+	      <h4>THERE IS SOMETHING<sup>1</sup> WHICH IS CONSERVED AND WE CALL
+		IT ENERGY</h4>
+	      <p class="footnote">1: We need to be careful as it
+		must also be a <em>state</em> variable thus observed
+		to change with the state of the system, not just some
+		arbitrary constant. What exactly is a state variable, and
+		why, in real systems, keeps me up at night...</p>
+	    </div>
+	  </section>
+	  <section>
+	    <h2>Recap: The second law</h2>
+	    <p>
+	      Prepare yourself for another brutal simplification
+	      followed by wild statements.
+	    </p>
+	    <h4 class="fragment" data-fragment-index="1">ENTROPY MUST INCREASE<sup>1</sup></h4>
+	    <p class="fragment" data-fragment-index="2">
+	      Entropy is like time in its inexorable increase, except
+	      it is not monotonic. <span class="fragment" data-fragment-index="3">It's more &ldquo;real&rdquo; than time(!), as
+	      a constant entropy pocket universe would have no way to
+	      record the passage of time.<sup>2</sup></span></p>
+	    <p class="footnote fragment"  data-fragment-index="1">
+	      1: Entropy does not stay the same in any real
+	      macroscopic process; however, $S=0$ is
+	      mathematically possible.</p>
+	    <p class="footnote fragment"  data-fragment-index="3">
+	      2: The lack of an "arrow of time" was a major critiscm
+	      of Boltzmann's early work on statistical mechanics. The
+	      conclusions of a statistical mechanical universe and
+	      time are fascinating. E.g. See<a href="https://www.bbc.co.uk/sounds/play/m000lvbx">
+	      The Infinite Monkey Cage: Does Time Exist?"
+	      </a>.
+	    </p>
 	  </section>
 	</section>
 	<section id="SM2">
