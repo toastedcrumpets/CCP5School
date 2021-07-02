@@ -78,7 +78,7 @@
      };
 
      var default_plot_Config = {
-       responsive: true,
+       responsive: false,
        displaylogo: false,
      };
     </script>
@@ -130,13 +130,31 @@
 	  </section>
 	</section>
 	<section id="SM1">
-	  <section>
+	  <section data-background="img/Boltzmann_grave.jpg">
 	    <h2 class="backbox">Statistical mechanics: Part 1</h2>
-	    <p><em>
-	      Ludwig Boltzman, who spent much of his life studying statistical mechanics, died in 1906, by his own hand. Paul Ehrenfest, carrying on the work, died similarly in 1933. Now it is our turn to study statistical mechanics. Perhaps it will be wise to approach the subject cautiously.
+	  </section>	    
+	  <section data-background="img/Boltzmann_grave.jpg">
+	    <p class="backbox"><em>
+	      Ludwig Boltzmann, who spent much of his life studying statistical mechanics, died in 1906, by his own hand. Paul Ehrenfest, carrying on the work, died similarly in 1933. Now it is our turn to study statistical mechanics. Perhaps it will be wise to approach the subject cautiously.
 	    </em>
 	    </p>
-	    <p style="float:right">(Opening lines of "States of Matter", by D.L. Goodstein).</p>
+	    <p class="backbox" style="float:right">(Opening lines of "States of Matter", by D.L. Goodstein).</p>
+	    <div class="fragment backbox" style="font-size:75%;clear:both;">
+	      <p>
+		Other excellent stat-mech texts include:
+	      </p>
+	      <ul>
+		<li>&ldquo;Statistical mechanics for computer simulators,&rdquo; Daan Frenkel (free/online/40 pages)</li>
+		<li>&ldquo;Physical chemistry,&rdquo; P. W. Atkins.</li>
+		<li>&ldquo;Molecular driving forces,&rdquo; K. A. Dill and S. Bromberg</li>
+		<li>&ldquo;Statistical mechanics: A survival guide,&rdquo; M. Glazer and J. Wark</li>
+		<li>&ldquo;Statistical mechanics,&rdquo; D. A. McQuarrie</li>
+		<li>&ldquo;Statistical mechanics, principles and selected applications&rdquo; T. L. Hill</li>
+		<li>&ldquo;Introduction to modern statistical mechanics&rdquo; David Chandler</li>
+		<li>&ldquo;Statistical mechanics: Theory and molecular simulation&rdquo; Mark Tuckerman</li>
+		<li>&ldquo;Computer simulation of liquids&rdquo; M. P. Allen and D. J. Tildesley</li>
+	      </ul>
+	    </div>
 	  </section>
 	  <section>
 	    <p>
@@ -153,14 +171,24 @@
 	    <p class="fragment">
 	      Two hours/lectures is nothing, I will hopelessly fail to
 	      teach you it all, so I'll give you the key touch points,
-	      and try my best to be different/interesting/intuitive.</p>
+	      and try my best to be different/interesting/intuitive.
+	    </p>
+	    <p class="fragment">
+	      If I get it wrong, I hope I do it badly enough to
+	      inspire you to correct me!
+	    </p>
 	  </section>
 	  <section>
 	    <p>
 	      Lets try to be real (and stay sane). The simplest
 	      example I can think that fits statistical mechanics AND
 	      thermodynamics is the game of craps (the sum of two
-	      dice).</p>
+	      dice).
+	    </p>
+	    <p>
+	      We'll study this, and try to draw parallels to molecular
+	      systems. If the link isn't clear, let me know!
+	    </p>
 	  </section>
 	</section>
 	<section >
@@ -189,31 +217,33 @@
 	  </section>
 	  <section data-background="https://upload.wikimedia.org/wikipedia/commons/3/3f/Craps_game_at_military_camp_in_1918.jpg">
 	    <p class="backbox">
-	      Players/<b>observers</b> of craps do not care about the <b>microstate</b>. The only <b>state</b> that matters in craps
-	      is the sum of the dice.</p>
+	      Players/<b>observers</b> of craps do not care about the <b>microstate</b>. The only <b>state</b> that
+	      is observed in craps is the sum of the dice.</p>
 	    <p class="backbox fragment">
-	      The sum of the dice is the <b>macrostate</b>. A particular <b>macrostate</b> can consist of an <b>ensemble</b> of
+	      The sum of the dice is thus called the <b>macrostate</b>. A particular <b>macrostate</b> can consist of an <b>ensemble</b> of
 	      many microstates. </p>
 	    <p class="backbox fragment">
 	      For example, the <b>state</b> of a sum of 7 on the two dice is made of the $\left\{\left[1,\,6\right],\,\left[2,\,5\right],\,\left[3,\,4\right],\ldots\right\}$ <b>microstates</b>.
 	    </p>
 	    <p class="backbox fragment">
 	      This is like a molecular system, where an observer sees a particular <b>state</b> (i.e. pressure,
-	      temperature, and mass) will have many possible <b>microstates</b> (molecular configurations).
-	    </p>
+	      temperature, and mass) will have many possible <b>microstates</b> (molecular
+	      configurations), and they don't particularly care about
+	      the microstate.</p>
 	    <p class="backbox fragment">
 	      Note: When we say <b>state</b> we typically mean the <b>macrostate</b>
-	      as its the one we can see experimentally/IRL, thus its the one we care about.
-	    </p>
+	      as its the one we can see experimentally/IRL, thus it's
+	    the one we interact with and actually care about.</p>
 	  </section>
 	  <section data-background="https://upload.wikimedia.org/wikipedia/commons/3/32/Craps.jpg">
 	    <p class="backbox">
 	      Fundamental postulate: Each <b>microstate</b> is equally probable.
 	    </p>	    
 	    <p class="backbox fragment">
-	      This is intuitive for perfect dice, not so intuitive for
-	      classical molecular systems; however, it works, and that
-	      is all we have time for.</p>
+	      This is intuitive for perfect dice, each possible roll
+	      is equally probable.  Not intuitive at all for molecular
+	      systems; however, it works, and that is all we have time
+	      for.</p>
 	    <p class="backbox fragment">
 	      Even though the <b>microstates</b> are equally probable, the <b>macrostates</b> have
 	      different probabilities due to the <em>combinations</em> of <b>microstates</b> that make up their <b>ensemble</b>.
@@ -227,11 +257,11 @@
 	      $\left\{\left[1,\,1\right]\right\}$
 	    </p>
 	    <p class="backbox fragment">
-	      What happens as we add more dice? Can we treat the
-	      system statistically? Molecular systems have very large
-	      numbers of microstate variables, so we need an intuition
-	      of the limit of many many dice....
-	    </p>
+	      What happens as we add more dice? Molecular systems have
+	      very large numbers of microstate variables
+	      $\left(\mathcal{O}\left(10^{26}\right)\right)$, so we
+	      need an intuition of what happens when we have many
+	      dice....</p>
 	  </section>
 	  <section style="height:100%" data-background="img/dice_heap.jpg">
 	    <h2 class="backbox">Example: Hyper-craps</h2>
@@ -421,13 +451,18 @@
 	    </h3>
 	    <ul >
 	      <li class="fragment">
-		Combinations increase incredibly quickly, even for small systems.
-	      </li>
+		Combinations increase incredibly quickly, even for
+	      small systems (20 dice, 189T combinations to roll 70).</li>
 	      <li class="fragment">
 		The distribution sharpens as the number of variables
-		increases. Thus &ldquo;large&rdquo; systems will
-		effectively have nearly unique states, despite
-		everything being possible.</li>
+		increases. Thus &ldquo;large&rdquo; systems will have
+		a very small collection of high probability states,
+		which we will call the <b>equilibrium state</b>.
+	      </li>
+	      <li>
+		Everything is possible, but highly highly improbable
+		compared to the equilibrium state.
+	      </li>
 	      <li class="fragment">
 		Normalisation is a convenience to:
 		<ul>
@@ -436,26 +471,37 @@
 		</ul>
 	      </li>
 	      <li class="fragment">
-		The number of combinations, effectively an
-		unnormalised probability, measures how many
-		microstates a particular macrostate might have.</li>
+		The number of combinations/microstates, $\Omega(\sum_i
+		x_i)$, for a particular dice roll/macrostate $\sum_i x_i$,
+		is an unnormalised probability.</li>
 	    </ul>
 	  </section>
 	  <section style="height:100%" data-background="img/Boltzmann_grave.jpg">
 	    <h3 class="backbox">Thermodynamics of craps</h3>
 	    <p class="backbox">
-	      Lets say we start with hyper-snake-eyes (all ones). What
-	      happens if we start to reroll dice randomly one at a time?
+	      Lets say we start with a roll of hyper-snake-eyes (all
+	      ones). Its density-of-states/combinations is $\Omega=1$.
+	      What happens if we start to reroll dice randomly one at
+	      a time?</p>
+	    <p class="backbox fragment">
+	      The system moves from this state to states with higher
+	      $\Omega$, simply because they are more probable.</p>
+	    <p class="backbox fragment">
+	      Generally ${\rm d}\Omega \ge 0$..... just like entropy!
 	    </p>
 	    <p class="backbox fragment">
-	      The system moves from states with low
-	      combinations/microstates to higher states, as they are more probable.
+	      However, entropy is additive, i.e. $2\times$ the system size gives
+	      $2\times$ the entropy.
 	    </p>
 	    <p class="backbox fragment">
-	      The density of states must increase! This sounds like entropy?
-	    </p>
-	    <p class="backbox fragment">
-	      But the combinations from one dice 
+	      If we want combinations to gain this property of entropy
+	      we need to take its logarithm; i.e.,
+
+	      \begin{align}
+	      \Omega_2 &= \Omega_1\times\Omega_1\\
+	      \ln\Omega_2 &= \ln\Omega_1 + \ln\Omega_1
+	      \end{align}
+
 	    </p>
 	    <div class="attribution backbox">
 	      Background <a href="https://en.wikipedia.org/wiki/Ludwig_Boltzmann#/media/File:Zentralfriedhof_Vienna_-_Boltzmann.JPG">Daderot at English Wikipedia</a> - Own work CC BY-SA 3.0
