@@ -66,7 +66,6 @@
 	 x:1, y:1, xanchor: 'right',
        },
        xaxis: {
-	 automargin:true,
 	 gridcolor:'white',
        },
        yaxis: {
@@ -196,14 +195,18 @@
 	    <h2 class="backbox">A craps example</h2>
 	    <p class="backbox fragment">
 	      In craps, players roll two dice and place bets on the
-	      outcome.
+	      outcome of the sum, which we'll call $E$.
 	    </p>
+	    <p class="backbox fragment">
+	      We will immediately generalise to hyper-craps, where $N$
+	      dice are rolled simultaneously.
+	    </p>	      
 	  </section>
 	  <section data-background="https://upload.wikimedia.org/wikipedia/commons/3/3f/Craps_game_at_military_camp_in_1918.jpg">
 	    <p class="backbox">
-	      The numbers on the dice at any point in the game/<b>simulation</b>
-	      are the <b>microstate</b> variables.
-	    </p>
+	      The numbers on each individual dice at any point in the game/<b>simulation</b>
+	      are called the <b>microstate</b> variables and describe everything about the <b>state</b> of
+	      the game.</p>
 	    <p class="backbox fragment" data-fragment-index="1" style="padding-top:0.5em">
 	      <b>State</b> variables are observables which must change IFF<sup>1</sup> the system
 	      changes.
@@ -217,13 +220,16 @@
 	  </section>
 	  <section data-background="https://upload.wikimedia.org/wikipedia/commons/3/3f/Craps_game_at_military_camp_in_1918.jpg">
 	    <p class="backbox">
-	      Players/<b>observers</b> of craps do not care about the <b>microstate</b>. The only <b>state</b> that
-	      is observed in craps is the sum of the dice.</p>
+	      Players/<b>observers</b> of craps do not really care about the <b>microstate</b>. The only <b>state</b> that
+	      is observed in craps is the sum of the dice, $E$. The
+	      microstate could change, but if $E$ stays the same then
+	      as far as the players are concerned its the same roll.</p>
 	    <p class="backbox fragment">
-	      The sum of the dice is thus called the <b>macrostate</b>. A particular <b>macrostate</b> can consist of an <b>ensemble</b> of
+	      The sum of the dice, $E$, is a <b>macrostate</b> variable
+	      (along with $N$). A <b>macrostate</b> can consist of an <b>ensemble</b> of
 	      many microstates. </p>
 	    <p class="backbox fragment">
-	      For example, the <b>state</b> of a sum of 7 on the two dice is made of the $\left\{\left[1,\,6\right],\,\left[2,\,5\right],\,\left[3,\,4\right],\ldots\right\}$ <b>microstates</b>.
+	      For example, the <b>state</b> of a sum of 7 on the two dice is made of the six <b>microstates</b>, $\left\{\left[1,\,6\right],\,\left[2,\,5\right],\,\left[3,\,4\right],\ldots\right\}$ .
 	    </p>
 	    <p class="backbox fragment">
 	      This is like a molecular system, where an observer sees a particular <b>state</b> (i.e. pressure,
@@ -249,10 +255,10 @@
 	      different probabilities due to the <em>combinations</em> of <b>microstates</b> that make up their <b>ensemble</b>.
 	    </p>	      
 	    <p class="backbox fragment">
-	      For two dice, rolling a seven <br/> 
+	      For two dice, rolling a $U=7$ <br/> 
 	      $\left\{\left[1,\,6\right],\,\left[2,\,5\right],\,\left[3,\,4\right],\,\left[4,\,3\right],\,\left[5,\,2\right],\,\left[6,\,1\right]\right\}$.
 	      <br/>
-	      is six times more likely than a snake eyes (two)
+	      is six times more likely than a snake eyes ($U=2$)
 	      <br/>
 	      $\left\{\left[1,\,1\right]\right\}$
 	    </p>
@@ -269,7 +275,7 @@
 	      <div class="row">
 		<div class="col">
 		  <div class="form-group">
-		    <label id="dicecount1label" for="dicecount1">Dice count: 1</label>
+		    <label id="dicecount1label" for="dicecount1">$N$: 1</label>
 		    <input type="range" class="form-control-range" id="dicecount1" min="1" max="28" value="1" step="1">
 		  </div>
 		</div>
@@ -282,16 +288,16 @@
 	      </div>
 	      <div class="row">
 		<div class="col">
-		  <input class="form-check-input" type="radio" name="dicey" id="dicey1" value="1" checked>
-		  <label class="form-check-label" for="dicey1" id="dicey1label">Combinations</label>
+		  <input class="form-check-input" type="radio" name="dicey" id="dicey1" value="1" checked><br/>
+		  <label class="form-check-label" for="dicey1" id="dicey1label">$\Omega\left(N,\,E\right)$</label>
 		</div>
 		<div class="col">
-		  <input class="form-check-input" type="radio" name="dicey" id="dicey2" value="2">
-		  <label class="form-check-label" for="dicey2" id="dicey2label">Probability, $p$</label>
+		  <input class="form-check-input" type="radio" name="dicey" id="dicey2" value="2"><br/>
+		  <label class="form-check-label" for="dicey2" id="dicey2label">$p(E)$</label>
 		</div>
 		<div class="col">
-		  <input class="form-check-input" type="radio" name="dicey" id="dicey3" value="3">
-		  <label class="form-check-label" for="dicey3" id="dicey3label">$p/max(p)$</label>
+		  <input class="form-check-input" type="radio" name="dicey" id="dicey3" value="3"><br/>
+		  <label class="form-check-label" for="dicey3" id="dicey3label">$p(E)/\left({\rm max}_E\,p(E)\right)$</label>
 		</div>
 	      </div>
 	    </form>
@@ -377,9 +383,10 @@
 		 data2.y = data2.y.map((e) => { return 1.0; });		 
 	       }
 
-	       var xlabel = '\\sum_i x_i';
+	       var xlabel = 'E';
+	       
 	       if ($('#dicenormalisation1')[0].checked) 
-		 xlabel = '\\left\\langle x_i\\right\\rangle';
+		 xlabel = 'e';
 	       
 	       var traces = [
 		 mergeDeep(
@@ -414,7 +421,7 @@
 	       
 	       if (ystate == 1) {
 		 layout.yaxis.autorange = true;
-		 layout.yaxis.title = 'Combinations $\\Omega\\left('+ xlabel +'\\right)$';
+		 layout.yaxis.title = '$\\Omega\\left(N,\\,'+ xlabel +'\\right)$';
 	       } else if (ystate == 2) {
 		 layout.yaxis.autorange = false;
 		 layout.yaxis.range = [0, 1.0 / dice_sides + 0.1];
@@ -422,7 +429,7 @@
 	       } else if (ystate == 3) {
 		 layout.yaxis.autorange = false;
 		 layout.yaxis.range = [0, 1.0];
-		 layout.yaxis.title = '$p\\left(' + xlabel + '\\right) / \\max p\\left(' + xlabel + '\\right)$';
+		 layout.yaxis.title = '$p\\left(' + xlabel + '\\right) / \\left(\\max_{'+xlabel+'} p\\left(' + xlabel + '\\right)\\right)$';
 	       }
 
 	       return {
@@ -436,7 +443,7 @@
 
 	     function diceupdate1() {
 	       var target = $('#dicecount1')[0];
-	       $('#dicecount1label').text("Dice count: "+target.value);
+	       $('#dicecount1label').text("N: "+target.value);
 	       Plotly.react('dicePlot', refresh_dice_plot(target.valueAsNumber, dice_sides));
 	     }
 
@@ -459,21 +466,21 @@
 		a very small collection of high probability states,
 		which we will call the <b>equilibrium state</b>.
 	      </li>
-	      <li>
-		Everything is possible, but highly highly improbable
-		compared to the equilibrium state.
+	      <li class="fragment">
+		Everything is possible, but highly improbable compared
+		to the equilibrium state.
 	      </li>
 	      <li class="fragment">
 		Normalisation is a convenience to:
 		<ul>
-		  <li>Make properties <b>intensive</b> (average dice value) instead of <b>extensive</b> (dice sum).</li>
+		  <li>Make properties <b>intensive</b> (average dice value, $u$) instead of <b>extensive</b> (dice sum, $U$).</li>
 		  <li>Move from combinations to probability, which is more useful for calculations.</li>
 		</ul>
 	      </li>
 	      <li class="fragment">
-		The number of combinations/microstates, $\Omega(\sum_i
-		x_i)$, for a particular dice roll/macrostate $\sum_i x_i$,
-		is an unnormalised probability.</li>
+		The number of microstates, $\Omega(U)$, for a
+		particular dice roll/macrostate, $U$, is an
+		unnormalised probability.</li>
 	    </ul>
 	  </section>
 	  <section style="height:100%" data-background="img/Boltzmann_grave.jpg">
@@ -484,8 +491,8 @@
 	      What happens if we start to reroll dice randomly one at
 	      a time?</p>
 	    <p class="backbox fragment">
-	      The system moves from this state to states with higher
-	      $\Omega$, simply because they are more probable.</p>
+	      The system moves towards states with higher $\Omega$,
+	      simply because they are more probable.</p>
 	    <p class="backbox fragment">
 	      Generally ${\rm d}\Omega \ge 0$..... just like entropy!
 	    </p>
@@ -494,18 +501,116 @@
 	      $2\times$ the entropy.
 	    </p>
 	    <p class="backbox fragment">
-	      If we want combinations to gain this property of entropy
+	      If we want combinations to have this property of entropy
 	      we need to take its logarithm; i.e.,
 
 	      \begin{align}
-	      \Omega_2 &= \Omega_1\times\Omega_1\\
-	      \ln\Omega_2 &= \ln\Omega_1 + \ln\Omega_1
+	      \Omega_{1+2} &= \Omega_{1}\times\Omega_{2}\\
+	      \ln\Omega_{1+2} &= \ln\Omega_1 + \ln\Omega_2
 	      \end{align}
 
 	    </p>
 	    <div class="attribution backbox">
 	      Background <a href="https://en.wikipedia.org/wiki/Ludwig_Boltzmann#/media/File:Zentralfriedhof_Vienna_-_Boltzmann.JPG">Daderot at English Wikipedia</a> - Own work CC BY-SA 3.0
 	    </div>
+	  </section>
+	  <section style="height:100%" data-background="img/Boltzmann_grave.jpg">
+	    <h3 class="backbox">Thermodynamics of everything</h3>
+	    <p class="backbox">
+	      Due to a historical accident, the actual relationship to
+	      entropy is multiplied by the Boltzmann constant, $k_B$.
+	      <img src="img/Boltzmann_equation.jfif"><br/>
+	      where $W=\Omega$, and $k.=k_B$.
+	    </p>
+	    <p class="backbox fragment">
+	      We now intuitively understand entropy as some measure of
+	      probability, thus it increases as things move
+	      towards the most probable state... but only probably (!).</p>
+	    <p class="backbox fragment">
+	      This has fascinating implications if true, see
+	      <a href="https://www.bbc.co.uk/sounds/play/m000lvbx">
+	      The Infinite Monkey Cage: Does Time Exist?"
+	      </a>.
+	    </p>
+	    <div class="attribution backbox">
+	      Background <a href="https://en.wikipedia.org/wiki/Ludwig_Boltzmann#/media/File:Zentralfriedhof_Vienna_-_Boltzmann.JPG">Daderot at English Wikipedia</a> - Own work CC BY-SA 3.0
+	    </div>
+	  </section>
+	  <section>
+	    <h3>The rest of thermodynamics</h3>
+	    <p>
+	      Assume we have a collection of dice, and they're now
+	      fixed at a particular dice sum of $U$. I.e. we're
+	      considering the <b>ensemble</b> of <b>microstates</b> for
+	      $U$.
+	    </p>
+	    <p class="fragment">
+	      Now divide the dice into two groups, each with a
+	      separate sum $U_1$ and $U_2 = U - U_1$ which adds to the
+	      total $U=U_1+U_2$.
+	    </p>
+	    <p class="fragment">
+	      The most probable state is one that maximises entropy, given as follows:
+	      
+	      \begin{align*}
+	      \ln \Omega_{1+2}(U_1+U_2) &= \ln \Omega_1(U_1) + \ln \Omega_2(U_2) \\
+	      \ln \Omega_{1+2}(U,\,U_1) &= \ln \Omega_1(U_1) + \ln \Omega_2(U-U_1) \\
+	      \end{align*}
+
+	      What is special at this maximum?
+	    </p>
+	  </section>
+	  <section>
+	    <h3>The rest of thermodynamics</h3>
+	    <p>
+	      The maximum entropy when varying  $U_1$ occurs at a stationary point, i.e.
+
+	      \begin{align*}
+	      \frac{{\rm d}}{{\rm d} U_1}\ln \Omega_{1+2}(U,\,U_1) &= 0\\
+	      \frac{{\rm d}}{{\rm d} U_1}\ln \Omega_1(U_1) + \frac{{\rm d}}{{\rm d} U_1}\ln \Omega_2(U-U_1)&=0 \\
+	      \frac{{\rm d}}{{\rm d} U_1}\ln \Omega_1(U_1) &= \frac{{\rm d}}{{\rm d} U_2}\ln \Omega_2(U_2)
+	      \end{align*}
+	    </p>
+	  </section>
+	  <section>
+	    <h3>The rest of thermodynamics</h3>
+	    <p>
+	      \begin{align*}
+	      \frac{{\rm d}}{{\rm d} U_1}\ln \Omega_1(U_1) &= \frac{{\rm d}}{{\rm d} U_2}\ln \Omega_2(U_2)
+	      \end{align*}
+
+	      We now define some shorthand:
+	      \begin{align*}
+	      \beta = \frac{{\rm d}}{{\rm d} U} \ln \Omega
+	      \end{align*}
+	      and note the result
+	      \begin{align*}
+	      \beta_1 = \beta_2
+	      \end{align*}
+	      I.e., Maximum entropy for two systems at fixed overall $U$ that can exchange ${\rm d}U$, have equal $\beta$.
+	    </p>
+	  </section>
+	  <section>
+	    <h3>Back to reality</h3>
+	    <p>
+	      We called the dice sum $U$, because its analogous to the
+	      thermodynamic internal energy $U$.
+	    </p>
+	    <p class="fragment">
+	      If we enforce conservation of $U$/energy, which is the
+	      first law of thermodynamics, then we gain the rule that
+	      $\beta$ must be equal between systems in thermal
+	      equilibrium, i.e. able to exchange ${\rm d}U$.
+	    </p>
+	    <p class="fragment">
+	      If we look up the derivative $\frac{{\rm d}}{{\rm d}U}S$
+	      in traditional thermodynamics, we realise that
+	      $\beta=1/(k_B\,T)$, and thus have proven that systems at
+	      equilibrium/maximum-entropy have the same temperature.</p>
+	    <p class="fragment">
+	      This may seem like a trivial result, but we have
+	      connected statistical descriptions of a system to
+	      macroscopic thermodynamics! Everything else follows from here.</p>
 	  </section>
 	  <section>
 	    <h2>Recap: The first law</h2>
@@ -549,9 +654,7 @@
 	      2: The lack of an "arrow of time" was a major critiscm
 	      of Boltzmann's early work on statistical mechanics. The
 	      conclusions of a statistical mechanical universe and
-	      time are fascinating. E.g. See<a href="https://www.bbc.co.uk/sounds/play/m000lvbx">
-	      The Infinite Monkey Cage: Does Time Exist?"
-	      </a>.
+	      time are fascinating. E.g. 
 	    </p>
 	  </section>
 	</section>
