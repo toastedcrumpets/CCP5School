@@ -293,11 +293,11 @@
 		</div>
 		<div class="col">
 		  <input class="form-check-input" type="radio" name="dicey" id="dicey2" value="2"><br/>
-		  <label class="form-check-label" for="dicey2" id="dicey2label">$p(E)$</label>
+		  <label class="form-check-label" for="dicey2" id="dicey2label">$P(E)$</label>
 		</div>
 		<div class="col">
 		  <input class="form-check-input" type="radio" name="dicey" id="dicey3" value="3"><br/>
-		  <label class="form-check-label" for="dicey3" id="dicey3label">$p(E)/\left({\rm max}_E\,p(E)\right)$</label>
+		  <label class="form-check-label" for="dicey3" id="dicey3label">$P(E)/\left({\rm max}_E\,P(E)\right)$</label>
 		</div>
 	      </div>
 	    </form>
@@ -461,25 +461,24 @@
 		Combinations increase incredibly quickly, even for
 	      small systems (20 dice, 189T combinations to roll 70).</li>
 	      <li class="fragment">
-		The distribution sharpens as the number of variables
-		increases. Thus &ldquo;large&rdquo; systems will have
-		a very small collection of high probability states,
+		The distribution sharpens as $N\to\infty$. Thus
+		&ldquo;large&rdquo; systems will have a relatively
+		small collection of extremely-high probability states,
 		which we will call the <b>equilibrium state</b>.
 	      </li>
 	      <li class="fragment">
-		Everything is possible, but highly improbable compared
-		to the equilibrium state.
-	      </li>
+		Everything is possible, but much of it is highly
+		highly highly highly improbable compared to the
+		equilibrium state.</li>
 	      <li class="fragment">
 		Normalisation is a convenience to:
 		<ul>
-		  <li>Make properties <b>intensive</b> (average dice value, $u$) instead of <b>extensive</b> (dice sum, $U$).</li>
-		  <li>Move from combinations to probability, which is more useful for calculations.</li>
-		</ul>
+		  <li>Make properties <b>intensive</b> (average dice value, $e$) instead of <b>extensive</b> (dice sum, $E$).</li>
+		  <li>Move from combinations to probability, which is more useful for calculations.</li></ul>
 	      </li>
 	      <li class="fragment">
-		The number of microstates, $\Omega(U)$, for a
-		particular dice roll/macrostate, $U$, is an
+		The number of microstates, $\Omega(N,\,E)$, for a
+		particular dice roll/macrostate, $E$, is an
 		unnormalised probability.</li>
 	    </ul>
 	  </section>
@@ -487,28 +486,41 @@
 	    <h3 class="backbox">Thermodynamics of craps</h3>
 	    <p class="backbox">
 	      Lets say we start with a roll of hyper-snake-eyes (all
-	      ones). Its density-of-states/combinations is $\Omega=1$.
+	      ones). Its density-of-states/combinations is $\Omega(N,\, E=N)=1$.
 	      What happens if we start to reroll dice randomly one at
 	      a time?</p>
 	    <p class="backbox fragment">
 	      The system moves towards states with higher $\Omega$,
-	      simply because they are more probable.</p>
+	      simply because they are more probable. This movement is
+	      gradual as we're rerolling small portions of dice, thus
+	      introducing quasi-dynamics.</p>
 	    <p class="backbox fragment">
 	      Generally ${\rm d}\Omega \ge 0$..... just like entropy!
 	    </p>
+	    <div class="attribution backbox">
+	      Background <a href="https://en.wikipedia.org/wiki/Ludwig_Boltzmann#/media/File:Zentralfriedhof_Vienna_-_Boltzmann.JPG">Daderot at English Wikipedia</a> - Own work CC BY-SA 3.0
+	    </div>
+	  </section>
+	  <section style="height:100%" data-background="img/Boltzmann_grave.jpg">
+	    <h3 class="backbox">Thermodynamics of craps</h3>
+	    <p class="backbox">
+	      But entropy is additive, i.e. $2\times$ the system size
+	      gives $2\times$ the entropy. Can we match this?</p>
 	    <p class="backbox fragment">
-	      However, entropy is additive, i.e. $2\times$ the system size gives
-	      $2\times$ the entropy.
+	      \begin{multline}
+	      \Omega\left(N=N_1+N_2,\,E=E_1+E_2\right) \\
+	      = \Omega\left(N_1,\,E_1\right)\times\Omega\left(N_2,\,E_2\right)
+	      \end{multline}
 	    </p>
 	    <p class="backbox fragment">
-	      If we want combinations to have this property of entropy
-	      we need to take its logarithm; i.e.,
-
-	      \begin{align}
-	      \Omega_{1+2} &= \Omega_{1}\times\Omega_{2}\\
-	      \ln\Omega_{1+2} &= \ln\Omega_1 + \ln\Omega_2
-	      \end{align}
-
+	      \begin{multline}
+	      \ln\Omega\left(N=N_1+N_2,\,E=E_1+E_2\right) \\
+	      = \ln\Omega\left(N_1,\,E_1\right) + \ln\Omega\left(N_2,\,E_2\right)
+	      \end{multline}
+	    </p>
+	    <p class="backbox fragment">
+	      $S = \ln \Omega$ has all the properties of entropy! We
+	      have discovered it inside our game of craps, and possibly inside molecular systems too.
 	    </p>
 	    <div class="attribution backbox">
 	      Background <a href="https://en.wikipedia.org/wiki/Ludwig_Boltzmann#/media/File:Zentralfriedhof_Vienna_-_Boltzmann.JPG">Daderot at English Wikipedia</a> - Own work CC BY-SA 3.0
@@ -527,10 +539,9 @@
 	      probability, thus it increases as things move
 	      towards the most probable state... but only probably (!).</p>
 	    <p class="backbox fragment">
-	      This has fascinating implications if true, see
-	      <a href="https://www.bbc.co.uk/sounds/play/m000lvbx">
+	      This fascinating implications, i.e. see<a href="https://www.bbc.co.uk/sounds/play/m000lvbx">
 	      The Infinite Monkey Cage: Does Time Exist?"
-	      </a>.
+	      </a> for one aspect.
 	    </p>
 	    <div class="attribution backbox">
 	      Background <a href="https://en.wikipedia.org/wiki/Ludwig_Boltzmann#/media/File:Zentralfriedhof_Vienna_-_Boltzmann.JPG">Daderot at English Wikipedia</a> - Own work CC BY-SA 3.0
@@ -539,46 +550,36 @@
 	  <section>
 	    <h3>The rest of thermodynamics</h3>
 	    <p>
-	      Assume we have a collection of dice, and they're now
-	      fixed at a particular dice sum of $U$. I.e. we're
-	      considering the <b>ensemble</b> of <b>microstates</b> for
-	      $U$.
-	    </p>
+	      Our <b>ensemble</b> so far has been fixed $N$, but now
+	    we include the dice sum $E$ as fixed too.</p>
 	    <p class="fragment">
-	      Now divide the dice into two groups, each with a
-	      separate sum $U_1$ and $U_2 = U - U_1$ which adds to the
+	      Divide the dice into two groups, each with a
+	      separate $U_1$ and $U_2 = U - U_1$ which adds to the
 	      total $U=U_1+U_2$.
 	    </p>
 	    <p class="fragment">
-	      The most probable state is one that maximises entropy, given as follows:
+	      The equilibrium value of $U_1$ is one that maximises
+	      entropy, where the total entropy is:
 	      
-	      \begin{align*}
-	      \ln \Omega_{1+2}(U_1+U_2) &= \ln \Omega_1(U_1) + \ln \Omega_2(U_2) \\
-	      \ln \Omega_{1+2}(U,\,U_1) &= \ln \Omega_1(U_1) + \ln \Omega_2(U-U_1) \\
-	      \end{align*}
+	      \begin{align*} \ln \Omega_{1+2}(U_1+U_2) &= \ln
+	      \Omega_1(U_1) + \ln \Omega_2(U_2) \\ \ln
+	      \Omega_{1+2}(U,\,U_1) &= \ln \Omega_1(U_1) + \ln
+	      \Omega_2(U-U_1) \\ \end{align*}
 
-	      What is special at this maximum?
-	    </p>
+	      The maximum entropy when varying $U_1$ occurs at a
+	      stationary point, i.e.  $\left(\frac{{\rm d} \ln
+	      \Omega_{1+2}(U,\,U_1)}{{\rm d} U_1}\right)_{N} = 0$...</p>
 	  </section>
 	  <section>
 	    <h3>The rest of thermodynamics</h3>
 	    <p>
-	      The maximum entropy when varying  $U_1$ occurs at a stationary point, i.e.
-
 	      \begin{align*}
 	      \frac{{\rm d}}{{\rm d} U_1}\ln \Omega_{1+2}(U,\,U_1) &= 0\\
 	      \frac{{\rm d}}{{\rm d} U_1}\ln \Omega_1(U_1) + \frac{{\rm d}}{{\rm d} U_1}\ln \Omega_2(U-U_1)&=0 \\
 	      \frac{{\rm d}}{{\rm d} U_1}\ln \Omega_1(U_1) &= \frac{{\rm d}}{{\rm d} U_2}\ln \Omega_2(U_2)
 	      \end{align*}
 	    </p>
-	  </section>
-	  <section>
-	    <h3>The rest of thermodynamics</h3>
-	    <p>
-	      \begin{align*}
-	      \frac{{\rm d}}{{\rm d} U_1}\ln \Omega_1(U_1) &= \frac{{\rm d}}{{\rm d} U_2}\ln \Omega_2(U_2)
-	      \end{align*}
-
+	    <p class="fragment">
 	      We now define some shorthand:
 	      \begin{align*}
 	      \beta = \frac{{\rm d}}{{\rm d} U} \ln \Omega
@@ -587,21 +588,18 @@
 	      \begin{align*}
 	      \beta_1 = \beta_2
 	      \end{align*}
-	      I.e., Maximum entropy for two systems at fixed overall $U$ that can exchange ${\rm d}U$, have equal $\beta$.
 	    </p>
 	  </section>
 	  <section>
 	    <h3>Back to reality</h3>
 	    <p>
-	      We called the dice sum $U$, because its analogous to the
-	      thermodynamic internal energy $U$.
-	    </p>
+	      The dice sum is $E$, because its analogous to the
+	      energy, which according to the first law is conserved,
+	      just like in our $N,E$ dice ensemble.</p>
 	    <p class="fragment">
-	      If we enforce conservation of $U$/energy, which is the
-	      first law of thermodynamics, then we gain the rule that
-	      $\beta$ must be equal between systems in thermal
-	      equilibrium, i.e. able to exchange ${\rm d}U$.
-	    </p>
+	      Thus adding conservation of energy/$E$ to dice gives us
+	      rule that $\beta$ must be equal between systems in
+	      (thermal) equilibrium, i.e. able to exchange ${\rm d}E$.</p>
 	    <p class="fragment">
 	      If we look up the derivative $\frac{{\rm d}}{{\rm d}U}S$
 	      in traditional thermodynamics, we realise that
@@ -613,48 +611,85 @@
 	      macroscopic thermodynamics! Everything else follows from here.</p>
 	  </section>
 	  <section>
-	    <h2>Recap: The first law</h2>
+	    <h3>Maxwell-Boltzmann distribution</h3>
 	    <p>
-	      Thermodynamics is observational. Consider the first law:
+	      Assume again we have two systems in the ensemble $N,E$
+	      but able to exchange energy (thus at equal
+	      temperatures). If system 1 is in a <b>microstate</b>, $i$, with
+	      energy $E_{1,i}$, all <b>microstates</b> are equally
+	      probable, then the <b>degeneracy</b> of system 2 (the bath)
+	      grants degeneracy of the system 1 <b>microstate</b>.
+	      
+	      <span style="font-size:75%">
+		\begin{align*} P\left(i\right) \propto \Omega_2(E_2=E-E_{1,i})
+		\end{align*}
+	      </span>
 	    </p>
-	    <h4 class="fragment">ENERGY IS CONSERVED</h4>
 	    <p class="fragment">
-	      But what is energy? Every time we observe violations of
-	      this law, we redefine energy to include the other forms.
+	      Expanding system 2 entropy around $E$...
+	      <span style="font-size:75%">
+		\begin{align*}
+		\ln \Omega_2(E_2=E-E_{1,i}) &= \ln\Omega_2(E_2=E) 
+		- E_{1,i} \frac{{\rm d} \ln\Omega(E)}{{\rm d}E} 
+		+ \mathcal{O}(1/E)
+		\\
+		&\approx \ln\Omega_2(E_2=E) - \frac{E_{1,i}}{k_B\,T}
+		\end{align*}
+	      </span>
 	    </p>
-	    <p class="fragment" >
-	      Let's rephrase the law to be something more universal (!):</p>
-	    <div class="fragment">
-	      <h4>THERE IS SOMETHING<sup>1</sup> WHICH IS CONSERVED AND WE CALL
-		IT ENERGY</h4>
-	      <p class="footnote">1: We need to be careful as it
-		must also be a <em>state</em> variable thus observed
-		to change with the state of the system, not just some
-		arbitrary constant. What exactly is a state variable, and
-		why, in real systems, keeps me up at night...</p>
-	    </div>
+	    <p class="fragment">
+	      Inserting, and realising that $\ln\Omega_2(E_2=E)$ is a constant,
+	      <span style="font-size:75%">		
+		\begin{align*} 
+		P\left(i\right) \propto e^{-E_{1,i}/(k_B\,T)}
+		\end{align*}
+	      </span>
+	    </p>
 	  </section>
 	  <section>
-	    <h2>Recap: The second law</h2>
+	    <h3>Canonical partition function</h3>
 	    <p>
-	      Prepare yourself for another brutal simplification
-	      followed by wild statements.
+	      \begin{align*}
+	      P\left(i\right) \propto e^{-E_{1,i} / (k_B\,T)}
+	      \end{align*}
+	      
+	      We can normalise this into a full expression by creating the <b>partition</b> function,
+	      \begin{align*} Z = \sum_{i} e^{-E_{1,i} / (k_B\,T)}
+	      \end{align*}
+	      
+	      Giving
+	      
+	      \begin{align*} P\left(i\right) = Z^{-1} e^{-E_{i} /
+	      (k_B\,T)} \end{align*}
+
+	      We've dropped the system 1 and 2 notations, as the other
+	      system is irrelevant, aside from its temperature.
 	    </p>
-	    <h4 class="fragment" data-fragment-index="1">ENTROPY MUST INCREASE<sup>1</sup></h4>
-	    <p class="fragment" data-fragment-index="2">
-	      Entropy is like time in its inexorable increase, except
-	      it is not monotonic. <span class="fragment" data-fragment-index="3">It's more &ldquo;real&rdquo; than time(!), as
-	      a constant entropy pocket universe would have no way to
-	      record the passage of time.<sup>2</sup></span></p>
-	    <p class="footnote fragment"  data-fragment-index="1">
-	      1: Entropy does not stay the same in any real
-	      macroscopic process; however, $S=0$ is
-	      mathematically possible.</p>
-	    <p class="footnote fragment"  data-fragment-index="3">
-	      2: The lack of an "arrow of time" was a major critiscm
-	      of Boltzmann's early work on statistical mechanics. The
-	      conclusions of a statistical mechanical universe and
-	      time are fascinating. E.g. 
+	    <p class="fragment">
+	      Amazingly, we have for a $N,\,T$ ensemble, 
+	    </p>
+	  </section>
+	  <section>
+	    <h3>Canonical partition function</h3>
+	    <p>
+	      \begin{align*}
+	      P\left(i\right) \propto e^{-E_{1,i} / (k_B\,T)}
+	      \end{align*}
+	      
+	      We can normalise this into a full expression by creating the <b>partition</b> function,
+	      \begin{align*} Z = \sum_{i} e^{-E_{1,i} / (k_B\,T)}
+	      \end{align*}
+	      
+	      Giving
+	      
+	      \begin{align*} P\left(i\right) = Z^{-1} e^{-E_{i} /
+	      (k_B\,T)} \end{align*}
+
+	      We've dropped the system 1 and 2 notations, as the other
+	      system is irrelevant, aside from its temperature.
+	    </p>
+	    <p class="fragment">
+	      Amazingly, we have for a $N,\,T$ ensemble, derived a 
 	    </p>
 	  </section>
 	</section>
