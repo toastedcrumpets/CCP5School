@@ -826,81 +826,83 @@
 	    </div>
 	    <div id="springDashpot" style="margin:auto 0; display:inline-block;" ></div>
 	    <script>
-	     var state = {
-	     };
-
-	     function init(n) {
-	       state.n = n;
-	       state.dt = 0.015;
-	       state.x = [];
-	       state.y = [];
-	       state.tinit = [];
-	       state.A = [];
-	       state.t = 0;
-	       
-	       for (i = 0; i < state.n; i++) {
-		 state.tinit[i] = Math.random();
-		 state.A[i] = 1.0;
+	     function() {
+	       var state = {
 	       };
-	     };
 
-	     function step() {
-	       state.t += state.dt;
-	       for (i = 0; i < state.n; i++) {
-		 var phase = 2 * 3.14159265 * (state.tinit[i] + state.t);
-		 state.x[i] = state.A[i] * Math.sin(phase);
-		 state.y[i] = state.A[i] * Math.cos(phase);
+	       function init(n) {
+		 state.n = n;
+		 state.dt = 0.015;
+		 state.x = [];
+		 state.y = [];
+		 state.tinit = [];
+		 state.A = [];
+		 state.t = 0;
+		 
+		 for (i = 0; i < state.n; i++) {
+		   state.tinit[i] = Math.random();
+		   state.A[i] = 1.0;
+		 };
 	       };
-	     };
 
-	     init(1);
-	     step();
+	       function step() {
+		 state.t += state.dt;
+		 for (i = 0; i < state.n; i++) {
+		   var phase = 2 * 3.14159265 * (state.tinit[i] + state.t);
+		   state.x[i] = state.A[i] * Math.sin(phase);
+		   state.y[i] = state.A[i] * Math.cos(phase);
+		 };
+	       };
 
-	     $('#shocount1').on('input change', 
-				(e) => {
-				  $('#shocount1output').text(e.target.value);
-				  init(e.target.valueAsNumber); 
-	     });
-
-	     Plotly.newPlot('springDashpot', 
-			    {
-			      data:	[{
-				x: state.x,
-				y: state.y,
-				mode: 'markers',
-			      }],
-			      layout:  { 
-				xaxis: { title: 'r', range: [-1.5, 1.5]},
-				yaxis: { title: 'v', range: [-1.5, 1.5]},
-				plot_bgcolor: '#000',
-				paper_bgcolor: '#000E',
-				font: {
-				  color: 'white',
-				  size: 15,
-				},
-			      },
-			      config: default_plot_Config,
-	     });
-	     
-	     function update () {
+	       init(1);
 	       step();
 
-	       Plotly.animate('springDashpot', {
-		 data: [{x: state.x, y: state.y}],
-	       }, {
-		 transition: {
-		   duration: 0
-		 },
-		 frame: {
-		   duration: 0,
-		   redraw: false
-		 }
+	       $('#shocount1').on('input change', 
+				  (e) => {
+				    $('#shocount1output').text(e.target.value);
+				    init(e.target.valueAsNumber); 
 	       });
 
-	       requestAnimationFrame(update);
-	     }
+	       Plotly.newPlot('springDashpot', 
+			      {
+				data:	[{
+				  x: state.x,
+				  y: state.y,
+				  mode: 'markers',
+				}],
+				layout:  { 
+				  xaxis: { title: 'r', range: [-1.5, 1.5]},
+				  yaxis: { title: 'v', range: [-1.5, 1.5]},
+				  plot_bgcolor: '#000',
+				  paper_bgcolor: '#000E',
+				  font: {
+				    color: 'white',
+				    size: 15,
+				  },
+				},
+				config: default_plot_Config,
+	       });
+	       
+	       function update () {
+		 step();
 
-	     requestAnimationFrame(update);
+		 Plotly.animate('springDashpot', {
+		   data: [{x: state.x, y: state.y}],
+		 }, {
+		   transition: {
+		     duration: 0
+		   },
+		   frame: {
+		     duration: 0,
+		     redraw: false
+		   }
+		 });
+
+		 requestAnimationFrame(update);
+	       }
+
+	       requestAnimationFrame(update);
+	     }();
 	    </script>
 	  </section>
 	  <section>
@@ -920,13 +922,41 @@
 	    </p>
 	  </section>
 	  <section>
-	    <img src="img/SHOflow1.svg" />
+	    <h3>SHO phase space &ldquo;flow&rdquo;</h3>
+	    <img src="img/SHOflow1.svg" style="width:50%" />
+	    <p>
+	      The systems flow around phase space, the trajectory
+	      lines do not cross, thus this behaves exactly as a
+	      incompressible fluid.
+	    </p>
+	  </section>
+	  <section>
+	    <h3>Liouville's Theorem</h3>
+	    <p>
+	      We can treat an ensemble of systems flowing around phase
+	      space as an incompressible fluid with density
+	      $\rho(\boldsymbol{\Gamma})$, thus it behaves as follows.
+	      
+	      \begin{align*}
+	      \nabla_{\boldsymbol{\Gamma}} \cdot \dot{\boldsymbol\Gamma}\,\rho({\boldsymbol\Gamma}) = 0
+	      \end{align*}
+	      
+	      which should be familiar to you from any fluid flow class you might have had.
+	    </p>
+	    <p class="fragment">
+	      This is the foundation of kinetic theory, as from here
+	      comes the BBGKY heirarchy and ultimately
+	      Boltzmann's/Enskog's equation.
+	    </p>
+	    <p class="fragment">
+	      Back to ergodicity.
+	    </p>
 	  </section>
 	  <section>
 	    <div class="backbox">
 	      <div class="form-group">
-		<label for="shocount1">Ensemble members:</label><output id="shocount1output" for="shocount1">1</output>
-		<input type="range" class="form-control-range" id="shocount1" min="1" max="500" value="1" step="1">
+		<label for="shocount2">Ensemble members:</label><output id="shocount2output" for="shocount2">1</output>
+		<input type="range" class="form-control-range" id="shocount2" min="1" max="500" value="1" step="1">
 	      </div>
 	    </div>
 	    <div id="springDashpot" style="margin:auto 0; display:inline-block;" ></div>
@@ -938,36 +968,36 @@
 	     var gamma = 2 * beta;
 	     var k = omega * omega + gamma * gamma / 4;
 	     
-	     def meshplot(r0):
-			 gamma = 2 * beta
-	     k = omega*omega + gamma*gamma/4
-	     m = 1
-	     r, v = np.linspace(-(1.3+r0), (1.3+r0), 100), np.linspace(-(1.3+r0), (1.3+r0), 100)
-	     R, V = np.meshgrid(r, v)
-	     E = 0.5 * (k * (np.abs(R)-r0) * (np.abs(R)-r0) + m * V * V)
-	     A = - k * np.abs(R) *(np.abs(R)-r0) / R - gamma * V
-	     #Q = plt.quiver(R, V, V, A, pivot='mid', scale=25, headlength=10, headaxislength=8, headwidth=10)
-
-	     if r0 != 0:
-		  Q = plt.streamplot(r, v, V, A, color='k', arrowstyle="->", density=1)
-             CS = plt.contour(R,V,E, levels=[0.25, 0.5, 0.75], linewidths=2, colors=['r', 'g', 'b'])
-             labels = ['$E=0.25$', '$E=0.5$','$E=0.75$']
-             for i in range(len(labels)):
-		      CS.collections[i].set_label(labels[i])
-             plt.legend(bbox_to_anchor=(1.3, 1.0))
-	     else:
-		      Q = plt.streamplot(r, v, V, A, color='k', arrowstyle="->", density=1)
-             
-	     plt.xlabel('$r$')
-	     plt.ylabel('$v$')
-	     plt.xlim([-(1.2+r0), r0+1.2])
-	     plt.ylim([-1.2, 1.2])
-	     plt.xticks([-1, 0, 1])
-	     plt.yticks([-1, 0, 1])
-	     style_fig(plt.gcf(), square=True, scale=(1+r0*0.8))
-	     print("Plotting phasespace flow plot")
-	     plt.savefig("springphasespaceflow"+str(beta)+"r"+str(r0)+".pdf", bbox_inches="tight", pad_inches=0, transparent=True)
-	     plt.clf()
+	     //def meshplot(r0):
+	     //		 gamma = 2 * beta
+	     //k = omega*omega + gamma*gamma/4
+	     //m = 1
+	     //r, v = np.linspace(-(1.3+r0), (1.3+r0), 100), np.linspace(-(1.3+r0), (1.3+r0), 100)
+	     //R, V = np.meshgrid(r, v)
+	     //E = 0.5 * (k * (np.abs(R)-r0) * (np.abs(R)-r0) + m * V * V)
+	     //A = - k * np.abs(R) *(np.abs(R)-r0) / R - gamma * V
+	     //#Q = plt.quiver(R, V, V, A, pivot='mid', scale=25, headlength=10, headaxislength=8, headwidth=10)
+	     //
+	     //if r0 != 0:
+	     //	  Q = plt.streamplot(r, v, V, A, color='k', arrowstyle="->", density=1)
+             //CS = plt.contour(R,V,E, levels=[0.25, 0.5, 0.75], linewidths=2, colors=['r', 'g', 'b'])
+             //labels = ['$E=0.25$', '$E=0.5$','$E=0.75$']
+             //for i in range(len(labels)):
+	     //	      CS.collections[i].set_label(labels[i])
+             //plt.legend(bbox_to_anchor=(1.3, 1.0))
+	     //else:
+	     //	      Q = plt.streamplot(r, v, V, A, color='k', arrowstyle="->", density=1)
+             //
+	     //plt.xlabel('$r$')
+	     //plt.ylabel('$v$')
+	     //plt.xlim([-(1.2+r0), r0+1.2])
+	     //plt.ylim([-1.2, 1.2])
+	     //plt.xticks([-1, 0, 1])
+	     //plt.yticks([-1, 0, 1])
+	     //style_fig(plt.gcf(), square=True, scale=(1+r0*0.8))
+	     //print("Plotting phasespace flow plot")
+	     //plt.savefig("springphasespaceflow"+str(beta)+"r"+str(r0)+".pdf", bbox_inches="tight", pad_inches=0, transparent=True)
+	     //plt.clf()
 
 
 	     function init(n) {
@@ -3346,6 +3376,12 @@
        width:960,height:700,margin:0.1, minScale:0.2, maxScale:1.5,
        backgroundTransition: 'fade',
        hash: true,
+       math: {
+	 config:'TeX-AMS_SVG',
+	 TeX: {
+	   extensions: ["autoload-all.js"]
+	 },
+       }
      });
     </script>
     <script src="codeButtons.js"></script>
