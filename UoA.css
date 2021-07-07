@@ -45,10 +45,7 @@
 
 .reveal .attribution {
     font-size:0.5em;
-    position:absolute;
-    bottom:0;
-    right:0;
-    display:inline-block;
+    text-align:right;
 }
 
 .MathJax_CHTML {
