@@ -179,14 +179,17 @@
 	  </section>
 	  <section>
 	    <p>
-	      Lets try to be real (and stay sane). The simplest
-	      example I can think that fits statistical mechanics AND
-	      thermodynamics is the game of craps (the sum of two
-	      dice).
-	    </p>
-	    <p>
+	      The simplest example I can think that fits statistical
+	      mechanics AND thermodynamics is the game of craps (the
+	      sum of two dice).</p>
+	    <p class="fragment">
 	      We'll study this, and try to draw parallels to molecular
 	      systems. If the link isn't clear, let me know!
+	    </p>
+	    <p class="fragment">
+	      Amazingly to me, we derive entropy first, then add
+	      conservation of energy to bring in temperature, then the
+	      rest of thermo follows.
 	    </p>
 	  </section>
 	</section>
@@ -198,9 +201,9 @@
 	      outcome of the sum, which we'll call $E$.
 	    </p>
 	    <p class="backbox fragment">
-	      We will immediately generalise to hyper-craps, where $N$
-	      dice are rolled simultaneously.
-	    </p>	      
+	      We will later generalise to hyper-craps, where $N$ dice
+	      are rolled simultaneously, but for now we start with
+	      traditional craps where $N=2$.</p>	      
 	  </section>
 	  <section data-background="https://upload.wikimedia.org/wikipedia/commons/3/3f/Craps_game_at_military_camp_in_1918.jpg">
 	    <p class="backbox">
@@ -220,7 +223,7 @@
 	  </section>
 	  <section data-background="https://upload.wikimedia.org/wikipedia/commons/3/3f/Craps_game_at_military_camp_in_1918.jpg">
 	    <p class="backbox">
-	      Players/<b>observers</b> of craps do not really care about the <b>microstate</b>. The only <b>state</b> that
+	      Players/<b>observers</b> of craps do not really care or measure the <b>microstate</b>. The only <b>state</b> that
 	      is observed in craps is the sum of the dice, $E$. The
 	      microstate could change, but if $E$ stays the same then
 	      as far as the players are concerned its the same roll.</p>
@@ -255,10 +258,10 @@
 	      different probabilities due to the <em>combinations</em> of <b>microstates</b> that make up their <b>ensemble</b>.
 	    </p>	      
 	    <p class="backbox fragment">
-	      For two dice, rolling a $U=7$ <br/> 
+	      For two dice, rolling a $E=7$ <br/> 
 	      $\left\{\left[1,\,6\right],\,\left[2,\,5\right],\,\left[3,\,4\right],\,\left[4,\,3\right],\,\left[5,\,2\right],\,\left[6,\,1\right]\right\}$.
 	      <br/>
-	      is six times more likely than a snake eyes ($U=2$)
+	      is six times more likely than a snake eyes ($E=2$)
 	      <br/>
 	      $\left\{\left[1,\,1\right]\right\}$
 	    </p>
@@ -412,7 +415,7 @@
 		 },
 		 yaxis: {
 		   title: {
-		     text: '$p\\left(' + xlabel + '\\right)$',
+		     text: '$P\\left(' + xlabel + '\\right)$',
 		   },		   
 		   range:[0, 1.0 / dice_sides + 0.1],
 		 }
@@ -425,11 +428,11 @@
 	       } else if (ystate == 2) {
 		 layout.yaxis.autorange = false;
 		 layout.yaxis.range = [0, 1.0 / dice_sides + 0.1];
-		 layout.yaxis.title = '$p\\left(' + xlabel + '\\right)$';
+		 layout.yaxis.title = '$P\\left(' + xlabel + '\\right)$';
 	       } else if (ystate == 3) {
 		 layout.yaxis.autorange = false;
 		 layout.yaxis.range = [0, 1.0];
-		 layout.yaxis.title = '$p\\left(' + xlabel + '\\right) / \\left(\\max_{'+xlabel+'} p\\left(' + xlabel + '\\right)\\right)$';
+		 layout.yaxis.title = '$P\\left(' + xlabel + '\\right) / \\left(\\max_{'+xlabel+'} P\\left(' + xlabel + '\\right)\\right)$';
 	       }
 
 	       return {
@@ -482,6 +485,8 @@
 		unnormalised probability.</li>
 	    </ul>
 	  </section>
+	</section>
+	<section>
 	  <section style="height:100%" data-background="img/Boltzmann_grave.jpg">
 	    <h3 class="backbox">Thermodynamics of craps</h3>
 	    <p class="backbox">
@@ -505,7 +510,7 @@
 	    <h3 class="backbox">Thermodynamics of craps</h3>
 	    <p class="backbox">
 	      But entropy is additive, i.e. $2\times$ the system size
-	      gives $2\times$ the entropy. Can we match this?</p>
+	      gives $2\times$ the entropy. Can combinations match this property?</p>
 	    <p class="backbox fragment">
 	      \begin{multline}
 	      \Omega\left(N=N_1+N_2,\,E=E_1+E_2\right) \\
@@ -520,8 +525,9 @@
 	    </p>
 	    <p class="backbox fragment">
 	      $S = \ln \Omega$ has all the properties of entropy! We
-	      have discovered it inside our game of craps, and possibly inside molecular systems too.
-	    </p>
+	      have discovered it inside our game of craps, it is not
+	      too much of a leap to believe it is more fundamental and
+	      in molecular systems too..</p>
 	    <div class="attribution backbox">
 	      Background <a href="https://en.wikipedia.org/wiki/Ludwig_Boltzmann#/media/File:Zentralfriedhof_Vienna_-_Boltzmann.JPG">Daderot at English Wikipedia</a> - Own work CC BY-SA 3.0
 	    </div>
@@ -539,7 +545,7 @@
 	      probability, thus it increases as things move
 	      towards the most probable state... but only probably (!).</p>
 	    <p class="backbox fragment">
-	      This fascinating implications, i.e. see<a href="https://www.bbc.co.uk/sounds/play/m000lvbx">
+	      This has fascinating implications, i.e. see<a href="https://www.bbc.co.uk/sounds/play/m000lvbx">
 	      The Infinite Monkey Cage: Does Time Exist?"
 	      </a> for one aspect.
 	    </p>
@@ -547,42 +553,76 @@
 	      Background <a href="https://en.wikipedia.org/wiki/Ludwig_Boltzmann#/media/File:Zentralfriedhof_Vienna_-_Boltzmann.JPG">Daderot at English Wikipedia</a> - Own work CC BY-SA 3.0
 	    </div>
 	  </section>
+	  <section style="height:100%">
+	    <h3 class="backbox">Microcanonical ensemble</h3>
+	    <p class="backbox">
+	      We have derived the key relationships of the <b>micro-canonical ensemble</b> ,
+	      where $N, E$ are held constant:
+	      <span style="font-size:70%">
+	      \begin{align*}
+	      P(N,\,E, \ldots) &= \frac{\Omega\left(N, E, \ldots\right)}{\sum_E \Omega\left(N,\,E, \ldots\right)}
+	      &
+	      S(N,\,E, \ldots) &= k_B \ln \Omega\left(N, E, \ldots\right)
+	      \end{align*}
+	      </span>
+	    </p>
+	    <p class="backbox fragment"> 
+	      Other thermodynamic properties can be generated from here
+	      <span style="font-size:70%">		
+	      \begin{align*}
+	      \left\langle E\right\rangle &= \sum_E E\,P(N,\,E, \ldots) &
+	      \mu &= - T\frac{\partial S(N,\,E, \ldots)}{\partial N} \\
+	      \beta=\frac{1}{k_B\,T} &= \frac{\partial S(N,\,E, \ldots)}{\partial E} & \ldots
+	      \end{align*}	      
+	      </span>
+	    </p>
+	    <p class="backbox fragment">
+	      Where is pressure/volume? Like all other thermodynamic work terms this can be added:
+	      <span style="font-size:70%">		
+		\begin{align*}
+		p &= T\frac{\partial S(N,\,E,\,V,\ldots)}{\partial V}
+		\end{align*}	      
+	      </span>	      
+	    </p>
+	  </section>
 	  <section>
-	    <h3>The rest of thermodynamics</h3>
+	    <h3>Canonical ensemble</h3>
 	    <p>
-	      Our <b>ensemble</b> so far has been fixed $N$, but now
-	    we include the dice sum $E$ as fixed too.</p>
+	      Experimentally, constant temperature is more
+	      interesting. Lets hold the dice sum, $E$, fixed in ALL
+	      our dice rolls. If you haven't guessed yet from the
+	      variable name, we're adding conservation of energy. </p>
 	    <p class="fragment">
-	      Divide the dice into two groups, each with a
-	      separate $U_1$ and $U_2 = U - U_1$ which adds to the
-	      total $U=U_1+U_2$.
+	      Divide the $N$ dice into two groups, each with a
+	      separate $E_1$ and $E_2 = E - E_1$ which adds to the
+	      (fixed) total $E=E_1+E_2$.
 	    </p>
 	    <p class="fragment">
-	      The equilibrium value of $U_1$ is one that maximises
+	      The equilibrium value of $E_1$ is one that maximises
 	      entropy, where the total entropy is:
 	      
-	      \begin{align*} \ln \Omega_{1+2}(U_1+U_2) &= \ln
-	      \Omega_1(U_1) + \ln \Omega_2(U_2) \\ \ln
-	      \Omega_{1+2}(U,\,U_1) &= \ln \Omega_1(U_1) + \ln
-	      \Omega_2(U-U_1) \\ \end{align*}
+	      \begin{align*} \ln \Omega_{1+2}(E_1+E_2) &= \ln
+	      \Omega_1(E_1) + \ln \Omega_2(E_2) \\ \ln
+	      \Omega_{1+2}(E,\,E_1) &= \ln \Omega_1(E_1) + \ln
+	      \Omega_2(E-E_1) \\ \end{align*}
 
-	      The maximum entropy when varying $U_1$ occurs at a
+	      The maximum entropy when varying $E_1$ occurs at a
 	      stationary point, i.e.  $\left(\frac{{\rm d} \ln
-	      \Omega_{1+2}(U,\,U_1)}{{\rm d} U_1}\right)_{N} = 0$...</p>
+	      \Omega_{1+2}(E,\,E_1)}{{\rm d} E_1}\right)_{N} = 0$...</p>
 	  </section>
 	  <section>
 	    <h3>The rest of thermodynamics</h3>
 	    <p>
 	      \begin{align*}
-	      \frac{{\rm d}}{{\rm d} U_1}\ln \Omega_{1+2}(U,\,U_1) &= 0\\
-	      \frac{{\rm d}}{{\rm d} U_1}\ln \Omega_1(U_1) + \frac{{\rm d}}{{\rm d} U_1}\ln \Omega_2(U-U_1)&=0 \\
-	      \frac{{\rm d}}{{\rm d} U_1}\ln \Omega_1(U_1) &= \frac{{\rm d}}{{\rm d} U_2}\ln \Omega_2(U_2)
+	      \frac{{\rm d}}{{\rm d} E_1}\ln \Omega_{1+2}(E,\,E_1) &= 0\\
+	      \frac{{\rm d}}{{\rm d} E_1}\ln \Omega_1(E_1) + \frac{{\rm d}}{{\rm d} E_1}\ln \Omega_2(E-E_1)&=0 \\
+	      \frac{{\rm d}}{{\rm d} E_1}\ln \Omega_1(E_1) &= \frac{{\rm d}}{{\rm d} E_2}\ln \Omega_2(E_2)
 	      \end{align*}
 	    </p>
 	    <p class="fragment">
 	      We now define some shorthand:
 	      \begin{align*}
-	      \beta = \frac{{\rm d}}{{\rm d} U} \ln \Omega
+	      \beta = \frac{{\rm d}}{{\rm d} E} \ln \Omega
 	      \end{align*}
 	      and note the result
 	      \begin{align*}
@@ -593,32 +633,28 @@
 	  <section>
 	    <h3>Back to reality</h3>
 	    <p>
-	      The dice sum is $E$, because its analogous to the
-	      energy, which according to the first law is conserved,
-	      just like in our $N,E$ dice ensemble.</p>
+	      Thus adding conservation of $E$ between two systems that
+	      can exchange ${\rm d}E$ gives us that $\beta$ must be
+	      equal between the systems at equilibrium. We call this
+	      &ldquo;thermal&rdquo; equilibrium if $E$ is energy, even though it
+	      works for conserved dice sum too.</p>
 	    <p class="fragment">
-	      Thus adding conservation of energy/$E$ to dice gives us
-	      rule that $\beta$ must be equal between systems in
-	      (thermal) equilibrium, i.e. able to exchange ${\rm d}E$.</p>
+	      If we look up the derivative $\left({\rm d}S/{\rm
+	      d}E\right)_{N,\ldots}$ in traditional thermodynamics, we
+	      realise that $\beta=1/(k_B\,T)$, and thus have proven
+	      that systems at thermal equilibrium must have the same
+	      temperature.</p>
 	    <p class="fragment">
-	      If we look up the derivative $\frac{{\rm d}}{{\rm d}U}S$
-	      in traditional thermodynamics, we realise that
-	      $\beta=1/(k_B\,T)$, and thus have proven that systems at
-	      equilibrium/maximum-entropy have the same temperature.</p>
-	    <p class="fragment">
-	      This may seem like a trivial result, but we have
-	      connected statistical descriptions of a system to
-	      macroscopic thermodynamics! Everything else follows from here.</p>
+	      This is confirmed by our observations, lets now generate
+	      the probabilty function (and everything else).</p>
 	  </section>
 	  <section>
-	    <h3>Maxwell-Boltzmann distribution</h3>
-	    <p>
-	      Assume again we have two systems in the ensemble $N,E$
-	      but able to exchange energy (thus at equal
-	      temperatures). If system 1 is in a <b>microstate</b>, $i$, with
-	      energy $E_{1,i}$, all <b>microstates</b> are equally
-	      probable, then the <b>degeneracy</b> of system 2 (the bath)
-	      grants degeneracy of the system 1 <b>microstate</b>.
+	    <h3>Canonical ensemble</h3>
+	    <p class>
+	      Again, consider system 1 in a <b>microstate</b>, $i$, with
+	      energy $E_{1,i}$ in thermal equilibrium with another
+	      system 2 at constant $E$. The combinations available are
+	      set by system 2's <b>degeneracy</b>:
 	      
 	      <span style="font-size:75%">
 		\begin{align*} P\left(i\right) \propto \Omega_2(E_2=E-E_{1,i})
@@ -626,11 +662,11 @@
 	      </span>
 	    </p>
 	    <p class="fragment">
-	      Expanding system 2 entropy around $E$...
+	      Expanding system 2 entropy around $E$:
 	      <span style="font-size:75%">
 		\begin{align*}
 		\ln \Omega_2(E_2=E-E_{1,i}) &= \ln\Omega_2(E_2=E) 
-		- E_{1,i} \frac{{\rm d} \ln\Omega(E)}{{\rm d}E} 
+		- E_{1,i} \frac{{\rm d} \ln\Omega_2(E)}{{\rm d}E} 
 		+ \mathcal{O}(1/E)
 		\\
 		&\approx \ln\Omega_2(E_2=E) - \frac{E_{1,i}}{k_B\,T}
@@ -647,50 +683,396 @@
 	    </p>
 	  </section>
 	  <section>
-	    <h3>Canonical partition function</h3>
+	    <h3>Canonical ensemble</h3>
 	    <p>
-	      \begin{align*}
-	      P\left(i\right) \propto e^{-E_{1,i} / (k_B\,T)}
-	      \end{align*}
+	      Each <b>microstate</b> of a system at thermal
+	      equilibrium has a probability proportional to the
+	      Boltzmann factor
 	      
-	      We can normalise this into a full expression by creating the <b>partition</b> function,
-	      \begin{align*} Z = \sum_{i} e^{-E_{1,i} / (k_B\,T)}
-	      \end{align*}
-	      
-	      Giving
-	      
-	      \begin{align*} P\left(i\right) = Z^{-1} e^{-E_{i} /
-	      (k_B\,T)} \end{align*}
-
-	      We've dropped the system 1 and 2 notations, as the other
-	      system is irrelevant, aside from its temperature.
-	    </p>
+	      \begin{align*} P\left(i\right) \propto
+	      e^{-E_{1,i} / (k_B\,T)} \end{align*}</p>
 	    <p class="fragment">
-	      Amazingly, we have for a $N,\,T$ ensemble, 
-	    </p>
+	      We can normalise this by creating the <b>partition</b> function,
+	      \begin{align*} Z(N,\,T) &= \sum_{i} e^{-E_{1,i} / (k_B\,T)} \\
+	      P\left(i\right) &= Z^{-1} e^{-E_{i} / (k_B\,T)}
+	      \end{align*}
+
+	      We've dropped the system 1 and 2 notations, as system 2
+	      (called the &ldquo;bath&rdquo;) is irrelevant, aside
+	      from its temperature which is also the temperature of
+	      system 1 (at equilibrium).</p>
 	  </section>
 	  <section>
 	    <h3>Canonical partition function</h3>
 	    <p>
-	      \begin{align*}
-	      P\left(i\right) \propto e^{-E_{1,i} / (k_B\,T)}
-	      \end{align*}
+	      <span style="font-size:75%">
+		\begin{align*} Z(N,\,T) &= \sum_{i} e^{-E_{1,i} /
+		(k_B\,T)} & P\left(i\right) &= Z^{-1} e^{-E_{i} /
+		(k_B\,T)} \end{align*}
+	      </span>
+	      Just like the relationship for entropy
+	      $S=k_B\ln\Omega(N,\,E,\ldots)$, the partition function
+	      is related to the <b>Helmholtz free energy</b>, $F$:
 	      
-	      We can normalise this into a full expression by creating the <b>partition</b> function,
-	      \begin{align*} Z = \sum_{i} e^{-E_{1,i} / (k_B\,T)}
-	      \end{align*}
-	      
-	      Giving
-	      
-	      \begin{align*} P\left(i\right) = Z^{-1} e^{-E_{i} /
-	      (k_B\,T)} \end{align*}
-
-	      We've dropped the system 1 and 2 notations, as the other
-	      system is irrelevant, aside from its temperature.
+	      <span style="font-size:75%">
+		\begin{align*}
+		F(N,\,T,\ldots) &= k_B\,T\ln Z(N,\,T,\ldots)
+		\end{align*}
+	      </span>
 	    </p>
 	    <p class="fragment">
-	      Amazingly, we have for a $N,\,T$ ensemble, derived a 
+	      And this is the generating function for all thermodynamic properties of this ensemble:
+	      <span style="font-size:75%">
+		\begin{align*}
+		S &= -\frac{\partial F(N,\,T,\ldots)}{\partial T} & \mu &= \frac{\partial F(N,\,T,\ldots)}{\partial N}\\
+		F &= U-T\,S & \ldots 
+		\end{align*}
+	      </span>
 	    </p>
+	  </section>
+	  <section>
+	    <h3>Other ensembles</h3>
+	    <p>
+	      By using similar arguments of dividing an ensemble of
+	      systems, allowing them to exchange something, performing a
+	      Taylor series, and comparing against macroscopic
+	      thermodynamics we can generate other ensembles.
+	    </p>
+	    <p class="fragment">
+	      <b>Isothermal-Isobaric ensemble $(N,\,T,\,p)$</b>
+	      
+	      <span style="font-size:75%">
+		\begin{align*}
+		P\left(i,\,N,\,p,\,T,\ldots\right) &= \mathcal{Z}^{-1} e^{-E_{i}/\left(k_B\,T\right)-p\,V_i/\left(k_B\,T\right)}
+		\\
+		G\left(N,\,p,\,T,\ldots\right) &= k_B\,T\ln \mathcal{Z}\left(N,\,p,\,T,\ldots\right)
+		\end{align*}
+	      </span>
+	    </p>
+	    <p class="fragment">
+	      <b>Grand-canonical ensemble $(\mu,\,T,\,p)$</b>
+	      
+	      <span style="font-size:75%">
+		\begin{align*}
+		P\left(i,\,\mu,\,p,\,T,\ldots\right) &= \mathcal{Z}^{-1} e^{-E_{i}/\left(k_B\,T\right)-p\,V_i/\left(k_B\,T\right)+\mu\,N_i/\left(k_B\,T\right)}
+		\\
+		\boldsymbol{\Omega}\left(\mu,\,p,\,T,\ldots\right) &= k_B\,T\ln \mathcal{Z}\left(N,\,p,\,T,\ldots\right)
+		\end{align*}
+	      </span>
+	    </p>
+	  </section>
+	  <section>
+	    <h3>Outlook</h3>
+	    <p class="backbox">
+	      There are too many important derivations to cover in
+	      stat mech, and what you will need highly depends on your
+	      interests/research.
+	    </p>
+	    <p class="fragment backbox">
+	      Rather than provide an incomplete  of them (which
+	      you will find in the literature if you really need
+	      them), I will try to give you some intuition on the
+	      foundational assumptions (which I think is much harder
+	      to find).</p>
+	  </section>
+	</section>
+	<section>
+	  <section>
+	    <h3>Averaging</h3>
+	    <p>
+	      <em>God does not play dice. <span style="float:right;">A. Einstein</span></em><br/><br/>
+	      
+	      <em style="clear:right;" class="fragment">God does play dice with the universe. All the evidence points to him being an inveterate gambler, who throws the dice on every possible occasion. <span style="float:right;">S. Hawking</span></em>
+	      <p class="fragment">
+		You are the omnipotent being of your simulation, so you get to choose:
+		<span style="font-size:75%">
+		  \begin{align*}
+		  \langle{\mathcal A}\rangle &= \sum_{\boldsymbol\Gamma} d{\boldsymbol\Gamma}\,P({\boldsymbol\Gamma})\,
+		  {\mathcal A}({\boldsymbol\Gamma}) & \text{(Monte Carlo)}\\
+		  &\text{or}\\
+		  \langle{\mathcal A}\rangle&=\lim_{t_{obs.}\to\infty} \frac{1}{t_{obs.}}\int_0^{t_{obs.}}\mathcal A(t)\,{\rm d}t & \text{(Molecular Dynamics)}
+		  \end{align*}
+		</span>
+	      </p>	    
+	      <p class="fragment">
+		<b>But are these equivalent? If so, the system is <u>Ergodic</u>.</b>
+	      </p>
+	  </section>
+	  <section>
+	    <h3>Dynamics for SHO</h3>
+	    <p>
+	      Consider the <b>S</b>imple <b>H</b>armonic <b>O</b>scillator:
+	      <img src="img/SHO.gif"><br/>
+	    </p>
+	    <p class="fragment">
+	      The <b>microstate</b> variables, in this case position,
+	      $r$, and velocity, $v=\dot{r}$, can be collected together to
+	      form a vector, $\boldsymbol \Gamma$, which exists in <b>phase space</b>.</p>
+	    <div class="attribution backbox">
+	      Image: 
+	      <i><a href="https://en.wikipedia.org/wiki/Simple_harmonic_motion#/media/File:Simple_Harmonic_Motion_Orbit.gif" title="User:XRay">Mazemaster - public domain</a>
+	      </i>
+	    </div>
+	  </section>
+	  <section>
+	    <p>
+	      The <b>microcanonical</b> SHO system visits all regions of phase space pretty quickly, it is therefore <b>Ergodic</b>. Stat-Mech
+	      and (molecular) dynamics averages are equivalent.</p>
+	    <div class="backbox">
+	      <div class="form-group">
+		<label for="shocount1">Ensemble members:</label><output id="shocount1output" for="shocount1">1</output>
+		<input type="range" class="form-control-range" id="shocount1" min="1" max="500" value="1" step="1">
+	      </div>
+	    </div>
+	    <div id="springDashpot" style="margin:auto 0; display:inline-block;" ></div>
+	    <script>
+	     function() {
+	       var state = {
+	       };
+
+	       function init(n) {
+		 state.n = n;
+		 state.dt = 0.015;
+		 state.x = [];
+		 state.y = [];
+		 state.tinit = [];
+		 state.A = [];
+		 state.t = 0;
+		 
+		 for (i = 0; i < state.n; i++) {
+		   state.tinit[i] = Math.random();
+		   state.A[i] = 1.0;
+		 };
+	       };
+
+	       function step() {
+		 state.t += state.dt;
+		 for (i = 0; i < state.n; i++) {
+		   var phase = 2 * 3.14159265 * (state.tinit[i] + state.t);
+		   state.x[i] = state.A[i] * Math.sin(phase);
+		   state.y[i] = state.A[i] * Math.cos(phase);
+		 };
+	       };
+
+	       init(1);
+	       step();
+
+	       $('#shocount1').on('input change', 
+				  (e) => {
+				    $('#shocount1output').text(e.target.value);
+				    init(e.target.valueAsNumber); 
+	       });
+
+	       Plotly.newPlot('springDashpot', 
+			      {
+				data:	[{
+				  x: state.x,
+				  y: state.y,
+				  mode: 'markers',
+				}],
+				layout:  { 
+				  xaxis: { title: 'r', range: [-1.5, 1.5]},
+				  yaxis: { title: 'v', range: [-1.5, 1.5]},
+				  plot_bgcolor: '#000',
+				  paper_bgcolor: '#000E',
+				  font: {
+				    color: 'white',
+				    size: 15,
+				  },
+				},
+				config: default_plot_Config,
+	       });
+	       
+	       function update () {
+		 step();
+
+		 Plotly.animate('springDashpot', {
+		   data: [{x: state.x, y: state.y}],
+		 }, {
+		   transition: {
+		     duration: 0
+		   },
+		   frame: {
+		     duration: 0,
+		     redraw: false
+		   }
+		 });
+
+		 requestAnimationFrame(update);
+	       }
+
+	       requestAnimationFrame(update);
+	     }();
+	    </script>
+	  </section>
+	  <section>
+	    <h3>SHO Hamiltonian</h3>
+	    <p>
+	      Its not surprising that it forms a circle in phase space,
+	      as the total energy (called the Hamiltonian), is the
+	      equation of a circle in $r$ and $v$.
+	      
+	      \begin{align*}
+	      E = \mathcal{H}(\boldsymbol{\Gamma}) = \frac{1}{2}k\,r^2 + \frac{1}{2}m\,v^2
+	      \end{align*}
+	      where $k$ is the spring constant and $m$ is the mass. 
+	    </p>
+	    <p class="fragment">
+	      What is all of phase space like? We can sample all energies, $E$, and plot the "flow" of trajectories:
+	    </p>
+	  </section>
+	  <section>
+	    <h3>SHO phase space &ldquo;flow&rdquo;</h3>
+	    <img src="img/SHOflow1.svg" style="width:50%" />
+	    <p>
+	      The systems flow around phase space, the trajectory
+	      lines do not cross, thus this behaves exactly as a
+	      incompressible fluid.
+	    </p>
+	  </section>
+	  <section>
+	    <h3>Liouville's Theorem</h3>
+	    <p>
+	      We can treat an ensemble of systems flowing around phase
+	      space as an incompressible fluid with density
+	      $\rho(\boldsymbol{\Gamma})$, thus it behaves as follows.
+	      
+	      \begin{align*}
+	      \nabla_{\boldsymbol{\Gamma}} \cdot \dot{\boldsymbol\Gamma}\,\rho({\boldsymbol\Gamma}) = 0
+	      \end{align*}
+	      
+	      which should be familiar to you from any fluid flow class you might have had.
+	    </p>
+	    <p class="fragment">
+	      This is the foundation of kinetic theory, as from here
+	      comes the BBGKY heirarchy and ultimately
+	      Boltzmann's/Enskog's equation.
+	    </p>
+	    <p class="fragment">
+	      Back to ergodicity.
+	    </p>
+	  </section>
+	  <section>
+	    <div class="backbox">
+	      <div class="form-group">
+		<label for="shocount2">Ensemble members:</label><output id="shocount2output" for="shocount2">1</output>
+		<input type="range" class="form-control-range" id="shocount2" min="1" max="500" value="1" step="1">
+	      </div>
+	    </div>
+	    <div id="springDashpot" style="margin:auto 0; display:inline-block;" ></div>
+	    <script>
+	     var state = {
+	     };
+	     var beta = 0; 
+	     var omega = 1;
+	     var gamma = 2 * beta;
+	     var k = omega * omega + gamma * gamma / 4;
+	     
+	     //def meshplot(r0):
+	     //		 gamma = 2 * beta
+	     //k = omega*omega + gamma*gamma/4
+	     //m = 1
+	     //r, v = np.linspace(-(1.3+r0), (1.3+r0), 100), np.linspace(-(1.3+r0), (1.3+r0), 100)
+	     //R, V = np.meshgrid(r, v)
+	     //E = 0.5 * (k * (np.abs(R)-r0) * (np.abs(R)-r0) + m * V * V)
+	     //A = - k * np.abs(R) *(np.abs(R)-r0) / R - gamma * V
+	     //#Q = plt.quiver(R, V, V, A, pivot='mid', scale=25, headlength=10, headaxislength=8, headwidth=10)
+	     //
+	     //if r0 != 0:
+	     //	  Q = plt.streamplot(r, v, V, A, color='k', arrowstyle="->", density=1)
+             //CS = plt.contour(R,V,E, levels=[0.25, 0.5, 0.75], linewidths=2, colors=['r', 'g', 'b'])
+             //labels = ['$E=0.25$', '$E=0.5$','$E=0.75$']
+             //for i in range(len(labels)):
+	     //	      CS.collections[i].set_label(labels[i])
+             //plt.legend(bbox_to_anchor=(1.3, 1.0))
+	     //else:
+	     //	      Q = plt.streamplot(r, v, V, A, color='k', arrowstyle="->", density=1)
+             //
+	     //plt.xlabel('$r$')
+	     //plt.ylabel('$v$')
+	     //plt.xlim([-(1.2+r0), r0+1.2])
+	     //plt.ylim([-1.2, 1.2])
+	     //plt.xticks([-1, 0, 1])
+	     //plt.yticks([-1, 0, 1])
+	     //style_fig(plt.gcf(), square=True, scale=(1+r0*0.8))
+	     //print("Plotting phasespace flow plot")
+	     //plt.savefig("springphasespaceflow"+str(beta)+"r"+str(r0)+".pdf", bbox_inches="tight", pad_inches=0, transparent=True)
+	     //plt.clf()
+
+
+	     function init(n) {
+	       state.n = n;
+	       state.dt = 0.015;
+	       state.x = [];
+	       state.y = [];
+	       state.tinit = [];
+	       state.A = [];
+	       state.t = 0;
+	       
+	       for (i = 0; i < state.n; i++) {
+		 state.tinit[i] = Math.random();
+		 state.A[i] = 1.0;
+	       };
+	     };
+
+	     function step() {
+	       state.t += state.dt;
+	       for (i = 0; i < state.n; i++) {
+		 var phase = 2 * 3.14159265 * (state.tinit[i] + state.t);
+		 state.x[i] = state.A[i] * Math.sin(phase);
+		 state.y[i] = state.A[i] * Math.cos(phase);
+	       };
+	     };
+
+	     init(1);
+	     step();
+
+	     $('#shocount1').on('input change', 
+				(e) => {
+				  $('#shocount1output').text(e.target.value);
+				  init(e.target.valueAsNumber); 
+	     });
+
+	     Plotly.newPlot('springDashpot', 
+			    {
+			      data:	[{
+				x: state.x,
+				y: state.y,
+				mode: 'markers',
+			      }],
+			      layout:  { 
+				xaxis: { title: 'r', range: [-1.5, 1.5]},
+				yaxis: { title: 'v', range: [-1.5, 1.5]},
+				plot_bgcolor: '#000',
+				paper_bgcolor: '#000E',
+				font: {
+				  color: 'white',
+				  size: 15,
+				},
+			      },
+			      config: default_plot_Config,
+	     });
+	     
+	     function update () {
+	       step();
+
+	       Plotly.animate('springDashpot', {
+		 data: [{x: state.x, y: state.y}],
+	       }, {
+		 transition: {
+		   duration: 0
+		 },
+		 frame: {
+		   duration: 0,
+		   redraw: false
+		 }
+	       });
+
+	       requestAnimationFrame(update);
+	     }
+
+	     requestAnimationFrame(update);
+	    </script>
 	  </section>
 	</section>
 	<section id="SM2">
@@ -890,7 +1272,7 @@
 	      <h2>Central limit theorem</h2>
 	      <p>
 		  Consider a set of $N$ independent variables $x_1$, $x_2$,...,$x_N$
-		  which all follow the same probability distribution function $p(x)$,
+		  which all follow the same probability distribution function $P(x)$,
 		  with mean, $\mu$, and variance, $\sigma$.
 	      </p>
 	      <p class="fragment">
@@ -1467,7 +1849,7 @@
 		<h2>Equilibration</h2>
 		<ul>
 		    <li> MC simulations converge towards equilibrium (or
-			&ldquo;thermalize&rdquo;) until $p(A,\tau+1) = p(A,\tau)$
+			&ldquo;thermalize&rdquo;) until $P(A,\tau+1) = P(A,\tau)$
 		    </li>
 		    <li> Starting from a non-equilibrium configuration, the deviation
 			from equilibrium decreases like $\exp(-\tau/\tau_0)$, where $\tau_0$
@@ -2994,6 +3376,12 @@
        width:960,height:700,margin:0.1, minScale:0.2, maxScale:1.5,
        backgroundTransition: 'fade',
        hash: true,
+       math: {
+	 config:'TeX-AMS_SVG',
+	 TeX: {
+	   extensions: ["autoload-all.js"]
+	 },
+       }
      });
     </script>
     <script src="codeButtons.js"></script>
