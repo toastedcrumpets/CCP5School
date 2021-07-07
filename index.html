@@ -115,10 +115,7 @@
 		  <a href="https://colab.research.google.com/github/toastedcrumpets/CCP5_Python_examples/blob/master/Table_of_contents_for_collab_research_google_com.ipynb">Python pre-school notes (hosted on Google collab)</a>
 		</li>
 		<li>
-		  <a href="#SM1">Statistical mechanics 1</a>
-		</li>
-		<li>
-		  <a href="#SM2">Statistical mechanics 2</a>
+		  <a href="#SM1">Statistical mechanics (1 & 2)</a>
 		</li>
 		<h3 style="margin-top:1em;font-size:75%;">Old out of date notes I haven't thrown away yet from previous summer schools</h3>
 		<li style="font-size:75%;">
@@ -136,7 +133,7 @@
 	</section>
 	<section id="SM1">
 	  <section data-background="img/Boltzmann_grave.jpg">
-	    <h2 class="backbox">Statistical mechanics: Part 1</h2>
+	    <h2 class="backbox">Statistical mechanics</h2>
 	  </section>	    
 	  <section data-background="img/Boltzmann_grave.jpg">
 	    <p class="backbox"><em>
@@ -185,7 +182,7 @@
 	  </section>
 	  <section>
 	    <p>
-	      The simplest example I can think that fits statistical
+	      The simplest example I can think of that fits statistical
 	      mechanics AND thermodynamics is the game of craps (the
 	      sum of two dice).</p>
 	    <p class="fragment">
@@ -298,15 +295,15 @@
 	      <div class="row">
 		<div class="col">
 		  <input class="form-check-input" type="radio" name="dicey" id="dicey1" value="1" checked><br/>
-		  <label class="form-check-label" for="dicey1" id="dicey1label">$\Omega\left(N,\,E\right)$</label>
+		  <label class="form-check-label" for="dicey1" id="dicey1label" style="font-size:75%">$\Omega\left(N,\,E\right)$</label>
 		</div>
 		<div class="col">
 		  <input class="form-check-input" type="radio" name="dicey" id="dicey2" value="2"><br/>
-		  <label class="form-check-label" for="dicey2" id="dicey2label">$P(E)$</label>
+		  <label class="form-check-label" for="dicey2" id="dicey2label" style="font-size:75%">$P(E)=\Omega\left(N,\,E\right) / \sum_E \Omega\left(N,\,E\right)$</label>
 		</div>
 		<div class="col">
 		  <input class="form-check-input" type="radio" name="dicey" id="dicey3" value="3"><br/>
-		  <label class="form-check-label" for="dicey3" id="dicey3label">$P(E)/\left({\rm max}_E\,P(E)\right)$</label>
+		  <label class="form-check-label" for="dicey3" id="dicey3label" style="font-size:75%">$P(E)/\left({\rm max}_E\,P(E)\right)$</label>
 		</div>
 	      </div>
 	    </form>
@@ -468,8 +465,13 @@
 		 Plotly.purge('dicePlot');
 	       }
 	     });	       
-	       
+	     
 	    </script>
+	  </section>
+	  <section style="height:100%; width:100%;">
+	    <div style="height:90%;width:100%; position:relative;">
+	      <iframe src="http://www.youtube.com/embed/03tx4v0i7MA" frameborder="0" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+	    </div>
 	  </section>
 	  <section class="backbox">
 	    <h3 class="backbox">
@@ -572,6 +574,21 @@
 	    <div class="attribution backbox">
 	      Background <a href="https://en.wikipedia.org/wiki/Ludwig_Boltzmann#/media/File:Zentralfriedhof_Vienna_-_Boltzmann.JPG">Daderot at English Wikipedia</a> - Own work CC BY-SA 3.0
 	    </div>
+	  </section>
+	  <section data-background-image="img/mindblown.gif">
+	    <p class="backbox">
+	      The second law of thermodynamics, put simply, is the
+	      most likely things will eventually happen and stay
+	      there. <br/>
+	      Entropy is simply log probability.</p>
+	    <p class="backbox fragment">
+	      Entropy is NOT disorder/chaos, its just that there's so many
+	      ways to make a mess... 
+	    </p>
+	    <p class="backbox fragment"> 
+	      Sometimes order is more likely, i.e., look at any
+	      crystal transition.
+	    </p>
 	  </section>
 	  <section style="height:100%">
 	    <h3 class="backbox">Microcanonical ensemble</h3>
@@ -708,8 +725,8 @@
 	      </span>
 	    </p>
 	    <p class="fragment">
-	      Inserting, and realising that $\ln\Omega_2(E_2=E)$ is a constant,
-	      <span style="font-size:75%">		
+	      Assuming system 2 is very large, substituting, and
+	      realising that $\ln\Omega_2(E_2=E)$ is a constant,<span style="font-size:75%">		
 		\begin{align*} 
 		P\left(i\right) \propto e^{-E_{1,i}/(k_B\,T)}
 		\end{align*}
@@ -720,11 +737,12 @@
 	    <h3>Canonical ensemble</h3>
 	    <p>
 	      Each <b>microstate</b> of a system at thermal
-	      equilibrium has a probability proportional to the
-	      Boltzmann factor:
+	      equilibrium (i.e. fixed $N,\,T,\ldots$ otherwise known
+	      as the canonical ensemble) has a probability
+	      proportional to the Boltzmann factor:
 	      
-	      \begin{align*} P\left(i\right) \propto
-	      e^{-E_{1,i} / (k_B\,T)} \end{align*}</p>
+	      \begin{align*} P\left(i\right) \propto e^{-E_{1,i} /
+	      (k_B\,T)} \end{align*}</p>
 	    <p class="fragment">
 	      We can normalise this by creating the <b>partition</b> function,
 	      \begin{align*} Z(N,\,T) &= \sum_{i} e^{-E_{1,i} / (k_B\,T)} \\
@@ -746,8 +764,9 @@
 	      </span>
 	      Like the relationship for entropy,
 	      $S=k_B\ln\Omega(N,\,E,\ldots)$, where its the log of the
-	      probability normalisation for $N,\,E$ ensembles, the partition function in $N,\,T$ ensembles is
-	      related to the <b>Helmholtz free energy</b>, $F$:
+	      probability normalisation for $\left(N,\,E\right)$
+	      ensembles, the partition function in $\left(N,\,T\right)$ ensembles
+	      is related to the <b>Helmholtz free energy</b>, $F$:
 	      
 	      <span style="font-size:75%">
 		\begin{align*}
@@ -1088,8 +1107,8 @@
 		   state.x = [];
 		   state.y = [];
 		   for (i = 0; i < state.n; i++) {
-		     state.x[i] = 2.5 * 2 * (Math.random() - 0.5);
-		     state.y[i] = 2 * (Math.random() - 0.5);
+		     state.x[i] = 3.0 * 2 * (Math.random() - 0.5);
+		     state.y[i] = 3.0 * (Math.random() - 0.5);
 		   };
 		 }
 	       };
@@ -1156,8 +1175,8 @@
 				      mode: 'markers',
 				    }],
 				    layout:  { 
-				      xaxis: { title: 'r', range: [-3, 3]},
-				      yaxis: { title: 'v', range: [-3, 3]},
+				      xaxis: { title: 'r', range: [-4, 4]},
+				      yaxis: { title: 'v', range: [-4, 4]},
 				      plot_bgcolor: '#000',
 				      paper_bgcolor: '#000E',
 				      font: {
@@ -1192,7 +1211,7 @@
 	      Phase space is so unbelievably big even for small
 	      systems it actually &ldquo;feels&rdquo; impossible for any
 	      trajectory to meaningfully visit all microstates (or come
-	      close enough to do so).
+	      close enough to do so) in finite time.
 	    </p>
 	    <p class="fragment">
 	      Practically, in simulation we typically just check
@@ -1205,8 +1224,33 @@
 	      which you will learn about in your MC lectures. These
 	      are also applied more frequently to MD simulations too.</p>
 	  </section>
-	</section>
-	<section id="SM2">
+	  <section>
+	    <h3>The final word on statistical mechanics</h3>
+	    <p class="backbox">
+	      The ideas of statistical mechanics are simple, yet the
+	      implications and relationships it provides are deep and
+	      meaningful.
+	    </p>
+	    <p class="backbox fragment">
+	      My dice example should make you believe that its
+	      applications are wider than just molecular
+	      systems. Isaac Asimov even explored the statistical
+	      mechanics of galactic societies in his excellent (but a little
+	      dated) <a href="https://en.wikipedia.org/wiki/Foundation_series">Foundation Series</a>. Who
+	      knows where it will turn up next.
+	    </p>
+	    <p class="backbox fragment">
+	      While much of the derivations covered here are
+	      &ldquo;ancient&rdquo;, there's still intense research
+	      into the field, and many more surprising results to
+	      find.
+	    </p>
+	    <p class="backbox fragment">
+	      I hope you're keen to find out more, and will look at
+	      the statistical mechanics underlying all your upcoming
+	      lectures as a mountain to climb up, rather than a chasm to
+	      fall in.</p>
+	  </section>
 	</section>
 	<section id="MC1">
 	  <section>
