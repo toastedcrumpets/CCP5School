@@ -92,7 +92,7 @@
     <div class="reveal">
       <div class="slides" style="border: 1px solid white;">
 	<section>
-	  <section>
+	  <section data-background-image="img/UoAbackground.jpg">
 	    <div class="backbox">
 	      <h3>Notes on Molecular Simulation</h3>
 	      <h3>CCP5 Summer School</h3>
@@ -180,7 +180,178 @@
 	      inspire you to correct me!
 	    </p>
 	  </section>
+	</section>
+	<section>
 	  <section>
+	    <h3>Thermodynamics Recap</h3>
+	    <p>
+	      Phenomenological theory, based on observations of <b>state</b> variables, $p,\,T,\,V,\,E,\,M,\,S,\ldots$ that seem to fully describe a thermodynamic <b>system</b>.
+	    </p>
+	    <p class="fragment">
+	      The power of thermodynamics arises from its ability to
+	      find simple universal relationships between (observable?)
+	      state variables.</p>
+	    <p class="fragment">
+	      First law: <b>Energy is conserved</b>
+	      \begin{align*}
+	      U_{system}+U_{surroundings}={\rm Constant}
+	      \end{align*}
+	      which also implies
+	      \begin{align*}
+	      {\rm d}U_{system}=-{\rm d}U_{surroundings}
+	      \end{align*}
+	    </p>
+	  </section>
+	  <section>
+	    <p>
+	      Energy can be transferred in many ways, but heat is distinguished from work thanks to the second law:
+	      \begin{align*}
+	      {\rm d}U_{system} = \partial Q - \partial W
+	      \end{align*}
+	    </p>
+	    <p class="fragment">
+	      Second law: Entropy must increase ${\rm d}S>0$ but the key relationship is actually ${\rm
+	      d}S > \partial Q/T$.
+	    </p>
+	    <p class="fragment">
+	      This becomes ${\rm d}S=\partial Q/T$ if the process is
+	      reversible (and we can make things almost reversible if
+	      we chop them up enough so that the system is almost homogeneous), leading to
+
+	      \begin{align*}
+	      {\rm d}U = T\,{\rm d}S - \partial W
+	      \end{align*}
+
+	      for a reversible processes.
+	    </p>
+	  </section>
+	  <section>
+	    <h3>Fundamental thermodynamic equation</h3>
+	    <p>
+	      \begin{align*}
+	      {\rm d}U &= T\,{\rm d}S - \partial W
+	      = T\,{\rm d}S - \sum_i F_i\,{\rm d}L_i
+	      \end{align*}
+	      This is the fundamental equation, which we extend
+	      depending on what work terms we can observe in our system.
+	    </p>
+	    <table>
+	      <tbody>
+		<tr>
+		  <td style="border-right:1px solid white;">$F_i$</td>
+		  <td>$p$</td>
+		  <td>$\mu_\alpha$</td>
+		  <td>$\gamma$</td>
+		  <td>&hellip;</td>
+		</tr>
+		<tr>
+		  <td style="border-right:1px solid white;">$L_i$</td>
+		  <td>$V$</td>
+		  <td>$-N_\alpha$</td>
+		  <td>$\Sigma$</td>
+		  <td>&hellip;</td>
+		</tr>
+	      </tbody>
+	    </table>
+	    <p class="fragment">
+	      Amazingly, as each term is a <b>conjugate</b> pairing of an <b>intensive</b> term and a differential <b>extensive</b> term,
+	      this equation can be solved using Euler's
+	      solution for homogeneous functions.
+
+	      \begin{align*}
+	      U(S,\,V,\,\left\{N_\alpha\right\},\ldots) &= T\,S -p\,V+\sum_\alpha \mu_\alpha\,N_\alpha + \ldots\\
+	      \end{align*}
+	    </p>
+	  </section>
+	</section>
+	<section>
+	  <h3>Generating identities</h3>
+	  <p>
+	    <span style="font-size:75%">
+	      \begin{align*}
+	      U(S,\,V,\,\left\{N_\alpha\right\},\ldots) &= T\,S -p\,V+\sum_\alpha \mu_\alpha N_\alpha + \ldots
+	      \\
+	      {\rm d}U &= T\,{\rm d}S  -p\,{\rm d}V+\sum_\alpha \mu_\alpha\,{\rm d}N_\alpha + \ldots
+	      \end{align*}
+	    </span>
+	    Comparing the equations we see lots of differential identities...
+
+	    <span style="font-size:75%">
+	      \begin{align*}
+	      \left(\frac{{\rm d}U}{{\rm d}S}\right)_{V,\,\left\{N_\alpha\right\},\ldots} &= T & \left(\frac{{\rm d}U}{{\rm d}V}\right)_{S,\,\left\{N_\alpha\right\},\ldots} &= -p
+	      \\
+	      \left(\frac{{\rm d}U}{{\rm d}N_\alpha}\right)_{S,\,V,\,\left\{N_\beta\neq\alpha\right\},\ldots} &= \mu & \ldots &= \ldots
+	      \end{align*}
+	    </span>
+	  </p>
+	  <div class="fragment">
+	    <p>
+	      When we have a relationship between $U,\,S,\,V,\ldots$, then it is a <b>generating function</b> for
+	      the rest of the thermodynamic properties.
+	    </p>
+	    <div class="footnote">
+	      Note that $U(S,\,V,\,\left\{N_\alpha\right\})$ can be rearranged to $S(U,\,V,\,\left\{N_\alpha\right\})$ and $\left(\frac{{\rm d}U}{{\rm d}S}\right)_X = \left(\frac{{\rm d}S}{{\rm d}U}\right)_X^{-1}$ so all this still applies.
+	    </div>
+	  </div>
+	</section>
+	<section>
+	  <h3>Legendre Transformations</h3>
+	  <p>
+	    <span style="font-size:75%">
+	      \begin{align*}
+	      U(S,\,V,\,\left\{N_\alpha\right\},\ldots) &= T\,S -p\,V+\sum_\alpha \mu_\alpha N_\alpha + \ldots
+	      \\
+	      {\rm d}U &= T\,{\rm d}S  -p\,{\rm d}V+\sum_\alpha \mu_\alpha\,{\rm d}N_\alpha + \ldots
+	      \end{align*}
+	    </span>
+	    $U,\,S,\,V$ and sometimes $N$ are challenging variables to measure/control. The <b>conjugate</b> variables  $T,\,T^{-1},\,p$ are nicer.
+	  </p>
+	  <p>
+	    A Legendre transformation swaps the pair
+	    around. I.e. Defining the enthalpy $H = U + p\,V$ 
+	    leads to:
+	    <span style="font-size:75%">
+	      \begin{align*}
+	      {\rm d}H &= {\rm d}U + V\,{\rm d}p +p\,{\rm d}V\\
+	      &= T\,{\rm d}S +V{\rm d}p+\sum_\alpha \mu_\alpha\,{\rm d}N_\alpha + \ldots
+	      \\
+	      H\left(S,\,p,\,\left\{N_\alpha\right\},\ldots\right) &= \ldots
+	      \end{align*}
+	    </span>
+	  </p>
+	</section>
+	<section>
+	  <h3>The thermodynamic table</h3>
+	  <p style="font-size:65%">
+	    \begin{align*}
+	    U\left(S,\,V,\,\left\{N_\alpha\right\}\right)&= T\,S - p\,V + \sum_\alpha \mu_\alpha\,N_\alpha
+	    &
+	    {\rm d}U &= T\,{\rm d}S - p\,{\rm d}V + \sum_\alpha\mu_{\alpha}\,{\rm d} N_{\alpha}
+	    \\
+	    S\left(U,\,V,\,\left\{N_\alpha\right\}\right)&= \frac{U}{T} + \frac{p}{T}\,V - \sum_\alpha \frac{\mu_\alpha}{T}\,N_\alpha
+	    &
+	    {\rm d}S &= T^{-1}\,{\rm d}S + \frac{p}{T}{\rm d}V - \sum_\alpha\frac{\mu_{\alpha}}{T}{\rm d} N_{\alpha}
+	    \\
+	    H\left(S,\,p,\,\left\{N_\alpha\right\}\right)&= U + p\,V = T\,S + \sum_\alpha\mu_\alpha\,N_\alpha
+	    &
+	    {\rm d}H &=
+	    T\,{\rm d}S + V\,{\rm d}p + \sum_\alpha\mu_\alpha\,{\rm d} N_\alpha
+	    \\
+	    A\left(T,\,V,\,\left\{N_\alpha\right\}\right)&= U - T\,S = - p\,V + \sum_\alpha\mu_\alpha\,N_\alpha
+	    &
+	    {\rm d}A &= -S\,{\rm d}T - p\,{\rm d}V +
+	    \sum_\alpha\mu_{\alpha}\,{\rm d} N_{\alpha}
+	    \\
+	    G\left(T,\,p,\,\left\{N_\alpha\right\}\right)&= H - T\,S = \sum_\alpha\mu_\alpha\,N_\alpha
+	    &
+	    {\rm d}G &= -S\,{\rm d}T + V\,{\rm d}p + \sum_\alpha\mu_\alpha\,{\rm
+	    d} N_\alpha
+	    \end{align*}
+	  </p>
+	</section>
+	<section>
+	  <section>
+	    <h3>Statistical mechanics by example</h3>
 	    <p>
 	      The simplest example I can think of that fits statistical
 	      mechanics AND thermodynamics is the game of craps (the
@@ -1205,6 +1376,8 @@
 	      isolated from each other, thus its not ergodic; however,
 	      a lot of properties (i.e. average velocity) will still work out!</p>
 	  </section>
+	</section>
+	<section>
 	  <section>
 	    <h3>The final word on ergodicity</h3>
 	    <p>
@@ -3548,6 +3721,8 @@
        plugins : [RevealMarkdown, RevealHighlight, RevealMath, RevealNotes],
        width:960,height:700,margin:0.1, minScale:0.2, maxScale:1.5,
        backgroundTransition: 'fade',
+       pdfSeparateFragments: false,
+       pdfMaxPagesPerSlide:1,
        hash: true,
        math: {
 	 TeX: {

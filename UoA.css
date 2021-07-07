@@ -11,6 +11,13 @@
     margin:5px 0;
 }
 
+.reveal p, .reveal h1, .reveal h2, .reveal h3, .reveal .footnote {
+    background: rgba(0, 0, 0, 0.9);
+    border-radius: 10px;
+    padding:5px;
+    margin:5px 0;
+}
+
 .reveal .slides {
   height: 100%;
 }
@@ -25,7 +32,7 @@
 
 .reveal .footnote {
     font-size:0.5em;
-    color:#AAA;text-align:left;padding-left:1em;padding-right:1em;
+    text-align:left;padding-left:1em;padding-right:1em;
 }
 
 .plot {
@@ -50,4 +57,12 @@
 
 .MathJax_CHTML {
     font-size: 90% !important;
+}
+
+.reveal th, .reveal td {
+    border-right: 1px solid #eeeeef;
+}
+
+.reveal th:last-child, .reveal td:last-child {
+    border-right: none;
 }
