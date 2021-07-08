@@ -21,7 +21,6 @@
       src="https://code.jquery.com/jquery-3.6.0.min.js"
       integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
       crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="UoA.css" id="theme"></link>    
     <script>
      /**
       * Simple object check.
@@ -81,12 +80,19 @@
        displaylogo: false,
      };
     </script>
+    <script src="reveal.js/dist/reveal.js"></script>
+    <script src="reveal.js/plugin/math/math.js"></script>
+    <script src="reveal.js/plugin/markdown/markdown.js"></script>
+    <script src="reveal.js/plugin/highlight/highlight.js"></script>
+    <script src="reveal.js/plugin/notes/notes.js"></script>
+    <script src="codeButtons.js"></script>
+    <link rel="stylesheet" href="UoA.css" id="theme"></link>    
   </head>
   <body>
     <div class="reveal">
       <div class="slides" style="border: 1px solid white;">
 	<section>
-	  <section>
+	  <section data-background-image="img/UoAbackground.jpg">
 	    <div class="backbox">
 	      <h3>Notes on Molecular Simulation</h3>
 	      <h3>CCP5 Summer School</h3>
@@ -109,10 +115,7 @@
 		  <a href="https://colab.research.google.com/github/toastedcrumpets/CCP5_Python_examples/blob/master/Table_of_contents_for_collab_research_google_com.ipynb">Python pre-school notes (hosted on Google collab)</a>
 		</li>
 		<li>
-		  <a href="#SM1">Statistical mechanics 1</a>
-		</li>
-		<li>
-		  <a href="#SM2">Statistical mechanics 2</a>
+		  <a href="#SM1">Statistical mechanics (1 & 2)</a>
 		</li>
 		<h3 style="margin-top:1em;font-size:75%;">Old out of date notes I haven't thrown away yet from previous summer schools</h3>
 		<li style="font-size:75%;">
@@ -130,7 +133,7 @@
 	</section>
 	<section id="SM1">
 	  <section data-background="img/Boltzmann_grave.jpg">
-	    <h2 class="backbox">Statistical mechanics: Part 1</h2>
+	    <h2 class="backbox">Statistical mechanics</h2>
 	  </section>	    
 	  <section data-background="img/Boltzmann_grave.jpg">
 	    <p class="backbox"><em>
@@ -177,9 +180,180 @@
 	      inspire you to correct me!
 	    </p>
 	  </section>
+	</section>
+	<section>
+	  <section>
+	    <h3>Thermodynamics Recap</h3>
+	    <p>
+	      Phenomenological theory, based on observations of <b>state</b> variables, $p,\,T,\,V,\,E,\,M,\,S,\ldots$ that seem to fully describe a thermodynamic <b>system</b>.
+	    </p>
+	    <p class="fragment">
+	      The power of thermodynamics arises from its ability to
+	      find simple universal relationships between (observable?)
+	      state variables.</p>
+	    <p class="fragment">
+	      First law: <b>Energy is conserved</b>
+	      \begin{align*}
+	      U_{system}+U_{surroundings}={\rm Constant}
+	      \end{align*}
+	      which also implies
+	      \begin{align*}
+	      {\rm d}U_{system}=-{\rm d}U_{surroundings}
+	      \end{align*}
+	    </p>
+	  </section>
 	  <section>
 	    <p>
-	      The simplest example I can think that fits statistical
+	      Energy can be transferred in many ways, but heat is distinguished from work thanks to the second law:
+	      \begin{align*}
+	      {\rm d}U_{system} = \partial Q - \partial W
+	      \end{align*}
+	    </p>
+	    <p class="fragment">
+	      Second law: Entropy must increase ${\rm d}S>0$ but the key relationship is actually ${\rm
+	      d}S > \partial Q/T$.
+	    </p>
+	    <p class="fragment">
+	      This becomes ${\rm d}S=\partial Q/T$ if the process is
+	      reversible (and we can make things almost reversible if
+	      we chop them up enough so that the system is almost homogeneous), leading to
+
+	      \begin{align*}
+	      {\rm d}U = T\,{\rm d}S - \partial W
+	      \end{align*}
+
+	      for a reversible processes.
+	    </p>
+	  </section>
+	  <section>
+	    <h3>Fundamental thermodynamic equation</h3>
+	    <p>
+	      \begin{align*}
+	      {\rm d}U &= T\,{\rm d}S - \partial W
+	      = T\,{\rm d}S - \sum_i F_i\,{\rm d}L_i
+	      \end{align*}
+	      This is the fundamental equation, which we extend
+	      depending on what work terms we can observe in our system.
+	    </p>
+	    <table>
+	      <tbody>
+		<tr>
+		  <td style="border-right:4px solid white;">$F_i$</td>
+		  <td>$p$</td>
+		  <td>$\mu_\alpha$</td>
+		  <td>$\gamma$</td>
+		  <td>&hellip;</td>
+		</tr>
+		<tr>
+		  <td style="border-right:4px solid white;">$L_i$</td>
+		  <td>$V$</td>
+		  <td>$-N_\alpha$</td>
+		  <td>$\Sigma$</td>
+		  <td>&hellip;</td>
+		</tr>
+	      </tbody>
+	    </table>
+	    <p class="fragment">
+	      Amazingly, as each term is a <b>conjugate</b> pairing of an <b>intensive</b> term and a differential <b>extensive</b> term,
+	      this equation can be solved using Euler's
+	      solution for homogeneous functions.
+
+	      \begin{align*}
+	      U(S,\,V,\,\left\{N_\alpha\right\},\ldots) &= T\,S -p\,V+\sum_\alpha \mu_\alpha\,N_\alpha + \ldots\\
+	      \end{align*}
+	    </p>
+	  </section>
+	</section>
+	<section>
+	  <h3>Generating identities</h3>
+	  <p>
+	    <span style="font-size:75%">
+	      \begin{align*}
+	      U(S,\,V,\,\left\{N_\alpha\right\},\ldots) &= T\,S -p\,V+\sum_\alpha \mu_\alpha N_\alpha + \ldots
+	      \\
+	      {\rm d}U &= T\,{\rm d}S  -p\,{\rm d}V+\sum_\alpha \mu_\alpha\,{\rm d}N_\alpha + \ldots
+	      \end{align*}
+	    </span>
+	    Comparing the equations we see lots of differential identities...
+
+	    <span style="font-size:75%">
+	      \begin{align*}
+	      \left(\frac{{\rm d}U}{{\rm d}S}\right)_{V,\,\left\{N_\alpha\right\},\ldots} &= T & \left(\frac{{\rm d}U}{{\rm d}V}\right)_{S,\,\left\{N_\alpha\right\},\ldots} &= -p
+	      \\
+	      \left(\frac{{\rm d}U}{{\rm d}N_\alpha}\right)_{S,\,V,\,\left\{N_\beta\neq\alpha\right\},\ldots} &= \mu & \ldots &= \ldots
+	      \end{align*}
+	    </span>
+	  </p>
+	  <div class="fragment">
+	    <p>
+	      When we have a relationship between $U,\,S,\,V,\ldots$, then it is a <b>generating function</b> for
+	      the rest of the thermodynamic properties.
+	    </p>
+	    <div class="footnote">
+	      Note that $U(S,\,V,\,\left\{N_\alpha\right\})$ can be rearranged to $S(U,\,V,\,\left\{N_\alpha\right\})$ and $\left(\frac{{\rm d}U}{{\rm d}S}\right)_X = \left(\frac{{\rm d}S}{{\rm d}U}\right)_X^{-1}$ so all this still applies.
+	    </div>
+	  </div>
+	</section>
+	<section>
+	  <h3>Legendre Transformations</h3>
+	  <p>
+	    <span style="font-size:75%">
+	      \begin{align*}
+	      U(S,\,V,\,\left\{N_\alpha\right\},\ldots) &= T\,S -p\,V+\sum_\alpha \mu_\alpha N_\alpha + \ldots
+	      \\
+	      {\rm d}U &= T\,{\rm d}S  -p\,{\rm d}V+\sum_\alpha \mu_\alpha\,{\rm d}N_\alpha + \ldots
+	      \end{align*}
+	    </span>
+	    $U,\,S,\,V$ and sometimes $N$ are challenging variables to measure/control. The <b>conjugate</b> variables  $T,\,T^{-1},\,p$ are nicer.
+	  </p>
+	  <p>
+	    A Legendre transformation swaps the pair
+	    around. I.e. Defining the enthalpy $H = U + p\,V$ 
+	    leads to:
+	    <span style="font-size:75%">
+	      \begin{align*}
+	      {\rm d}H &= {\rm d}U + V\,{\rm d}p +p\,{\rm d}V\\
+	      &= T\,{\rm d}S +V{\rm d}p+\sum_\alpha \mu_\alpha\,{\rm d}N_\alpha + \ldots
+	      \\
+	      H\left(S,\,p,\,\left\{N_\alpha\right\},\ldots\right) &= \ldots
+	      \end{align*}
+	    </span>
+	  </p>
+	</section>
+	<section>
+	  <h3>The thermodynamic table</h3>
+	  <p style="font-size:65%">
+	    \begin{align*}
+	    U\left(S,\,V,\,\left\{N_\alpha\right\}\right)&= T\,S - p\,V + \sum_\alpha \mu_\alpha\,N_\alpha
+	    &
+	    {\rm d}U &= T\,{\rm d}S - p\,{\rm d}V + \sum_\alpha\mu_{\alpha}\,{\rm d} N_{\alpha}
+	    \\
+	    S\left(U,\,V,\,\left\{N_\alpha\right\}\right)&= \frac{U}{T} + \frac{p}{T}\,V - \sum_\alpha \frac{\mu_\alpha}{T}\,N_\alpha
+	    &
+	    {\rm d}S &= T^{-1}\,{\rm d}S + \frac{p}{T}{\rm d}V - \sum_\alpha\frac{\mu_{\alpha}}{T}{\rm d} N_{\alpha}
+	    \\
+	    H\left(S,\,p,\,\left\{N_\alpha\right\}\right)&= U + p\,V = T\,S + \sum_\alpha\mu_\alpha\,N_\alpha
+	    &
+	    {\rm d}H &=
+	    T\,{\rm d}S + V\,{\rm d}p + \sum_\alpha\mu_\alpha\,{\rm d} N_\alpha
+	    \\
+	    A\left(T,\,V,\,\left\{N_\alpha\right\}\right)&= U - T\,S = - p\,V + \sum_\alpha\mu_\alpha\,N_\alpha
+	    &
+	    {\rm d}A &= -S\,{\rm d}T - p\,{\rm d}V +
+	    \sum_\alpha\mu_{\alpha}\,{\rm d} N_{\alpha}
+	    \\
+	    G\left(T,\,p,\,\left\{N_\alpha\right\}\right)&= H - T\,S = \sum_\alpha\mu_\alpha\,N_\alpha
+	    &
+	    {\rm d}G &= -S\,{\rm d}T + V\,{\rm d}p + \sum_\alpha\mu_\alpha\,{\rm
+	    d} N_\alpha
+	    \end{align*}
+	  </p>
+	</section>
+	<section>
+	  <section>
+	    <h3>Statistical mechanics by example</h3>
+	    <p>
+	      The simplest example I can think of that fits statistical
 	      mechanics AND thermodynamics is the game of craps (the
 	      sum of two dice).</p>
 	    <p class="fragment">
@@ -272,7 +446,7 @@
 	      need an intuition of what happens when we have many
 	      dice....</p>
 	  </section>
-	  <section style="height:100%" data-background="img/dice_heap.jpg">
+	  <section style="height:100%" data-background="img/dice_heap.jpg" id="dicecount1slide">
 	    <h2 class="backbox">Example: Hyper-craps</h2>
 	    <form class="backbox">
 	      <div class="row">
@@ -292,15 +466,15 @@
 	      <div class="row">
 		<div class="col">
 		  <input class="form-check-input" type="radio" name="dicey" id="dicey1" value="1" checked><br/>
-		  <label class="form-check-label" for="dicey1" id="dicey1label">$\Omega\left(N,\,E\right)$</label>
+		  <label class="form-check-label" for="dicey1" id="dicey1label" style="font-size:75%">$\Omega\left(N,\,E\right)$</label>
 		</div>
 		<div class="col">
 		  <input class="form-check-input" type="radio" name="dicey" id="dicey2" value="2"><br/>
-		  <label class="form-check-label" for="dicey2" id="dicey2label">$P(E)$</label>
+		  <label class="form-check-label" for="dicey2" id="dicey2label" style="font-size:75%">$P(E)=\Omega\left(N,\,E\right) / \sum_E \Omega\left(N,\,E\right)$</label>
 		</div>
 		<div class="col">
 		  <input class="form-check-input" type="radio" name="dicey" id="dicey3" value="3"><br/>
-		  <label class="form-check-label" for="dicey3" id="dicey3label">$P(E)/\left({\rm max}_E\,P(E)\right)$</label>
+		  <label class="form-check-label" for="dicey3" id="dicey3label" style="font-size:75%">$P(E)/\left({\rm max}_E\,P(E)\right)$</label>
 		</div>
 	      </div>
 	    </form>
@@ -442,7 +616,6 @@
 	       };
 	     }
 	     
-	     Plotly.plot('dicePlot', refresh_dice_plot(1, 6));
 
 	     function diceupdate1() {
 	       var target = $('#dicecount1')[0];
@@ -453,7 +626,23 @@
 	     $('#dicecount1').on('input', (event) => { diceupdate1() });
 	     $('#dicenormalisation1').on('input', (event) => { diceupdate1() });
 	     $('input[name=dicey]').on('input', (event) => { diceupdate1() });
+
+
+	     Reveal.on( 'slidechanged', event => {
+	       if (event.currentSlide.id == 'dicecount1slide') {
+		 Plotly.plot('dicePlot', refresh_dice_plot(1, 6));
+		 Reveal.layout();		 
+	       } else {
+		 Plotly.purge('dicePlot');
+	       }
+	     });	       
+	     
 	    </script>
+	  </section>
+	  <section style="height:100%; width:100%;">
+	    <div style="height:90%;width:100%; position:relative;">
+	      <iframe src="http://www.youtube.com/embed/03tx4v0i7MA" frameborder="0" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+	    </div>
 	  </section>
 	  <section class="backbox">
 	    <h3 class="backbox">
@@ -470,13 +659,17 @@
 		which we will call the <b>equilibrium state</b>.
 	      </li>
 	      <li class="fragment">
+		This equilibrium state *might* be &ldquo;unique&rdquo;
+		and appear at a maximum (more on uniqueness later).
+	      </li>
+	      <li class="fragment">
 		Everything is possible, but much of it is highly
 		highly highly highly improbable compared to the
 		equilibrium state.</li>
 	      <li class="fragment">
 		Normalisation is a convenience to:
 		<ul>
-		  <li>Make properties <b>intensive</b> (average dice value, $e$) instead of <b>extensive</b> (dice sum, $E$).</li>
+		  <li>Make properties <b>intensive</b> (i.e. $E$ to $e$).</li>
 		  <li>Move from combinations to probability, which is more useful for calculations.</li></ul>
 	      </li>
 	      <li class="fragment">
@@ -487,7 +680,7 @@
 	  </section>
 	</section>
 	<section>
-	  <section style="height:100%" data-background="img/Boltzmann_grave.jpg">
+	  <section data-background="img/Boltzmann_grave.jpg">
 	    <h3 class="backbox">Thermodynamics of craps</h3>
 	    <p class="backbox">
 	      Lets say we start with a roll of hyper-snake-eyes (all
@@ -527,7 +720,7 @@
 	      $S = \ln \Omega$ has all the properties of entropy! We
 	      have discovered it inside our game of craps, it is not
 	      too much of a leap to believe it is more fundamental and
-	      in molecular systems too..</p>
+	      in molecular systems too...</p>
 	    <div class="attribution backbox">
 	      Background <a href="https://en.wikipedia.org/wiki/Ludwig_Boltzmann#/media/File:Zentralfriedhof_Vienna_-_Boltzmann.JPG">Daderot at English Wikipedia</a> - Own work CC BY-SA 3.0
 	    </div>
@@ -553,6 +746,30 @@
 	      Background <a href="https://en.wikipedia.org/wiki/Ludwig_Boltzmann#/media/File:Zentralfriedhof_Vienna_-_Boltzmann.JPG">Daderot at English Wikipedia</a> - Own work CC BY-SA 3.0
 	    </div>
 	  </section>
+	  <section data-background-image="img/mindblown.gif">
+	    <p class="backbox">
+	      The second law of thermodynamics, put simply, is that
+	      the most likely things will eventually happen and stay
+	      there.
+	    </p>
+	    <p class="backbox fragment">
+	      Richard Feynman says in his Lectures on Physics “…
+	      entropy is just the logarithm of the number of ways of
+	      internally arranging a system while have it look the same
+	      from the outside”.</p>
+	    <p class="backbox fragment"> 
+	      Entropy is a measure of how much we don't know, i.e. it
+	      measures our lack of control-over/measurement-of the
+	      microstate.</p>
+	    <p class="backbox fragment">
+	      Entropy is NOT disorder/chaos, its just that there's so many
+	      ways to make a mess... 
+	    </p>
+	    <p class="backbox fragment"> 
+	      Sometimes order is more likely, i.e., look at any
+	      crystal transition.
+	    </p>
+	  </section>
 	  <section style="height:100%">
 	    <h3 class="backbox">Microcanonical ensemble</h3>
 	    <p class="backbox">
@@ -571,8 +788,7 @@
 	      <span style="font-size:70%">		
 	      \begin{align*}
 	      \left\langle E\right\rangle &= \sum_E E\,P(N,\,E, \ldots) &
-	      \mu &= - T\frac{\partial S(N,\,E, \ldots)}{\partial N} \\
-	      \beta=\frac{1}{k_B\,T} &= \frac{\partial S(N,\,E, \ldots)}{\partial E} & \ldots
+	      \mu &= - T\frac{\partial S(N,\,E, \ldots)}{\partial N}
 	      \end{align*}	      
 	      </span>
 	    </p>
@@ -584,21 +800,27 @@
 		\end{align*}	      
 	      </span>	      
 	    </p>
+	    <p class="backbox fragment">
+	      Temperature requires a little more work to derive.
+	    </p>
 	  </section>
 	  <section>
 	    <h3>Canonical ensemble</h3>
 	    <p>
-	      Experimentally, constant temperature is more
-	      interesting. Lets hold the dice sum, $E$, fixed in ALL
-	      our dice rolls. If you haven't guessed yet from the
-	      variable name, we're adding conservation of energy. </p>
+	      Lets hold the dice sum, $E$, fixed in ALL our dice
+	      rolls. If you haven't guessed yet from the variable
+	      name, we're adding conservation of energy. </p>
 	    <p class="fragment">
 	      Divide the $N$ dice into two groups, each with a
 	      separate $E_1$ and $E_2 = E - E_1$ which adds to the
 	      (fixed) total $E=E_1+E_2$.
+	      <img src="img/NEDiceEnsemble.svg" style="width:75%" />
 	    </p>
-	    <p class="fragment">
-	      The equilibrium value of $E_1$ is one that maximises
+	  </section>
+	    <section>
+	      <h3>Canonical ensemble</h3>
+	      <p >
+	      The equilibrium value of $E_1$ occurs at the maxiumum
 	      entropy, where the total entropy is:
 	      
 	      \begin{align*} \ln \Omega_{1+2}(E_1+E_2) &= \ln
@@ -607,8 +829,13 @@
 	      \Omega_2(E-E_1) \\ \end{align*}
 
 	      The maximum entropy when varying $E_1$ occurs at a
-	      stationary point, i.e.  $\left(\frac{{\rm d} \ln
-	      \Omega_{1+2}(E,\,E_1)}{{\rm d} E_1}\right)_{N} = 0$...</p>
+	      stationary point, i.e.  
+		
+		\begin{align*}
+		\left(\frac{{\rm d} \ln
+		\Omega_{1+2}(E,\,E_1)}{{\rm d} E_1}\right)_{N} = 0
+		\end{align*}
+	      </p>
 	  </section>
 	  <section>
 	    <h3>The rest of thermodynamics</h3>
@@ -622,7 +849,7 @@
 	    <p class="fragment">
 	      We now define some shorthand:
 	      \begin{align*}
-	      \beta = \frac{{\rm d}}{{\rm d} E} \ln \Omega
+	      \beta = \frac{{\partial} S\left(N,\,E,\,\ldots\right)}{{\partial} E} = \frac{{\partial} \ln \Omega\left(N,\,E,\,\ldots\right)}{{\partial} E} 
 	      \end{align*}
 	      and note the result
 	      \begin{align*}
@@ -645,8 +872,12 @@
 	      that systems at thermal equilibrium must have the same
 	      temperature.</p>
 	    <p class="fragment">
-	      This is confirmed by our observations, lets now generate
-	      the probabilty function (and everything else).</p>
+	      This generalises to three systems, and thus is proof of the zeroth law.
+	    </p>
+	    <p class="fragment">
+	      Lets now generate the probabilty function (and
+	      everything else).
+	    </p>
 	  </section>
 	  <section>
 	    <h3>Canonical ensemble</h3>
@@ -674,8 +905,8 @@
 	      </span>
 	    </p>
 	    <p class="fragment">
-	      Inserting, and realising that $\ln\Omega_2(E_2=E)$ is a constant,
-	      <span style="font-size:75%">		
+	      Assuming system 2 is very large, substituting, and
+	      realising that $\ln\Omega_2(E_2=E)$ is a constant,<span style="font-size:75%">		
 		\begin{align*} 
 		P\left(i\right) \propto e^{-E_{1,i}/(k_B\,T)}
 		\end{align*}
@@ -686,11 +917,12 @@
 	    <h3>Canonical ensemble</h3>
 	    <p>
 	      Each <b>microstate</b> of a system at thermal
-	      equilibrium has a probability proportional to the
-	      Boltzmann factor
+	      equilibrium (i.e. fixed $N,\,T,\ldots$ otherwise known
+	      as the canonical ensemble) has a probability
+	      proportional to the Boltzmann factor:
 	      
-	      \begin{align*} P\left(i\right) \propto
-	      e^{-E_{1,i} / (k_B\,T)} \end{align*}</p>
+	      \begin{align*} P\left(i\right) \propto e^{-E_{1,i} /
+	      (k_B\,T)} \end{align*}</p>
 	    <p class="fragment">
 	      We can normalise this by creating the <b>partition</b> function,
 	      \begin{align*} Z(N,\,T) &= \sum_{i} e^{-E_{1,i} / (k_B\,T)} \\
@@ -710,8 +942,10 @@
 		(k_B\,T)} & P\left(i\right) &= Z^{-1} e^{-E_{i} /
 		(k_B\,T)} \end{align*}
 	      </span>
-	      Just like the relationship for entropy
-	      $S=k_B\ln\Omega(N,\,E,\ldots)$, the partition function
+	      Like the relationship for entropy,
+	      $S=k_B\ln\Omega(N,\,E,\ldots)$, where its the log of the
+	      probability normalisation for $\left(N,\,E\right)$
+	      ensembles, the partition function in $\left(N,\,T\right)$ ensembles
 	      is related to the <b>Helmholtz free energy</b>, $F$:
 	      
 	      <span style="font-size:75%">
@@ -760,20 +994,25 @@
 		\end{align*}
 	      </span>
 	    </p>
+	    <p class="fragment">
+	      Calculating move probabilities is fundamental to Monte
+	      Carlo, thus these probabilities (and how to compute the
+	      partition functions) is core to that approach.
+	    </p>
 	  </section>
 	  <section>
 	    <h3>Outlook</h3>
 	    <p class="backbox">
 	      There are too many important derivations to cover in
 	      stat mech, and what you will need highly depends on your
-	      interests/research.
+	      interests/research. We cannot do more but please ask if
+	      you have something in particular to understand in the
+	      problem sessions.
 	    </p>
 	    <p class="fragment backbox">
-	      Rather than provide an incomplete  of them (which
-	      you will find in the literature if you really need
-	      them), I will try to give you some intuition on the
-	      foundational assumptions (which I think is much harder
-	      to find).</p>
+	      I will now try to give you some intuition on the other
+	      foundational assumptions of stat mech (which I think is
+	      much harder to find).</p>
 	  </section>
 	</section>
 	<section>
@@ -814,7 +1053,7 @@
 	      </i>
 	    </div>
 	  </section>
-	  <section>
+	  <section id="shocount1slide">
 	    <p>
 	      The <b>microcanonical</b> SHO system visits all regions of phase space pretty quickly, it is therefore <b>Ergodic</b>. Stat-Mech
 	      and (molecular) dynamics averages are equivalent.</p>
@@ -824,9 +1063,9 @@
 		<input type="range" class="form-control-range" id="shocount1" min="1" max="500" value="1" step="1">
 	      </div>
 	    </div>
-	    <div id="springDashpot" style="margin:auto 0; display:inline-block;" ></div>
+	    <div id="shocount1div" style="margin:auto 0; display:inline-block;" ></div>
 	    <script>
-	     function() {
+	     (function() {
 	       var state = {
 	       };
 
@@ -862,31 +1101,13 @@
 				    $('#shocount1output').text(e.target.value);
 				    init(e.target.valueAsNumber); 
 	       });
-
-	       Plotly.newPlot('springDashpot', 
-			      {
-				data:	[{
-				  x: state.x,
-				  y: state.y,
-				  mode: 'markers',
-				}],
-				layout:  { 
-				  xaxis: { title: 'r', range: [-1.5, 1.5]},
-				  yaxis: { title: 'v', range: [-1.5, 1.5]},
-				  plot_bgcolor: '#000',
-				  paper_bgcolor: '#000E',
-				  font: {
-				    color: 'white',
-				    size: 15,
-				  },
-				},
-				config: default_plot_Config,
-	       });
 	       
+	       var animating = false;
+
 	       function update () {
 		 step();
 
-		 Plotly.animate('springDashpot', {
+		 Plotly.animate('shocount1div', {
 		   data: [{x: state.x, y: state.y}],
 		 }, {
 		   transition: {
@@ -897,12 +1118,43 @@
 		     redraw: false
 		   }
 		 });
-
-		 requestAnimationFrame(update);
+		 
+		 if (animating)
+		   requestAnimationFrame(update);
+		 else {
+		   Plotly.purge('shocount1div');
+		 }
 	       }
 
-	       requestAnimationFrame(update);
-	     }();
+	       Reveal.on( 'slidechanged', event => {
+		 if (event.currentSlide.id == 'shocount1slide') {
+		   Plotly.newPlot('shocount1div', 
+				  {
+				    data:	[{
+				      x: state.x,
+				      y: state.y,
+				      mode: 'markers',
+				    }],
+				    layout:  { 
+				      xaxis: { title: 'r', range: [-1.5, 1.5]},
+				      yaxis: { title: 'v', range: [-1.5, 1.5]},
+				      plot_bgcolor: '#000',
+				      paper_bgcolor: '#000E',
+				      font: {
+					color: 'white',
+					size: 15,
+				      },
+				    },
+				    config: default_plot_Config,
+		   });
+		   Reveal.layout();
+		   animating = true;
+		   requestAnimationFrame(update);
+		 } else {
+		   animating = false;
+		 }
+	       });
+	     })();
 	    </script>
 	  </section>
 	  <section>
@@ -923,12 +1175,16 @@
 	  </section>
 	  <section>
 	    <h3>SHO phase space &ldquo;flow&rdquo;</h3>
-	    <img src="img/SHOflow1.svg" style="width:50%" />
-	    <p>
-	      The systems flow around phase space, the trajectory
-	      lines do not cross, thus this behaves exactly as a
-	      incompressible fluid.
-	    </p>
+	    <div style="display:flex">
+	      <img src="img/SHOflow1.svg" style="flex:1" />
+	      <div style="flex:1" >
+		<p style="padding-left:1em;">
+		  The systems flow around phase space, the trajectory
+		  lines do not cross, thus this behaves exactly as a
+		  incompressible fluid.
+		</p>
+	      </div>
+	    </div>
 	  </section>
 	  <section>
 	    <h3>Liouville's Theorem</h3>
@@ -937,11 +1193,19 @@
 	      space as an incompressible fluid with density
 	      $\rho(\boldsymbol{\Gamma})$, thus it behaves as follows.
 	      
-	      \begin{align*}
-	      \nabla_{\boldsymbol{\Gamma}} \cdot \dot{\boldsymbol\Gamma}\,\rho({\boldsymbol\Gamma}) = 0
-	      \end{align*}
+	      <span style="font-size:75%">
+		\begin{align*} \nabla_{\boldsymbol{\Gamma}} \cdot
+		\dot{\boldsymbol\Gamma}\,\rho({\boldsymbol\Gamma}) = \sum_i\left(\dot{\boldsymbol{r}}_i\cdot \frac{\partial}{\partial \boldsymbol{r}_i} + \dot{\boldsymbol{v}}_i \cdot \frac{\partial}{\partial \boldsymbol{v}_i}\right)\rho\left(\left\{\boldsymbol{r}_i,\,\boldsymbol{v}_i\right\}^N_i\right) = 0
+		\end{align*}
+	      </span>
+	      which should be familiar to you as a simplification of
+	      the continuity equation from any fluid flow class you
+	      might have had:
 	      
-	      which should be familiar to you from any fluid flow class you might have had.
+	      <span style="font-size:75%">
+		\begin{align*} \frac{\partial \rho}{\partial t} +\nabla
+	      \cdot \rho\,\boldsymbol{v} =0 \end{align*}
+	      </span>
 	    </p>
 	    <p class="fragment">
 	      This is the foundation of kinetic theory, as from here
@@ -953,129 +1217,225 @@
 	    </p>
 	  </section>
 	  <section>
-	    <div class="backbox">
-	      <div class="form-group">
-		<label for="shocount2">Ensemble members:</label><output id="shocount2output" for="shocount2">1</output>
-		<input type="range" class="form-control-range" id="shocount2" min="1" max="500" value="1" step="1">
+	    <h3>Double well potential</h3>
+	    <p>
+	      The SHO system has a parabolic potential energy:
+
+	      \begin{align*}
+	      E = \mathcal{H}(\boldsymbol{\Gamma}) = \frac{1}{2}k\,r^2 + \frac{1}{2}m\,v^2
+	      \end{align*}
+	    </p>
+	    <p class="fragment">
+	      We can make a double-well potential simply by shifting the spring rest position away from the origin:
+	      
+	      \begin{align*}
+	      E = \mathcal{H}(\boldsymbol{\Gamma}) = \frac{1}{2}k\,\left(\left|r\right|-r_0\right)^2 + \frac{1}{2}m\,v^2
+	      \end{align*}
+	      
+	      <span style="font-size:50%">
+		This potential is not a particularly nice one to
+		integrate as it is discontinuous at $r=0$. Even though
+		I use velocity verlet (which is symplectic) as the
+		integrator in the next example, you can still see the
+		system drifting in energy due to where/when the time
+		step crosses the $r=0$ line. But the demonstration is
+		quite beautiful so I claim artistic licence, whatever
+		that means.</span></p>
+	  </section>
+	  <section id="shocount2slide">
+	    <div class="backbox">	
+	      <div class="row">
+		<div class="col">
+		  <div class="form-group">
+		    <label for="shocount2">Ensemble members: </label><output id="shocount2output" for="shocount2">1</output><br/>
+		    <input type="range" class="form-control-range" id="shocount2" min="1" max="500" value="200" step="1">
+		  </div>
+		</div>
+		<div class="col">
+		  <div class="form-group">
+		    <label for="shocount2dt">Time step: </label><output id="shocount2dtout" for="shocount2dt">1</output><br/>
+		    <input type="range" class="form-control-range" id="shocount2dt" min="0.005" max="0.4" value="0.035" step="0.005">
+		  </div>
+		</div>
 	      </div>
 	    </div>
-	    <div id="springDashpot" style="margin:auto 0; display:inline-block;" ></div>
+	    <div id="shocount2div" style="margin:auto 0; display:inline-block;" ></div>
+	    <p>
+	      Are the systems in the lower energies (closer to the centre of the orbits) ergodic?
+	    </p>
 	    <script>
-	     var state = {
-	     };
-	     var beta = 0; 
-	     var omega = 1;
-	     var gamma = 2 * beta;
-	     var k = omega * omega + gamma * gamma / 4;
-	     
-	     //def meshplot(r0):
-	     //		 gamma = 2 * beta
-	     //k = omega*omega + gamma*gamma/4
-	     //m = 1
-	     //r, v = np.linspace(-(1.3+r0), (1.3+r0), 100), np.linspace(-(1.3+r0), (1.3+r0), 100)
-	     //R, V = np.meshgrid(r, v)
-	     //E = 0.5 * (k * (np.abs(R)-r0) * (np.abs(R)-r0) + m * V * V)
-	     //A = - k * np.abs(R) *(np.abs(R)-r0) / R - gamma * V
-	     //#Q = plt.quiver(R, V, V, A, pivot='mid', scale=25, headlength=10, headaxislength=8, headwidth=10)
-	     //
-	     //if r0 != 0:
-	     //	  Q = plt.streamplot(r, v, V, A, color='k', arrowstyle="->", density=1)
-             //CS = plt.contour(R,V,E, levels=[0.25, 0.5, 0.75], linewidths=2, colors=['r', 'g', 'b'])
-             //labels = ['$E=0.25$', '$E=0.5$','$E=0.75$']
-             //for i in range(len(labels)):
-	     //	      CS.collections[i].set_label(labels[i])
-             //plt.legend(bbox_to_anchor=(1.3, 1.0))
-	     //else:
-	     //	      Q = plt.streamplot(r, v, V, A, color='k', arrowstyle="->", density=1)
-             //
-	     //plt.xlabel('$r$')
-	     //plt.ylabel('$v$')
-	     //plt.xlim([-(1.2+r0), r0+1.2])
-	     //plt.ylim([-1.2, 1.2])
-	     //plt.xticks([-1, 0, 1])
-	     //plt.yticks([-1, 0, 1])
-	     //style_fig(plt.gcf(), square=True, scale=(1+r0*0.8))
-	     //print("Plotting phasespace flow plot")
-	     //plt.savefig("springphasespaceflow"+str(beta)+"r"+str(r0)+".pdf", bbox_inches="tight", pad_inches=0, transparent=True)
-	     //plt.clf()
-
-
-	     function init(n) {
-	       state.n = n;
-	       state.dt = 0.015;
-	       state.x = [];
-	       state.y = [];
-	       state.tinit = [];
-	       state.A = [];
-	       state.t = 0;
-	       
-	       for (i = 0; i < state.n; i++) {
-		 state.tinit[i] = Math.random();
-		 state.A[i] = 1.0;
+	     (function() {
+	       var state = {
+		 x: [],
+		 y: []
 	       };
-	     };
+	       var beta = 0; 
+	       var omega = 1;
+	       var gamma = 2 * beta;
+	       var k = omega * omega + gamma * gamma / 4;
+	       var m = 1
+	       var r0 = 1;
 
-	     function step() {
-	       state.t += state.dt;
-	       for (i = 0; i < state.n; i++) {
-		 var phase = 2 * 3.14159265 * (state.tinit[i] + state.t);
-		 state.x[i] = state.A[i] * Math.sin(phase);
-		 state.y[i] = state.A[i] * Math.cos(phase);
+
+	       function init() {
+		 state.n = $('#shocount2')[0].valueAsNumber;
+		 $('#shocount2output').text(state.n.toString());
+		 state.dt = $('#shocount2dt')[0].valueAsNumber;
+		 $('#shocount2dtout').text(state.dt.toString());
+		 
+		 if (state.n != state.x.length) {
+		   state.x = [];
+		   state.y = [];
+		   for (i = 0; i < state.n; i++) {
+		     state.x[i] = 3.0 * 2 * (Math.random() - 0.5);
+		     state.y[i] = 3.0 * (Math.random() - 0.5);
+		   };
+		 }
 	       };
-	     };
 
-	     init(1);
-	     step();
+	       function accel(i) {
+		 var ri = state.x[i];
+ 		 var vi = state.y[i];
+		 return - k * (Math.abs(ri) / ri) * (Math.abs(ri) - r0);
+	       }
 
-	     $('#shocount1').on('input change', 
-				(e) => {
-				  $('#shocount1output').text(e.target.value);
-				  init(e.target.valueAsNumber); 
-	     });
+	       function step() {
+		 for (i = 0; i < state.n; i++) {
+		   var ai  = accel(i);
+		   state.x[i] += state.dt * state.y[i] + 0.5 * ai * state.dt * state.dt;
+		   state.y[i] += 0.5 * state.dt * ai;
+		   var ai  = accel(i);
+		   state.y[i] += 0.5 * state.dt * ai;
+		 };
+	       };
 
-	     Plotly.newPlot('springDashpot', 
-			    {
-			      data:	[{
-				x: state.x,
-				y: state.y,
-				mode: 'markers',
-			      }],
-			      layout:  { 
-				xaxis: { title: 'r', range: [-1.5, 1.5]},
-				yaxis: { title: 'v', range: [-1.5, 1.5]},
-				plot_bgcolor: '#000',
-				paper_bgcolor: '#000E',
-				font: {
-				  color: 'white',
-				  size: 15,
-				},
-			      },
-			      config: default_plot_Config,
-	     });
-	     
-	     function update () {
+	       init();
 	       step();
 
-	       Plotly.animate('springDashpot', {
-		 data: [{x: state.x, y: state.y}],
-	       }, {
-		 transition: {
-		   duration: 0
-		 },
-		 frame: {
-		   duration: 0,
-		   redraw: false
-		 }
+	       $('#shocount2').on('input change', 
+				  (e) => {
+				    init(); 
 	       });
 
-	       requestAnimationFrame(update);
-	     }
+	       $('#shocount2dt').on('input change', 
+				  (e) => {
+				    init(); 
+	       });
+	       
+	       var animating = false;	       
+	       function update () {
+		 step();
 
-	     requestAnimationFrame(update);
+		 Plotly.animate('shocount2div', {
+		   data: [{x: state.x, y: state.y}],
+		 },{ 
+		   transition: {
+		     duration: 0
+		   },
+		   frame: {
+		     duration: 0,
+		     redraw: false
+		   }
+		 });
+
+		 if (animating)
+		   requestAnimationFrame(update);
+		 else {
+		   Plotly.purge('shocount2div')
+		 }
+	       }
+
+	       Reveal.on( 'slidechanged', event => {
+		 if (event.currentSlide.id == 'shocount2slide') {
+		   Plotly.newPlot('shocount2div', 
+				  {
+				    data:	[{
+				      x: state.x,
+				      y: state.y,
+				      mode: 'markers',
+				    }],
+				    layout:  { 
+				      xaxis: { title: 'r', range: [-4, 4]},
+				      yaxis: { title: 'v', range: [-4, 4]},
+				      plot_bgcolor: '#000',
+				      paper_bgcolor: '#000E',
+				      font: {
+					color: 'white',
+					size: 15,
+				      },
+				    },
+				    config: default_plot_Config,
+		   });
+		   Reveal.layout();
+		   
+		   animating = true;
+		   requestAnimationFrame(update);
+		 } else {
+		   animating = false;
+		 }
+	       });	       
+	     })();
 	    </script>
 	  </section>
+	  <section>
+	    <h3>$N,\,E$ double-well SHO dynamics</h3>
+	    <img src="img/SHOsplit.svg" style="width:100%" />
+	    <p>
+	      <b>Microstates</b> in $E=0.25$ are energetically
+	      isolated from each other, thus its not ergodic; however,
+	      a lot of properties (i.e. average velocity) will still work out!</p>
+	  </section>
 	</section>
-	<section id="SM2">
+	<section>
+	  <section>
+	    <h3>The final word on ergodicity</h3>
+	    <p>
+	      Phase space is so unbelievably big even for small
+	      systems it actually &ldquo;feels&rdquo; impossible for any
+	      trajectory to meaningfully visit all microstates (or come
+	      close enough to do so) in finite time.
+	    </p>
+	    <p class="fragment">
+	      Practically, in simulation we typically just check
+	      averages are converging and hope we're effectively
+	      ergodic. Like a lot of things in simulation, you presume
+	      it might be true but verify.</p>
+	    <p class="fragment">
+	      There are many techniques for accelerating dynamics past
+	      energy barriers and ensure good sampling of phase space
+	      which you will learn about in your MC lectures. These
+	      are also applied more frequently to MD simulations too.</p>
+	  </section>
+	  <section>
+	    <h3>The final word on statistical mechanics</h3>
+	    <p class="backbox">
+	      The ideas of statistical mechanics are simple, yet the
+	      implications and relationships it provides are deep and
+	      meaningful.
+	    </p>
+	    <p class="backbox fragment">
+	      My dice example should make you believe that its
+	      applications are wider than just molecular
+	      systems. Isaac Asimov even explored the statistical
+	      mechanics of galactic societies in his excellent (but a little
+	      dated) <a href="https://en.wikipedia.org/wiki/Foundation_series">Foundation Series</a>. Who
+	      knows where it will turn up next.
+	    </p>
+	    <p class="backbox fragment">
+	      While much of the derivations covered here are
+	      &ldquo;ancient&rdquo;, there's still intense research
+	      into the field, and many more surprising results to
+	      find.
+	    </p>
+	    <p class="backbox fragment">
+	      I hope you're keen to find out more, and will look at
+	      the statistical mechanics underlying all your upcoming
+	      lectures as a mountain to climb up, rather than a chasm to
+	      fall in.</p>
+	  </section>
+	  <section data-background-image="img/endframe.svg" data-background-size="contain">
+	    <h3>Fin.</h3>
+	  </section>
 	</section>
 	<section id="MC1">
 	  <section>
@@ -3358,32 +3718,27 @@
 			(2009).
 		    </li>
 		    <li> JP Hansen and IR McDonald, <i>Theory of Simple Liquids</i>, 3ed
-			(2006).
+		      (2006).
 		    </li>
 		</ul>
 	    </section>
 	</section>
       </div>
     </div>
-    <script src="reveal.js/dist/reveal.js"></script>
-    <script src="reveal.js/plugin/math/math.js"></script>
-    <script src="reveal.js/plugin/markdown/markdown.js"></script>
-    <script src="reveal.js/plugin/highlight/highlight.js"></script>
-    <script src="reveal.js/plugin/notes/notes.js"></script>
     <script>
      Reveal.initialize({
        plugins : [RevealMarkdown, RevealHighlight, RevealMath, RevealNotes],
        width:960,height:700,margin:0.1, minScale:0.2, maxScale:1.5,
        backgroundTransition: 'fade',
+       pdfSeparateFragments: false,
+       pdfMaxPagesPerSlide:1,
        hash: true,
        math: {
-	 config:'TeX-AMS_SVG',
 	 TeX: {
 	   extensions: ["autoload-all.js"]
 	 },
        }
      });
     </script>
-    <script src="codeButtons.js"></script>
   </body>
 </html>
