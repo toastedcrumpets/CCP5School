@@ -185,7 +185,7 @@
 	  <section>
 	    <h3>Thermodynamics Recap</h3>
 	    <p>
-	      Phenomenological theory, based on observations of <b>state</b> variables, $p,\,T,\,V,\,E,\,M,\,S,\ldots$ that seem to fully describe a thermodynamic <b>system</b>.
+	      Phenomenological theory, based on observations of <b>state</b> variables, $p,\,T,\,V,\,U,\,M,\,S,\ldots$ that seem to fully describe a thermodynamic <b>system</b>.
 	    </p>
 	    <p class="fragment">
 	      The power of thermodynamics arises from its ability to
@@ -210,7 +210,7 @@
 	      \end{align*}
 	    </p>
 	    <p class="fragment">
-	      Second law: Entropy must increase ${\rm d}S>0$ but the key relationship is actually ${\rm
+	      Second law: Entropy must increase ${\rm d}S_{universe}>0$ but the key relationship is actually ${\rm
 	      d}S > \partial Q/T$.
 	    </p>
 	    <p class="fragment">
@@ -253,21 +253,62 @@
 		</tr>
 	      </tbody>
 	    </table>
-	    <p class="fragment">
-	      Amazingly, as each term is a <b>conjugate</b> pairing of an <b>intensive</b> term and a differential <b>extensive</b> term,
-	      this equation can be solved using Euler's
-	      solution for homogeneous functions.
-
-	      \begin{align*}
-	      U(S,\,V,\,\left\{N_\alpha\right\},\ldots) &= T\,S -p\,V+\sum_\alpha \mu_\alpha\,N_\alpha + \ldots\\
-	      \end{align*}
-	    </p>
 	  </section>
+	</section>
+	<section>
+	  <h3>Example</h3>
+	  <img src="img/balloon.svg" style="width:45%"/>
+	  <p>
+	    The addition of a balloon to bound system A when compared
+	    to system B adds additional surface work terms, where
+	    energy is stored in the elastic surface that stretches.</p>
+	  <p class="fragment">
+	    These <b>independent</b> variables $S$ and $V$ are
+	    unwieldy as we can't measure entropy and the balloon's
+	    volume will change in response to fluctuations in $T$ and
+	    $p$. Lets see if we can make this better.</p>
+	</section>
+	<section>
+	  <h3>Fundamental thermodynamic equation</h3>
+	  <p>
+	    \begin{align*}
+	    {\rm d}U &= T\,{\rm d}S - \partial W
+	    = T\,{\rm d}S - \sum_i F_i\,{\rm d}L_i
+	    \end{align*}
+	  </p>
+	  <table>
+	    <tbody>
+	      <tr>
+		<td style="border-right:4px solid white;">$F_i$</td>
+		<td>$p$</td>
+		<td>$\mu_\alpha$</td>
+		<td>$\gamma$</td>
+		<td>&hellip;</td>
+	      </tr>
+	      <tr>
+		<td style="border-right:4px solid white;">$L_i$</td>
+		<td>$V$</td>
+		<td>$-N_\alpha$</td>
+		<td>$\Sigma$</td>
+		<td>&hellip;</td>
+	      </tr>
+	    </tbody>
+	  </table>
+	  <p>
+	    Amazingly, as each term is a <b>conjugate</b> pairing of an <b>intensive</b> term and a differential <b>extensive</b> term,
+	    this equation can be solved using Euler's
+	    solution for homogeneous functions.
+
+	    \begin{align*}
+	    U(S,\,V,\,\left\{N_\alpha\right\},\ldots) &= T\,S -p\,V+\sum_\alpha \mu_\alpha\,N_\alpha + \ldots\\
+	    \end{align*}
+	  </p>
+	</section>
 	</section>
 	<section>
 	  <h3>Generating identities</h3>
 	  <p>
-	    <span style="font-size:75%">
+	    <span style="font-size:70%">
 	      \begin{align*}
 	      U(S,\,V,\,\left\{N_\alpha\right\},\ldots) &= T\,S -p\,V+\sum_\alpha \mu_\alpha N_\alpha + \ldots
 	      \\
@@ -276,7 +317,7 @@
 	    </span>
 	    Comparing the equations we see lots of differential identities...
 
-	    <span style="font-size:75%">
+	    <span style="font-size:70%">
 	      \begin{align*}
 	      \left(\frac{{\rm d}U}{{\rm d}S}\right)_{V,\,\left\{N_\alpha\right\},\ldots} &= T & \left(\frac{{\rm d}U}{{\rm d}V}\right)_{S,\,\left\{N_\alpha\right\},\ldots} &= -p
 	      \\
@@ -290,7 +331,7 @@
 	      the rest of the thermodynamic properties.
 	    </p>
 	    <div class="footnote">
-	      Note that $U(S,\,V,\,\left\{N_\alpha\right\})$ can be rearranged to $S(U,\,V,\,\left\{N_\alpha\right\})$ and $\left(\frac{{\rm d}U}{{\rm d}S}\right)_X = \left(\frac{{\rm d}S}{{\rm d}U}\right)_X^{-1}$ so all this still applies.
+	      Note that $U(S,\,V,\,\left\{N_\alpha\right\})$ can be rearranged to $S(U,\,V,\,\left\{N_\alpha\right\})$ and $\left(\frac{{\rm d}U}{{\rm d}S}\right)_X = \left(\frac{{\rm d}S}{{\rm d}U}\right)_X^{-1}$ so all this still applies to entropy as well as energy.
 	    </div>
 	  </div>
 	</section>
@@ -307,8 +348,8 @@
 	    $U,\,S,\,V$ and sometimes $N$ are challenging variables to measure/control. The <b>conjugate</b> variables  $T,\,T^{-1},\,p$ are nicer.
 	  </p>
 	  <p>
-	    A Legendre transformation swaps the pair
-	    around. I.e. Defining the enthalpy $H = U + p\,V$ 
+	    A Legendre transformation defines a new <b>potential</b> that swaps the pair
+	    around as <b>independent</b> variable. I.e. Defining the enthalpy $H = U + p\,V$ 
 	    leads to:
 	    <span style="font-size:75%">
 	      \begin{align*}
@@ -331,18 +372,22 @@
 	    S\left(U,\,V,\,\left\{N_\alpha\right\}\right)&= \frac{U}{T} + \frac{p}{T}\,V - \sum_\alpha \frac{\mu_\alpha}{T}\,N_\alpha
 	    &
 	    {\rm d}S &= T^{-1}\,{\rm d}S + \frac{p}{T}{\rm d}V - \sum_\alpha\frac{\mu_{\alpha}}{T}{\rm d} N_{\alpha}
-	    \\
-	    H\left(S,\,p,\,\left\{N_\alpha\right\}\right)&= U + p\,V = T\,S + \sum_\alpha\mu_\alpha\,N_\alpha
+	    \end{align*}
+	  </p>
+	  <p style="font-size:65%">
+	    <b>Legendre transforms</b>
+	    \begin{align*}
+	    H\left(S,\,p,\,\left\{N_\alpha\right\}\right)&= U {\color{red} + p\,V} = T\,S + \sum_\alpha\mu_\alpha\,N_\alpha
 	    &
 	    {\rm d}H &=
 	    T\,{\rm d}S + V\,{\rm d}p + \sum_\alpha\mu_\alpha\,{\rm d} N_\alpha
 	    \\
-	    A\left(T,\,V,\,\left\{N_\alpha\right\}\right)&= U - T\,S = - p\,V + \sum_\alpha\mu_\alpha\,N_\alpha
+	    A\left(T,\,V,\,\left\{N_\alpha\right\}\right)&= U {\color{red}- T\,S} = - p\,V + \sum_\alpha\mu_\alpha\,N_\alpha
 	    &
 	    {\rm d}A &= -S\,{\rm d}T - p\,{\rm d}V +
 	    \sum_\alpha\mu_{\alpha}\,{\rm d} N_{\alpha}
 	    \\
-	    G\left(T,\,p,\,\left\{N_\alpha\right\}\right)&= H - T\,S = \sum_\alpha\mu_\alpha\,N_\alpha
+	    G\left(T,\,p,\,\left\{N_\alpha\right\}\right)&= H {\color{red}- T\,S} = \sum_\alpha\mu_\alpha\,N_\alpha
 	    &
 	    {\rm d}G &= -S\,{\rm d}T + V\,{\rm d}p + \sum_\alpha\mu_\alpha\,{\rm
 	    d} N_\alpha
@@ -353,6 +398,9 @@
 	  <section>
 	    <h3>Statistical mechanics by example</h3>
 	    <p>
+	      We're ready for statistical mechanics now.
+	    </p>
+	    <p class="fragment">
 	      The simplest example I can think of that fits statistical
 	      mechanics AND thermodynamics is the game of craps (the
 	      sum of two dice).</p>
@@ -372,7 +420,7 @@
 	    <h2 class="backbox">A craps example</h2>
 	    <p class="backbox fragment">
 	      In craps, players roll two dice and place bets on the
-	      outcome of the sum, which we'll call $E$.
+	      outcome of the sum, which we'll call $U$.
 	    </p>
 	    <p class="backbox fragment">
 	      We will later generalise to hyper-craps, where $N$ dice
@@ -398,11 +446,11 @@
 	  <section data-background="https://upload.wikimedia.org/wikipedia/commons/3/3f/Craps_game_at_military_camp_in_1918.jpg">
 	    <p class="backbox">
 	      Players/<b>observers</b> of craps do not really care or measure the <b>microstate</b>. The only <b>state</b> that
-	      is observed in craps is the sum of the dice, $E$. The
-	      microstate could change, but if $E$ stays the same then
+	      is observed in craps is the sum of the dice, $U$. The
+	      microstate could change, but if $U$ stays the same then
 	      as far as the players are concerned its the same roll.</p>
 	    <p class="backbox fragment">
-	      The sum of the dice, $E$, is a <b>macrostate</b> variable
+	      The sum of the dice, $U$, is a <b>macrostate</b> variable
 	      (along with $N$). A <b>macrostate</b> can consist of an <b>ensemble</b> of
 	      many microstates. </p>
 	    <p class="backbox fragment">
@@ -432,10 +480,10 @@
 	      different probabilities due to the <em>combinations</em> of <b>microstates</b> that make up their <b>ensemble</b>.
 	    </p>	      
 	    <p class="backbox fragment">
-	      For two dice, rolling a $E=7$ <br/> 
+	      For two dice, rolling a $U=7$ <br/> 
 	      $\left\{\left[1,\,6\right],\,\left[2,\,5\right],\,\left[3,\,4\right],\,\left[4,\,3\right],\,\left[5,\,2\right],\,\left[6,\,1\right]\right\}$.
 	      <br/>
-	      is six times more likely than a snake eyes ($E=2$)
+	      is six times more likely than a snake eyes ($U=2$)
 	      <br/>
 	      $\left\{\left[1,\,1\right]\right\}$
 	    </p>
@@ -466,15 +514,15 @@
 	      <div class="row">
 		<div class="col">
 		  <input class="form-check-input" type="radio" name="dicey" id="dicey1" value="1" checked><br/>
-		  <label class="form-check-label" for="dicey1" id="dicey1label" style="font-size:75%">$\Omega\left(N,\,E\right)$</label>
+		  <label class="form-check-label" for="dicey1" id="dicey1label" style="font-size:75%">$\Omega\left(N,\,U\right)$</label>
 		</div>
 		<div class="col">
 		  <input class="form-check-input" type="radio" name="dicey" id="dicey2" value="2"><br/>
-		  <label class="form-check-label" for="dicey2" id="dicey2label" style="font-size:75%">$P(E)=\Omega\left(N,\,E\right) / \sum_E \Omega\left(N,\,E\right)$</label>
+		  <label class="form-check-label" for="dicey2" id="dicey2label" style="font-size:75%">$P(U)=\Omega\left(N,\,U\right) / \sum_U \Omega\left(N,\,U\right)$</label>
 		</div>
 		<div class="col">
 		  <input class="form-check-input" type="radio" name="dicey" id="dicey3" value="3"><br/>
-		  <label class="form-check-label" for="dicey3" id="dicey3label" style="font-size:75%">$P(E)/\left({\rm max}_E\,P(E)\right)$</label>
+		  <label class="form-check-label" for="dicey3" id="dicey3label" style="font-size:75%">$P(U)/\left({\rm max}_U\,P(U)\right)$</label>
 		</div>
 	      </div>
 	    </form>
@@ -560,10 +608,10 @@
 		 data2.y = data2.y.map((e) => { return 1.0; });		 
 	       }
 
-	       var xlabel = 'E';
+	       var xlabel = 'U';
 	       
 	       if ($('#dicenormalisation1')[0].checked) 
-		 xlabel = 'e';
+		 xlabel = 'u';
 	       
 	       var traces = [
 		 mergeDeep(
@@ -669,12 +717,12 @@
 	      <li class="fragment">
 		Normalisation is a convenience to:
 		<ul>
-		  <li>Make properties <b>intensive</b> (i.e. $E$ to $e$).</li>
+		  <li>Make properties <b>intensive</b> (i.e. $U$ to $u$).</li>
 		  <li>Move from combinations to probability, which is more useful for calculations.</li></ul>
 	      </li>
 	      <li class="fragment">
-		The number of microstates, $\Omega(N,\,E)$, for a
-		particular dice roll/macrostate, $E$, is an
+		The number of microstates, $\Omega(N,\,U)$, for a
+		particular dice roll/macrostate, $U$, is an
 		unnormalised probability.</li>
 	    </ul>
 	  </section>
@@ -684,7 +732,7 @@
 	    <h3 class="backbox">Thermodynamics of craps</h3>
 	    <p class="backbox">
 	      Lets say we start with a roll of hyper-snake-eyes (all
-	      ones). Its density-of-states/combinations is $\Omega(N,\, E=N)=1$.
+	      ones). Its <b>density-of-states</b>/combinations is the lowest possible value in this system of $\Omega(N,\, U=N)=1$.
 	      What happens if we start to reroll dice randomly one at
 	      a time?</p>
 	    <p class="backbox fragment">
@@ -706,21 +754,21 @@
 	      gives $2\times$ the entropy. Can combinations match this property?</p>
 	    <p class="backbox fragment">
 	      \begin{multline}
-	      \Omega\left(N=N_1+N_2,\,E=E_1+E_2\right) \\
-	      = \Omega\left(N_1,\,E_1\right)\times\Omega\left(N_2,\,E_2\right)
+	      \Omega\left(N=N_1+N_2,\,U=U_1+U_2\right) \\
+	      = \Omega\left(N_1,\,U_1\right)\times\Omega\left(N_2,\,U_2\right)
 	      \end{multline}
 	    </p>
 	    <p class="backbox fragment">
 	      \begin{multline}
-	      \ln\Omega\left(N=N_1+N_2,\,E=E_1+E_2\right) \\
-	      = \ln\Omega\left(N_1,\,E_1\right) + \ln\Omega\left(N_2,\,E_2\right)
+	      \ln\Omega\left(N=N_1+N_2,\,U=U_1+U_2\right) \\
+	      = \ln\Omega\left(N_1,\,U_1\right) + \ln\Omega\left(N_2,\,U_2\right)
 	      \end{multline}
 	    </p>
 	    <p class="backbox fragment">
 	      $S = \ln \Omega$ has all the properties of entropy! We
 	      have discovered it inside our game of craps, it is not
 	      too much of a leap to believe it is more fundamental and
-	      in molecular systems too...</p>
+	      in molecular systems too.</p>
 	    <div class="attribution backbox">
 	      Background <a href="https://en.wikipedia.org/wiki/Ludwig_Boltzmann#/media/File:Zentralfriedhof_Vienna_-_Boltzmann.JPG">Daderot at English Wikipedia</a> - Own work CC BY-SA 3.0
 	    </div>
@@ -773,30 +821,32 @@
 	  <section style="height:100%">
 	    <h3 class="backbox">Microcanonical ensemble</h3>
 	    <p class="backbox">
-	      We have derived the key relationships of the <b>micro-canonical ensemble</b> ,
-	      where $N, E$ are held constant:
-	      <span style="font-size:70%">
+	      We have derived the key relationships of the <b>micro-canonical ensemble</b>,
+	      where $N, U$ are held constant (typically $N,\,V,\,E$ in molecular systems):
+	      <span style="font-size:65%">
 	      \begin{align*}
-	      P(N,\,E, \ldots) &= \frac{\Omega\left(N, E, \ldots\right)}{\sum_E \Omega\left(N,\,E, \ldots\right)}
+	      P(N,\,U, \ldots) &= \frac{\Omega\left(N, U, \ldots\right)}{\sum_U \Omega\left(N,\,U, \ldots\right)}
 	      &
-	      S(N,\,E, \ldots) &= k_B \ln \Omega\left(N, E, \ldots\right)
+	      S(N,\,U, \ldots) &= k_B \ln \Omega\left(N, U, \ldots\right)
 	      \end{align*}
 	      </span>
 	    </p>
 	    <p class="backbox fragment"> 
-	      Other thermodynamic properties can be generated from here
-	      <span style="font-size:70%">		
+	      Other thermodynamic properties can be generated from
+	      here, just like in normal thermodynamics
+	      
+	      <span style="font-size:65%">		
 	      \begin{align*}
-	      \left\langle E\right\rangle &= \sum_E E\,P(N,\,E, \ldots) &
-	      \mu &= - T\frac{\partial S(N,\,E, \ldots)}{\partial N}
+	      \left\langle U\right\rangle &= \sum_U U\,P(N,\,U, \ldots) &
+	      \mu &= - T\frac{\partial S(N,\,U, \ldots)}{\partial N}
 	      \end{align*}	      
 	      </span>
 	    </p>
 	    <p class="backbox fragment">
-	      Where is pressure/volume? Like all other thermodynamic work terms this can be added:
-	      <span style="font-size:70%">		
+	      Where is pressure/volume? Let's add it!
+	      <span style="font-size:65%">		
 		\begin{align*}
-		p &= T\frac{\partial S(N,\,E,\,V,\ldots)}{\partial V}
+		p &= T\frac{\partial S(N,\,U,\,V,\ldots)}{\partial V}
 		\end{align*}	      
 	      </span>	      
 	    </p>
@@ -807,33 +857,33 @@
 	  <section>
 	    <h3>Canonical ensemble</h3>
 	    <p>
-	      Lets hold the dice sum, $E$, fixed in ALL our dice
+	      Lets hold the dice sum, $U$, fixed in ALL our dice
 	      rolls. If you haven't guessed yet from the variable
 	      name, we're adding conservation of energy. </p>
 	    <p class="fragment">
 	      Divide the $N$ dice into two groups, each with a
-	      separate $E_1$ and $E_2 = E - E_1$ which adds to the
-	      (fixed) total $E=E_1+E_2$.
+	      separate $U_1$ and $U_2 = U - U_1$ which adds to the
+	      (fixed) total $U=U_1+U_2$.
 	      <img src="img/NEDiceEnsemble.svg" style="width:75%" />
 	    </p>
 	  </section>
 	    <section>
 	      <h3>Canonical ensemble</h3>
 	      <p >
-	      The equilibrium value of $E_1$ occurs at the maxiumum
+	      The equilibrium value of $U_1$ occurs at the maxiumum
 	      entropy, where the total entropy is:
 	      
-	      \begin{align*} \ln \Omega_{1+2}(E_1+E_2) &= \ln
-	      \Omega_1(E_1) + \ln \Omega_2(E_2) \\ \ln
-	      \Omega_{1+2}(E,\,E_1) &= \ln \Omega_1(E_1) + \ln
-	      \Omega_2(E-E_1) \\ \end{align*}
+	      \begin{align*} \ln \Omega_{1+2}(U_1+U_2) &= \ln
+	      \Omega_1(U_1) + \ln \Omega_2(U_2) \\ \ln
+	      \Omega_{1+2}(U,\,U_1) &= \ln \Omega_1(U_1) + \ln
+	      \Omega_2(U-U_1) \\ \end{align*}
 
-	      The maximum entropy when varying $E_1$ occurs at a
+	      The maximum entropy when varying $U_1$ occurs at a
 	      stationary point, i.e.  
 		
 		\begin{align*}
 		\left(\frac{{\rm d} \ln
-		\Omega_{1+2}(E,\,E_1)}{{\rm d} E_1}\right)_{N} = 0
+		\Omega_{1+2}(U,\,U_1)}{{\rm d} U_1}\right)_{N} = 0
 		\end{align*}
 	      </p>
 	  </section>
@@ -841,33 +891,30 @@
 	    <h3>The rest of thermodynamics</h3>
 	    <p>
 	      \begin{align*}
-	      \frac{{\rm d}}{{\rm d} E_1}\ln \Omega_{1+2}(E,\,E_1) &= 0\\
-	      \frac{{\rm d}}{{\rm d} E_1}\ln \Omega_1(E_1) + \frac{{\rm d}}{{\rm d} E_1}\ln \Omega_2(E-E_1)&=0 \\
-	      \frac{{\rm d}}{{\rm d} E_1}\ln \Omega_1(E_1) &= \frac{{\rm d}}{{\rm d} E_2}\ln \Omega_2(E_2)
+	      \frac{{\rm d}}{{\rm d} U_1}\ln \Omega_{1+2}(U,\,U_1) &= 0\\
+	      \frac{{\rm d}}{{\rm d} U_1}\ln \Omega_1(U_1) + \frac{{\rm d}}{{\rm d} U_1}\ln \Omega_2(U-U_1)&=0 \\
+	      \frac{{\rm d}}{{\rm d} U_1}\ln \Omega_1(U_1) &= \frac{{\rm d}}{{\rm d} U_2}\ln \Omega_2(U_2)
 	      \end{align*}
 	    </p>
 	    <p class="fragment">
 	      We now define some shorthand:
 	      \begin{align*}
-	      \beta = \frac{{\partial} S\left(N,\,E,\,\ldots\right)}{{\partial} E} = \frac{{\partial} \ln \Omega\left(N,\,E,\,\ldots\right)}{{\partial} E} 
+	      \beta = \frac{{\partial} S\left(N,\,U,\,\ldots\right)}{{\partial} U} = \frac{{\partial} \ln \Omega\left(N,\,U,\,\ldots\right)}{{\partial} U} 
 	      \end{align*}
-	      and note the result
-	      \begin{align*}
-	      \beta_1 = \beta_2
-	      \end{align*}
+	      and note the result, $\beta_1 = \beta_2$
 	    </p>
 	  </section>
 	  <section>
 	    <h3>Back to reality</h3>
 	    <p>
-	      Thus adding conservation of $E$ between two systems that
-	      can exchange ${\rm d}E$ gives us that $\beta$ must be
+	      Thus adding conservation of $U$ between two systems that
+	      can exchange ${\rm d}U$ gives us that $\beta$ must be
 	      equal between the systems at equilibrium. We call this
-	      &ldquo;thermal&rdquo; equilibrium if $E$ is energy, even though it
+	      &ldquo;thermal&rdquo; equilibrium if $U$ is energy, even though it
 	      works for conserved dice sum too.</p>
 	    <p class="fragment">
 	      If we look up the derivative $\left({\rm d}S/{\rm
-	      d}E\right)_{N,\ldots}$ in traditional thermodynamics, we
+	      d}U\right)_{N,\ldots}$ in traditional thermodynamics, we
 	      realise that $\beta=1/(k_B\,T)$, and thus have proven
 	      that systems at thermal equilibrium must have the same
 	      temperature.</p>
@@ -883,32 +930,35 @@
 	    <h3>Canonical ensemble</h3>
 	    <p class>
 	      Again, consider system 1 in a <b>microstate</b>, $i$, with
-	      energy $E_{1,i}$ in thermal equilibrium with another
-	      system 2 at constant $E$. The combinations available are
+	      energy $U_{1,i}$ in thermal equilibrium with another
+	      system 2 at constant $U$. The combinations available are
 	      set by system 2's <b>degeneracy</b>:
 	      
-	      <span style="font-size:75%">
-		\begin{align*} P\left(i\right) \propto \Omega_2(E_2=E-E_{1,i})
+	      <span style="font-size:65%">
+		\begin{align*} 
+		P\left(i\right) \propto \Omega_2(U_2=U-U_{1,i})
 		\end{align*}
 	      </span>
 	    </p>
 	    <p class="fragment">
-	      Expanding system 2 entropy around $E$:
-	      <span style="font-size:75%">
+	      Expanding system 2 entropy around $U$:
+	      <span style="font-size:65%">
 		\begin{align*}
-		\ln \Omega_2(E_2=E-E_{1,i}) &= \ln\Omega_2(E_2=E) 
-		- E_{1,i} \frac{{\rm d} \ln\Omega_2(E)}{{\rm d}E} 
-		+ \mathcal{O}(1/E)
+		\ln \Omega_2(U_2=U-U_{1,i}) &= \ln\Omega_2(U_2=U) 
+		- U_{1,i} \frac{{\rm d} \ln\Omega_2(U)}{{\rm d}U} 
+		+ \mathcal{O}(1/U)
 		\\
-		&\approx \ln\Omega_2(E_2=E) - \frac{E_{1,i}}{k_B\,T}
+		&\approx \ln\Omega_2(U_2=U) - \frac{U_{1,i}}{k_B\,T}
 		\end{align*}
 	      </span>
 	    </p>
 	    <p class="fragment">
 	      Assuming system 2 is very large, substituting, and
-	      realising that $\ln\Omega_2(E_2=E)$ is a constant,<span style="font-size:75%">		
+	      realising that $\ln\Omega_2(U_2=U)$ is a constant,
+	      
+	      <span style="font-size:65%">		
 		\begin{align*} 
-		P\left(i\right) \propto e^{-E_{1,i}/(k_B\,T)}
+		P\left(i\right) \propto e^{-U_{1,i}/(k_B\,T)}
 		\end{align*}
 	      </span>
 	    </p>
@@ -921,12 +971,12 @@
 	      as the canonical ensemble) has a probability
 	      proportional to the Boltzmann factor:
 	      
-	      \begin{align*} P\left(i\right) \propto e^{-E_{1,i} /
+	      \begin{align*} P\left(i\right) \propto e^{-U_{1,i} /
 	      (k_B\,T)} \end{align*}</p>
 	    <p class="fragment">
 	      We can normalise this by creating the <b>partition</b> function,
-	      \begin{align*} Z(N,\,T) &= \sum_{i} e^{-E_{1,i} / (k_B\,T)} \\
-	      P\left(i\right) &= Z^{-1} e^{-E_{i} / (k_B\,T)}
+	      \begin{align*} Z(N,\,T) &= \sum_{i} e^{-U_{1,i} / (k_B\,T)} \\
+	      P\left(i\right) &= Z^{-1} e^{-U_{i} / (k_B\,T)}
 	      \end{align*}
 
 	      We've dropped the system 1 and 2 notations, as system 2
@@ -938,13 +988,13 @@
 	    <h3>Canonical partition function</h3>
 	    <p>
 	      <span style="font-size:75%">
-		\begin{align*} Z(N,\,T) &= \sum_{i} e^{-E_{1,i} /
-		(k_B\,T)} & P\left(i\right) &= Z^{-1} e^{-E_{i} /
+		\begin{align*} Z(N,\,T) &= \sum_{i} e^{-U_{1,i} /
+		(k_B\,T)} & P\left(i\right) &= Z^{-1} e^{-U_{i} /
 		(k_B\,T)} \end{align*}
 	      </span>
 	      Like the relationship for entropy,
-	      $S=k_B\ln\Omega(N,\,E,\ldots)$, where its the log of the
-	      probability normalisation for $\left(N,\,E\right)$
+	      $S=k_B\ln\Omega(N,\,U,\ldots)$, where its the log of the
+	      probability normalisation for $\left(N,\,U\right)$
 	      ensembles, the partition function in $\left(N,\,T\right)$ ensembles
 	      is related to the <b>Helmholtz free energy</b>, $F$:
 	      
@@ -977,7 +1027,7 @@
 	      
 	      <span style="font-size:75%">
 		\begin{align*}
-		P\left(i,\,N,\,p,\,T,\ldots\right) &= \mathcal{Z}^{-1} e^{-E_{i}/\left(k_B\,T\right)-p\,V_i/\left(k_B\,T\right)}
+		P\left(i,\,N,\,p,\,T,\ldots\right) &= \mathcal{Z}^{-1} e^{-U_{i}/\left(k_B\,T\right)-p\,V_i/\left(k_B\,T\right)}
 		\\
 		G\left(N,\,p,\,T,\ldots\right) &= k_B\,T\ln \mathcal{Z}\left(N,\,p,\,T,\ldots\right)
 		\end{align*}
@@ -988,7 +1038,7 @@
 	      
 	      <span style="font-size:75%">
 		\begin{align*}
-		P\left(i,\,\mu,\,p,\,T,\ldots\right) &= \mathcal{Z}^{-1} e^{-E_{i}/\left(k_B\,T\right)-p\,V_i/\left(k_B\,T\right)+\mu\,N_i/\left(k_B\,T\right)}
+		P\left(i,\,\mu,\,p,\,T,\ldots\right) &= \mathcal{Z}^{-1} e^{-U_{i}/\left(k_B\,T\right)-p\,V_i/\left(k_B\,T\right)+\mu\,N_i/\left(k_B\,T\right)}
 		\\
 		\boldsymbol{\Omega}\left(\mu,\,p,\,T,\ldots\right) &= k_B\,T\ln \mathcal{Z}\left(N,\,p,\,T,\ldots\right)
 		\end{align*}
@@ -1005,13 +1055,13 @@
 	    <p class="backbox">
 	      There are too many important derivations to cover in
 	      stat mech, and what you will need highly depends on your
-	      interests/research. We cannot do more but please ask if
+	      interests/research. We cannot do more here, but please ask if
 	      you have something in particular to understand in the
 	      problem sessions.
 	    </p>
 	    <p class="fragment backbox">
 	      I will now try to give you some intuition on the other
-	      foundational assumptions of stat mech (which I think is
+	      foundational assumption of stat mech (which I think is
 	      much harder to find).</p>
 	  </section>
 	</section>
@@ -1019,23 +1069,25 @@
 	  <section>
 	    <h3>Averaging</h3>
 	    <p>
-	      <em>God does not play dice. <span style="float:right;">A. Einstein</span></em><br/><br/>
-	      
-	      <em style="clear:right;" class="fragment">God does play dice with the universe. All the evidence points to him being an inveterate gambler, who throws the dice on every possible occasion. <span style="float:right;">S. Hawking</span></em>
-	      <p class="fragment">
-		You are the omnipotent being of your simulation, so you get to choose:
-		<span style="font-size:75%">
-		  \begin{align*}
-		  \langle{\mathcal A}\rangle &= \sum_{\boldsymbol\Gamma} d{\boldsymbol\Gamma}\,P({\boldsymbol\Gamma})\,
-		  {\mathcal A}({\boldsymbol\Gamma}) & \text{(Monte Carlo)}\\
-		  &\text{or}\\
-		  \langle{\mathcal A}\rangle&=\lim_{t_{obs.}\to\infty} \frac{1}{t_{obs.}}\int_0^{t_{obs.}}\mathcal A(t)\,{\rm d}t & \text{(Molecular Dynamics)}
-		  \end{align*}
-		</span>
-	      </p>	    
-	      <p class="fragment">
-		<b>But are these equivalent? If so, the system is <u>Ergodic</u>.</b>
-	      </p>
+	      <em>God does not play dice. <span style="float:right;">A. Einstein</span></em>
+	    </p>
+	    <p style="clear:right;" class="fragment">
+	      <em>God does play dice with the universe. All the evidence points to him being an inveterate gambler, who throws the dice on every possible occasion. <span style="float:right;">S. Hawking</span></em>
+	    </p>
+	    <p class="fragment">
+	      You are the omnipotent being of your simulation, so you get to choose:
+	      <span style="font-size:75%">
+		\begin{align*}
+		\langle{\mathcal A}\rangle &= \sum_{\boldsymbol\Gamma} d{\boldsymbol\Gamma}\,P({\boldsymbol\Gamma})\,
+		{\mathcal A}({\boldsymbol\Gamma}) & \text{(Monte Carlo)}\\
+		&\text{or}\\
+		\langle{\mathcal A}\rangle&=\lim_{t_{obs.}\to\infty} \frac{1}{t_{obs.}}\int_0^{t_{obs.}}\mathcal A(t)\,{\rm d}t & \text{(Molecular Dynamics)}
+		\end{align*}
+	      </span>
+	    </p>	    
+	    <p class="fragment">
+	      <b>But are these equivalent? If so, the system is <u>Ergodic</u>.</b>
+	    </p>
 	  </section>
 	  <section>
 	    <h3>Dynamics for SHO</h3>
@@ -1165,12 +1217,12 @@
 	      equation of a circle in $r$ and $v$.
 	      
 	      \begin{align*}
-	      E = \mathcal{H}(\boldsymbol{\Gamma}) = \frac{1}{2}k\,r^2 + \frac{1}{2}m\,v^2
+	      U = \mathcal{H}(\boldsymbol{\Gamma}) = \frac{1}{2}k\,r^2 + \frac{1}{2}m\,v^2
 	      \end{align*}
 	      where $k$ is the spring constant and $m$ is the mass. 
 	    </p>
 	    <p class="fragment">
-	      What is all of phase space like? We can sample all energies, $E$, and plot the "flow" of trajectories:
+	      What is all of phase space like? We can sample all energies, $U$, and plot the "flow" of trajectories:
 	    </p>
 	  </section>
 	  <section>
@@ -1182,6 +1234,12 @@
 		  The systems flow around phase space, the trajectory
 		  lines do not cross, thus this behaves exactly as a
 		  incompressible fluid.
+		</p>
+		<p class="fragment" style="padding-left:1em;">
+		  Whatever <b>ensemble</b> of starting states we begin
+		  with, there's a symmetry to its motion through phase
+		  space. If evenly distributed, it will remain evenly
+		  distributed.
 		</p>
 	      </div>
 	    </div>
@@ -1222,14 +1280,14 @@
 	      The SHO system has a parabolic potential energy:
 
 	      \begin{align*}
-	      E = \mathcal{H}(\boldsymbol{\Gamma}) = \frac{1}{2}k\,r^2 + \frac{1}{2}m\,v^2
+	      U(\boldsymbol{\Gamma}) = \mathcal{H}(r,\,v) = \frac{1}{2}k\,r^2 + \frac{1}{2}m\,v^2
 	      \end{align*}
 	    </p>
 	    <p class="fragment">
 	      We can make a double-well potential simply by shifting the spring rest position away from the origin:
 	      
 	      \begin{align*}
-	      E = \mathcal{H}(\boldsymbol{\Gamma}) = \frac{1}{2}k\,\left(\left|r\right|-r_0\right)^2 + \frac{1}{2}m\,v^2
+	      U(\boldsymbol{\Gamma}) = \mathcal{H}(r,\,v) = \frac{1}{2}k\,\left(\left|r\right|-r_0\right)^2 + \frac{1}{2}m\,v^2
 	      \end{align*}
 	      
 	      <span style="font-size:50%">
@@ -1378,10 +1436,10 @@
 	    </script>
 	  </section>
 	  <section>
-	    <h3>$N,\,E$ double-well SHO dynamics</h3>
+	    <h3>$N,\,U$ double-well SHO dynamics</h3>
 	    <img src="img/SHOsplit.svg" style="width:100%" />
 	    <p>
-	      <b>Microstates</b> in $E=0.25$ are energetically
+	      <b>Microstates</b> in $U=0.25$ are energetically
 	      isolated from each other, thus its not ergodic; however,
 	      a lot of properties (i.e. average velocity) will still work out!</p>
 	  </section>
@@ -1399,10 +1457,10 @@
 	      Practically, in simulation we typically just check
 	      averages are converging and hope we're effectively
 	      ergodic. Like a lot of things in simulation, you presume
-	      it might be true but verify.</p>
+	      it might be true but verify as best you can.</p>
 	    <p class="fragment">
 	      There are many techniques for accelerating dynamics past
-	      energy barriers and ensure good sampling of phase space
+	      energy barriers and &ldquo;encourage&rdquo; good sampling of phase space
 	      which you will learn about in your MC lectures. These
 	      are also applied more frequently to MD simulations too.</p>
 	  </section>
@@ -1434,7 +1492,7 @@
 	      fall in.</p>
 	  </section>
 	  <section data-background-image="img/endframe.svg" data-background-size="contain">
-	    <h3>Fin.</h3>
+	    <h3 style="background:none">Fin.</h3>
 	  </section>
 	</section>
 	<section id="MC1">
@@ -1670,10 +1728,10 @@
 	      </p>
 	  </section>
 	  <section style="height:100%; width:100%;">
-	      <b>Example:  Galton Board</b>
-	      <div style="height:90%;width:100%; position:relative;">
-		<iframe src="http://www.youtube.com/embed/03tx4v0i7MA" frameborder="0" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
-	      </div>
+	    <b>Example:  Galton Board</b>
+	    <div style="height:100%;width:100%;">
+	      <iframe src="http://www.youtube.com/embed/03tx4v0i7MA" frameborder="0" allowfullscreen style="width:100%;"></iframe>
+	    </div>
 	  </section>
 	  <section>
 	      <h2>Convergence</h2>

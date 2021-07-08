@@ -14,7 +14,6 @@
 .reveal p, .reveal h1, .reveal h2, .reveal h3, .reveal .footnote, .reveal table {
     background: rgba(0, 0, 0, 0.9);
     border-radius: 10px;
-    padding:5px;
 }
 
 .reveal .slides {
