@@ -1160,7 +1160,15 @@
 		 step();
 
 		 Plotly.animate('shocount1div', {
-		   data: [{x: state.x, y: state.y}],
+		   data: [{
+		     x: state.x, 
+		     y: state.y, 					
+		     marker: {
+		       color: [...Array(state.x.length).keys()],
+		       cmin: 0,
+		       cmax:state.x.length,
+		     },
+		   }],
 		 }, {
 		   transition: {
 		     duration: 0
@@ -1181,10 +1189,14 @@
 	       Reveal.on( 'slidechanged', event => {
 		 if (event.currentSlide.id == 'shocount1slide') {
 		   Plotly.newPlot('shocount1div', 
-				  {
-				    data:	[{
-				      x: state.x,
-				      y: state.y,
+				    {
+				      data:	[{
+					x: state.x,
+					y: state.y,
+					marker: {
+					  color: [...Array(state.x.length).keys()],
+					  colorscale: 'Jet',
+					},
 				      mode: 'markers',
 				    }],
 				    layout:  { 
@@ -1375,7 +1387,7 @@
 				    init(); 
 	       });
 
-	       $('#shocount2dt').on('input change', 
+	       $('#shocount2dt').on('input change',
 				  (e) => {
 				    init(); 
 	       });
@@ -1385,7 +1397,15 @@
 		 step();
 
 		 Plotly.animate('shocount2div', {
-		   data: [{x: state.x, y: state.y}],
+		   data: [{
+		     x: state.x, 
+		     y: state.y,
+		     marker: {
+		       color: [...Array(state.x.length).keys()],
+		       cmin: 0,
+		       cmax:state.x.length,
+		     },
+		   }],
 		 },{ 
 		   transition: {
 		     duration: 0
@@ -1411,6 +1431,12 @@
 				      x: state.x,
 				      y: state.y,
 				      mode: 'markers',
+				      marker: {
+					color: [...Array(state.x.length).keys()],
+					colorscale: 'Jet',
+					cmin: 0,
+					cmax:state.x.length,
+				      },
 				    }],
 				    layout:  { 
 				      xaxis: { title: 'r', range: [-4, 4]},
