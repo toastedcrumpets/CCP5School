@@ -64,3 +64,10 @@
 .reveal th:last-child, .reveal td:last-child {
     border-right: none;
 }
+
+@media print {
+    .slide-background {
+        background-color: #002b36 !important;
+        -webkit-print-color-adjust: exact; 
+    }
+}
