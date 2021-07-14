@@ -90,7 +90,7 @@
   </head>
   <body>
     <div class="reveal">
-      <div class="slides" style="border: 1px solid white;">
+      <div class="slides">
 	<section>
 	  <section data-background-image="img/UoAbackground.jpg">
 	    <div class="backbox">
@@ -230,7 +230,8 @@
 	    <p>
 	      \begin{align*}
 	      {\rm d}U &= T\,{\rm d}S - \partial W
-	      = T\,{\rm d}S - \sum_i F_i\,{\rm d}L_i
+	      \\
+	      &= T\,{\rm d}S - \sum_i {\color{red}F_i}\,{\color{teal}{\rm d}L_i}
 	      \end{align*}
 	      This is the fundamental equation, which we extend
 	      depending on what work terms we can observe in our system.
@@ -238,17 +239,19 @@
 	    <table>
 	      <tbody>
 		<tr>
-		  <td style="border-right:4px solid white;">$F_i$</td>
+		  <td style="border-right:4px solid white;">${\color{red}F_i}$</td>
 		  <td>$p$</td>
 		  <td>$\mu_\alpha$</td>
 		  <td>$\gamma$</td>
+		  <td>$\tau$</td>
 		  <td>&hellip;</td>
 		</tr>
 		<tr>
-		  <td style="border-right:4px solid white;">$L_i$</td>
+		  <td style="border-right:4px solid white;">${\color{teal}L_i}$</td>
 		  <td>$V$</td>
 		  <td>$-N_\alpha$</td>
 		  <td>$\Sigma$</td>
+		  <td>$\dot{\omega}$</td>
 		  <td>&hellip;</td>
 		</tr>
 	      </tbody>
@@ -261,7 +264,8 @@
 	  <p>
 	    The addition of a balloon to bound system A when compared
 	    to system B adds additional surface work terms, where
-	    energy is stored in the elastic surface that stretches.</p>
+	    energy is stored in the force/tension, $\gamma$, of the
+	    stretched elastic surface, $\Sigma$.</p>
 	  <p class="fragment">
 	    These <b>independent</b> variables $S$ and $V$ are
 	    unwieldy as we can't measure entropy and the balloon's
