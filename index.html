@@ -8,6 +8,9 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="viewport" content="initial-scale=1">
+	<style>
+		loaded {color:aquamarine}
+	</style>
     <link rel="stylesheet" href="reveal.js/dist/reveal.css"></link>
     <link rel="stylesheet" href="Font-Awesome/css/font-awesome.min.css"></link>
     <!-- Default themes -->
@@ -90,7 +93,7 @@
   </head>
   <body>
     <div class="reveal">
-      <div class="slides" style="border: 1px solid white;">
+      <div class="slides" style="border: 1px solid darkslategray">
 	<section>
 	  <section data-background-image="img/UoAbackground.jpg">
 	    <div class="backbox">
@@ -108,7 +111,7 @@
 	    </p>
 	  </section>
 	  <section>
-	    <h3 style="margin-top:1em;">2021 Lectures</h3>
+	    <h3 style="margin-top:1em;">Current Lectures</h3>
 	    <p>
 	      <ul>
 		<li>
@@ -117,7 +120,9 @@
 		<li>
 		  <a href="#SM1">Statistical mechanics (1 & 2)</a>
 		</li>
-		<h3 style="margin-top:1em;font-size:75%;">Old out of date notes I haven't thrown away yet from previous summer schools</h3>
+		</ul>
+		<h3>My old notes (ignore)</h3>
+		<ul>
 		<li style="font-size:75%;">
 		  <a href="#MC1">Monte carlo 1</a>
 		</li>
@@ -146,7 +151,7 @@
 		Other excellent stat-mech texts include:
 	      </p>
 	      <ul>
-		<li>&ldquo;Statistical mechanics for computer simulators,&rdquo; Daan Frenkel (free/online/40 pages)</li>
+		<li><a href="https://www.researchgate.net/publication/27693700_Statistical_mechanics_for_computer_simulators">&ldquo;Statistical mechanics for computer simulators,&rdquo;</a> Daan Frenkel (free/online/40 pages)</li>
 		<li>&ldquo;Physical chemistry,&rdquo; P. W. Atkins.</li>
 		<li>&ldquo;Molecular driving forces,&rdquo; K. A. Dill and S. Bromberg</li>
 		<li>&ldquo;Statistical mechanics: A survival guide,&rdquo; M. Glazer and J. Wark</li>
@@ -160,54 +165,71 @@
 	  </section>
 	  <section>
 	    <p>
-	      Statistical mechanics is our bridge from the microscopic
-	      scale (simulating individual atoms/molecules) to the
-	      &ldquo;macroscopic&rdquo; measurements we make in
-	      experiments (i.e., internal energy, heat capacity, pressure,
-	      free-energy).</p>
-	    <p class="fragment">
-	      We use it to connect to <b>thermodynamics</b>, and that
-	      is the focus here (statistical
-	      thermodynamics/equilibrium statistical mechanics), but
-	      it also is used to explore dynamics.</p>
-	    <p class="fragment">
 	      Two hours/lectures is nothing, I will hopelessly fail to
 	      teach you it all, so I'll give you the key touch points,
 	      and try my best to be different/interesting/intuitive.
 	    </p>
 	    <p class="fragment">
-	      If I get it wrong, I hope I do it badly enough to
-	      inspire you to correct me!
+	      Interrupt me, question me, tell me how to do it better! Anything is better than silence.
 	    </p>
+		<p class="fragment">
+			I'll put &ldquo;loaded&rdquo; words which I think could be
+			interesting to ask about <loaded>in this colour</loaded> to remind
+			me to tell you about them, and to remind you to ask!
+		</p>
 	  </section>
+	  <section>
+	    <p>
+	      Statistical mechanics is our bridge from the microscopic
+	      scale (simulating individual atoms/molecules) to the
+	      &ldquo;macroscopic&rdquo; measurements we make in
+	      experiments (i.e., density, temperature, heat capacity, pressure,
+	      <loaded>free-energy</loaded>).
+		</p>
+		<p>
+			<img src="img/DiffusionMicroMacro.gif" style="width:45%;display:block;margin: 0 auto;"/>
+		</p>
+		<p>
+				We will use Statistical Mechanics to connect to <b>thermodynamics</b>, and that
+				is the focus here (statistical
+				thermodynamics/equilibrium statistical mechanics), but
+				it also is used to explore dynamics.
+		</p>
+	</section>
 	</section>
 	<section>
 	  <section>
 	    <h3>Thermodynamics Recap</h3>
 	    <p>
-	      Phenomenological theory, based on observations of <b>state</b> variables, $p,\,T,\,V,\,U,\,M,\,S,\ldots$ that seem to fully describe a thermodynamic <b>system</b>.
+	      Thermodynamics was/is a <loaded>phenomenological theory</loaded>,
+	      based on observations of <b>state</b> variables,
+	      $p,\,T,\,V,\,U,\,M,\,S,\ldots$ that <loaded>seem</loaded> to fully describe a
+	      thermodynamic <b>system</b>.
 	    </p>
 	    <p class="fragment">
 	      The power of thermodynamics arises from its ability to
-	      find simple universal relationships between (observable?)
+	      find simple universal relationships between <loaded>observable</loaded>
 	      state variables.</p>
 	    <p class="fragment">
 	      First law: <b>Energy is conserved</b>
 	      \begin{align*}
 	      U_{system}+U_{surroundings}={\rm Constant}
 	      \end{align*}
-	      which also implies
+	      which also implies the differential relationship
 	      \begin{align*}
 	      {\rm d}U_{system}=-{\rm d}U_{surroundings}
 	      \end{align*}
 	    </p>
+		<p>
+			<loaded>Have you ever seen energy?</loaded>
+		</p>
 	  </section>
 	  <section>
 	    <p>
-	      Energy can be transferred in many ways, but heat is distinguished from work thanks to the second law:
-	      \begin{align*}
-	      {\rm d}U_{system} = \partial Q - \partial W
-	      \end{align*}
+	      Energy is conserved but can be transferred in many ways; however, heat
+	      is <loaded>special</loaded> thanks to the second law so we distinguish
+	      it from other transfers called work: \begin{align*} {\rm d}U_{system}
+	      = \partial Q - \partial W \end{align*}
 	    </p>
 	    <p class="fragment">
 	      Second law: Entropy must increase ${\rm d}S_{universe}>0$ but the key relationship is actually ${\rm
@@ -215,8 +237,8 @@
 	    </p>
 	    <p class="fragment">
 	      This becomes ${\rm d}S=\partial Q/T$ if the process is
-	      reversible (and we can make things almost reversible if
-	      we chop them up enough so that the system is almost homogeneous), leading to
+	      <loaded>reversible</loaded> (and we can make things almost reversible if
+	      we chop them up enough so that the chunks/sub-systems are almost homogeneous), leading to
 
 	      \begin{align*}
 	      {\rm d}U = T\,{\rm d}S - \partial W
@@ -226,6 +248,7 @@
 	    </p>
 	  </section>
 	  <section>
+		<p>We have now made the</p>
 	    <h3>Fundamental thermodynamic equation</h3>
 	    <p>
 	      \begin{align*}
@@ -233,8 +256,8 @@
 	      \\
 	      &= T\,{\rm d}S - \sum_i {\color{red}F_i}\,{\color{teal}{\rm d}L_i}
 	      \end{align*}
-	      This is the fundamental equation, which we extend
-	      depending on what work terms we can observe in our system.
+		  It relates its <loaded>natural</loaded> variables $U$, $S$, and $L_i$ together, where  
+	      $L_i$ is built up by adding the work terms we can <loaded>observe/control</loaded> in our system.
 	    </p>
 	    <table>
 	      <tbody>
@@ -256,23 +279,38 @@
 		</tr>
 	      </tbody>
 	    </table>
+		<p>
+			For now, assume we want to calculate $U$ when controlling $S$, and
+			$L_i$, but any rearrangement of this is possible (see implicit function theorem).
+		</p>
 	  </section>
 	</section>
 	<section>
 	  <h3>Example</h3>
 	  <img src="img/balloon.svg" style="width:45%"/>
+	  <p>Consider we have some gas (system B), then we always have entropy $S$
+		  in the fundamental equation, but also have a volume/pressure work as the gas can expand, as well
+		  as mass/chemical-potential work as it flows through the boundary.</p>
 	  <p>
-	    The addition of a balloon to bound system A when compared
-	    to system B adds additional surface work terms, where
-	    energy is stored in the force/tension, $\gamma$, of the
-	    stretched elastic surface, $\Sigma$.</p>
-	  <p class="fragment">
-	    These <b>independent</b> variables $S$ and $V$ are
-	    unwieldy as we can't measure entropy and the balloon's
-	    volume will change in response to fluctuations in $T$ and
-	    $p$. Lets see if we can make this better.</p>
+	    If we suddenly decided the gas was inside a balloon, energy is
+	    stored in the force/tension, $\gamma$, of the stretched elastic
+	    surface, $\Sigma$.</p>
+	  <p>
+		If we tied the baloon and neglected diffusion through the skin, we can
+		ignore the mass change (${\rm d}N=0$) and throw away this term!
+	  </p>
 	</section>
 	<section>
+		<h3>Example</h3>
+		<img src="img/balloon.svg" style="width:45%"/>
+		<p>
+		  The <loaded>independent</loaded> variables $S$ and $V$ are unwieldy as
+		  we can't measure entropy and the balloon's volume will change in
+		  response to fluctuations in $T$ and $p$, so we need to change them,
+		  but first lets solve the fundamental equation as this can be done in
+		  its current form.</p>
+	  </section>
+	  <section>
 	  <h3>Fundamental thermodynamic equation</h3>
 	  <p>
 	    \begin{align*}
@@ -319,8 +357,8 @@
 	      {\rm d}U &= T\,{\rm d}S  -p\,{\rm d}V+\sum_\alpha \mu_\alpha\,{\rm d}N_\alpha + \ldots
 	      \end{align*}
 	    </span>
-	    Comparing the equations we see lots of differential identities...
-
+	    Comparing the equations we see lots of differential identities which
+	    will later help us connect thermodynmics to microscopics as we'll have the derivatives:
 	    <span style="font-size:70%">
 	      \begin{align*}
 	      \left(\frac{{\rm d}U}{{\rm d}S}\right)_{V,\,\left\{N_\alpha\right\},\ldots} &= T & \left(\frac{{\rm d}U}{{\rm d}V}\right)_{S,\,\left\{N_\alpha\right\},\ldots} &= -p
@@ -331,11 +369,12 @@
 	  </p>
 	  <div class="fragment">
 	    <p>
-	      When we have a relationship between $U,\,S,\,V,\ldots$, then it is a <b>generating function</b> for
-	      the rest of the thermodynamic properties.
+	      In general, when we have a relationship between $U,\,S,\,V,\ldots$,
+	      then it is a <b>generating function</b> for the rest of the
+	      thermodynamic properties.
 	    </p>
 	    <div class="footnote">
-	      Note that $U(S,\,V,\,\left\{N_\alpha\right\})$ can be rearranged to $S(U,\,V,\,\left\{N_\alpha\right\})$ and $\left(\frac{{\rm d}U}{{\rm d}S}\right)_X = \left(\frac{{\rm d}S}{{\rm d}U}\right)_X^{-1}$ so all this still applies to entropy as well as energy.
+	      Note that $U(S,\,V,\,\left\{N_\alpha\right\})$ can be rearranged to $S(U,\,V,\,\left\{N_\alpha\right\})$ and $\left(\frac{{\rm d}U}{{\rm d}S}\right)_X = \left(\frac{{\rm d}S}{{\rm d}U}\right)_X^{-1}$ so entropy is a generating function as well as energy.
 	    </div>
 	  </div>
 	</section>
@@ -349,7 +388,9 @@
 	      {\rm d}U &= T\,{\rm d}S  -p\,{\rm d}V+\sum_\alpha \mu_\alpha\,{\rm d}N_\alpha + \ldots
 	      \end{align*}
 	    </span>
-	    $U,\,S,\,V$ and sometimes $N$ are challenging variables to measure/control. The <b>conjugate</b> variables  $T,\,T^{-1},\,p$ are nicer.
+	    $U,\,S,\,V$ can be challenging variables to measure/control, so we want
+	    something more observable/controllable. The 
+	    <b>conjugate</b> variables  $T,\,T^{-1},\,p$ are nicer for experiments (maybe not simulation though). 
 	  </p>
 	  <p>
 	    A Legendre transformation defines a new <b>potential</b> that swaps the pair
@@ -394,15 +435,21 @@
 	    G\left(T,\,p,\,\left\{N_\alpha\right\}\right)&= H {\color{red}- T\,S} = \sum_\alpha\mu_\alpha\,N_\alpha
 	    &
 	    {\rm d}G &= -S\,{\rm d}T + V\,{\rm d}p + \sum_\alpha\mu_\alpha\,{\rm
-	    d} N_\alpha
+	    d} N_\alpha\\
+		\ldots & & & \ldots
 	    \end{align*}
+	  </p>
+	  <p>
+		Every time we add a new work term, there is a new Legendre transform,
+		and thus a new free energy (homework, find a new work term and name the
+		free energy after yourself). 
 	  </p>
 	</section>
 	<section>
 	  <section>
 	    <h3>Statistical mechanics by example</h3>
 	    <p>
-	      We're ready for statistical mechanics now.
+	      We've now covered all of thermodynamics (!). We're ready for statistical mechanics now.
 	    </p>
 	    <p class="fragment">
 	      The simplest example I can think of that fits statistical
@@ -410,7 +457,7 @@
 	      sum of two dice).</p>
 	    <p class="fragment">
 	      We'll study this, and try to draw parallels to molecular
-	      systems. If the link isn't clear, let me know!
+	      systems. Whenever the link isn't clear, let me know!
 	    </p>
 	    <p class="fragment">
 	      Amazingly to me, we derive entropy first, then add
@@ -449,10 +496,11 @@
 	  </section>
 	  <section data-background="https://upload.wikimedia.org/wikipedia/commons/3/3f/Craps_game_at_military_camp_in_1918.jpg">
 	    <p class="backbox">
-	      Players/<b>observers</b> of craps do not really care or measure the <b>microstate</b>. The only <b>state</b> that
-	      is observed in craps is the sum of the dice, $U$. The
-	      microstate could change, but if $U$ stays the same then
-	      as far as the players are concerned its the same roll.</p>
+	      Players/<b>observers</b> of craps do not really care or measure the
+	      <b>microstate</b>. The only <b>state</b> that is observed in craps is
+	      the sum of the dice, $U$. The microstate could change, but if $U$
+	      stays the same then as far as the players are concerned its the same
+	      roll.</p>
 	    <p class="backbox fragment">
 	      The sum of the dice, $U$, is a <b>macrostate</b> variable
 	      (along with $N$). A <b>macrostate</b> can consist of an <b>ensemble</b> of
@@ -472,7 +520,7 @@
 	  </section>
 	  <section data-background="https://upload.wikimedia.org/wikipedia/commons/3/32/Craps.jpg">
 	    <p class="backbox">
-	      Fundamental postulate: Each <b>microstate</b> is equally probable.
+	      <loaded>Fundamental postulate: Each <b>microstate</b> is equally probable.</loaded>
 	    </p>	    
 	    <p class="backbox fragment">
 	      This is intuitive for perfect dice, each possible roll
@@ -495,7 +543,7 @@
 	      What happens as we add more dice? Molecular systems have
 	      very large numbers of microstate variables
 	      $\left(\mathcal{O}\left(10^{26}\right)\right)$, so we
-	      need an intuition of what happens when we have many
+	      need an intuition of what happens when we have so many
 	      dice....</p>
 	  </section>
 	  <section style="height:100%" data-background="img/dice_heap.jpg" id="dicecount1slide">
@@ -711,7 +759,7 @@
 		which we will call the <b>equilibrium state</b>.
 	      </li>
 	      <li class="fragment">
-		This equilibrium state *might* be &ldquo;unique&rdquo;
+		This equilibrium state <loaded>might be &ldquo;unique&rdquo;</loaded>
 		and appear at a maximum (more on uniqueness later).
 	      </li>
 	      <li class="fragment">
@@ -807,8 +855,8 @@
 	    <p class="backbox fragment">
 	      Richard Feynman says in his Lectures on Physics “…
 	      entropy is just the logarithm of the number of ways of
-	      internally arranging a system while have it look the same
-	      from the outside”.</p>
+	      internally arranging a system while <loaded>have it look the same
+	      from the outside</loaded>”.</p>
 	    <p class="backbox fragment"> 
 	      Entropy is a measure of how much we don't know, i.e. it
 	      measures our lack of control-over/measurement-of the
@@ -847,15 +895,13 @@
 	      </span>
 	    </p>
 	    <p class="backbox fragment">
-	      Where is pressure/volume? Let's add it!
-	      <span style="font-size:65%">		
-		\begin{align*}
-		p &= T\frac{\partial S(N,\,U,\,V,\ldots)}{\partial V}
-		\end{align*}	      
-	      </span>	      
+	      We don't have pressure or any other work variable in this system, we'd
+	      need to have some "volume" and "pressure" that somehow contributes to
+	      the dice roll for that.
 	    </p>
 	    <p class="backbox fragment">
-	      Temperature requires a little more work to derive.
+	      However, we do still have temperature, although it requires us to add
+	      the first law.
 	    </p>
 	  </section>
 	  <section>
@@ -882,8 +928,8 @@
 	      \Omega_{1+2}(U,\,U_1) &= \ln \Omega_1(U_1) + \ln
 	      \Omega_2(U-U_1) \\ \end{align*}
 
-	      The maximum entropy when varying $U_1$ occurs at a
-	      stationary point, i.e.  
+	      The maximum entropy when varying $U_1$ (but holding $U$ fixed) occurs
+	      at a stationary point, i.e.  
 		
 		\begin{align*}
 		\left(\frac{{\rm d} \ln
@@ -901,11 +947,11 @@
 	      \end{align*}
 	    </p>
 	    <p class="fragment">
-	      We now define some shorthand:
-	      \begin{align*}
-	      \beta = \frac{{\partial} S\left(N,\,U,\,\ldots\right)}{{\partial} U} = \frac{{\partial} \ln \Omega\left(N,\,U,\,\ldots\right)}{{\partial} U} 
-	      \end{align*}
-	      and note the result, $\beta_1 = \beta_2$
+	      We now define some shorthand: \begin{align*} \beta = \frac{{\partial}
+	      S\left(N,\,U,\,\ldots\right)}{{\partial} U} = \frac{{\partial} \ln
+	      \Omega\left(N,\,U,\,\ldots\right)}{{\partial} U} \end{align*} and note
+	      the result, $\beta_1 = \beta_2$ when two systems have fixed energy and
+	      are at maximum entropy/equilibrium.
 	    </p>
 	  </section>
 	  <section>
@@ -926,8 +972,8 @@
 	      This generalises to three systems, and thus is proof of the zeroth law.
 	    </p>
 	    <p class="fragment">
-	      Lets now generate the probabilty function (and
-	      everything else).
+	      Lets now generate the probabilty function for when $U$ is conserved
+	      (and everything else).
 	    </p>
 	  </section>
 	  <section>
@@ -957,7 +1003,7 @@
 	      </span>
 	    </p>
 	    <p class="fragment">
-	      Assuming system 2 is very large, substituting, and
+	      Assuming system 2 is very large so that changes in $U_1$ become negligble to it, giving $U_2\to U$, substituting, and
 	      realising that $\ln\Omega_2(U_2=U)$ is a constant,
 	      
 	      <span style="font-size:65%">		
@@ -978,13 +1024,13 @@
 	      \begin{align*} P\left(i\right) \propto e^{-U_{1,i} /
 	      (k_B\,T)} \end{align*}</p>
 	    <p class="fragment">
-	      We can normalise this by creating the <b>partition</b> function,
+	      We can normalise this by creating the so-called <b>canonical partition</b> function,
 	      \begin{align*} Z(N,\,T) &= \sum_{i} e^{-U_{1,i} / (k_B\,T)} \\
 	      P\left(i\right) &= Z^{-1} e^{-U_{i} / (k_B\,T)}
 	      \end{align*}
 
 	      We've dropped the system 1 and 2 notations, as system 2
-	      (called the &ldquo;bath&rdquo;) is irrelevant, aside
+	      (called the &ldquo;bath&rdquo;) is irrelevant (despite its enormous size), aside
 	      from its temperature which is also the temperature of
 	      system 1 (at equilibrium).</p>
 	  </section>
@@ -1017,6 +1063,9 @@
 		\end{align*}
 	      </span>
 	    </p>
+		<p>
+			This applies to dice, but also molecules. But now we must leave dice behind and add additional work terms.
+		</p>
 	  </section>
 	  <section>
 	    <h3>Other ensembles</h3>
@@ -1199,7 +1248,7 @@
 					y: state.y,
 					marker: {
 					  color: [...Array(state.x.length).keys()],
-					  colorscale: 'Jet',
+					  colorscale: 'Rainbow',
 					},
 				      mode: 'markers',
 				    }],
@@ -1328,14 +1377,16 @@
 		<div class="col">
 		  <div class="form-group">
 		    <label for="shocount2dt">Time step: </label><output id="shocount2dtout" for="shocount2dt">1</output><br/>
-		    <input type="range" class="form-control-range" id="shocount2dt" min="0.005" max="0.4" value="0.035" step="0.005">
+		    <input type="range" class="form-control-range" id="shocount2dt" min="0.005" max="0.4" value="0.2" step="0.005">
 		  </div>
 		</div>
 	      </div>
 	    </div>
 	    <div id="shocount2div" style="margin:auto 0; display:inline-block;" ></div>
 	    <p>
-	      Are the systems in the lower energies (closer to the centre of the orbits) ergodic?
+	      Are the systems in the lower energies (closer to the centre of the
+	      orbits) ergodic? No, they cannot visit each other even though they're
+	      at the same energy level (thus at the same state)!
 	    </p>
 	    <script>
 	     (function() {
@@ -1485,7 +1536,7 @@
 	    </p>
 	    <p class="fragment">
 	      Practically, in simulation we typically just check
-	      averages are converging and hope we're effectively
+	      averages are converging and hope we're <loaded>effectively</loaded>
 	      ergodic. Like a lot of things in simulation, you presume
 	      it might be true but verify as best you can.</p>
 	    <p class="fragment">
