@@ -286,29 +286,28 @@
 	  </section>
 	</section>
 	<section>
-	  <h3>Example</h3>
-	  <img src="img/balloon.svg" style="width:45%"/>
-	  <p>Consider we have some gas (system B), then we always have entropy $S$
-		  in the fundamental equation, but also have a volume/pressure work as the gas can expand, as well
-		  as mass/chemical-potential work as it flows through the boundary.</p>
+	  <h3>Choosing work terms</h3>
+	  <img src="img/balloon.svg" style="width:40%"/>
+	  <p>Taking some gas (B), then we always have entropy $T\,{\rm d}S$, but
+	  also have a volume/pressure work, $V\,{\rm d}p$, as well as
+	  mass/chemical-potential work, $N_i\,{\rm d}\mu_i$, as it moves through the
+	  boundary.</p>
 	  <p>
-	    If we suddenly decided the gas was inside a balloon, energy is
-	    stored in the force/tension, $\gamma$, of the stretched elastic
-	    surface, $\Sigma$.</p>
-	  <p>
-		If we tied the baloon and neglected diffusion through the skin, we can
-		ignore the mass change (${\rm d}N=0$) and throw away this term!
+	    Adding a baloon skin means energy is stored in the force/tension, ${\rm
+	    d}\gamma$, of the stretched elastic surface, $\Sigma$ which must be
+	    included; however, ignoring diffusion through the skin means we can
+	    ignore the mass change (${\rm d}N=0$) and throw away this term!
 	  </p>
 	</section>
 	<section>
 		<h3>Example</h3>
-		<img src="img/balloon.svg" style="width:45%"/>
+		<img src="img/balloon.svg" style="width:40%"/>
 		<p>
 		  The <loaded>independent</loaded> variables $S$ and $V$ are unwieldy as
-		  we can't measure entropy and the balloon's volume will change in
-		  response to fluctuations in $T$ and $p$, so we need to change them,
-		  but first lets solve the fundamental equation as this can be done in
-		  its current form.</p>
+		  we can't measure entropy and the balloon's volume will change. $T$ and
+		  $p$ are much better variables for real problems so we need to change
+		  them, but first lets solve the fundamental equation as this can be
+		  done in its current form.</p>
 	  </section>
 	  <section>
 	  <h3>Fundamental thermodynamic equation</h3>
@@ -339,7 +338,7 @@
 	  <p>
 	    Amazingly, as each term is a <b>conjugate</b> pairing of an <b>intensive</b> term and a differential <b>extensive</b> term,
 	    this equation can be solved using Euler's
-	    solution for homogeneous functions.
+	    solution for homogeneous functions (<a href="https://www.simcem.com/docs/thermo/#UEuler">my notes here</a>).
 
 	    \begin{align*}
 	    U(S,\,V,\,\left\{N_\alpha\right\},\ldots) &= T\,S -p\,V+\sum_\alpha \mu_\alpha\,N_\alpha + \ldots\\
